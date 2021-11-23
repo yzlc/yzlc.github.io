@@ -1,0 +1,416 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>第3章　内存分配策略 - YZLC</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="YZLC"><meta name=description content="3.2 对象已死？ 3.2.1 引用计数算法 在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；任何时刻计数器为">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://yzlc.github.io/post/read/jvm/3/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/dark.css>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="第3章　内存分配策略">
+<meta property="og:description" content="3.2 对象已死？ 3.2.1 引用计数算法 在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；任何时刻计数器为">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://yzlc.github.io/post/read/jvm/3/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-05-09T10:32:33+08:00">
+<meta property="article:modified_time" content="2021-11-23T17:07:01+08:00">
+<meta itemprop=name content="第3章　内存分配策略">
+<meta itemprop=description content="3.2 对象已死？ 3.2.1 引用计数算法 在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；任何时刻计数器为"><meta itemprop=datePublished content="2020-05-09T10:32:33+08:00">
+<meta itemprop=dateModified content="2021-11-23T17:07:01+08:00">
+<meta itemprop=wordCount content="4239">
+<meta itemprop=keywords content="jvm,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="第3章　内存分配策略">
+<meta name=twitter:description content="3.2 对象已死？ 3.2.1 引用计数算法 在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；任何时刻计数器为"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>YZLC</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/post/web>
+<li class=mobile-menu-item>网站</li>
+</a><a href=/post/read/read>
+<li class=mobile-menu-item>读</li>
+</a><a href=/post/soft>
+<li class=mobile-menu-item>软件</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>YZLC</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/web>网站</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/read/read>读</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/soft>软件</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>第3章　内存分配策略</h1>
+<div class=post-meta>
+<span class=post-time> 2020-05-09 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 4239 字 </span>
+<span class=more-meta> 预计阅读 9 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#32对象已死>3.2　对象已死？</a>
+<ul>
+<li><a href=#321引用计数算法>3.2.1　引用计数算法</a></li>
+<li><a href=#322可达性分析算法>3.2.2　可达性分析算法</a></li>
+<li><a href=#323再谈引用>3.2.3　再谈引用</a></li>
+<li><a href=#324生存还是死亡>3.2.4　生存还是死亡？</a></li>
+<li><a href=#325回收方法区>3.2.5　回收方法区</a></li>
+</ul>
+</li>
+<li><a href=#33垃圾收集算法>3.3　垃圾收集算法</a>
+<ul>
+<li><a href=#331分代收集理论generational-collection>3.3.1　分代收集理论（Generational Collection）</a></li>
+<li><a href=#332标记-清除算法mark-sweep>3.3.2　标记-清除算法（Mark-Sweep）</a></li>
+<li><a href=#333标记-复制算法>3.3.3　标记-复制算法</a></li>
+<li><a href=#334标记-整理算法mark-compact>3.3.4　标记-整理算法（Mark-Compact）</a></li>
+</ul>
+</li>
+<li><a href=#34hotspot的算法细节实现>3.4　HotSpot的算法细节实现</a>
+<ul>
+<li><a href=#341根节点枚举>3.4.1　根节点枚举</a></li>
+<li><a href=#342安全点safepoint>3.4.2　安全点（Safepoint）</a></li>
+<li><a href=#343安全区域>3.4.3　安全区域</a></li>
+<li><a href=#344记忆集remembered-set与卡表card-table>3.4.4　记忆集（Remembered Set）与卡表（Card Table）</a></li>
+<li><a href=#345写屏障write-barrier>3.4.5　写屏障（Write Barrier）</a></li>
+<li><a href=#346并发的可达性分析>3.4.6　并发的可达性分析</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h2 id=32对象已死>3.2　对象已死？</h2>
+<h3 id=321引用计数算法>3.2.1　引用计数算法</h3>
+<blockquote>
+<p>在对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加一；当引用失效时，计数器值就减一；任何时刻计数器为零的对象就是不可能再被使用的</p>
+</blockquote>
+<h3 id=322可达性分析算法>3.2.2　可达性分析算法</h3>
+<blockquote>
+<p>通过一系列称为GC Roots的根对象作为起始节点集，从这些节点开始，根据引用关系向下搜索，搜索过程所走过的路径称为引用链（Reference Chain），如果某个对象到GC Roots间没有任何引用链相连，则证明此对象是不可能再被使用的</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-1.jpg alt>
+GC Roots</p>
+<ul>
+<li>在虚拟机栈（栈帧中的本地变量表）中引用的对象，譬如各个线程被调用的方法堆栈中使用到的参数、局部变量、临时变量等</li>
+<li>在方法区中类静态属性引用的对象，譬如Java类的引用类型静态变量</li>
+<li>在方法区中常量引用的对象，譬如字符串常量池（String Table）里的引用</li>
+<li>在本地方法栈中JNI（即通常所说的Native方法）引用的对象</li>
+<li>Java虚拟机内部的引用，如基本数据类型对应的Class对象，一些常驻的异常对象（比如NullPointExcepiton、OutOfMemoryError）等，还有系统类加载器</li>
+<li>所有被同步锁（synchronized关键字）持有的对象</li>
+<li>反映Java虚拟机内部情况的JMXBean、JVMTI中注册的回调、本地代码缓存等</li>
+</ul>
+<h3 id=323再谈引用>3.2.3　再谈引用</h3>
+<p>强引用（Strongly Re-ference）：普遍存在的引用赋值，即类似“Object obj=new Object()”这种引用关系。无论任何情况下，只要强引用关系还存在，垃圾收集器就永远不会回收掉被引用的对象</p>
+<p>软引用（Soft Reference）：还有用，但非必须的对象。只被软引用关联着的对象，在系统将要发生内存溢出异常前，会把这些对象列进回收范围之中进行第二次回收，如果这次回收还没有足够的内存，才会抛出内存溢出异常</p>
+<p>弱引用（Weak Reference）：非必须对象，强度比软引用更弱一些，被弱引用关联的对象只能生存到下一次垃圾收集发生为止。当垃圾收集器开始工作，无论当前内存是否足够，都会回收掉只被弱引用关联的对象</p>
+<p>虚引用（Phantom Reference）：最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的只是为了能在这个对象被收集器回收时收到一个系统通知</p>
+<h3 id=324生存还是死亡>3.2.4　生存还是死亡？</h3>
+<blockquote>
+<p>可达性分析 -> 标记 -> F-Queue队列,由Finalizer线程执行finalize() -> 标记 -> 回收</p>
+</blockquote>
+<h3 id=325回收方法区>3.2.5　回收方法区</h3>
+<blockquote>
+<p>废弃的常量和不再使用的类型，垃圾收集的性价比比较低</p>
+</blockquote>
+<p>废弃常量：没有任何对象引用常量池中的常量，且虚拟机中也没有其他地方引用这个字面量</p>
+<p>不再使用的类型</p>
+<ul>
+<li>该类所有的实例都已经被回收，也就是Java堆中不存在该类及其任何派生子类的实例</li>
+<li>加载该类的类加载器已经被回收，这个条件除非是经过精心设计的可替换类加载器的场景，如OSGi、JSP的重加载等，否则通常是很难达成的</li>
+<li>该类对应的Class对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法</li>
+</ul>
+<p>需求场景：在大量使用反射、动态代理、CGLib等字节码框架，动态生成JSP以及OSGi这类频繁自定义类加载器的场景中，通常都需要Java虚拟机具备类型卸载的能力，以保证不会对方法区造成过大的内存压力</p>
+<h2 id=33垃圾收集算法>3.3　垃圾收集算法</h2>
+<blockquote>
+<p>引用计数式垃圾收集（ReferenceCounting GC）和追踪式垃圾收集（Tracing GC）</p>
+</blockquote>
+<h3 id=331分代收集理论generational-collection>3.3.1　分代收集理论（Generational Collection）</h3>
+<p>弱分代假说（Weak Generational Hypothesis）：绝大多数对象都是朝生夕灭的</p>
+<p>强分代假说（Strong Generational Hypothesis）：熬过越多次垃圾收集过程的对象就越难以消亡</p>
+<p>跨代引用假说（Intergenerational Reference Hypothesis）：跨代引用相对于同代引用来说仅占极少数</p>
+<h3 id=332标记-清除算法mark-sweep>3.3.2　标记-清除算法（Mark-Sweep）</h3>
+<blockquote>
+<p>标记出所有需要回收的对象，统一回收掉所有被标记的对象，也可以反过来，标记存活的对象，统一回收所有未被标记的对象</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-2.jpg alt>
+执行效率不稳定：标记和清除两个过程的执行效率随对象数量增长而降低</p>
+<p>内存空间碎片化：空间碎片太多导致分配较大对象时无法找到足够的连续内存而提前触发另一次垃圾收集</p>
+<h3 id=333标记-复制算法>3.3.3　标记-复制算法</h3>
+<p>半区复制（Semispace Copying）：内存按容量划分为大小相等的两块，只使用其中的一块。内存用完了就将存活的对象复制到另外一块上面，再把已使用过的内存空间一次清理掉
+<img src=/images/read/jvm/3-3.jpg alt></p>
+<ul>
+<li>可用内存缩小为了原来的一半，空间浪费多</li>
+</ul>
+<p>Appel式回收：把新生代分为一块较大的Eden空间和两块较小的Survivor空间，每次分配内存只使用Eden和其中一块Survivor。发生垃圾收集时，将Eden和Survivor中仍然存活的对象一次性复制到另外一块Survivor空间上，然后直接清理掉Eden和已用过的那块Survivor空间</p>
+<ul>
+<li>逃生门：当Survivor空间不足以容纳一次Minor GC之后存活的对象时，就需要依赖其他内存区域（实际上大多就是老年代）进行分配担保（Handle Promotion）</li>
+</ul>
+<h3 id=334标记-整理算法mark-compact>3.3.4　标记-整理算法（Mark-Compact）</h3>
+<blockquote>
+<p>让所有存活的对象都向内存空间一端移动，然后直接清理掉边界以外的内存</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-4.jpg alt></p>
+<h2 id=34hotspot的算法细节实现>3.4　HotSpot的算法细节实现</h2>
+<h3 id=341根节点枚举>3.4.1　根节点枚举</h3>
+<p>枚举根节点时必须要停顿</p>
+<p>不需要一个不漏地检查完所有执行上下文和全局的引用位置，虚拟机有办法直接得到哪些地方存放着对象引用</p>
+<ul>
+<li>HotSpot使用OopMap的数据结构来达到这个目的</li>
+</ul>
+<h3 id=342安全点safepoint>3.4.2　安全点（Safepoint）</h3>
+<blockquote>
+<p>为了解决引用关系变化的问题，只在“特定的位置”记录OopMap信息</p>
+</blockquote>
+<p>选取标准：是否具有让程序长时间执行的特征,“长时间执行”的最明显特征就是指令序列的复用，例如方法调用、循环跳转、异常跳转等</p>
+<p>方案1：抢先式中断（Preemptive Suspension）：把所有用户线程全部中断，如果发现有用户线程中断的地方不在安全点上，就恢复这条线程执行，让它一会再重新中断，直到跑到安全点上</p>
+<p>方案2：主动式中断（Voluntary Suspension）：设置一个标志位，各个线程轮询，中断标志为真时在最近的安全点上挂起。轮询标志的地方和安全点是重合的，另外还要加上所有创建对象和其他需要在Java堆上分配内存的地方，这是为了检查是否即将要发生垃圾收集，避免没有足够内存分配新对象</p>
+<ul>
+<li>HotSpot使用内存保护陷阱的方式，当需要暂停用户线程时，虚拟机把内存页设置为不可读，那线程执行到test指令时就会产生一个自陷异常信号，然后在预先注册的异常处理器中挂起线程实现等待</li>
+</ul>
+<h3 id=343安全区域>3.4.3　安全区域</h3>
+<blockquote>
+<p>指能够确保在某一段代码片段之中，引用关系不会发生变化，在这个区域中任意地方开始垃圾收集都是安全的</p>
+</blockquote>
+<p>场景：程序“不执行”的时候(Sleep、Blocked)</p>
+<p>执行安全区域的代码时，首先标识进入了安全区域，虚拟机垃圾收集时不必去管安全区域的线程。离开安全区域时，如果虚拟机没有完成根节点枚举，就必须等待可以离开安全区域的信号</p>
+<h3 id=344记忆集remembered-set与卡表card-table>3.4.4　记忆集（Remembered Set）与卡表（Card Table）</h3>
+<blockquote>
+<p>为解决对象跨代引用所带来的问题，避免把整个老年代加进GC Roots扫描范围<br>
+记忆集是一种用于记录从非收集区域指向收集区域的指针集合的抽象数据结构<br>
+卡表是记忆集的一种具体实现，它定义了记忆集的记录精度、与堆内存的映射关系等</p>
+</blockquote>
+<p>记忆集</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>Class</span> <span class=n>RememberedSet</span> <span class=p>{</span>
+  <span class=n>Object</span><span class=p>[]</span> <span class=n>set</span><span class=p>[</span><span class=n>OBJECT_INTERGENERATIONAL_REFERENCE_SIZE</span><span class=p>];</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>记录精度
+<ul>
+<li>字长精度：每个记录精确到一个机器字长，该字包含跨代指针</li>
+<li>对象精度：每个记录精确到一个对象，该对象里有字段含有跨代指针</li>
+<li>卡精度(卡表)：每个记录精确到一块内存区域，该区域内有对象含有跨代指针</li>
+</ul>
+</li>
+</ul>
+<p>卡表</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=n>CARD_TABLE</span> <span class=p>[</span><span class=n>this</span> <span class=n>address</span> <span class=o>&gt;&gt;</span> <span class=mi>9</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>卡页（Card Page）：字节数组CARD_TABLE的每一个元素都对应着其标识的内存区域中一块特定大小的内存块</li>
+</ul>
+<p><img src=/images/read/jvm/3-5.jpg alt title=卡表与卡页对应示意图></p>
+<ul>
+<li>一个卡页的内存中通常包含不止一个对象，只要卡页内有一个（或更多）对象的字段存在着跨代指针，那就将对应卡表的数组元素的值标识为1，称为这个元素变脏（Dirty），没有则标识为0。在垃圾收集发生时，只要筛选出卡表中变脏的元素，就能轻易得出哪些卡页内存块中包含跨代指针，把它们加入GC Roots中一并扫描</li>
+</ul>
+<h3 id=345写屏障write-barrier>3.4.5　写屏障（Write Barrier）</h3>
+<blockquote>
+<p>写屏障可以看作在虚拟机层面对“引用类型字段赋值”这个动作的AOP切面，在引用对象赋值时会产生一个环形（Around）通知，供程序执行额外的动作，也就是说赋值的前后都在写屏障的覆盖范畴内。在赋值前的部分的写屏障叫作写前屏障（Pre-Write Barrier），在赋值后的则叫作写后屏障（Post-Write Barrier）</p>
+</blockquote>
+<p>伪共享（False Sharing）：现代中央处理器的缓存系统中是以缓存行（Cache Line）为单位存储的，当多线程修改互相独立的变量时，如果这些变量恰好共享同一个缓存行，就会彼此影响（写回、无效化或者同步）而导致性能降低</p>
+<ul>
+<li>解决方案(-XX：+UseCondCardMark)：检查卡表标记，只有当该卡表元素未被标记过时才将其标记为变脏</li>
+</ul>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=k>if</span> <span class=p>(</span><span class=n>CARD_TABLE</span> <span class=p>[</span><span class=n>this</span> <span class=n>address</span> <span class=o>&gt;&gt;</span> <span class=mi>9</span><span class=p>]</span> <span class=o>!=</span> <span class=mi>0</span><span class=p>)</span>
+  <span class=n>CARD_TABLE</span> <span class=p>[</span><span class=n>this</span> <span class=n>address</span> <span class=o>&gt;&gt;</span> <span class=mi>9</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id=346并发的可达性分析>3.4.6　并发的可达性分析</h3>
+<p>三色标记（Tri-color Marking）</p>
+<ul>
+<li>白色：表示对象尚未被垃圾收集器访问过。开始的阶段都是白色，结束的阶段代表不可达</li>
+<li>黑色：表示对象已经被垃圾收集器访问过，且这个对象的所有引用都已经扫描过。黑色的对象代表已经扫描过，它是安全存活的，如果有其他对象引用指向了黑色对象，无须重新扫描一遍。黑色对象不可能直接（不经过灰色对象）指向某个白色对象</li>
+<li>灰色：表示对象已经被垃圾收集器访问过，但这个对象上至少存在一个引用还没有被扫描过</li>
+</ul>
+<p><img src=/images/read/jvm/%E8%A1%A83-1.jpg alt></p>
+<p>对象消失,当以下两个条件同时满足时</p>
+<ol>
+<li>赋值器插入了一条或多条从黑色对象到白色对象的新引用</li>
+<li>赋值器删除了全部从灰色对象到该白色对象的直接或间接引用</li>
+</ol>
+<ul>
+<li>解决方案(通过写屏障实现)
+<ul>
+<li>增量更新（Incremental Update）,破坏条件1：当黑色对象插入新的指向白色对象的引用关系时，就将这个新插入的引用记录下来，等并发扫描结束之后，再将这些记录过的引用关系中的黑色对象为根，重新扫描一次。简化理解为，黑色对象一旦新插入了指向白色对象的引用之后，它就变回灰色对象了</li>
+<li>原始快照（Snapshot At The Beginning，SATB）,破坏条件2：当灰色对象要删除指向白色对象的引用关系时，就将这个要删除的引用记录下来，在并发扫描结束之后，再将这些记录过的引用关系中的灰色对象为根，重新扫描一次。简化理解为，无论引用关系删除与否，都会按照刚刚开始扫描那一刻的对象图快照来进行搜索</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>YZLC</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-11-23
+<a href=https://github.com/yzlc/www/commit/c730371df23fc72e8fe7c8c08382182f1c650494 title=1>(c730371)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<div class=post-reward>
+<input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label>
+<div class=qr-code>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/wechat.jpg>
+<span>微信打赏</span>
+</label>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/alipay.jpg>
+<span>支付宝打赏</span>
+</label>
+</div>
+</div><footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/jvm/>jvm</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/read/jvm/3.5/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">第3章　垃圾收集器</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/read/jvm/2/>
+<span class="next-text nav-default">第2章　Java内存区域与内存溢出异常</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
+<a href=https://github.com/yzlc class="iconfont icon-github" title=github></a>
+<a href=https://space.bilibili.com/10341737 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2019 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}}</script>
+<script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-154585647-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

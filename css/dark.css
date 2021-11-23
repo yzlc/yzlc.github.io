@@ -1,0 +1,24 @@
+::selection {
+    background: lightsteelblue;
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        color: darkgray;
+        background: black;
+    }
+    a {
+        color: darkgray;
+    }
+    .slideout-panel {
+        background-color: black;
+    }
+    .post .post-content .highlight>.chroma table:after {
+        background: rgb(41, 41, 41);
+    }
+    .post .post-content code, .post .post-content pre {
+        background: rgb(32, 32, 32);
+    }
+}
+
+@media (prefers-color-scheme: light) {
+}

@@ -1,0 +1,578 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>sql - YZLC</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="YZLC"><meta name=description content="建表 1 2 3 4 5 CREATEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEUNIQUEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEsequenceseq_table_name;COMMENTONTABLEtable_nameIS&amp;#39;table_name&amp;#39;;COMMENTONCOLUMNtable_name.column_nameIS&amp;#39;column_name&amp;#39;; 修改表 1 2 3 4 DROPsequenceseq_name;ALTERTABLEtable_nameADD(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameMODIFY(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameDROP(column_name,column_name); 复制表 1 CREATETABLENEW_TABASSELECT*FROMOLD_TABWHERE1=1;-- WHERE 1=0 不复制数据 查表 1 selectseq_name.NextValasidfromdual; 授权 1 2 grantselectontabletouser;grantexecuteonfunctiontouser; 存储过程 1 2 3 4 5 6 7 8 9 10 11 12 createproceduresync_table_from_userisv_errvarchar(2000);beginUPDATESETID=t.IDcommit;EXCEPTIONWHENNO_DATA_FOUNDTHENrollback;WHENOTHERSTHENrollback;end; 命令行调试 1 2 setserveroutputon;--dbms_output.put_line execsync_table_from_user; 触发器 1 2 3 4">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://yzlc.github.io/post/note/dev/sql/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/dark.css>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="sql">
+<meta property="og:description" content="建表 1 2 3 4 5 CREATEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEUNIQUEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEsequenceseq_table_name;COMMENTONTABLEtable_nameIS'table_name';COMMENTONCOLUMNtable_name.column_nameIS'column_name'; 修改表 1 2 3 4 DROPsequenceseq_name;ALTERTABLEtable_nameADD(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameMODIFY(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameDROP(column_name,column_name); 复制表 1 CREATETABLENEW_TABASSELECT*FROMOLD_TABWHERE1=1;-- WHERE 1=0 不复制数据 查表 1 selectseq_name.NextValasidfromdual; 授权 1 2 grantselectontabletouser;grantexecuteonfunctiontouser; 存储过程 1 2 3 4 5 6 7 8 9 10 11 12 createproceduresync_table_from_userisv_errvarchar(2000);beginUPDATESETID=t.IDcommit;EXCEPTIONWHENNO_DATA_FOUNDTHENrollback;WHENOTHERSTHENrollback;end; 命令行调试 1 2 setserveroutputon;--dbms_output.put_line execsync_table_from_user; 触发器 1 2 3 4">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://yzlc.github.io/post/note/dev/sql/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2019-05-04T10:32:33+08:00">
+<meta property="article:modified_time" content="2021-11-23T17:07:01+08:00">
+<meta itemprop=name content="sql">
+<meta itemprop=description content="建表 1 2 3 4 5 CREATEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEUNIQUEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEsequenceseq_table_name;COMMENTONTABLEtable_nameIS'table_name';COMMENTONCOLUMNtable_name.column_nameIS'column_name'; 修改表 1 2 3 4 DROPsequenceseq_name;ALTERTABLEtable_nameADD(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameMODIFY(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameDROP(column_name,column_name); 复制表 1 CREATETABLENEW_TABASSELECT*FROMOLD_TABWHERE1=1;-- WHERE 1=0 不复制数据 查表 1 selectseq_name.NextValasidfromdual; 授权 1 2 grantselectontabletouser;grantexecuteonfunctiontouser; 存储过程 1 2 3 4 5 6 7 8 9 10 11 12 createproceduresync_table_from_userisv_errvarchar(2000);beginUPDATESETID=t.IDcommit;EXCEPTIONWHENNO_DATA_FOUNDTHENrollback;WHENOTHERSTHENrollback;end; 命令行调试 1 2 setserveroutputon;--dbms_output.put_line execsync_table_from_user; 触发器 1 2 3 4"><meta itemprop=datePublished content="2019-05-04T10:32:33+08:00">
+<meta itemprop=dateModified content="2021-11-23T17:07:01+08:00">
+<meta itemprop=wordCount content="833">
+<meta itemprop=keywords content="sql,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="sql">
+<meta name=twitter:description content="建表 1 2 3 4 5 CREATEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEUNIQUEINDEXidx_table_name_column_nameONtable_name(column_name);CREATEsequenceseq_table_name;COMMENTONTABLEtable_nameIS'table_name';COMMENTONCOLUMNtable_name.column_nameIS'column_name'; 修改表 1 2 3 4 DROPsequenceseq_name;ALTERTABLEtable_nameADD(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameMODIFY(column_namedatatype,column_namedatatype);ALTERTABLEtable_nameDROP(column_name,column_name); 复制表 1 CREATETABLENEW_TABASSELECT*FROMOLD_TABWHERE1=1;-- WHERE 1=0 不复制数据 查表 1 selectseq_name.NextValasidfromdual; 授权 1 2 grantselectontabletouser;grantexecuteonfunctiontouser; 存储过程 1 2 3 4 5 6 7 8 9 10 11 12 createproceduresync_table_from_userisv_errvarchar(2000);beginUPDATESETID=t.IDcommit;EXCEPTIONWHENNO_DATA_FOUNDTHENrollback;WHENOTHERSTHENrollback;end; 命令行调试 1 2 setserveroutputon;--dbms_output.put_line execsync_table_from_user; 触发器 1 2 3 4"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>YZLC</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/post/web>
+<li class=mobile-menu-item>网站</li>
+</a><a href=/post/read/read>
+<li class=mobile-menu-item>读</li>
+</a><a href=/post/soft>
+<li class=mobile-menu-item>软件</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>YZLC</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/web>网站</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/read/read>读</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/soft>软件</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>sql</h1>
+<div class=post-meta>
+<span class=post-time> 2019-05-04 </span>
+<div class=post-category>
+<a href=/categories/note/> note </a>
+</div>
+<span class=more-meta> 约 833 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#建表>建表</a></li>
+<li><a href=#修改表>修改表</a></li>
+<li><a href=#复制表>复制表</a></li>
+<li><a href=#查表>查表</a></li>
+<li><a href=#授权>授权</a></li>
+<li><a href=#存储过程>存储过程</a>
+<ul>
+<li><a href=#命令行调试>命令行调试</a></li>
+</ul>
+</li>
+<li><a href=#触发器>触发器</a></li>
+<li><a href=#定时任务>定时任务</a></li>
+<li><a href=#dblink>dblink</a></li>
+<li><a href=#char-varchar-nchar-nvarchar>char varchar nchar nvarchar</a></li>
+<li><a href=#二进制解决多状态问题>二进制解决多状态问题</a></li>
+<li><a href=#多行合并>多行合并</a></li>
+<li><a href=#截取字符串>截取字符串</a></li>
+<li><a href=#窗口函数>窗口函数</a>
+<ul>
+<li><a href=#语法>语法</a></li>
+<li><a href=#分类>分类</a></li>
+</ul>
+</li>
+<li><a href=#优化>优化</a></li>
+<li><a href=#分区>分区</a></li>
+<li><a href=#查版本>查版本</a></li>
+<li><a href=#循环>循环</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h2 id=建表>建表</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>CREATE</span><span class=w> </span><span class=k>INDEX</span><span class=w> </span><span class=n>idx_table_name_column_name</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=k>table_name</span><span class=p>(</span><span class=k>column_name</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=k>UNIQUE</span><span class=w> </span><span class=k>INDEX</span><span class=w> </span><span class=n>idx_table_name_column_name</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=k>table_name</span><span class=p>(</span><span class=k>column_name</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>CREATE</span><span class=w> </span><span class=n>sequence</span><span class=w> </span><span class=n>seq_table_name</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>COMMENT</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>table_name</span><span class=w> </span><span class=k>IS</span><span class=w> </span><span class=s1>&#39;table_name&#39;</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>COMMENT</span><span class=w> </span><span class=k>ON</span><span class=w> </span><span class=k>COLUMN</span><span class=w> </span><span class=k>table_name</span><span class=p>.</span><span class=k>column_name</span><span class=w> </span><span class=k>IS</span><span class=w> </span><span class=s1>&#39;column_name&#39;</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=修改表>修改表</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>DROP</span><span class=w> </span><span class=n>sequence</span><span class=w> </span><span class=n>seq_name</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>table_name</span><span class=w> </span><span class=k>ADD</span><span class=w> </span><span class=p>(</span><span class=k>column_name</span><span class=w> </span><span class=n>datatype</span><span class=p>,</span><span class=k>column_name</span><span class=w> </span><span class=n>datatype</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>table_name</span><span class=w> </span><span class=k>MODIFY</span><span class=w> </span><span class=p>(</span><span class=k>column_name</span><span class=w> </span><span class=n>datatype</span><span class=p>,</span><span class=k>column_name</span><span class=w> </span><span class=n>datatype</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=k>table_name</span><span class=w> </span><span class=k>DROP</span><span class=w> </span><span class=p>(</span><span class=k>column_name</span><span class=p>,</span><span class=k>column_name</span><span class=p>);</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=复制表>复制表</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=n>NEW_TAB</span><span class=w> </span><span class=k>AS</span><span class=w> </span><span class=k>SELECT</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>OLD_TAB</span><span class=w> </span><span class=k>WHERE</span><span class=w> </span><span class=mi>1</span><span class=o>=</span><span class=mi>1</span><span class=p>;</span><span class=w> </span><span class=c1>-- WHERE 1=0 不复制数据
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=查表>查表</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>select</span><span class=w> </span><span class=n>seq_name</span><span class=p>.</span><span class=n>NextVal</span><span class=w> </span><span class=k>as</span><span class=w> </span><span class=n>id</span><span class=w> </span><span class=k>from</span><span class=w> </span><span class=n>dual</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=授权>授权</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>grant</span><span class=w> </span><span class=k>select</span><span class=w> </span><span class=k>on</span><span class=w> </span><span class=k>table</span><span class=w> </span><span class=k>to</span><span class=w> </span><span class=k>user</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>grant</span><span class=w> </span><span class=k>execute</span><span class=w> </span><span class=k>on</span><span class=w> </span><span class=k>function</span><span class=w> </span><span class=k>to</span><span class=w> </span><span class=k>user</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=存储过程>存储过程</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>create</span><span class=w> </span><span class=k>procedure</span><span class=w> </span><span class=n>sync_table_from_user</span><span class=w> </span><span class=k>is</span><span class=w>
+</span><span class=w>    </span><span class=n>v_err</span><span class=w> </span><span class=nb>varchar</span><span class=p>(</span><span class=mi>2000</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>begin</span><span class=w>
+</span><span class=w>    </span><span class=k>UPDATE</span><span class=w> </span><span class=k>SET</span><span class=w> </span><span class=n>ID</span><span class=o>=</span><span class=n>t</span><span class=p>.</span><span class=n>ID</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=k>commit</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>EXCEPTION</span><span class=w>
+</span><span class=w>    </span><span class=k>WHEN</span><span class=w> </span><span class=n>NO_DATA_FOUND</span><span class=w> </span><span class=k>THEN</span><span class=w>
+</span><span class=w>        </span><span class=k>rollback</span><span class=p>;</span><span class=w>
+</span><span class=w>    </span><span class=k>WHEN</span><span class=w> </span><span class=n>OTHERS</span><span class=w> </span><span class=k>THEN</span><span class=w>
+</span><span class=w>        </span><span class=k>rollback</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id=命令行调试>命令行调试</h3>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>set</span><span class=w> </span><span class=n>serveroutput</span><span class=w> </span><span class=k>on</span><span class=p>;</span><span class=c1>--dbms_output.put_line
+</span><span class=c1></span><span class=k>exec</span><span class=w> </span><span class=n>sync_table_from_user</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=触发器>触发器</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>create</span><span class=w> </span><span class=k>trigger</span><span class=w> </span><span class=n>TG_TABLE_LOG</span><span class=w>
+</span><span class=w>    </span><span class=k>before</span><span class=w> </span><span class=k>update</span><span class=w>
+</span><span class=w>    </span><span class=k>on</span><span class=w> </span><span class=k>TABLE</span><span class=w>
+</span><span class=w>    </span><span class=k>for</span><span class=w> </span><span class=k>each</span><span class=w> </span><span class=k>row</span><span class=w>
+</span><span class=w></span><span class=k>DECLARE</span><span class=w>
+</span><span class=w></span><span class=k>BEGIN</span><span class=w>
+</span><span class=w>    </span><span class=k>insert</span><span class=w> </span><span class=k>into</span><span class=w> </span><span class=k>TABLE</span><span class=p>(</span><span class=n>id</span><span class=p>)</span><span class=w>
+</span><span class=w>    </span><span class=k>values</span><span class=w> </span><span class=p>(:</span><span class=k>old</span><span class=p>.</span><span class=n>id</span><span class=p>);</span><span class=w>
+</span><span class=w></span><span class=k>END</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=定时任务>定时任务</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>declare</span><span class=w>
+</span><span class=w>    </span><span class=n>job</span><span class=w> </span><span class=nb>number</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>BEGIN</span><span class=w>
+</span><span class=w>    </span><span class=n>DBMS_JOB</span><span class=p>.</span><span class=n>SUBMIT</span><span class=p>(</span><span class=w>
+</span><span class=w>            </span><span class=n>JOB</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=n>job</span><span class=p>,</span><span class=w>  </span><span class=cm>/*自动生成JOB_ID*/</span><span class=w>
+</span><span class=w>            </span><span class=n>WHAT</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=s1>&#39;procedure;&#39;</span><span class=p>,</span><span class=w>  </span><span class=cm>/*需要执行的存储过程名称或SQL语句*/</span><span class=w>
+</span><span class=w>            </span><span class=n>NEXT_DATE</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=n>sysdate</span><span class=p>,</span><span class=w>  </span><span class=cm>/*初次执行时间*/</span><span class=w>
+</span><span class=w>            </span><span class=nb>INTERVAL</span><span class=w> </span><span class=o>=&gt;</span><span class=w> </span><span class=s1>&#39;trunc(sysdate,&#39;&#39;mi&#39;&#39;)+5/(24*60)&#39;</span><span class=w> </span><span class=cm>/*每隔5分钟执行一次*/</span><span class=w>
+</span><span class=w>        </span><span class=p>);</span><span class=w>
+</span><span class=w>    </span><span class=k>commit</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>end</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>select</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>from</span><span class=w> </span><span class=n>all_jobs</span><span class=p>;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>begin</span><span class=w>
+</span><span class=w>    </span><span class=n>dbms_job</span><span class=p>.</span><span class=n>run</span><span class=p>(</span><span class=mi>123</span><span class=p>);</span><span class=c1>--启动
+</span><span class=c1></span><span class=w>    </span><span class=n>dbms_job</span><span class=p>.</span><span class=n>broken</span><span class=p>(</span><span class=mi>123</span><span class=p>,</span><span class=w> </span><span class=k>true</span><span class=p>);</span><span class=c1>--停止
+</span><span class=c1></span><span class=k>end</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=dblink>dblink</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>CREATE</span><span class=w> </span><span class=k>public</span><span class=w> </span><span class=k>database</span><span class=w> </span><span class=n>link</span><span class=w> </span><span class=n>test_link</span><span class=w> </span><span class=k>CONNECT</span><span class=w> </span><span class=k>TO</span><span class=w> </span><span class=k>user</span><span class=w> </span><span class=n>IDENTIFIED</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=s2>&#34;pwd&#34;</span><span class=w>
+</span><span class=w></span><span class=k>using</span><span class=w> </span><span class=s1>&#39;(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 127.0.0.1)(PORT = 1521)) ) (CONNECT_DATA = (SERVICE_NAME = LEE) ) )&#39;</span><span class=p>;</span><span class=w> 
+</span><span class=w>
+</span><span class=w></span><span class=k>select</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>from</span><span class=w> </span><span class=k>table</span><span class=o>@</span><span class=n>test_link</span><span class=p>;</span><span class=w> 
+</span><span class=w></span><span class=k>drop</span><span class=w> </span><span class=k>public</span><span class=w> </span><span class=k>database</span><span class=w> </span><span class=n>link</span><span class=w> </span><span class=n>TEST_LINK</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=char-varchar-nchar-nvarchar>char varchar nchar nvarchar</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=nb>char</span><span class=w> </span><span class=err>定长</span><span class=w>
+</span><span class=w></span><span class=nb>varchar</span><span class=w> </span><span class=err>变长</span><span class=w>
+</span><span class=w></span><span class=nb>char</span><span class=err>、</span><span class=nb>varchar</span><span class=w> </span><span class=err>英文、数字</span><span class=w>
+</span><span class=w></span><span class=k>nchar</span><span class=err>、</span><span class=n>nvarchar</span><span class=w> </span><span class=err>中文</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=二进制解决多状态问题>二进制解决多状态问题</h2>
+<ol>
+<li>2次幂做id，每一位保存一种状态
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback>00000001 1
+00000010 2
+00000100 4
+00001000 8
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>多选时，做|运算，记为<code>result_id</code></li>
+<li>查询时，用<code>bitand(id,result_id)>0</code></li>
+</ol>
+<h2 id=多行合并>多行合并</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>SELECT</span><span class=w> </span><span class=n>listagg</span><span class=w> </span><span class=p>(</span><span class=n>T</span><span class=w> </span><span class=p>.</span><span class=n>ENAME</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;,&#39;</span><span class=p>)</span><span class=w> </span><span class=n>WITHIN</span><span class=w> </span><span class=k>GROUP</span><span class=w> </span><span class=p>(</span><span class=k>ORDER</span><span class=w> </span><span class=k>BY</span><span class=w> </span><span class=n>T</span><span class=w> </span><span class=p>.</span><span class=n>ENAME</span><span class=p>)</span><span class=w> </span><span class=k>names</span><span class=w>
+</span><span class=w></span><span class=k>FROM</span><span class=w> </span><span class=n>SCOTT</span><span class=p>.</span><span class=n>EMP</span><span class=w> </span><span class=n>T</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=截取字符串>截取字符串</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>SELECT</span><span class=w> </span><span class=n>SUBSTR</span><span class=w> </span><span class=p>(</span><span class=s1>&#39;123.456&#39;</span><span class=p>,</span><span class=w> </span><span class=n>INSTR</span><span class=w> </span><span class=p>(</span><span class=s1>&#39;123.456&#39;</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;.&#39;</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>)</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span><span class=w> </span><span class=k>FROM</span><span class=w> </span><span class=n>DUAL</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=窗口函数>窗口函数</h2>
+<h3 id=语法>语法</h3>
+<p><code>&lt;函数> over (partition by &lt;分组列> order by &lt;排序列>)</code></p>
+<h3 id=分类>分类</h3>
+<ul>
+<li>窗口函数（行数不变）
+<ul>
+<li>rank（并列占位）</li>
+<li>dense_rank（并列不占位）</li>
+<li>row_number（不并列）</li>
+</ul>
+</li>
+<li>聚合函数（行数变，作用范围自身及以上数据）：sum，avg，count，max，min</li>
+</ul>
+<h2 id=优化>优化</h2>
+<ol>
+<li>评估查询条件、表关联、子查询对性能的影响</li>
+<li>针对性能差的部分做优化（加索引、窗口函数）</li>
+<li>清除缓存再测试
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>ALTER</span><span class=w> </span><span class=k>SYSTEM</span><span class=w> </span><span class=n>FLUSH</span><span class=w> </span><span class=n>SHARED_POOL</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>SYSTEM</span><span class=w> </span><span class=n>FLUSH</span><span class=w> </span><span class=n>BUFFER_CACHE</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>ALTER</span><span class=w> </span><span class=k>SYSTEM</span><span class=w> </span><span class=n>FLUSH</span><span class=w> </span><span class=k>GLOBAL</span><span class=w> </span><span class=n>CONTEXT</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ol>
+<h2 id=分区>分区</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>CREATE</span><span class=w> </span><span class=k>TABLE</span><span class=w> </span><span class=s2>&#34;TABLE&#34;</span><span class=p>(...)</span><span class=w>
+</span><span class=w></span><span class=n>partition</span><span class=w> </span><span class=k>by</span><span class=w> </span><span class=n>range</span><span class=w> </span><span class=p>(</span><span class=n>_DATE</span><span class=p>)</span><span class=w>
+</span><span class=w></span><span class=nb>interval</span><span class=w> </span><span class=p>(</span><span class=n>NUMTOYMINTERVAL</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=s1>&#39;MONTH&#39;</span><span class=p>))</span><span class=w>
+</span><span class=w></span><span class=p>(</span><span class=n>partition</span><span class=w> </span><span class=n>P1</span><span class=w> </span><span class=k>values</span><span class=w> </span><span class=k>less</span><span class=w> </span><span class=k>than</span><span class=w> 
+</span><span class=w>    </span><span class=p>(</span><span class=n>TO_DATE</span><span class=p>(</span><span class=s1>&#39; 2020-01-01 00:00:00&#39;</span><span class=p>,</span><span class=w> 
+</span><span class=w>        </span><span class=s1>&#39;SYYYY-MM-DD HH24:MI:SS&#39;</span><span class=p>,</span><span class=w>
+</span><span class=w>        </span><span class=s1>&#39;NLS_CALENDAR=GREGORIAN&#39;</span><span class=p>))</span><span class=w>
+</span><span class=w></span><span class=p>);</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=查版本>查版本</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>select</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=k>from</span><span class=w> </span><span class=n>product_component_version</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div><h2 id=循环>循环</h2>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-sql data-lang=sql><span class=k>DECLARE</span><span class=w>
+</span><span class=w></span><span class=n>i</span><span class=w> </span><span class=nb>number</span><span class=w> </span><span class=p>:</span><span class=o>=</span><span class=w> </span><span class=mi>0</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>BEGIN</span><span class=w>
+</span><span class=w></span><span class=k>for</span><span class=w> </span><span class=n>i</span><span class=w> </span><span class=k>in</span><span class=w> </span><span class=mi>1</span><span class=w> </span><span class=p>..</span><span class=w> </span><span class=mi>3000</span><span class=w> </span><span class=n>loop</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=k>insert</span><span class=w> </span><span class=k>into</span><span class=w> </span><span class=k>table</span><span class=p>(...)</span><span class=k>values</span><span class=p>(...);</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c1>--dbms_output.put_line(i);
+</span><span class=c1></span><span class=k>end</span><span class=w> </span><span class=n>loop</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>commit</span><span class=p>;</span><span class=w>
+</span><span class=w></span><span class=k>END</span><span class=p>;</span><span class=w>
+</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>YZLC</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-11-23
+<a href=https://github.com/yzlc/www/commit/c730371df23fc72e8fe7c8c08382182f1c650494 title=1>(c730371)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<div class=post-reward>
+<input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label>
+<div class=qr-code>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/wechat.jpg>
+<span>微信打赏</span>
+</label>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/alipay.jpg>
+<span>支付宝打赏</span>
+</label>
+</div>
+</div><footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/sql/>sql</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/note/dev/regular/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">正则表达式</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/note/dev/ibatis/>
+<span class="next-text nav-default">ibatis</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
+<a href=https://github.com/yzlc class="iconfont icon-github" title=github></a>
+<a href=https://space.bilibili.com/10341737 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2019 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}}</script>
+<script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-154585647-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>

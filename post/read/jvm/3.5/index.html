@@ -1,0 +1,315 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>第3章　垃圾收集器 - YZLC</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="YZLC"><meta name=description content="3.5 经典垃圾收集器 3.5.1 Serial收集器 单线程,HotSpot虚拟机运行在客户端模式下的默认新生代收集器，对于内存资源受限的环境，它是所有收集器">
+<meta name=generator content="Hugo 0.89.4 with theme even">
+<link rel=canonical href=https://yzlc.github.io/post/read/jvm/3.5/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/dark.css>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="第3章　垃圾收集器">
+<meta property="og:description" content="3.5 经典垃圾收集器 3.5.1 Serial收集器 单线程,HotSpot虚拟机运行在客户端模式下的默认新生代收集器，对于内存资源受限的环境，它是所有收集器">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://yzlc.github.io/post/read/jvm/3.5/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2020-05-09T11:32:33+08:00">
+<meta property="article:modified_time" content="2021-11-23T17:07:01+08:00">
+<meta itemprop=name content="第3章　垃圾收集器">
+<meta itemprop=description content="3.5 经典垃圾收集器 3.5.1 Serial收集器 单线程,HotSpot虚拟机运行在客户端模式下的默认新生代收集器，对于内存资源受限的环境，它是所有收集器"><meta itemprop=datePublished content="2020-05-09T11:32:33+08:00">
+<meta itemprop=dateModified content="2021-11-23T17:07:01+08:00">
+<meta itemprop=wordCount content="2882">
+<meta itemprop=keywords content="jvm,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="第3章　垃圾收集器">
+<meta name=twitter:description content="3.5 经典垃圾收集器 3.5.1 Serial收集器 单线程,HotSpot虚拟机运行在客户端模式下的默认新生代收集器，对于内存资源受限的环境，它是所有收集器"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>YZLC</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/post/web>
+<li class=mobile-menu-item>网站</li>
+</a><a href=/post/read/read>
+<li class=mobile-menu-item>读</li>
+</a><a href=/post/soft>
+<li class=mobile-menu-item>软件</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>YZLC</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/web>网站</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/read/read>读</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/soft>软件</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>第3章　垃圾收集器</h1>
+<div class=post-meta>
+<span class=post-time> 2020-05-09 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 2882 字 </span>
+<span class=more-meta> 预计阅读 6 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#35经典垃圾收集器>3.5　经典垃圾收集器</a>
+<ul>
+<li><a href=#351serial收集器>3.5.1　Serial收集器</a></li>
+<li><a href=#352parnew收集器>3.5.2　ParNew收集器</a></li>
+<li><a href=#353parallel-scavenge收集器>3.5.3　Parallel Scavenge收集器</a></li>
+<li><a href=#354serial-old收集器>3.5.4　Serial Old收集器</a></li>
+<li><a href=#355parallel-old收集器>3.5.5　Parallel Old收集器</a></li>
+<li><a href=#356cms收集器concurrent-mark-sweep>3.5.6　CMS收集器（Concurrent Mark Sweep）</a></li>
+<li><a href=#357garbage-first收集器g1>3.5.7　Garbage First收集器(G1)</a></li>
+</ul>
+</li>
+<li><a href=#36低延迟垃圾收集器>3.6　低延迟垃圾收集器</a>
+<ul>
+<li><a href=#361shenandoah收集器>3.6.1　Shenandoah收集器</a></li>
+<li><a href=#362zgc收集器z-garbage-collector>3.6.2　ZGC收集器(Z Garbage Collector)</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h2 id=35经典垃圾收集器>3.5　经典垃圾收集器</h2>
+<h3 id=351serial收集器>3.5.1　Serial收集器</h3>
+<blockquote>
+<p>单线程,HotSpot虚拟机运行在客户端模式下的默认新生代收集器，对于内存资源受限的环境，它是所有收集器里额外内存消耗（Memory Footprint）最小的,微服务</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-7.jpg alt></p>
+<h3 id=352parnew收集器>3.5.2　ParNew收集器</h3>
+<blockquote>
+<p>Serial收集器的多线程并行版本,除了Serial收集器外，目前只有它能与CMS收集器配合工作</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-8.jpg alt></p>
+<h3 id=353parallel-scavenge收集器>3.5.3　Parallel Scavenge收集器</h3>
+<blockquote>
+<p>吞吐量优先收集器</p>
+</blockquote>
+<p>吞吐量（Throughput）：处理器用于运行用户代码的时间/处理器总消耗时间
+参数-XX：</p>
+<ul>
+<li>MaxGCPauseMillis：最大垃圾收集停顿时间,ms</li>
+<li>GCTimeRatio：吞吐量大小,{1/(1+x),默认x=99}</li>
+<li>+UseAdaptiveSizePolicy：自适应的调节策略（GC Ergonomics）</li>
+</ul>
+<h3 id=354serial-old收集器>3.5.4　Serial Old收集器</h3>
+<blockquote>
+<p>Serial收集器的老年代版本</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-9.jpg alt></p>
+<h3 id=355parallel-old收集器>3.5.5　Parallel Old收集器</h3>
+<blockquote>
+<p>Parallel Scavenge收集器的老年代版本</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-10.jpg alt></p>
+<h3 id=356cms收集器concurrent-mark-sweep>3.5.6　CMS收集器（Concurrent Mark Sweep）</h3>
+<blockquote>
+<p>以获取最短回收停顿时间为目标的收集器,B/S系统</p>
+</blockquote>
+<p><img src=/images/read/jvm/3-11.jpg alt></p>
+<h3 id=357garbage-first收集器g1>3.5.7　Garbage First收集器(G1)</h3>
+<blockquote>
+<p>使用Region划分内存空间，以及具有优先级的区域回收方式</p>
+</blockquote>
+<p>停顿时间模型（Pause Prediction Model）：在一个长度为M毫秒的时间片段内，消耗在垃圾收集上的时间大概率不超过N毫秒</p>
+<p>Mixed GC：面向堆内存任何部分来组成回收集（Collection Set，一般简称CSet）进行回收，衡量标准不再是它属于哪个分代，而是哪块内存中存放的垃圾数量最多，回收收益最大</p>
+<p>Region堆内存布局：把连续的Java堆划分为多个大小相等的独立区域（Region），每一个Region根据需要，扮演新生代的Eden空间、Survivor空间，或者老年代空间。收集器能够对扮演不同角色的Region采用不同的策略去处理.Humongous区域：专门用来存储大对象
+<img src=/images/read/jvm/3-13.jpg alt></p>
+<h2 id=36低延迟垃圾收集器>3.6　低延迟垃圾收集器</h2>
+<h3 id=361shenandoah收集器>3.6.1　Shenandoah收集器</h3>
+<p>并发标记（Concurrent Marking）：与G1一样，遍历对象图，标记出全部可达的对象，时间长短取决于堆中存活对象的数量以及对象图的结构复杂程度。</p>
+<p>并发回收（Concurrent Evacuation）：并发回收阶段是Shenandoah与之前HotSpot中其他收集器的核心差异。在这个阶段，Shenandoah要把回收集里面的存活对象先复制一份到其他未被使用的Region之中。通过读屏障和被称为“Brooks Pointers”的转发指针来解决。并发回收阶段运行的时间长短取决于回收集的大小。</p>
+<p>并发引用更新（Concurrent Update Reference）：真正开始进行引用更新操作，时间长短取决于内存中涉及的引用数量的多少。按照内存物理地址的顺序，线性地搜索出引用类型，把旧值改为新值即可。</p>
+<p>Brooks Pointers：在原有对象布局结构的最前面统一增加一个新的引用字段，在正常不处于并发移动的情况下，该引用指向对象自己</p>
+<ul>
+<li>每次对象访问会带来一次额外的转向开销</li>
+<li>并发写入：通过比较并交换（Compare And Swap，CAS）操作来保证并发时对象的访问正确性</li>
+<li>执行频率的问题：通过对象头上的Brooks Pointer来保证并发时原对象与复制对象的访问一致性，要覆盖全部对象访问操作，Shenandoah不得不同时设置读、写屏障去拦截。
+<ul>
+<li>引用访问屏障（Load Reference Barrier）：只拦截对象中数据类型为引用类型的读写操作，而不去管原生数据类型等其他非引用字段的读写，这能够省去大量对原生类型、对象比较、对象加锁等场景中设置内存屏障所带来的消耗</li>
+</ul>
+</li>
+</ul>
+<h3 id=362zgc收集器z-garbage-collector>3.6.2　ZGC收集器(Z Garbage Collector)</h3>
+<blockquote>
+<p>基于Region内存布局，（暂时）不设分代，使用了读屏障、染色指针和内存多重映射等技术来实现可并发的标记-整理算法，低延迟为目标</p>
+</blockquote>
+<p>Region：具有动态性——动态创建和销毁，以及动态的区域容量大小</p>
+<ul>
+<li>小型Region（Small Region）：容量固定为2MB，用于放置小于256KB的小对象</li>
+<li>中型Region（Medium Region）：容量固定为32MB，用于放置大于等于256KB但小于4MB的对象</li>
+<li>大型Region（Large Region）：容量不固定，可以动态变化，但必须为2MB的整数倍，用于放置4MB或以上的大对象。每个大型Region中只会存放一个大对象，这也预示着虽然名字叫作“大型Region”，但它的实际容量完全有可能小于中型Region，最小容量可低至4MB。大型Region在ZGC的实现中是不会被重分配的，因为复制一个大对象的代价非常高昂</li>
+</ul>
+<p>染色指针技术（Colored Pointer）：把标记信息记在引用对象的指针上，这时，与其说可达性分析是遍历对象图来标记对象，还不如说是遍历“引用图”来标记“引用”了
+<img src=/images/read/jvm/3-20.jpg alt></p>
+<p>ZGC运作过程
+<img src=/images/read/jvm/3-22.jpg alt title=ZGC运作过程></p>
+<ul>
+<li>并发标记（Concurrent Mark）：标记阶段会更新染色指针中的Marked 0、Marked 1标志位</li>
+<li>并发预备重分配（Concurrent Prepare for Relocate）：根据特定的查询条件统计得出本次收集过程要清理哪些Region，将这些Region组成重分配集（Relocation Set）</li>
+<li>并发重分配（Concurrent Relocate）：重分配是ZGC执行过程中的核心阶段，这个过程要把重分配集中的存活对象复制到新的Region上，并为重分配集中的每个Region维护一个转发表（Forward Table），记录从旧对象到新对象的转向关系</li>
+<li>指针的自愈（Self-Healing）：得益于染色指针的支持，ZGC收集器能仅从引用上就明确得知一个对象是否处于重分配集之中，如果用户线程此时并发访问了位于重分配集中的对象，这次访问将会被预置的内存屏障所截获，然后立即根据Region上的转发表记录将访问转发到新复制的对象上，并同时修正更新该引用的值，使其直接指向新对象
+<ul>
+<li>只有第一次访问旧对象会陷入转发，也就是只慢一次，对比Shenandoah的Brooks转发指针，那是每次对象访问都必须付出的固定开销，简单地说就是每次都慢</li>
+<li>由于染色指针的存在，一旦重分配集中某个Region的存活对象都复制完毕后，这个Region就可以立即释放用于新对象的分配（但是转发表还得留着不能释放掉），哪怕堆中还有很多指向这个对象的未更新指针也没有关系，这些旧指针一旦被使用，它们都是可以自愈的</li>
+</ul>
+</li>
+<li>并发重映射（Concurrent Remap）：重映射所做的就是修正整个堆中指向重分配集中旧对象的所有引用，这一点从目标角度看是与Shenandoah并发引用更新阶段一样的，但是ZGC的并发重映射并不是一个必须要“迫切”去完成的任务，因为前面说过，即使是旧引用，它也是可以自愈的，最多只是第一次使用时多一次转发和修正操作。重映射清理这些旧引用的主要目的是为了不变慢（还有清理结束后可以释放转发表这样的附带收益），所以说这并不是很“迫切”。因此，ZGC很巧妙地把并发重映射阶段要做的工作，合并到了下一次垃圾收集循环中的并发标记阶段里去完成，反正它们都是要遍历所有对象的，这样合并就节省了一次遍历对象图的开销。一旦所有指针都被修正之后，原来记录新旧对象关系的转发表就可以释放掉了</li>
+</ul>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>YZLC</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2021-11-23
+<a href=https://github.com/yzlc/www/commit/c730371df23fc72e8fe7c8c08382182f1c650494 title=1>(c730371)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<div class=post-reward>
+<input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label>
+<div class=qr-code>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/wechat.jpg>
+<span>微信打赏</span>
+</label>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/alipay.jpg>
+<span>支付宝打赏</span>
+</label>
+</div>
+</div><footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/jvm/>jvm</a>
+</div>
+<nav class=post-nav>
+<a class=prev href=/post/read/jvm/4/>
+<i class="iconfont icon-left"></i>
+<span class="prev-text nav-default">第4章　虚拟机性能监控、故障处理工具</span>
+<span class="prev-text nav-mobile">上一篇</span>
+</a>
+<a class=next href=/post/read/jvm/3/>
+<span class="next-text nav-default">第3章　内存分配策略</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
+<a href=https://github.com/yzlc class="iconfont icon-github" title=github></a>
+<a href=https://space.bilibili.com/10341737 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2019 -
+2021<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}}</script>
+<script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-154585647-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>
