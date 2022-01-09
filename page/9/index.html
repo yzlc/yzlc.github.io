@@ -12,7 +12,7 @@
 <meta name=apple-mobile-web-app-capable content="yes">
 <meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
 <meta name=author content="YZLC"><meta name=description content="less is more">
-<meta name=generator content="Hugo 0.90.1 with theme even">
+<meta name=generator content="Hugo 0.91.2 with theme even">
 <link rel=canonical href=https://yzlc.github.io/>
 <link href=https://yzlc.github.io/index.xml rel=alternate type=application/rss+xml title=YZLC>
 <link href=https://yzlc.github.io/index.xml rel=feed type=application/rss+xml title=YZLC>
@@ -87,6 +87,27 @@
 <div class=content-wrapper>
 <div id=content class=content>
 <section id=posts class=posts>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/config/linux/vps/>vps</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-09-01 </span>
+<div class=post-category>
+<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+</div>
+<span class=more-meta> 约 123 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+登录配置 本机生成密钥(输入管理密码) ssh-keygen -t rsa -C "yzlc233@outlook.com" 把公钥复制到服务器 ssh-copy-id -p port user@host ssh登录 ssh -p port user@host 安装工具包 1 2 3 4 yum -y update && yum -y upgrade yum -y install wget yum -y install vim yum
+</div>
+<div class=read-more>
+<a href=/post/config/linux/vps/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
 <article class=post>
 <header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/config/win/idea/>idea</a></h1>
@@ -171,27 +192,6 @@ nginx 启动 start nginx 正常停止 nginx -s quit 快速停止 nginx -s stop �
 </div>
 </div>
 </article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/note/linux/linux/>linux</a></h1>
-<div class=post-meta>
-<span class=post-time> 2019-06-01 </span>
-<div class=post-category>
-<a href=/categories/note/> note </a>
-</div>
-<span class=more-meta> 约 183 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-查找 find / -type d -name *tomcat* 2>/dev/null 按文件/目录大小排序 du -sh * | sort -rn | head 查看进程运行的完整路径 ll /proc/PID 杀进程 pkill -f 进程名称 后台运行 nohup xx >/dev/null 2>&1 & 脚本 1 2 3 #!/bin/bash day=`date +%Y%m%d` echo &#3
-</div>
-<div class=read-more>
-<a href=/post/note/linux/linux/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
 </section>
 <nav class=pagination>
 <a class=prev href=/page/8/>
@@ -230,7 +230,7 @@ nginx 启动 start nginx 正常停止 nginx -s quit 快速停止 nginx -s stop �
 <span class=copyright-year>
 &copy;
 2019 -
-2021<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
 </span>
 </div>
 </footer>

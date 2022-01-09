@@ -1,0 +1,345 @@
+<!doctype html><html lang=zh-cn>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
+<title>vue - YZLC</title>
+<meta name=renderer content="webkit">
+<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta http-equiv=cache-control content="no-transform">
+<meta http-equiv=cache-control content="no-siteapp">
+<meta name=theme-color content="#f8f5ec">
+<meta name=msapplication-navbutton-color content="#f8f5ec">
+<meta name=apple-mobile-web-app-capable content="yes">
+<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
+<meta name=author content="YZLC"><meta name=description content="数据绑定 v-bind单向，v-model(表单元素)双向 el、data的其他写法 vm.$mount('#root') data(){ return {msg:'1'} } 事件处理 @click=&amp;quot;demo($event,1)&amp;quot; 事件修饰符 prevent：阻止默认事件（">
+<meta name=generator content="Hugo 0.91.2 with theme even">
+<link rel=canonical href=https://yzlc.github.io/post/note/dev/vue/>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
+<link rel=manifest href=/manifest.json>
+<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
+<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
+<link rel=stylesheet href=/css/dark.css>
+<link rel=stylesheet href=/css/custom.css>
+<meta property="og:title" content="vue">
+<meta property="og:description" content="数据绑定 v-bind单向，v-model(表单元素)双向 el、data的其他写法 vm.$mount('#root') data(){ return {msg:'1'} } 事件处理 @click=&#34;demo($event,1)&#34; 事件修饰符 prevent：阻止默认事件（">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://yzlc.github.io/post/note/dev/vue/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2022-01-08T10:45:33+08:00">
+<meta property="article:modified_time" content="2022-01-09T15:45:55+08:00">
+<meta itemprop=name content="vue">
+<meta itemprop=description content="数据绑定 v-bind单向，v-model(表单元素)双向 el、data的其他写法 vm.$mount('#root') data(){ return {msg:'1'} } 事件处理 @click=&#34;demo($event,1)&#34; 事件修饰符 prevent：阻止默认事件（"><meta itemprop=datePublished content="2022-01-08T10:45:33+08:00">
+<meta itemprop=dateModified content="2022-01-09T15:45:55+08:00">
+<meta itemprop=wordCount content="1305">
+<meta itemprop=keywords content="vue,"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="vue">
+<meta name=twitter:description content="数据绑定 v-bind单向，v-model(表单元素)双向 el、data的其他写法 vm.$mount('#root') data(){ return {msg:'1'} } 事件处理 @click=&#34;demo($event,1)&#34; 事件修饰符 prevent：阻止默认事件（"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
+</head>
+<body>
+<div id=mobile-navbar class=mobile-navbar>
+<div class=mobile-header-logo>
+<a href=/ class=logo>YZLC</a>
+</div>
+<div class=mobile-navbar-icon>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
+<nav id=mobile-menu class="mobile-menu slideout-menu">
+<ul class=mobile-menu-list>
+<a href=/tags/>
+<li class=mobile-menu-item>标签</li>
+</a><a href=/categories/>
+<li class=mobile-menu-item>分类</li>
+</a><a href=/post/web>
+<li class=mobile-menu-item>网站</li>
+</a><a href=/post/read/read>
+<li class=mobile-menu-item>读</li>
+</a><a href=/post/soft>
+<li class=mobile-menu-item>软件</li>
+</a>
+</ul>
+</nav>
+<div class=container id=mobile-panel>
+<header id=header class=header>
+<div class=logo-wrapper>
+<a href=/ class=logo>YZLC</a>
+</div>
+<nav class=site-navbar>
+<ul id=menu class=menu>
+<li class=menu-item>
+<a class=menu-item-link href=/tags/>标签</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/categories/>分类</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/web>网站</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/read/read>读</a>
+</li><li class=menu-item>
+<a class=menu-item-link href=/post/soft>软件</a>
+</li>
+</ul>
+</nav>
+</header>
+<main id=main class=main>
+<div class=content-wrapper>
+<div id=content class=content>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title>vue</h1>
+<div class=post-meta>
+<span class=post-time> 2022-01-08 </span>
+<div class=post-category>
+<a href=/categories/note/> note </a>
+</div>
+<span class=more-meta> 约 1305 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
+<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+</div>
+</header>
+<div class=post-toc id=post-toc>
+<h2 class=post-toc-title>文章目录</h2>
+<div class="post-toc-content always-active">
+<nav id=TableOfContents>
+<ul>
+<li><a href=#数据绑定>数据绑定</a></li>
+<li><a href=#eldata的其他写法>el、data的其他写法</a></li>
+<li><a href=#事件处理>事件处理</a></li>
+<li><a href=#事件修饰符>事件修饰符</a></li>
+<li><a href=#键盘事件>键盘事件</a></li>
+<li><a href=#计算属性>计算属性</a></li>
+<li><a href=#监视属性>监视属性</a></li>
+<li><a href=#绑定class>绑定class</a></li>
+<li><a href=#条件渲染>条件渲染</a></li>
+<li><a href=#列表渲染>列表渲染</a></li>
+<li><a href=#列表过滤>列表过滤</a></li>
+<li><a href=#数据监视>数据监视</a></li>
+<li><a href=#v-model>v-model</a></li>
+<li><a href=#v-cloak>v-cloak</a></li>
+<li><a href=#v-once>v-once</a></li>
+<li><a href=#v-pre>v-pre</a></li>
+<li><a href=#自定义指令>自定义指令</a></li>
+<li><a href=#生命周期>生命周期</a></li>
+<li><a href=#组件>组件</a></li>
+<li><a href=#ref>ref</a></li>
+<li><a href=#nexttick>nextTick</a></li>
+<li><a href=#路由>路由</a></li>
+</ul>
+</nav>
+</div>
+</div>
+<div class=post-content>
+<h2 id=数据绑定>数据绑定</h2>
+<p>v-bind单向，v-model(表单元素)双向</p>
+<h2 id=eldata的其他写法>el、data的其他写法</h2>
+<p><code>vm.$mount('#root')</code></p>
+<p><code>data(){ return {msg:'1'} }</code></p>
+<h2 id=事件处理>事件处理</h2>
+<p><code>@click="demo($event,1)"</code></p>
+<h2 id=事件修饰符>事件修饰符</h2>
+<ol>
+<li>prevent：阻止默认事件（a标签跳转）</li>
+<li>stop：阻止事件冒泡（外层div事件）</li>
+<li>once：事件只触发一次</li>
+</ol>
+<h2 id=键盘事件>键盘事件</h2>
+<p>按键别名：enter、delete、esc、space、tab；keydown：ctrl、alt、shift、meta</p>
+<h2 id=计算属性>计算属性</h2>
+<blockquote>
+<p>不能异步</p>
+</blockquote>
+<p>computed：<code>fullName:{get(){}}</code>，简写<code>fullName(){}</code></p>
+<h2 id=监视属性>监视属性</h2>
+<p>watch：<code>isHot(newVal,oldVal){}</code></p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=nx>isHot</span><span class=o>:</span><span class=p>{</span> 
+    <span class=nx>immediate</span><span class=o>:</span><span class=kc>true</span><span class=p>,</span> <span class=c1>//初始化时调用
+</span><span class=c1></span>    <span class=nx>deep</span><span class=o>:</span><span class=kc>true</span><span class=p>,</span> <span class=c1>//深度监视
+</span><span class=c1></span>    <span class=nx>handler</span><span class=p>(</span><span class=nx>newVal</span><span class=p>,</span><span class=nx>oldVal</span><span class=p>){}</span>
+<span class=p>}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>vm.$watch('isHot',function(newVal,oldVal){})</code></p>
+<h2 id=绑定class>绑定class</h2>
+<p>单个：&lsquo;class1&rsquo;、多个不确定：arr[&lsquo;class1&rsquo;,&lsquo;class2&rsquo;]、动态开启：obj:{class1:false,class2:true}</p>
+<h2 id=条件渲染>条件渲染</h2>
+<p>v-if：切换频率低的场景，移除；v-show：切换频率高的场景，隐藏，不能搭配template</p>
+<h2 id=列表渲染>列表渲染</h2>
+<p><code>v-for="(item,index) in xxx" :key="唯一标识id"</code></p>
+<h2 id=列表过滤>列表过滤</h2>
+<p>computed、watch</p>
+<h2 id=数据监视>数据监视</h2>
+<p>对象、数组：Vue.set(target,propertyName/index,value)、vm.$set(target,propertyName/index,value)</p>
+<p>数组：push、pop、shift、unshift、splice、sort、reverse</p>
+<h2 id=v-model>v-model</h2>
+<ul>
+<li>radio：需要配置value</li>
+<li>checkbox：不配置value，则为checked（布尔）；初始值是[]，则为value数组</li>
+</ul>
+<p>三个修饰符：lazy（失焦再收集数据）、number（转数字）、trim（去空格）</p>
+<h2 id=v-cloak>v-cloak</h2>
+<p>使用css<code>[v-cloak]{display:none;}</code>配合v-cloak解决{{xxx}}问题</p>
+<h2 id=v-once>v-once</h2>
+<p>初次渲染后视为静态内容</p>
+<h2 id=v-pre>v-pre</h2>
+<p>跳过编译过程</p>
+<h2 id=自定义指令>自定义指令</h2>
+<ul>
+<li>局部：new Vue({ directives:{指令名:配置对象/回调函数} })</li>
+<li>全局：Vue.directives(指令名,配置对象/回调函数)</li>
+</ul>
+<p>配置对象常用的回调</p>
+<ol>
+<li>bind：指令与元素绑定时</li>
+<li>inserted：元素被插入时</li>
+<li>update：模板结构被重新解析时</li>
+</ol>
+<h2 id=生命周期>生命周期</h2>
+<ul>
+<li>mounted：发送ajax、启动定时器、绑定自定义事件、订阅消息</li>
+<li>beforeDestroy：清除定时器、解绑自定义事件、取消订阅</li>
+</ul>
+<h2 id=组件>组件</h2>
+<p>Vue.extend(options)，el不写，data必须写成函数。局部注册components，全局Vue.component(&lsquo;组件名&rsquo;,组件)</p>
+<ul>
+<li>每次调用，返回一个全新的VueComponent</li>
+<li>this在组件中是vc（VueComponent）对象，在new Vue中是vm（Vue）对象</li>
+<li>VueComponent.prototype.<strong>proto</strong> === Vue.prototype</li>
+</ul>
+<h2 id=ref>ref</h2>
+<p>给元素（dom）或子组件（vc）注册引用信息，this.$refs.xxx</p>
+<h2 id=nexttick>nextTick</h2>
+<p>在下一次dom更新后执行回调</p>
+<h2 id=路由>路由</h2>
+<p>query参数</p>
+<div class=highlight><div class=chroma>
+<table class=lntable><tr><td class=lntd>
+<pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td>
+<td class=lntd>
+<pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=o>&lt;</span><span class=nx>router</span><span class=o>-</span><span class=nx>link</span> 
+    <span class=o>:</span><span class=nx>to</span><span class=o>=</span><span class=s2>&#34;{
+</span><span class=s2>        path:&#39;/home/msg/detail&#39;,
+</span><span class=s2>        query:{
+</span><span class=s2>            id:1,
+</span><span class=s2>            title:&#39;标题1&#39;
+</span><span class=s2>        }
+</span><span class=s2>    }&#34;</span>
+<span class=o>&gt;</span><span class=nx>跳转</span><span class=o>&lt;</span><span class=err>/router-link&gt;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>接收：<code>$route.query.id</code></p>
+</div>
+<div class=post-copyright>
+<p class=copyright-item>
+<span class=item-title>文章作者</span>
+<span class=item-content>YZLC</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>上次更新</span>
+<span class=item-content>
+2022-01-09
+<a href=https://github.com/yzlc/www/commit/324cdee9eca75d23976241dd3d863a23012b65a7 title=1>(324cdee)</a>
+</span>
+</p>
+<p class=copyright-item>
+<span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
+</p>
+</div>
+<div class=post-reward>
+<input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label>
+<div class=qr-code>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/wechat.jpg>
+<span>微信打赏</span>
+</label>
+<label class=qr-code-image for=reward>
+<img class=image src=/images/reward/alipay.jpg>
+<span>支付宝打赏</span>
+</label>
+</div>
+</div><footer class=post-footer>
+<div class=post-tags>
+<a href=/tags/vue/>vue</a>
+</div>
+<nav class=post-nav>
+<a class=next href=/post/note/dev/nodejs/>
+<span class="next-text nav-default">nodejs</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i>
+</a>
+</nav>
+</footer>
+</article>
+</div>
+<div id=vcomments></div>
+<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
+</div>
+</main>
+<footer id=footer class=footer>
+<div class=social-links>
+<a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
+<a href=https://github.com/yzlc class="iconfont icon-github" title=github></a>
+<a href=https://space.bilibili.com/10341737 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
+</div>
+<div class=copyright>
+<span class=power-by>
+由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
+</span>
+<span class=division>|</span>
+<span class=theme-info>
+主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
+</span>
+<div class=busuanzi-footer>
+<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
+</div>
+<span class=copyright-year>
+&copy;
+2019 -
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
+</span>
+</div>
+</footer>
+<div class=back-to-top id=back-to-top>
+<i class="iconfont icon-up"></i>
+</div>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}}</script>
+<script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-154585647-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</body>
+</html>
