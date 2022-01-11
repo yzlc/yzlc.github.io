@@ -89,6 +89,27 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/config/linux/ss/>ss</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-09-01 </span>
+<div class=post-category>
+<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+</div>
+<span class=more-meta> 约 75 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+SS 1 2 3 4 5 6 7 8 9 10 11 #安装 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh && chmod +x shadowsocks-all.sh && ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log #卸载 ./shadowsocks-all.sh uninstall #命令 /etc/init.d/shadowsocks-python start | stop | restart | status #配置文件 /etc/shadowsocks-python/config.json BBR 1 2 3 4 5 #安装 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+</div>
+<div class=read-more>
+<a href=/post/config/linux/ss/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/config/linux/vps/>vps</a></h1>
 <div class=post-meta>
 <span class=post-time> 2019-09-01 </span>
@@ -168,27 +189,6 @@ Padavan v2ray 导出节点 在电脑上将正常的节点导出为客户端json 
 </div>
 <div class=read-more>
 <a href=/post/note/win/bat/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/note/win/nginx/>nginx</a></h1>
-<div class=post-meta>
-<span class=post-time> 2019-06-30 </span>
-<div class=post-category>
-<a href=/categories/note/> note </a>
-</div>
-<span class=more-meta> 约 243 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-nginx 启动 start nginx 正常停止 nginx -s quit 快速停止 nginx -s stop 代理 地址 1 2 3 4 5 6 7 8 9 server { listen 9001; server_name 192.168.1.10; location /11/ { #192.168.1.10:9001/11/test -> http://192.168.1.11:8080/test proxy_pass http://192.168.1.11:8080/; } } 服务器 1 2 3 4 5 6 7 8 9 10 11 12 13 stream { #str
-</div>
-<div class=read-more>
-<a href=/post/note/win/nginx/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
