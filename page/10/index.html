@@ -89,27 +89,6 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/note/win/nginx/>nginx</a></h1>
-<div class=post-meta>
-<span class=post-time> 2019-06-30 </span>
-<div class=post-category>
-<a href=/categories/note/> note </a>
-</div>
-<span class=more-meta> 约 243 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-nginx 启动 start nginx 正常停止 nginx -s quit 快速停止 nginx -s stop 代理 地址 1 2 3 4 5 6 7 8 9 server { listen 9001; server_name 192.168.1.10; location /11/ { #192.168.1.10:9001/11/test -> http://192.168.1.11:8080/test proxy_pass http://192.168.1.11:8080/; } } 服务器 1 2 3 4 5 6 7 8 9 10 11 12 13 stream { #str
-</div>
-<div class=read-more>
-<a href=/post/note/win/nginx/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
 <h1 class=post-title><a class=post-link href=/post/note/linux/linux/>linux</a></h1>
 <div class=post-meta>
 <span class=post-time> 2019-06-01 </span>
@@ -189,6 +168,27 @@ nginx 启动 start nginx 正常停止 nginx -s quit 快速停止 nginx -s stop �
 </div>
 <div class=read-more>
 <a href=/post/note/dev/sql/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/note/dev/ibatis/>ibatis</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-05-02 </span>
+<div class=post-category>
+<a href=/categories/note/> note </a>
+</div>
+<span class=more-meta> 约 210 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+批量merge Oracle 参数做判断，需要传入map 1 2 3 4 5 6 &lt;statement id="merge" parameterClass="map"> &lt;iterate property="list" open="begin" close=";end;" conjunction=";"> merge into... &lt;isNotEmpty property="list[].id"> id=id, &lt;/isNotEmpty> 不用判断参数，传入list 1 2 3 &lt;statement id="merge" parameterClass="list"> &lt;iterate open="begin" close=";end;" conjunction=";"> merge into... #list[].id# mysql 1 2
+</div>
+<div class=read-more>
+<a href=/post/note/dev/ibatis/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
