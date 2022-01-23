@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>springWebflux - YZLC</title>
+<title>YZLC</title>
 <meta name=renderer content="webkit">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta http-equiv=cache-control content="no-transform">
@@ -11,9 +11,11 @@
 <meta name=msapplication-navbutton-color content="#f8f5ec">
 <meta name=apple-mobile-web-app-capable content="yes">
 <meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="YZLC"><meta name=description content="异步：调用者发送请求，不等待回应就做事情 非阻塞：被调用者收到请求，先反馈再做事情 响应式编程 观察者模式，jdk8：Observale，jdk9">
+<meta name=author content="YZLC"><meta name=description content="less is more">
 <meta name=generator content="Hugo 0.92.0 with theme even">
-<link rel=canonical href=https://yzlc.github.io/post/read/spring/webflux/>
+<link rel=canonical href=https://yzlc.github.io/>
+<link href=https://yzlc.github.io/index.xml rel=alternate type=application/rss+xml title=YZLC>
+<link href=https://yzlc.github.io/index.xml rel=feed type=application/rss+xml title=YZLC>
 <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
@@ -24,19 +26,14 @@
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
 <link rel=stylesheet href=/css/dark.css>
 <link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="springWebflux">
-<meta property="og:description" content="异步：调用者发送请求，不等待回应就做事情 非阻塞：被调用者收到请求，先反馈再做事情 响应式编程 观察者模式，jdk8：Observale，jdk9">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://yzlc.github.io/post/read/spring/webflux/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2020-12-12T11:38:33+08:00">
-<meta property="article:modified_time" content="2022-01-14T21:57:58+08:00">
-<meta itemprop=name content="springWebflux">
-<meta itemprop=description content="异步：调用者发送请求，不等待回应就做事情 非阻塞：被调用者收到请求，先反馈再做事情 响应式编程 观察者模式，jdk8：Observale，jdk9"><meta itemprop=datePublished content="2020-12-12T11:38:33+08:00">
-<meta itemprop=dateModified content="2022-01-14T21:57:58+08:00">
-<meta itemprop=wordCount content="158">
-<meta itemprop=keywords content="spring,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="springWebflux">
-<meta name=twitter:description content="异步：调用者发送请求，不等待回应就做事情 非阻塞：被调用者收到请求，先反馈再做事情 响应式编程 观察者模式，jdk8：Observale，jdk9"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<meta property="og:title" content="YZLC">
+<meta property="og:description" content="less is more">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yzlc.github.io/">
+<meta itemprop=name content="YZLC">
+<meta itemprop=description content="less is more"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="YZLC">
+<meta name=twitter:description content="less is more"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
 <script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
@@ -58,8 +55,6 @@
 <li class=mobile-menu-item>分类</li>
 </a><a href=/post/web>
 <li class=mobile-menu-item>网站</li>
-</a><a href=/post/read/read>
-<li class=mobile-menu-item>读</li>
 </a><a href=/post/soft>
 <li class=mobile-menu-item>软件</li>
 </a>
@@ -79,8 +74,6 @@
 </li><li class=menu-item>
 <a class=menu-item-link href=/post/web>网站</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/post/read/read>读</a>
-</li><li class=menu-item>
 <a class=menu-item-link href=/post/soft>软件</a>
 </li>
 </ul>
@@ -89,99 +82,124 @@
 <main id=main class=main>
 <div class=content-wrapper>
 <div id=content class=content>
+<section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title>springWebflux</h1>
+<h1 class=post-title><a class=post-link href=/post/read/linux/auth/>linux - 权限</a></h1>
 <div class=post-meta>
-<span class=post-time> 2020-12-12 </span>
+<span class=post-time> 2019-06-01 </span>
 <div class=post-category>
 <a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 158 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
+<span class=more-meta> 约 558 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#响应式编程>响应式编程</a>
-<ul>
-<li><a href=#reactor>Reactor</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
 <div class=post-content>
-<p>异步：调用者发送请求，不等待回应就做事情
-非阻塞：被调用者收到请求，先反馈再做事情</p>
-<h2 id=响应式编程>响应式编程</h2>
-<blockquote>
-<p>观察者模式，jdk8：Observale，jdk9：Flow</p>
-</blockquote>
-<h3 id=reactor>Reactor</h3>
-<blockquote>
-<p>Reactive规范</p>
-</blockquote>
-<p>核心类：发布者Mono（返回0或1个元素）、Flux（返回N个元素）实现Publisher接口。发出三种数据信号：元素值，终止信号（错误、完成）</p>
+<div class=post-summary>
+拥有者、组成员和其他人 id 查看身份 文件类型 - 文件 d 目录 l 符号链接。注意对于符号链接文件，剩余的文件属性总是rwxrwxrwx，而且都是 虚拟值。
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>YZLC</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-14
-<a href=https://github.com/yzlc/www/commit/334bcd0aecbaece9c47c5d466fc034b2badcffe9 title="Update scoop.md">(334bcd0)</a>
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+<div class=read-more>
+<a href=/post/read/linux/auth/ class=read-more-link>阅读更多</a>
 </div>
-<div class=post-reward>
-<input type=checkbox name=reward id=reward hidden>
-<label class=reward-button for=reward>赞赏支持</label>
-<div class=qr-code>
-<label class=qr-code-image for=reward>
-<img class=image src=/images/reward/wechat.jpg>
-<span>微信打赏</span>
-</label>
-<label class=qr-code-image for=reward>
-<img class=image src=/images/reward/alipay.jpg>
-<span>支付宝打赏</span>
-</label>
 </div>
-</div><footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/spring/>spring</a>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/read/linux/pkgmgr/>linux - 软件包管理</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-06-01 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
 </div>
-<nav class=post-nav>
-<a class=prev href=/post/read/java/thread/>
+<span class=more-meta> 约 275 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+打包系统 Debian Style (.deb) Debian, Ubuntu, Xandros, Linspire Red Hat Style (.rpm) Fedora, CentOS, Red Hat Enterprise Linux, OpenSUSE, Mandriva, PCLinuxOS 包管理工具 发行版 底层工具 上层工具 Debian-Style dpkg apt-get, aptitude Fedora, Red Hat Enterprise Linux, CentOS rpm yum 底层工具用来处理这些任务，比方说安装
+</div>
+<div class=read-more>
+<a href=/post/read/linux/pkgmgr/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/read/linux/process/>linux - 进程</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-06-01 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 562 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+ps ps -ef|grep xx ps x 所有进程 ps aux 用户进程 VSZ 虚拟内存大小 RSS 进程占用的物理内存的大小，以千字节为单位。 START 进程启动的时间。若它的值超过24小时，则用天表示
+</div>
+<div class=read-more>
+<a href=/post/read/linux/process/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/read/linux/key/>linux - 键盘高级操作技巧</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-06-01 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 419 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+移动光标 Ctrl-a 移动光标到行首 Ctrl-e 移动光标到行尾 Ctrl-f 光标前移一个字符；和右箭头作用一样 Ctrl-b 光标后移一个字符；和左箭头作用一样 Alt-f 光标前移一个字 Alt-b 光标后移一
+</div>
+<div class=read-more>
+<a href=/post/read/linux/key/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/config/win/git/>git - win</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-05-30 </span>
+<div class=post-category>
+<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+</div>
+<span class=more-meta> 约 74 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+免密登录 ssh方式 ssh-keygen -t rsa -C "yzlc233@outlook.com" http方式 1 2 3 4 5 6 7 8 9 10 #1. 新增配置文件 cd ~ vim .git-credentials #2. 添加内容 https://username:password@github.com http://username:password@github.com #3. 配置账号 git config --global credential.helper store 配置代理 1 2 git config --global http.proxy socks5://127.0.0.1:10808 git
+</div>
+<div class=read-more>
+<a href=/post/config/win/git/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+</section>
+<nav class=pagination>
+<a class=prev href=/page/17/>
 <i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">线程</span>
-<span class="prev-text nav-mobile">上一篇</span>
+<span class=prev-text>上一页</span>
 </a>
-<a class=next href=/post/read/spring/transaction/>
-<span class="next-text nav-default">spring事务</span>
-<span class="next-text nav-mobile">下一篇</span>
+<a class=next href=/page/19/>
+<span class=next-text>下一页</span>
 <i class="iconfont icon-right"></i>
 </a>
 </nav>
-</footer>
-</article>
 </div>
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
-<script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
 </div>
 </main>
 <footer id=footer class=footer>

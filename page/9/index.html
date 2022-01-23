@@ -55,8 +55,6 @@
 <li class=mobile-menu-item>分类</li>
 </a><a href=/post/web>
 <li class=mobile-menu-item>网站</li>
-</a><a href=/post/read/read>
-<li class=mobile-menu-item>读</li>
 </a><a href=/post/soft>
 <li class=mobile-menu-item>软件</li>
 </a>
@@ -76,8 +74,6 @@
 </li><li class=menu-item>
 <a class=menu-item-link href=/post/web>网站</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/post/read/read>读</a>
-</li><li class=menu-item>
 <a class=menu-item-link href=/post/soft>软件</a>
 </li>
 </ul>
@@ -89,106 +85,106 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/config/linux/ss/>ss</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/concurrency/2/>第2章　线程安全性</a></h1>
 <div class=post-meta>
-<span class=post-time> 2019-09-01 </span>
+<span class=post-time> 2020-06-15 </span>
 <div class=post-category>
-<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+<a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 75 字 </span>
+<span class=more-meta> 约 363 字 </span>
 <span class=more-meta> 预计阅读 1 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-SS 1 2 3 4 5 6 7 8 9 10 11 #安装 wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh && chmod +x shadowsocks-all.sh && ./shadowsocks-all.sh 2>&1 | tee shadowsocks-all.log #卸载 ./shadowsocks-all.sh uninstall #命令 /etc/init.d/shadowsocks-python start | stop | restart | status #配置文件 /etc/shadowsocks-python/config.json BBR 1 2 3 4 5 #安装 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+2.1 什么是线程安全性 当多个线程访问某个类时，这个类始终都能表现出正确的行为 2.2 原子性 2.2.1 竞态条件（Race Condition） 由于不恰当的执行时序
 </div>
 <div class=read-more>
-<a href=/post/config/linux/ss/ class=read-more-link>阅读更多</a>
+<a href=/post/read/concurrency/2/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/config/linux/vps/>vps</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/concurrency/3/>第3章　对象的共享</a></h1>
 <div class=post-meta>
-<span class=post-time> 2019-09-01 </span>
+<span class=post-time> 2020-06-15 </span>
 <div class=post-category>
-<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+<a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 123 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
+<span class=more-meta> 约 1348 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-登录配置 本机生成密钥(输入管理密码) ssh-keygen -t rsa -C "yzlc233@outlook.com" 把公钥复制到服务器 ssh-copy-id -p port user@host ssh登录 ssh -p port user@host 安装工具包 1 2 3 4 yum -y update && yum -y upgrade yum -y install wget yum -y install vim yum
+3.1 可见性 3.1.1 失效数据 3.1.2 非原子的64位操作 3.1.3 加锁与可见性 3.1.4 Volatile变量 当且仅当满足以下所有条件时使用： 对变量的写入操作不依赖变量的当前值
 </div>
 <div class=read-more>
-<a href=/post/config/linux/vps/ class=read-more-link>阅读更多</a>
+<a href=/post/read/concurrency/3/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/config/win/idea/>idea</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/jvm/12/>第12章　Java内存模型与线程</a></h1>
 <div class=post-meta>
-<span class=post-time> 2019-08-31 </span>
+<span class=post-time> 2020-06-03 </span>
 <div class=post-category>
-<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+<a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 77 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
+<span class=more-meta> 约 3716 字 </span>
+<span class=more-meta> 预计阅读 8 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-Help Edit Custom VM Options&mldr; 1 -Dfile.encoding=UTF-8 Settings Editor File and Code Templates Files&ndash;>Class 1 2 3 /** * @author ${USER} */ File Types ignore files and folders 添加*.idea;*.iml; General Auto Import Add unambiguous imports on the fly Optimize imports on the fly Code Completion Match case Editor Tabs Show tabs in one row Tab limit
+12.1 概述 每秒事务处理数（Transactions Per Second，TPS） 12.3 Java内存模型 定义程序中各种变量的访问规则，即关注在虚拟机中把变量
 </div>
 <div class=read-more>
-<a href=/post/config/win/idea/ class=read-more-link>阅读更多</a>
+<a href=/post/read/jvm/12/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/config/linux/padavan/>padavan</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/jvm/13/>第13章　线程安全与锁优化</a></h1>
 <div class=post-meta>
-<span class=post-time> 2019-07-08 </span>
+<span class=post-time> 2020-06-03 </span>
 <div class=post-category>
-<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+<a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 270 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
+<span class=more-meta> 约 1814 字 </span>
+<span class=more-meta> 预计阅读 4 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-Padavan v2ray 导出节点 在电脑上将正常的节点导出为客户端json 修改json第10行"listen"为路由器的管理地址 v2ray设置
+13.2 线程安全 13.2.1 Java语言中的线程安全 不可变 基本数据类型：在定义时使用final关键字修饰 对象：需要保证其行为不会对其状态产生任何影响(Str
 </div>
 <div class=read-more>
-<a href=/post/config/linux/padavan/ class=read-more-link>阅读更多</a>
+<a href=/post/read/jvm/13/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/note/win/bat/>bat</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/jvm/11/>第11章　后端编译与优化</a></h1>
 <div class=post-meta>
-<span class=post-time> 2019-06-30 </span>
+<span class=post-time> 2020-06-02 </span>
 <div class=post-category>
-<a href=/categories/note/> note </a>
+<a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 227 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
+<span class=more-meta> 约 2187 字 </span>
+<span class=more-meta> 预计阅读 5 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-变量 ps>ls env: 用户目录：%UserProfile% 开机启动（用户）：%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup 删目录、文
+11.2 即时编译器 Java程序最初都是通过解释器（Interpreter）进行解释执行的，当虚拟机发现某个方法或代码块的运行特别频繁，就会把这些代
 </div>
 <div class=read-more>
-<a href=/post/note/win/bat/ class=read-more-link>阅读更多</a>
+<a href=/post/read/jvm/11/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>

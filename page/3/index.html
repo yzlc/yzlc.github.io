@@ -55,8 +55,6 @@
 <li class=mobile-menu-item>分类</li>
 </a><a href=/post/web>
 <li class=mobile-menu-item>网站</li>
-</a><a href=/post/read/read>
-<li class=mobile-menu-item>读</li>
 </a><a href=/post/soft>
 <li class=mobile-menu-item>软件</li>
 </a>
@@ -76,8 +74,6 @@
 </li><li class=menu-item>
 <a class=menu-item-link href=/post/web>网站</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/post/read/read>读</a>
-</li><li class=menu-item>
 <a class=menu-item-link href=/post/soft>软件</a>
 </li>
 </ul>
@@ -89,106 +85,106 @@
 <section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/note/win/scoop/>scoop</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/spring/spring/>springAOP</a></h1>
 <div class=post-meta>
-<span class=post-time> 2020-12-31 </span>
+<span class=post-time> 2020-12-10 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 238 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+AOP 动态代理 有接口：jdk，代理接口实现类 无接口：cglib，代理子类 事务 propagation REQUIRED（default）：有则追加，无则创建 REQUIR
+</div>
+<div class=read-more>
+<a href=/post/read/spring/spring/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/read/spring/ioc/>springIOC</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-12-07 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 2471 字 </span>
+<span class=more-meta> 预计阅读 5 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+参考 Spring分析 请别再问Spring Bean的生命周期了！ 思想：把对象创建和调用交给spring管理，降低耦合 实现：配置解析->工
+</div>
+<div class=read-more>
+<a href=/post/read/spring/ioc/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/config/win/plantuml/>PlantUML</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-11-26 </span>
+<div class=post-category>
+<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+</div>
+<span class=more-meta> 约 309 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+安装 vscode安装PlantUML插件 安装Graphviz 绘图 编写脚本：新建md文件 1 2 3 @startuml @enduml 查看图像：快捷键 Alt + D （Ctrl+Shift
+</div>
+<div class=read-more>
+<a href=/post/config/win/plantuml/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/note/dev/leetcode/easy/>leetcode初级算法</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-09-10 </span>
 <div class=post-category>
 <a href=/categories/note/> note </a>
 </div>
-<span class=more-meta> 约 124 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
+<span class=more-meta> 约 793 字 </span>
+<span class=more-meta> 预计阅读 2 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-script git代理 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser $env:SCOOP='C:\Scoop' #添加环境变量 [environment]::setEnvironmentVariable('SCOOP',$env:SCOOP,'User') iwr -useb get.scoop.sh | iex scoop install git scoop install aria2 scoop config aria2-enabled false scoop bucket add extras scoop
+数组 旋转图像 将矩阵划分为4部分旋转 ij 交换轨迹 00 00->30->33->03 01 01->20->32->13 10 10->31->23->02 11 11->21->22->12 坐标 (i,j)->(len-1-j,i)->(len-1-i,len-1-j)->(j,len-1-i) 1 2 3 4 5 6 7 8 9 10 11 12 public void rotate(int[][] matrix){ int len = matrix.length; for (int i = 0; i &lt; (len + 1) / 2; i++) { for (int j
 </div>
 <div class=read-more>
-<a href=/post/note/win/scoop/ class=read-more-link>阅读更多</a>
+<a href=/post/note/dev/leetcode/easy/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/note/win/powershell/>powershell</a></h1>
+<h1 class=post-title><a class=post-link href=/post/read/algorithms/5.2/>5.2　单词查找树</a></h1>
 <div class=post-meta>
-<span class=post-time> 2020-12-28 </span>
-<div class=post-category>
-<a href=/categories/note/> note </a>
-</div>
-<span class=more-meta> 约 225 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-代理 1 2 3 4 5 6 #设置代理 $Env:https_proxy="socks5://localhost:10808" #取消代理 #查看代理 $env:https_proxy 环境变量 1 2 3 4 5 6 7 8 9 10 [environment]::SetEnvironmentvariable("GOPATH", "$env:USERPROFILE\gopath", "User") #调用命令结果：$(命令) #获取原有用户 PATH 变量：$([e
-</div>
-<div class=read-more>
-<a href=/post/note/win/powershell/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/read/java/string/>String</a></h1>
-<div class=post-meta>
-<span class=post-time> 2020-12-13 </span>
+<span class=post-time> 2020-09-01 </span>
 <div class=post-category>
 <a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 32 字 </span>
+<span class=more-meta> 约 237 字 </span>
 <span class=more-meta> 预计阅读 1 分钟 </span>
 </div>
 </header>
 <div class=post-content>
 <div class=post-summary>
-常量拼接在常量池 只要有变量拼接，就在堆 调用inern()，常量池
+public class StringST StringST() 创建一个符号表 void put(String key, Value val) 向表中插入键值对（如果值为 null 则删除键key ） Value get(String key) 键 key 所对应的值（如果键不存在则返回 null） void delete(String key) 删除键 key
 </div>
 <div class=read-more>
-<a href=/post/read/java/string/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/read/java/thread/>线程</a></h1>
-<div class=post-meta>
-<span class=post-time> 2020-12-13 </span>
-<div class=post-category>
-<a href=/categories/read/> read </a>
-</div>
-<span class=more-meta> 约 349 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-继承Thread implements Runnable Thread，static类、方法实现数据共享 Runnable，数据共享 Collable，返回值、抛异、泛型 sleep、
-</div>
-<div class=read-more>
-<a href=/post/read/java/thread/ class=read-more-link>阅读更多</a>
-</div>
-</div>
-</article>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title><a class=post-link href=/post/read/spring/webflux/>springWebflux</a></h1>
-<div class=post-meta>
-<span class=post-time> 2020-12-12 </span>
-<div class=post-category>
-<a href=/categories/read/> read </a>
-</div>
-<span class=more-meta> 约 158 字 </span>
-<span class=more-meta> 预计阅读 1 分钟 </span>
-</div>
-</header>
-<div class=post-content>
-<div class=post-summary>
-异步：调用者发送请求，不等待回应就做事情 非阻塞：被调用者收到请求，先反馈再做事情 响应式编程 观察者模式，jdk8：Observale，jdk9
-</div>
-<div class=read-more>
-<a href=/post/read/spring/webflux/ class=read-more-link>阅读更多</a>
+<a href=/post/read/algorithms/5.2/ class=read-more-link>阅读更多</a>
 </div>
 </div>
 </article>

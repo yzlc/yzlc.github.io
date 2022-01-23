@@ -2,7 +2,7 @@
 <head>
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>spring事务 - YZLC</title>
+<title>YZLC</title>
 <meta name=renderer content="webkit">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
 <meta http-equiv=cache-control content="no-transform">
@@ -11,9 +11,11 @@
 <meta name=msapplication-navbutton-color content="#f8f5ec">
 <meta name=apple-mobile-web-app-capable content="yes">
 <meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="YZLC"><meta name=description content="propagation REQUIRED（default）：有则追加，无则创建 REQUIRES_NEW：创建">
+<meta name=author content="YZLC"><meta name=description content="less is more">
 <meta name=generator content="Hugo 0.92.0 with theme even">
-<link rel=canonical href=https://yzlc.github.io/post/read/spring/transaction/>
+<link rel=canonical href=https://yzlc.github.io/>
+<link href=https://yzlc.github.io/index.xml rel=alternate type=application/rss+xml title=YZLC>
+<link href=https://yzlc.github.io/index.xml rel=feed type=application/rss+xml title=YZLC>
 <link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
 <link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
 <link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
@@ -24,19 +26,14 @@
 <link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
 <link rel=stylesheet href=/css/dark.css>
 <link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="spring事务">
-<meta property="og:description" content="propagation REQUIRED（default）：有则追加，无则创建 REQUIRES_NEW：创建">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://yzlc.github.io/post/read/spring/transaction/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2020-12-12T11:04:33+08:00">
-<meta property="article:modified_time" content="2022-01-14T21:57:58+08:00">
-<meta itemprop=name content="spring事务">
-<meta itemprop=description content="propagation REQUIRED（default）：有则追加，无则创建 REQUIRES_NEW：创建"><meta itemprop=datePublished content="2020-12-12T11:04:33+08:00">
-<meta itemprop=dateModified content="2022-01-14T21:57:58+08:00">
-<meta itemprop=wordCount content="43">
-<meta itemprop=keywords content="spring,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="spring事务">
-<meta name=twitter:description content="propagation REQUIRED（default）：有则追加，无则创建 REQUIRES_NEW：创建"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<meta property="og:title" content="YZLC">
+<meta property="og:description" content="less is more">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yzlc.github.io/">
+<meta itemprop=name content="YZLC">
+<meta itemprop=description content="less is more"><meta name=twitter:card content="summary">
+<meta name=twitter:title content="YZLC">
+<meta name=twitter:description content="less is more"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
 <script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
 </head>
 <body>
@@ -58,8 +55,6 @@
 <li class=mobile-menu-item>分类</li>
 </a><a href=/post/web>
 <li class=mobile-menu-item>网站</li>
-</a><a href=/post/read/read>
-<li class=mobile-menu-item>读</li>
 </a><a href=/post/soft>
 <li class=mobile-menu-item>软件</li>
 </a>
@@ -79,8 +74,6 @@
 </li><li class=menu-item>
 <a class=menu-item-link href=/post/web>网站</a>
 </li><li class=menu-item>
-<a class=menu-item-link href=/post/read/read>读</a>
-</li><li class=menu-item>
 <a class=menu-item-link href=/post/soft>软件</a>
 </li>
 </ul>
@@ -89,85 +82,124 @@
 <main id=main class=main>
 <div class=content-wrapper>
 <div id=content class=content>
+<section id=posts class=posts>
 <article class=post>
 <header class=post-header>
-<h1 class=post-title>spring事务</h1>
+<h1 class=post-title><a class=post-link href=/post/read/jvm/1/>第1章　走近Java</a></h1>
 <div class=post-meta>
-<span class=post-time> 2020-12-12 </span>
+<span class=post-time> 2020-04-30 </span>
 <div class=post-category>
 <a href=/categories/read/> read </a>
 </div>
-<span class=more-meta> 约 43 字 </span>
+<span class=more-meta> 约 467 字 </span>
 <span class=more-meta> 预计阅读 1 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
 </div>
 </header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents></nav>
-</div>
-</div>
 <div class=post-content>
-<p>propagation</p>
-<ul>
-<li>REQUIRED（default）：有则追加，无则创建</li>
-<li>REQUIRES_NEW：创建</li>
-</ul>
+<div class=post-summary>
+1.6 实战:自己编译JDK 1.6.1 获取源码 下载 -> browse -> zip 1.6.3 构建编译环境(Ubuntu) 工具 命令 GCC sudo apt-get install build-essential FreeType sudo apt-get install libfreetype6-dev CUPS sudo apt-get install libcups2-dev X11 sudo apt-get install libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev ALSA sudo apt-get install
 </div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>YZLC</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-14
-<a href=https://github.com/yzlc/www/commit/334bcd0aecbaece9c47c5d466fc034b2badcffe9 title="Update scoop.md">(334bcd0)</a>
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
+<div class=read-more>
+<a href=/post/read/jvm/1/ class=read-more-link>阅读更多</a>
 </div>
-<div class=post-reward>
-<input type=checkbox name=reward id=reward hidden>
-<label class=reward-button for=reward>赞赏支持</label>
-<div class=qr-code>
-<label class=qr-code-image for=reward>
-<img class=image src=/images/reward/wechat.jpg>
-<span>微信打赏</span>
-</label>
-<label class=qr-code-image for=reward>
-<img class=image src=/images/reward/alipay.jpg>
-<span>支付宝打赏</span>
-</label>
 </div>
-</div><footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/spring/>spring</a>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/read/csapp/5/>第5章 优化程序性能</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-04-29 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
 </div>
-<nav class=post-nav>
-<a class=prev href=/post/read/spring/webflux/>
+<span class=more-meta> 约 348 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+5.1 优化编译器的能力和局限性 5.2 表示程序性能 CPE(Cycles Per Element):每元素的周期数 循环展开(loop unrolling) 举例:前置和,每次迭代计算两个元素 5.3 程序示例
+</div>
+<div class=read-more>
+<a href=/post/read/csapp/5/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/config/win/dbeaver/>dbeaver</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-04-28 </span>
+<div class=post-category>
+<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+</div>
+<span class=more-meta> 约 27 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+导出xlsx 下载dbeaver 帮助 -> 安装新软件 -> DBeaver Office integration
+</div>
+<div class=read-more>
+<a href=/post/config/win/dbeaver/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/config/win/plsql/>plsql</a></h1>
+<div class=post-meta>
+<span class=post-time> 2020-01-10 </span>
+<div class=post-category>
+<a href=/categories/%E9%85%8D%E7%BD%AE/> 配置 </a>
+</div>
+<span class=more-meta> 约 69 字 </span>
+<span class=more-meta> 预计阅读 1 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+下载 plsql instantclient-basic-11.2.0.4 注册 product code： ke4tv8t5jtxz493kl8s2nn3t6xgngcmgf3 serial Number： 264452 password: xs374ca Preferences Oracle Connection Oracle Home C:\soft\instantclient_11_2 OCI library C:\soft\instantclient_11_2\oci.dll Logon History Store with password Other Updates Never News Never 乱码 查询编码 select userenv('language') from dual; 设置环境变量 NLS_LANG SIMPLIFIED CHINESE_CHINA.ZHS16GBK 重启plsql
+</div>
+<div class=read-more>
+<a href=/post/config/win/plsql/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title><a class=post-link href=/post/read/csapp/3.7/>3.7 过程</a></h1>
+<div class=post-meta>
+<span class=post-time> 2019-12-31 </span>
+<div class=post-category>
+<a href=/categories/read/> read </a>
+</div>
+<span class=more-meta> 约 1221 字 </span>
+<span class=more-meta> 预计阅读 3 分钟 </span>
+</div>
+</header>
+<div class=post-content>
+<div class=post-summary>
+3.7 过程 3.7.1 运行时栈 x86-64的栈向低地址方向增长，栈指针%rsp指向栈顶元素。减小栈指针分配空间，增加栈指针释放空间 当x86-64过程需要的
+</div>
+<div class=read-more>
+<a href=/post/read/csapp/3.7/ class=read-more-link>阅读更多</a>
+</div>
+</div>
+</article>
+</section>
+<nav class=pagination>
+<a class=prev href=/page/11/>
 <i class="iconfont icon-left"></i>
-<span class="prev-text nav-default">springWebflux</span>
-<span class="prev-text nav-mobile">上一篇</span>
+<span class=prev-text>上一页</span>
 </a>
-<a class=next href=/post/read/spring/aop/>
-<span class="next-text nav-default">springAOP</span>
-<span class="next-text nav-mobile">下一篇</span>
+<a class=next href=/page/13/>
+<span class=next-text>下一页</span>
 <i class="iconfont icon-right"></i>
 </a>
 </nav>
-</footer>
-</article>
 </div>
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
-<script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
 </div>
 </main>
 <footer id=footer class=footer>
