@@ -1,172 +1,10 @@
-<!doctype html><html lang=zh-cn>
-<head>
-<meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
-<title>第4章　图 - YZLC</title>
-<meta name=renderer content="webkit">
-<meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<meta http-equiv=cache-control content="no-transform">
-<meta http-equiv=cache-control content="no-siteapp">
-<meta name=theme-color content="#f8f5ec">
-<meta name=msapplication-navbutton-color content="#f8f5ec">
-<meta name=apple-mobile-web-app-capable content="yes">
-<meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec">
-<meta name=author content="YZLC"><meta name=description content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in">
-<meta name=generator content="Hugo 0.92.0 with theme even">
-<link rel=canonical href=https://yzlc.github.io/post/read/algorithms/4.1/>
-<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png>
-<link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png>
-<link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png>
-<link rel=manifest href=/manifest.json>
-<link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5>
-<script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous>
-<link rel=stylesheet href=/css/dark.css>
-<link rel=stylesheet href=/css/custom.css>
-<meta property="og:title" content="第4章　图">
-<meta property="og:description" content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://yzlc.github.io/post/read/algorithms/4.1/"><meta property="article:section" content="post">
-<meta property="article:published_time" content="2020-08-07T09:58:33+08:00">
-<meta property="article:modified_time" content="2022-01-23T21:28:09+08:00">
-<meta itemprop=name content="第4章　图">
-<meta itemprop=description content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in"><meta itemprop=datePublished content="2020-08-07T09:58:33+08:00">
-<meta itemprop=dateModified content="2022-01-23T21:28:09+08:00">
-<meta itemprop=wordCount content="1444">
-<meta itemprop=keywords content="算法,"><meta name=twitter:card content="summary">
-<meta name=twitter:title content="第4章　图">
-<meta name=twitter:description content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
-<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]-->
-</head>
-<body>
-<div id=mobile-navbar class=mobile-navbar>
-<div class=mobile-header-logo>
-<a href=/ class=logo>YZLC</a>
-</div>
-<div class=mobile-navbar-icon>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>第4章　图 - YZLC</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="YZLC"><meta name=description content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in"><meta name=generator content="Hugo 0.95.0 with theme even"><link rel=canonical href=https://yzlc.github.io/post/read/algorithms/4.1/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="第4章　图"><meta property="og:description" content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/read/algorithms/4.1/"><meta property="article:section" content="post"><meta property="article:published_time" content="2020-08-07T09:58:33+08:00"><meta property="article:modified_time" content="2022-03-26T16:53:35+08:00"><meta itemprop=name content="第4章　图"><meta itemprop=description content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in"><meta itemprop=datePublished content="2020-08-07T09:58:33+08:00"><meta itemprop=dateModified content="2022-03-26T16:53:35+08:00"><meta itemprop=wordCount content="1444"><meta itemprop=keywords content="算法,"><meta name=twitter:card content="summary"><meta name=twitter:title content="第4章　图"><meta name=twitter:description content="4.1 无向图 图是由一组顶点和一组能够将两个顶点相连的边组成的 4.1.2 表示无向图的数据类型 public class Graph Graph(int V) 创建一个含有V个顶点但不含有边的图 Graph(In in) 从标准输入流 in"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>YZLC</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span>
-<span></span>
-</div>
-</div>
-<nav id=mobile-menu class="mobile-menu slideout-menu">
-<ul class=mobile-menu-list>
-<a href=/tags/>
-<li class=mobile-menu-item>标签</li>
-</a><a href=/categories/>
-<li class=mobile-menu-item>分类</li>
-</a><a href=/post/web>
-<li class=mobile-menu-item>网站</li>
-</a><a href=/post/soft>
-<li class=mobile-menu-item>软件</li>
-</a>
-</ul>
-</nav>
-<div class=container id=mobile-panel>
-<header id=header class=header>
-<div class=logo-wrapper>
-<a href=/ class=logo>YZLC</a>
-</div>
-<nav class=site-navbar>
-<ul id=menu class=menu>
-<li class=menu-item>
-<a class=menu-item-link href=/tags/>标签</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/categories/>分类</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/web>网站</a>
-</li><li class=menu-item>
-<a class=menu-item-link href=/post/soft>软件</a>
-</li>
-</ul>
-</nav>
-</header>
-<main id=main class=main>
-<div class=content-wrapper>
-<div id=content class=content>
-<article class=post>
-<header class=post-header>
-<h1 class=post-title>第4章　图</h1>
-<div class=post-meta>
-<span class=post-time> 2020-08-07 </span>
-<div class=post-category>
-<a href=/categories/read/> read </a>
-</div>
-<span class=more-meta> 约 1444 字 </span>
-<span class=more-meta> 预计阅读 3 分钟 </span>
-<span id=busuanzi_container_page_pv class=more-meta> <span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读 </span>
-</div>
-</header>
-<div class=post-toc id=post-toc>
-<h2 class=post-toc-title>文章目录</h2>
-<div class="post-toc-content always-active">
-<nav id=TableOfContents>
-<ul>
-<li><a href=#41无向图>4.1　无向图</a>
-<ul>
-<li><a href=#412表示无向图的数据类型>4.1.2　表示无向图的数据类型</a></li>
-<li><a href=#413深度优先搜索dfs通道>4.1.3　深度优先搜索（DFS）通道</a></li>
-<li><a href=#414寻找路径>4.1.4　寻找路径</a></li>
-<li><a href=#415广度优先搜索bfs>4.1.5　广度优先搜索（BFS)</a></li>
-<li><a href=#416连通分量>4.1.6　连通分量</a></li>
-</ul>
-</li>
-</ul>
-</nav>
-</div>
-</div>
-<div class=post-content>
-<h2 id=41无向图>4.1　无向图</h2>
-<blockquote>
-<p>图是由一组顶点和一组能够将两个顶点相连的边组成的</p>
-</blockquote>
-<h3 id=412表示无向图的数据类型>4.1.2　表示无向图的数据类型</h3>
-<table>
-<thead>
-<tr>
-<th>public class Graph</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Graph(int V)</td>
-<td>创建一个含有V个顶点但不含有边的图</td>
-</tr>
-<tr>
-<td>Graph(In in)</td>
-<td>从标准输入流 in 读入一幅图</td>
-</tr>
-<tr>
-<td>int V()</td>
-<td>顶点数</td>
-</tr>
-<tr>
-<td>int E()</td>
-<td>边数</td>
-</tr>
-<tr>
-<td>void addEdge(int v, int w)</td>
-<td>向图中添加一条边 v-w</td>
-</tr>
-<tr>
-<td>Iterable adj(int v)</td>
-<td>和 v 相邻的所有顶点</td>
-</tr>
-<tr>
-<td>String toString()</td>
-<td>对象的字符串表示</td>
-</tr>
-</tbody>
-</table>
-<h4 id=4121图的几种表示方法>4.1.2.1　图的几种表示方法</h4>
-<p>邻接表数组：以顶点为索引的列表数组，其中的每个元素都是和该顶点相邻的顶点列表</p>
-<p><img src=/images/read/algorithms/Image00689.gif alt></p>
-<h4 id=4122邻接表的数据结构>4.1.2.2　邻接表的数据结构</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/post/web><li class=mobile-menu-item>网站</li></a><a href=/post/soft><li class=mobile-menu-item>软件</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>YZLC</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/post/web>网站</a></li><li class=menu-item><a class=menu-item-link href=/post/soft>软件</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>第4章　图</h1><div class=post-meta><span class=post-time>2020-08-07</span><div class=post-category><a href=/categories/read/>read</a></div><span class=more-meta>约 1444 字</span>
+<span class=more-meta>预计阅读 3 分钟</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#41无向图>4.1　无向图</a><ul><li><a href=#412表示无向图的数据类型>4.1.2　表示无向图的数据类型</a></li><li><a href=#413深度优先搜索dfs通道>4.1.3　深度优先搜索（DFS）通道</a></li><li><a href=#414寻找路径>4.1.4　寻找路径</a></li><li><a href=#415广度优先搜索bfs>4.1.5　广度优先搜索（BFS)</a></li><li><a href=#416连通分量>4.1.6　连通分量</a></li></ul></li></ul></nav></div></div><div class=post-content><h2 id=41无向图>4.1　无向图</h2><blockquote><p>图是由一组顶点和一组能够将两个顶点相连的边组成的</p></blockquote><h3 id=412表示无向图的数据类型>4.1.2　表示无向图的数据类型</h3><table><thead><tr><th>public class Graph</th><th></th></tr></thead><tbody><tr><td>Graph(int V)</td><td>创建一个含有V个顶点但不含有边的图</td></tr><tr><td>Graph(In in)</td><td>从标准输入流 in 读入一幅图</td></tr><tr><td>int V()</td><td>顶点数</td></tr><tr><td>int E()</td><td>边数</td></tr><tr><td>void addEdge(int v, int w)</td><td>向图中添加一条边 v-w</td></tr><tr><td>Iterable adj(int v)</td><td>和 v 相邻的所有顶点</td></tr><tr><td>String toString()</td><td>对象的字符串表示</td></tr></tbody></table><h4 id=4121图的几种表示方法>4.1.2.1　图的几种表示方法</h4><p>邻接表数组：以顶点为索引的列表数组，其中的每个元素都是和该顶点相邻的顶点列表</p><p><img src=/images/read/algorithms/Image00689.gif alt></p><h4 id=4122邻接表的数据结构>4.1.2.2　邻接表的数据结构</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -200,79 +38,41 @@
 </span><span class=lnt>32
 </span><span class=lnt>33
 </span><span class=lnt>34
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Graph</span>
-<span class=o>{</span>
-    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>V</span><span class=o>;</span> <span class=c1>// 顶点数目
-</span><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>E</span><span class=o>;</span> <span class=c1>// 边的数目
-</span><span class=c1></span>    <span class=kd>private</span> <span class=n>Bag</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;[]</span> <span class=n>adj</span><span class=o>;</span> <span class=c1>// 邻接表
-</span><span class=c1></span>    <span class=kd>public</span> <span class=nf>Graph</span><span class=o>(</span><span class=kt>int</span> <span class=n>V</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=k>this</span><span class=o>.</span><span class=na>V</span> <span class=o>=</span> <span class=n>V</span><span class=o>;</span> <span class=k>this</span><span class=o>.</span><span class=na>E</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
-        <span class=n>adj</span> <span class=o>=</span> <span class=o>(</span><span class=n>Bag</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;[])</span> <span class=k>new</span> <span class=n>Bag</span><span class=o>[</span><span class=n>V</span><span class=o>];</span> <span class=c1>// 创建邻接表
-</span><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>v</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>v</span> <span class=o>&lt;</span> <span class=n>V</span><span class=o>;</span> <span class=n>v</span><span class=o>++)</span> <span class=c1>// 将所有链表初始化为空
-</span><span class=c1></span>            <span class=n>adj</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Bag</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;();</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=nf>Graph</span><span class=o>(</span><span class=n>In</span> <span class=n>in</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=k>this</span><span class=o>(</span><span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>());</span> <span class=c1>// 读取V并将图初始化
-</span><span class=c1></span>        <span class=kt>int</span> <span class=n>E</span> <span class=o>=</span> <span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>();</span> <span class=c1>// 读取E
-</span><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>E</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span>
-        <span class=o>{</span> <span class=c1>// 添加一条边
-</span><span class=c1></span>            <span class=kt>int</span> <span class=n>v</span> <span class=o>=</span> <span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>();</span> <span class=c1>// 读取一个顶点
-</span><span class=c1></span>            <span class=kt>int</span> <span class=n>w</span> <span class=o>=</span> <span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>();</span> <span class=c1>// 读取另一个顶点
-</span><span class=c1></span>            <span class=n>addEdge</span><span class=o>(</span><span class=n>v</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span> <span class=c1>// 添加一条连接它们的边
-</span><span class=c1></span>        <span class=o>}</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>V</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>V</span><span class=o>;</span> <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>E</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>E</span><span class=o>;</span> <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>addEdge</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>,</span> <span class=kt>int</span> <span class=n>w</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>adj</span><span class=o>[</span><span class=n>v</span><span class=o>].</span><span class=na>add</span><span class=o>(</span><span class=n>w</span><span class=o>);</span> <span class=c1>// 将w添加到v的链表中
-</span><span class=c1></span>        <span class=n>adj</span><span class=o>[</span><span class=n>w</span><span class=o>].</span><span class=na>add</span><span class=o>(</span><span class=n>v</span><span class=o>);</span> <span class=c1>// 将v添加到w的链表中
-</span><span class=c1></span>        <span class=n>E</span><span class=o>++;</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=nf>adj</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
-    <span class=o>{</span> <span class=k>return</span> <span class=n>adj</span><span class=o>[</span><span class=n>v</span><span class=o>];</span> <span class=o>}</span>
-<span class=o>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=4123图的处理算法的设计模式>4.1.2.3　图的处理算法的设计模式</h4>
-<table>
-<thead>
-<tr>
-<th>public class Search</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Search(Graph G, int s)</td>
-<td>找到和起点 s 连通的所有顶点</td>
-</tr>
-<tr>
-<td>boolean marked(int v)</td>
-<td>v 和 s 是连通的吗</td>
-</tr>
-<tr>
-<td>int count()</td>
-<td>与 s 连通的顶点总数</td>
-</tr>
-</tbody>
-</table>
-<h3 id=413深度优先搜索dfs通道>4.1.3　深度优先搜索（DFS）通道</h3>
-<h4 id=4131走迷宫>4.1.3.1　走迷宫</h4>
-<p>Tremaux 搜索</p>
-<ul>
-<li>选择一条没有标记过的通道，在你走过的路上铺一条绳子</li>
-<li>标记所有你第一次路过的路口和通道</li>
-<li>当来到一个标记过的路口时（用绳子）回退到上个路口</li>
-<li>当回退到的路口已没有可走的通道时继续回退</li>
-</ul>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Graph</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>V</span><span class=o>;</span> <span class=c1>// 顶点数目
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>E</span><span class=o>;</span> <span class=c1>// 边的数目
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=n>Bag</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;[]</span> <span class=n>adj</span><span class=o>;</span> <span class=c1>// 邻接表
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=nf>Graph</span><span class=o>(</span><span class=kt>int</span> <span class=n>V</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>V</span> <span class=o>=</span> <span class=n>V</span><span class=o>;</span> <span class=k>this</span><span class=o>.</span><span class=na>E</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>adj</span> <span class=o>=</span> <span class=o>(</span><span class=n>Bag</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;[])</span> <span class=k>new</span> <span class=n>Bag</span><span class=o>[</span><span class=n>V</span><span class=o>];</span> <span class=c1>// 创建邻接表
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>v</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>v</span> <span class=o>&lt;</span> <span class=n>V</span><span class=o>;</span> <span class=n>v</span><span class=o>++)</span> <span class=c1>// 将所有链表初始化为空
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>adj</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Bag</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;();</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>Graph</span><span class=o>(</span><span class=n>In</span> <span class=n>in</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>(</span><span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>());</span> <span class=c1>// 读取V并将图初始化
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>E</span> <span class=o>=</span> <span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>();</span> <span class=c1>// 读取E
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>E</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span> <span class=c1>// 添加一条边
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=kt>int</span> <span class=n>v</span> <span class=o>=</span> <span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>();</span> <span class=c1>// 读取一个顶点
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=kt>int</span> <span class=n>w</span> <span class=o>=</span> <span class=n>in</span><span class=o>.</span><span class=na>readInt</span><span class=o>();</span> <span class=c1>// 读取另一个顶点
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>addEdge</span><span class=o>(</span><span class=n>v</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span> <span class=c1>// 添加一条连接它们的边
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>V</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>V</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>E</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>E</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>addEdge</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>,</span> <span class=kt>int</span> <span class=n>w</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>adj</span><span class=o>[</span><span class=n>v</span><span class=o>].</span><span class=na>add</span><span class=o>(</span><span class=n>w</span><span class=o>);</span> <span class=c1>// 将w添加到v的链表中
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>adj</span><span class=o>[</span><span class=n>w</span><span class=o>].</span><span class=na>add</span><span class=o>(</span><span class=n>v</span><span class=o>);</span> <span class=c1>// 将v添加到w的链表中
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>E</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=nf>adj</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=k>return</span> <span class=n>adj</span><span class=o>[</span><span class=n>v</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=4123图的处理算法的设计模式>4.1.2.3　图的处理算法的设计模式</h4><table><thead><tr><th>public class Search</th><th></th></tr></thead><tbody><tr><td>Search(Graph G, int s)</td><td>找到和起点 s 连通的所有顶点</td></tr><tr><td>boolean marked(int v)</td><td>v 和 s 是连通的吗</td></tr><tr><td>int count()</td><td>与 s 连通的顶点总数</td></tr></tbody></table><h3 id=413深度优先搜索dfs通道>4.1.3　深度优先搜索（DFS）通道</h3><h4 id=4131走迷宫>4.1.3.1　走迷宫</h4><p>Tremaux 搜索</p><ul><li>选择一条没有标记过的通道，在你走过的路上铺一条绳子</li><li>标记所有你第一次路过的路口和通道</li><li>当来到一个标记过的路口时（用绳子）回退到上个路口</li><li>当回退到的路口已没有可走的通道时继续回退</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -293,66 +93,28 @@
 </span><span class=lnt>19
 </span><span class=lnt>20
 </span><span class=lnt>21
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>DepthFirstSearch</span>
-<span class=o>{</span>
-    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span>
-    <span class=kd>private</span> <span class=kt>int</span> <span class=n>count</span><span class=o>;</span>
-    <span class=kd>public</span> <span class=nf>DepthFirstSearch</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
-        <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>s</span><span class=o>);</span>
-    <span class=o>}</span>
-    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>dfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
-        <span class=n>count</span><span class=o>++;</span>
-        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
-            <span class=k>if</span> <span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span> <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>marked</span><span class=o>(</span><span class=kt>int</span> <span class=n>w</span><span class=o>)</span>
-    <span class=o>{</span> <span class=k>return</span> <span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>];</span> <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>count</span><span class=o>()</span>
-    <span class=o>{</span> <span class=k>return</span> <span class=n>count</span><span class=o>;</span> <span class=o>}</span>
-<span class=o>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=4132热身>4.1.3.2　热身</h4>
-<p>深度优先搜索：在访问其中一个顶点时</p>
-<ul>
-<li>将它标记为已访问</li>
-<li>递归地访问它的所有没有被标记过的邻居顶点</li>
-</ul>
-<h4 id=4135深度优先搜索的详细轨迹>4.1.3.5　深度优先搜索的详细轨迹</h4>
-<p><img src=/images/read/algorithms/Image00701.jpg alt></p>
-<h3 id=414寻找路径>4.1.4　寻找路径</h3>
-<table>
-<thead>
-<tr>
-<th>public class Paths</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Paths(Graph G, int s)</td>
-<td>在 G 中找出所有起点为 s 的路径</td>
-</tr>
-<tr>
-<td>boolean hasPathTo(int v)</td>
-<td>是否存在从 s 到 v 的路径</td>
-</tr>
-<tr>
-<td>Iterable pathTo(int v)</td>
-<td>s 到 v 的路径，如果不存在则返回 null</td>
-</tr>
-</tbody>
-</table>
-<h4 id=4141实现>4.1.4.1　实现</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>DepthFirstSearch</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>count</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>DepthFirstSearch</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>        <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>s</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>dfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span> <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>marked</span><span class=o>(</span><span class=kt>int</span> <span class=n>w</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=k>return</span> <span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>count</span><span class=o>()</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=k>return</span> <span class=n>count</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=4132热身>4.1.3.2　热身</h4><p>深度优先搜索：在访问其中一个顶点时</p><ul><li>将它标记为已访问</li><li>递归地访问它的所有没有被标记过的邻居顶点</li></ul><h4 id=4135深度优先搜索的详细轨迹>4.1.3.5　深度优先搜索的详细轨迹</h4><p><img src=/images/read/algorithms/Image00701.jpg alt></p><h3 id=414寻找路径>4.1.4　寻找路径</h3><table><thead><tr><th>public class Paths</th><th></th></tr></thead><tbody><tr><td>Paths(Graph G, int s)</td><td>在 G 中找出所有起点为 s 的路径</td></tr><tr><td>boolean hasPathTo(int v)</td><td>是否存在从 s 到 v 的路径</td></tr><tr><td>Iterable pathTo(int v)</td><td>s 到 v 的路径，如果不存在则返回 null</td></tr></tbody></table><h4 id=4141实现>4.1.4.1　实现</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -384,57 +146,39 @@
 </span><span class=lnt>30
 </span><span class=lnt>31
 </span><span class=lnt>32
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>DepthFirstPaths</span>
-<span class=o>{</span>
-    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span> <span class=c1>//这个顶点上调用过dfs()了吗？
-</span><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>edgeTo</span><span class=o>;</span> <span class=c1>//从起点到一个顶点的已知路径上的最后一个顶点
-</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>s</span><span class=o>;</span> <span class=c1>//起点
-</span><span class=c1></span>    <span class=kd>public</span> <span class=nf>DepthFirstPaths</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span><span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
-        <span class=k>this</span><span class=o>.</span><span class=na>s</span> <span class=o>=</span> <span class=n>s</span><span class=o>;</span>
-        <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span><span class=n>s</span><span class=o>);</span>
-    <span class=o>}</span>
-
-    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>dfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
-        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
-            <span class=k>if</span><span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span>
-            <span class=o>{</span>
-                <span class=n>edgeTo</span><span class=o>[</span><span class=n>w</span><span class=o>]</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span>
-                <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span>
-            <span class=o>}</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>hasPathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>){</span><span class=k>return</span> <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>];}</span>
-    <span class=kd>public</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=nf>pathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>){</span>
-        <span class=k>if</span><span class=o>(!</span><span class=n>hasPathTo</span><span class=o>(</span><span class=n>V</span><span class=o>))</span> <span class=k>return</span> <span class=kc>null</span><span class=o>;</span>
-        <span class=n>Stack</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=n>path</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Stack</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;();</span>
-        <span class=k>for</span><span class=o>(</span><span class=kt>int</span> <span class=n>x</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span><span class=n>x</span> <span class=o>!=</span> <span class=n>s</span><span class=o>;</span><span class=n>x</span> <span class=o>=</span> <span class=n>edgeTo</span><span class=o>[</span><span class=n>x</span><span class=o>])</span>
-            <span class=n>path</span><span class=o>.</span><span class=na>push</span><span class=o>(</span><span class=n>x</span><span class=o>);</span>
-        <span class=n>path</span><span class=o>.</span><span class=na>push</span><span class=o>(</span><span class=n>s</span><span class=o>);</span>
-        <span class=k>return</span> <span class=n>path</span><span class=o>;</span>
-    <span class=o>}</span>
-<span class=o>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h4 id=4142详细轨迹>4.1.4.2　详细轨迹</h4>
-<p><img src=/images/read/algorithms/Image00704.jpg alt></p>
-<h3 id=415广度优先搜索bfs>4.1.5　广度优先搜索（BFS)</h3>
-<blockquote>
-<p>按照与起点的距离的顺序来遍历所有顶点：使用（FIFO，先进先出）队列</p>
-</blockquote>
-<p>先将起点加入队列，然后重复以下步骤直到队列为空</p>
-<ul>
-<li>取队列中的下一个顶点 v 并标记它</li>
-<li>将与 v 相邻的所有未被标记过的顶点加入队列</li>
-</ul>
-<p><img src=/images/read/algorithms/Image00707.jpg alt></p>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>DepthFirstPaths</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span> <span class=c1>//这个顶点上调用过dfs()了吗？
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>edgeTo</span><span class=o>;</span> <span class=c1>//从起点到一个顶点的已知路径上的最后一个顶点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>s</span><span class=o>;</span> <span class=c1>//起点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=nf>DepthFirstPaths</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span><span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>s</span> <span class=o>=</span> <span class=n>s</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span><span class=n>s</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>dfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span><span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span>
+</span></span><span class=line><span class=cl>            <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>edgeTo</span><span class=o>[</span><span class=n>w</span><span class=o>]</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>                <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>hasPathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>){</span><span class=k>return</span> <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>];}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=nf>pathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=o>(!</span><span class=n>hasPathTo</span><span class=o>(</span><span class=n>V</span><span class=o>))</span> <span class=k>return</span> <span class=kc>null</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Stack</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=n>path</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Stack</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span><span class=o>(</span><span class=kt>int</span> <span class=n>x</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span><span class=n>x</span> <span class=o>!=</span> <span class=n>s</span><span class=o>;</span><span class=n>x</span> <span class=o>=</span> <span class=n>edgeTo</span><span class=o>[</span><span class=n>x</span><span class=o>])</span>
+</span></span><span class=line><span class=cl>            <span class=n>path</span><span class=o>.</span><span class=na>push</span><span class=o>(</span><span class=n>x</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>path</span><span class=o>.</span><span class=na>push</span><span class=o>(</span><span class=n>s</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>path</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=4142详细轨迹>4.1.4.2　详细轨迹</h4><p><img src=/images/read/algorithms/Image00704.jpg alt></p><h3 id=415广度优先搜索bfs>4.1.5　广度优先搜索（BFS)</h3><blockquote><p>按照与起点的距离的顺序来遍历所有顶点：使用（FIFO，先进先出）队列</p></blockquote><p>先将起点加入队列，然后重复以下步骤直到队列为空</p><ul><li>取队列中的下一个顶点 v 并标记它</li><li>将与 v 相邻的所有未被标记过的顶点加入队列</li></ul><p><img src=/images/read/algorithms/Image00707.jpg alt></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -467,74 +211,40 @@
 </span><span class=lnt>31
 </span><span class=lnt>32
 </span><span class=lnt>33
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>BreadthFirstPaths</span>
-<span class=o>{</span>
-    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span> <span class=c1>// 到达该顶点的最短路径已知吗？
-</span><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>edgeTo</span><span class=o>;</span> <span class=c1>// 到达该顶点的已知路径上的最后一个顶点
-</span><span class=c1></span>    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>s</span><span class=o>;</span> <span class=c1>// 起点
-</span><span class=c1></span>    <span class=kd>public</span> <span class=nf>BreadthFirstPaths</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
-        <span class=n>edgeTo</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
-        <span class=k>this</span><span class=o>.</span><span class=na>s</span> <span class=o>=</span> <span class=n>s</span><span class=o>;</span>
-        <span class=n>bfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>s</span><span class=o>);</span>
-    <span class=o>}</span>
-    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>bfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>Queue</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=n>queue</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Queue</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;();</span>
-        <span class=n>marked</span><span class=o>[</span><span class=n>s</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span> <span class=c1>// 标记起点
-</span><span class=c1></span>        <span class=n>queue</span><span class=o>.</span><span class=na>enqueue</span><span class=o>(</span><span class=n>s</span><span class=o>);</span> <span class=c1>// 将它加入队列
-</span><span class=c1></span>        <span class=k>while</span> <span class=o>(!</span><span class=n>queue</span><span class=o>.</span><span class=na>isEmpty</span><span class=o>())</span>
-        <span class=o>{</span>
-            <span class=kt>int</span> <span class=n>v</span> <span class=o>=</span> <span class=n>queue</span><span class=o>.</span><span class=na>dequeue</span><span class=o>();</span> <span class=c1>// 从队列中删去下一顶点
-</span><span class=c1></span>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
-                <span class=k>if</span> <span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span> <span class=c1>// 对于每个未被标记的相邻顶点
-</span><span class=c1></span>                <span class=o>{</span>
-                    <span class=n>edgeTo</span><span class=o>[</span><span class=n>w</span><span class=o>]</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span> <span class=c1>// 保存最短路径的最后一条边
-</span><span class=c1></span>                    <span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span> <span class=c1>// 标记它，因为最短路径已知
-</span><span class=c1></span>                    <span class=n>queue</span><span class=o>.</span><span class=na>enqueue</span><span class=o>(</span><span class=n>w</span><span class=o>);</span> <span class=c1>// 并将它添加到队列中
-</span><span class=c1></span>                <span class=o>}</span>
-        <span class=o>}</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>hasPathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
-    <span class=o>{</span> <span class=k>return</span> <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>];</span> <span class=o>}</span>
-    <span class=kd>public</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=nf>pathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
-<span class=o>}</span>
-</code></pre></td></tr></table>
-</div>
-</div><h3 id=416连通分量>4.1.6　连通分量</h3>
-<table>
-<thead>
-<tr>
-<th>public class CC</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CC(Graph G)</td>
-<td>预处理构造函数</td>
-</tr>
-<tr>
-<td>boolean connected(int v, int w)</td>
-<td>v 和 w 连通吗</td>
-</tr>
-<tr>
-<td>int count()</td>
-<td>连通分量数</td>
-</tr>
-<tr>
-<td>int id(int v)</td>
-<td>v 所在的连通分量的标识符（ 0 ～ count()-1 ）</td>
-</tr>
-</tbody>
-</table>
-<h4 id=4161实现>4.1.6.1　实现</h4>
-<div class=highlight><div class=chroma>
-<table class=lntable><tr><td class=lntd>
-<pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>BreadthFirstPaths</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span> <span class=c1>// 到达该顶点的最短路径已知吗？
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>edgeTo</span><span class=o>;</span> <span class=c1>// 到达该顶点的已知路径上的最后一个顶点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>s</span><span class=o>;</span> <span class=c1>// 起点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=nf>BreadthFirstPaths</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>        <span class=n>edgeTo</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>        <span class=k>this</span><span class=o>.</span><span class=na>s</span> <span class=o>=</span> <span class=n>s</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>bfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>s</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>bfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>s</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Queue</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=n>queue</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Queue</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;();</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span><span class=o>[</span><span class=n>s</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span> <span class=c1>// 标记起点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>queue</span><span class=o>.</span><span class=na>enqueue</span><span class=o>(</span><span class=n>s</span><span class=o>);</span> <span class=c1>// 将它加入队列
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>while</span> <span class=o>(!</span><span class=n>queue</span><span class=o>.</span><span class=na>isEmpty</span><span class=o>())</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>v</span> <span class=o>=</span> <span class=n>queue</span><span class=o>.</span><span class=na>dequeue</span><span class=o>();</span> <span class=c1>// 从队列中删去下一顶点
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span> <span class=c1>// 对于每个未被标记的相邻顶点
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>edgeTo</span><span class=o>[</span><span class=n>w</span><span class=o>]</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span> <span class=c1>// 保存最短路径的最后一条边
+</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span> <span class=c1>// 标记它，因为最短路径已知
+</span></span></span><span class=line><span class=cl><span class=c1></span>                    <span class=n>queue</span><span class=o>.</span><span class=na>enqueue</span><span class=o>(</span><span class=n>w</span><span class=o>);</span> <span class=c1>// 并将它添加到队列中
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>hasPathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=k>return</span> <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Integer</span><span class=o>&gt;</span> <span class=nf>pathTo</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=416连通分量>4.1.6　连通分量</h3><table><thead><tr><th>public class CC</th><th></th></tr></thead><tbody><tr><td>CC(Graph G)</td><td>预处理构造函数</td></tr><tr><td>boolean connected(int v, int w)</td><td>v 和 w 连通吗</td></tr><tr><td>int count()</td><td>连通分量数</td></tr><tr><td>int id(int v)</td><td>v 所在的连通分量的标识符（ 0 ～ count()-1 ）</td></tr></tbody></table><h4 id=4161实现>4.1.6.1　实现</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -562,133 +272,62 @@
 </span><span class=lnt>26
 </span><span class=lnt>27
 </span><span class=lnt>28
-</span></code></pre></td>
-<td class=lntd>
-<pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=kd>public</span> <span class=kd>class</span> <span class=nc>CC</span>
-<span class=o>{</span>
-    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span>
-    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>id</span><span class=o>;</span>
-    <span class=kd>private</span> <span class=kt>int</span> <span class=n>count</span><span class=o>;</span>
-    <span class=kd>public</span> <span class=nf>CC</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
-        <span class=n>id</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
-        <span class=k>for</span><span class=o>(</span><span class=kt>int</span> <span class=n>s</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>s</span> <span class=o>&lt;</span> <span class=n>G</span><span class=o>.</span><span class=na>v</span><span class=o>();</span> <span class=n>s</span><span class=o>++)</span>
-            <span class=k>if</span><span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>s</span><span class=o>])</span>
-            <span class=o>{</span>
-                <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>s</span><span class=o>);</span>
-                <span class=n>count</span><span class=o>++;</span>
-            <span class=o>}</span>
-    <span class=o>}</span>
-    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>dfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
-    <span class=o>{</span>
-        <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
-        <span class=n>id</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=n>count</span><span class=o>;</span>
-        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
-            <span class=k>if</span><span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span>
-                <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span>
-    <span class=o>}</span>
-    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>connected</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>,</span> <span class=kt>int</span> <span class=n>w</span><span class=o>){</span><span class=k>return</span> <span class=n>id</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>==</span> <span class=n>id</span><span class=o>[</span><span class=n>w</span><span class=o>];}</span>
-    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>id</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>){</span><span class=k>return</span> <span class=n>id</span><span class=o>[</span><span class=n>v</span><span class=o>];}</span>
-    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>count</span><span class=o>(){</span><span class=k>return</span> <span class=n>count</span><span class=o>;}</span>
-<span class=o>}</span></code></pre></td></tr></table>
-</div>
-</div>
-</div>
-<div class=post-copyright>
-<p class=copyright-item>
-<span class=item-title>文章作者</span>
-<span class=item-content>YZLC</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>上次更新</span>
-<span class=item-content>
-2022-01-23
-<a href=https://github.com/yzlc/www/commit/8ff42c55f0d4efa9e2d4bf14709066699a3dfaee title=1>(8ff42c5)</a>
-</span>
-</p>
-<p class=copyright-item>
-<span class=item-title>许可协议</span>
-<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span>
-</p>
-</div>
-<div class=post-reward>
-<input type=checkbox name=reward id=reward hidden>
-<label class=reward-button for=reward>赞赏支持</label>
-<div class=qr-code>
-<label class=qr-code-image for=reward>
-<img class=image src=/images/reward/wechat.jpg>
-<span>微信打赏</span>
-</label>
-<label class=qr-code-image for=reward>
-<img class=image src=/images/reward/alipay.jpg>
-<span>支付宝打赏</span>
-</label>
-</div>
-</div><footer class=post-footer>
-<div class=post-tags>
-<a href=/tags/%E7%AE%97%E6%B3%95/>算法</a>
-</div>
-<nav class=post-nav>
-<a class=prev href=/post/read/algorithms/4.2/>
-<i class="iconfont icon-left"></i>
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>CC</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>boolean</span><span class=o>[]</span> <span class=n>marked</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>id</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>count</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>CC</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>boolean</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>        <span class=n>id</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>G</span><span class=o>.</span><span class=na>V</span><span class=o>()];</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span><span class=o>(</span><span class=kt>int</span> <span class=n>s</span> <span class=o>=</span> <span class=n>0</span><span class=o>;</span> <span class=n>s</span> <span class=o>&lt;</span> <span class=n>G</span><span class=o>.</span><span class=na>v</span><span class=o>();</span> <span class=n>s</span><span class=o>++)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span><span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>s</span><span class=o>])</span>
+</span></span><span class=line><span class=cl>            <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>s</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=n>count</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>void</span> <span class=nf>dfs</span><span class=o>(</span><span class=n>Graph</span> <span class=n>G</span><span class=o>,</span> <span class=kt>int</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>marked</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>id</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>=</span> <span class=n>count</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>w</span> <span class=o>:</span> <span class=n>G</span><span class=o>.</span><span class=na>adj</span><span class=o>(</span><span class=n>v</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span><span class=o>(!</span><span class=n>marked</span><span class=o>[</span><span class=n>w</span><span class=o>])</span>
+</span></span><span class=line><span class=cl>                <span class=n>dfs</span><span class=o>(</span><span class=n>G</span><span class=o>,</span> <span class=n>w</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>connected</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>,</span> <span class=kt>int</span> <span class=n>w</span><span class=o>){</span><span class=k>return</span> <span class=n>id</span><span class=o>[</span><span class=n>v</span><span class=o>]</span> <span class=o>==</span> <span class=n>id</span><span class=o>[</span><span class=n>w</span><span class=o>];}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>id</span><span class=o>(</span><span class=kt>int</span> <span class=n>v</span><span class=o>){</span><span class=k>return</span> <span class=n>id</span><span class=o>[</span><span class=n>v</span><span class=o>];}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>count</span><span class=o>(){</span><span class=k>return</span> <span class=n>count</span><span class=o>;}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>YZLC</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2022-03-26
+<a href=https://github.com/yzlc/www/commit/b77fbe380ff59cb6b9965d8fcd77415b254e338f title=1>(b77fbe3)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/images/reward/wechat.jpg>
+<span>微信打赏</span></label>
+<label class=qr-code-image for=reward><img class=image src=/images/reward/alipay.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E7%AE%97%E6%B3%95/>算法</a></div><nav class=post-nav><a class=prev href=/post/read/algorithms/4.2/><i class="iconfont icon-left"></i>
 <span class="prev-text nav-default">4.2　有向图</span>
-<span class="prev-text nav-mobile">上一篇</span>
-</a>
-<a class=next href=/post/note/dev/spring/security/>
-<span class="next-text nav-default">spring Security</span>
+<span class="prev-text nav-mobile">上一篇</span></a>
+<a class=next href=/post/note/dev/spring/security/><span class="next-text nav-default">spring Security</span>
 <span class="next-text nav-mobile">下一篇</span>
-<i class="iconfont icon-right"></i>
-</a>
-</nav>
-</footer>
-</article>
-</div>
-<div id=vcomments></div>
-<script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=vcomments></div><script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
 <script src=//unpkg.com/valine/dist/Valine.min.js></script>
-<script type=text/javascript>new Valine({el:'#vcomments',appId:'eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz',appKey:'fhXztPgcCKoM3Tlof1DEGnB8',notify:!1,verify:!1,avatar:'mm',placeholder:'说点什么吧...',visitor:!1})</script>
-</div>
-</main>
-<footer id=footer class=footer>
-<div class=social-links>
-<a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
+<script type=text/javascript>new Valine({el:"#vcomments",appId:"eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz",appKey:"fhXztPgcCKoM3Tlof1DEGnB8",notify:!1,verify:!1,avatar:"mm",placeholder:"说点什么吧...",visitor:!1})</script></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
 <a href=https://github.com/yzlc class="iconfont icon-github" title=github></a>
 <a href=https://space.bilibili.com/10341737 class="iconfont icon-bilibili" title=bilibili></a>
-<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a>
-</div>
-<div class=copyright>
-<span class=power-by>
-由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动
-</span>
+<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
 <span class=division>|</span>
-<span class=theme-info>
-主题 -
-<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a>
-</span>
-<div class=busuanzi-footer>
-<span id=busuanzi_container_site_pv> 本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次 </span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次</span>
 <span class=division>|</span>
-<span id=busuanzi_container_site_uv> 本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人 </span>
-</div>
-<span class=copyright-year>
-&copy;
+<span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy;
 2019 -
-2022<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span>
-</span>
-</div>
-</footer>
-<div class=back-to-top id=back-to-top>
-<i class="iconfont icon-up"></i>
-</div>
-</div>
-<script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+2022<span class=heart><i class="iconfont icon-heart"></i></span><span>YZLC</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
 <script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
-<script type=text/javascript src=/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js></script>
-<script type=text/javascript>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']]}}</script>
-<script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
-<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-154585647-1','auto'),ga('set','anonymizeIp',!0),ga('send','pageview'))</script>
-<script async src=https://www.google-analytics.com/analytics.js></script>
-</body>
-</html>
+<script type=text/javascript src=/js/main.min.64437849d125a2d603b3e71d6de5225d641a32d17168a58106e0b61852079683.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
