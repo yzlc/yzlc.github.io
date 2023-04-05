@@ -1,10 +1,10 @@
 <!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>centos8 - YZLC</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="YZLC"><meta name=description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &amp;ldquo;114.114.114.114 8.8.8.8&amp;rdquo; 修改对应网卡的 dns"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://yzlc.github.io/post/note/linux/centos8/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="centos8"><meta property="og:description" content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/linux/centos8/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-04-03T15:32:33+08:00"><meta property="article:modified_time" content="2023-04-04T23:17:06+08:00"><meta itemprop=name content="centos8"><meta itemprop=description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns"><meta itemprop=datePublished content="2023-04-03T15:32:33+08:00"><meta itemprop=dateModified content="2023-04-04T23:17:06+08:00"><meta itemprop=wordCount content="206"><meta itemprop=keywords content="linux,"><meta name=twitter:card content="summary"><meta name=twitter:title content="centos8"><meta name=twitter:description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="centos8"><meta property="og:description" content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/linux/centos8/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-04-03T15:32:33+08:00"><meta property="article:modified_time" content="2023-04-05T15:33:35+08:00"><meta itemprop=name content="centos8"><meta itemprop=description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns"><meta itemprop=datePublished content="2023-04-03T15:32:33+08:00"><meta itemprop=dateModified content="2023-04-05T15:33:35+08:00"><meta itemprop=wordCount content="1297"><meta itemprop=keywords content="linux,"><meta name=twitter:card content="summary"><meta name=twitter:title content="centos8"><meta name=twitter:description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
 <script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>yzlc</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/post/web><li class=mobile-menu-item>网站大全</li></a><a href=/post/soft><li class=mobile-menu-item>软件大全</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>yzlc</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/post/web>网站大全</a></li><li class=menu-item><a class=menu-item-link href=/post/soft>软件大全</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>centos8</h1><div class=post-meta><span class=post-time>2023-04-03</span><div class=post-category><a href=/categories/note/>note</a></div><span class=more-meta>约 206 字</span>
-<span class=more-meta>预计阅读 1 分钟</span>
-<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#dns配置>DNS配置</a></li><li><a href=#修改hosts>修改hosts</a></li><li><a href=#更换yum源>更换yum源</a></li><li><a href=#安装nginx>安装nginx</a></li></ul></nav></div></div><div class=post-content><h2 id=dns配置>DNS配置</h2><ol><li>通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置）</li><li>通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns 设置</li><li>systemctl restart NetworkManager.service</li><li>cat /etc/resolv.conf 查看dns</li></ol><h2 id=修改hosts>修改hosts</h2><ol><li>vim /etc/hosts</li><li>8.132.50.96 mirrors.aliyun.com</li><li>nmcli c reload</li></ol><h2 id=更换yum源>更换yum源</h2><ul><li>cd /etc/yum.repos.d/</li><li>创建新文件夹并将源文件备份为repo.bak</li><li>mkdir backup && mv *repo backup/</li><li>下载国内yum源文件</li><li>curl -o /etc/yum.repos.d/CentOS-Base.repo <a href=http://mirrors.aliyun.com/repo/Centos-8.repo>http://mirrors.aliyun.com/repo/Centos-8.repo</a></li><li>更新下载yum源地址</li><li>sed -i -e"s|mirrors.cloud.aliyuncs.com|mirrors.aliyun.com|g " /etc/yum.repos.d/CentOS-*</li><li>sed -i -e &ldquo;s|releasever|releasever-stream|g&rdquo; /etc/yum.repos.d/CentOS-*</li><li>生成缓存</li><li>yum clean all && yum makecache</li></ul><h2 id=安装nginx>安装nginx</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/categories/><li class=mobile-menu-item>分类</li></a><a href=/post/web><li class=mobile-menu-item>网站大全</li></a><a href=/post/soft><li class=mobile-menu-item>软件大全</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>yzlc</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/categories/>分类</a></li><li class=menu-item><a class=menu-item-link href=/post/web>网站大全</a></li><li class=menu-item><a class=menu-item-link href=/post/soft>软件大全</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>centos8</h1><div class=post-meta><span class=post-time>2023-04-03</span><div class=post-category><a href=/categories/note/>note</a></div><span class=more-meta>约 1297 字</span>
+<span class=more-meta>预计阅读 3 分钟</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#dns配置>DNS配置</a></li><li><a href=#修改hosts>修改hosts</a></li><li><a href=#更换yum源>更换yum源</a></li><li><a href=#安装nginx>安装nginx</a></li><li><a href=#mysql>mysql</a><ul><li><a href=#集群节点设置主主>集群节点设置(主/主)</a></li><li><a href=#修改集群配置文件>修改集群配置文件</a></li><li><a href=#配置-mysql-主从关系>配置 MySQL 主从关系</a></li><li><a href=#配置主从关系>配置主从关系</a></li><li><a href=#创建数据库>创建数据库</a></li></ul></li><li><a href=#oracle-jdk-8>Oracle JDK 8</a></li></ul></nav></div></div><div class=post-content><h2 id=dns配置>DNS配置</h2><ol><li>通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置）</li><li>通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns 设置</li><li>systemctl restart NetworkManager.service</li><li>cat /etc/resolv.conf 查看dns</li></ol><h2 id=修改hosts>修改hosts</h2><ol><li>vim /etc/hosts</li><li>8.132.50.96 mirrors.aliyun.com</li><li>nmcli c reload</li></ol><h2 id=更换yum源>更换yum源</h2><ul><li>cd /etc/yum.repos.d/</li><li>创建新文件夹并将源文件备份为repo.bak</li><li>mkdir backup && mv *repo backup/</li><li>下载国内yum源文件</li><li>curl -o /etc/yum.repos.d/CentOS-Base.repo <a href=http://mirrors.aliyun.com/repo/Centos-8.repo>http://mirrors.aliyun.com/repo/Centos-8.repo</a></li><li>更新下载yum源地址</li><li>sed -i -e"s|mirrors.cloud.aliyuncs.com|mirrors.aliyun.com|g " /etc/yum.repos.d/CentOS-*</li><li>sed -i -e &ldquo;s|releasever|releasever-stream|g&rdquo; /etc/yum.repos.d/CentOS-*</li><li>生成缓存</li><li>yum clean all && yum makecache</li></ul><h2 id=安装nginx>安装nginx</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -14,10 +14,196 @@
 </span></span><span class=line><span class=cl>sudo systemctl start nginx
 </span></span><span class=line><span class=cl>sudo systemctl status nginx
 </span></span><span class=line><span class=cl>cat /etc/nginx/nginx.conf
+</span></span></code></pre></td></tr></table></div></div><h2 id=mysql>mysql</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#关防火墙</span>
+</span></span><span class=line><span class=cl>firewall-cmd --zone<span class=o>=</span>public --add-port<span class=o>=</span>3306/tcp --permanent
+</span></span><span class=line><span class=cl>firewall-cmd --reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.38-1.el7.x86_64.rpm-bundle.tar
+</span></span><span class=line><span class=cl>tar xvf mysql-5.7.38-1.el7.x86_64.rpm-bundle.tar
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>yum install libncurses* -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 移除已有的 MariaDB libs</span>
+</span></span><span class=line><span class=cl>yum -y remove mariadb-libs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装 MySQL rpm</span>
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-common-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-libs-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-devel-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-client-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-server-5.7*.rpm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl start mysqld
+</span></span><span class=line><span class=cl>grep <span class=s1>&#39;temporary password&#39;</span> /var/log/mysqld.log
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql -uroot -p
+</span></span><span class=line><span class=cl>mysql&gt; ALTER USER USER<span class=o>()</span> IDENTIFIED BY <span class=s1>&#39;Password123@mysql&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=集群节点设置主主>集群节点设置(主/主)</h3><blockquote><p>添加复制用户及权限，在 MySQL-1 节点上创建用于复制数据的用户 clusteruser，授权 MySQL-2 节点访问，在 MySQL-2 节点上创建用于复制数据的用户 clusteruser，授权 MySQL-1 节点访问</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 开启 root 用户远程访问</span>
+</span></span><span class=line><span class=cl>mysql&gt; grant all privileges on *.* to <span class=s1>&#39;root&#39;</span>@<span class=s1>&#39;%&#39;</span> identified by <span class=s1>&#39;Password123@mysql&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1># 添加 MySQL 主从复制⽤户 clusteruser，并授权 MySQL-2 节点可访问 MySQL-1 节点</span>
+</span></span><span class=line><span class=cl>mysql&gt; grant replication slave,file on *.* to <span class=s1>&#39;clusteruser&#39;</span>@<span class=s1>&#39;2/1节点IP&#39;</span> identified by <span class=s1>&#39;Replication@123&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1># 刷新授权</span>
+</span></span><span class=line><span class=cl>mysql&gt; flush privileges<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>我们在 1/2节点上添加一个复制账户 <span class=s1>&#39;clusteruser&#39;</span>，允许 <span class=s1>&#39;2/1节点IP&#39;</span> 客户端来访问，密码为 <span class=s1>&#39;Replication@123&#39;</span>。
+</span></span><span class=line><span class=cl>如果有多个从服务器需要共享这一个复制账号，可以使用 <span class=s1>&#39;10.1.11.%&#39;</span> 来替代整个网段。
+</span></span></code></pre></td></tr></table></div></div><h3 id=修改集群配置文件>修改集群配置文件</h3><blockquote><p>将 /etc/my.cnf 文件内容修改如下，MySQL-2 节点修改<code>server-id=102</code>和<code>auto_increment_offset=2</code></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[mysqld]
+</span></span><span class=line><span class=cl>datadir=/var/lib/mysql
+</span></span><span class=line><span class=cl>default-storage-engine=INNODB
+</span></span><span class=line><span class=cl>character_set_server=utf8
+</span></span><span class=line><span class=cl>lower_case_table_names=1
+</span></span><span class=line><span class=cl>table_open_cache=128
+</span></span><span class=line><span class=cl>max_connections=2000
+</span></span><span class=line><span class=cl>max_connect_errors=6000
+</span></span><span class=line><span class=cl>innodb_file_per_table=1
+</span></span><span class=line><span class=cl>innodb_buffer_pool_size=1G
+</span></span><span class=line><span class=cl>max_allowed_packet=64M
+</span></span><span class=line><span class=cl>transaction_isolation=READ-COMMITTED
+</span></span><span class=line><span class=cl>innodb_flush_method=O_DIRECT
+</span></span><span class=line><span class=cl>innodb_flush_log_at_trx_commit=0
+</span></span><span class=line><span class=cl>sync_binlog=0
+</span></span><span class=line><span class=cl>innodb_lock_wait_timeout=1800
+</span></span><span class=line><span class=cl>bind-address=0.0.0.0
+</span></span><span class=line><span class=cl>group_concat_max_len=1024000
+</span></span><span class=line><span class=cl>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+</span></span><span class=line><span class=cl>skip-name-resolve
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>server-id=101
+</span></span><span class=line><span class=cl>log-bin=mysql-bin
+</span></span><span class=line><span class=cl>auto_increment_increment=2
+</span></span><span class=line><span class=cl>auto_increment_offset=1
+</span></span><span class=line><span class=cl>expire_logs_days=30
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[mysql]
+</span></span><span class=line><span class=cl>default-character-set=utf8
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[mysql.server]
+</span></span><span class=line><span class=cl>default-character-set=utf8
+</span></span></code></pre></td></tr></table></div></div><p>配置完成后重启 MySQL 服务：
+systemctl restart mysqld</p><h3 id=配置-mysql-主从关系>配置 MySQL 主从关系</h3><blockquote><p>分别登录到 MySQL 的两个节点上，配置相互的主从关系。</p></blockquote><p>获取各节点状态信息
+到各节点上获取节点状态信息：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql -uroot -p<span class=s1>&#39;Password123@mysql&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql&gt; flush tables with <span class=nb>read</span> lock<span class=se>\G</span>
+</span></span><span class=line><span class=cl>Query OK, <span class=m>0</span> rows affected <span class=o>(</span>0.00 sec<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql&gt; show master status<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以获取到 &lsquo;File&rsquo; 和 &lsquo;Position&rsquo; 两个值，用于设置主从关系。</p><h3 id=配置主从关系>配置主从关系</h3><p>在各个节点上执行以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; change master to <span class=nv>master_host</span><span class=o>=</span><span class=s1>&#39;2/1节点IP&#39;</span>, <span class=nv>master_user</span><span class=o>=</span><span class=s1>&#39;clusteruser&#39;</span>, <span class=nv>master_password</span><span class=o>=</span><span class=s1>&#39;Replication@123&#39;</span>, <span class=nv>master_log_file</span><span class=o>=</span><span class=s1>&#39;2/1节点File&#39;</span>, <span class=nv>master_log_pos</span><span class=o>=</span>2/1节点Position<span class=p>;</span>
+</span></span><span class=line><span class=cl>mysql&gt; start slave<span class=p>;</span>
+</span></span><span class=line><span class=cl>mysql&gt; show slave status<span class=se>\G</span>
+</span></span><span class=line><span class=cl>提示：master_host 为 2/1节点的 IP，master_log_file 为 2/1节点上查询到的 <span class=s2>&#34;File&#34;</span> 值，master_log_pos 为 2/1节点上查询到的 <span class=s2>&#34;Position&#34;</span> 值。
+</span></span><span class=line><span class=cl>当 <span class=s2>&#34;show slave status\G&#34;</span> 命令执行结果中，查询到 Slave_IO_Running 和 Slave_SQL_Running 都为 Yes 则表明配置成功。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>最后执行 MySQL 命令解锁：
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql&gt; UNLOCK TABLES<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建数据库>创建数据库</h3><blockquote><p>配置好主主节点后，登录到任意节点</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; CREATE DATABASE <span class=sb>`</span>testdb<span class=sb>`</span> DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>在另一个节点上，用 MySQL 命令可以同样查看到新建的数据库：
+</span></span><span class=line><span class=cl>mysql&gt; show databases<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=oracle-jdk-8>Oracle JDK 8</h2><ol><li><p><a href=https://github.com/frekele/oracle-java/releases/download/8u212-b10/jdk-8u212-linux-x64.tar.gz>下载</a></p></li><li><p>解压缩</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> /usr/local/src
+</span></span><span class=line><span class=cl>tar zxvf jdk-8u212-linux-x64.tar.gz
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>在 /etc/profile.d 中创建一个新文件以设置 JAVA_HOME 和 PATH 环境变量</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vi /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>在 jdk.sh 文件中添加以下内容：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>JAVA_HOME</span><span class=o>=</span>/usr/local/src/jdk1.8.8u212
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:<span class=nv>$JAVA_HOME</span>/bin
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>使 jdk.sh 文件可执行：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo chmod +x /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table></div></div><ol start=6><li>使更改生效：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>source</span> /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table></div></div><ol start=7><li>确认 Java 已成功安装：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>java -version
 </span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
 <span class=item-content>YZLC</span></p><p class=copyright-item><span class=item-title>上次更新</span>
-<span class=item-content>2023-04-04
-<a href=https://github.com/yzlc/www/commit/5ec1e08c968b98cb023700cd901d689a36713322 title=1>(5ec1e08)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content>2023-04-05
+<a href=https://github.com/yzlc/www/commit/80584bcf1f6da2ba59bad6096f898a4133eb74f5 title=1>(80584bc)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
 <span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
 <label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/images/reward/wechat.jpg>
 <span>微信打赏</span></label>
