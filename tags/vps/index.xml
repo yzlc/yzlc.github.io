@@ -1,1 +1,46 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vps on YZLC</title><link>https://yzlc.github.io/tags/vps/</link><description>Recent content in vps on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Sep 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/vps/index.xml" rel="self" type="application/rss+xml"/><item><title>vps</title><link>https://yzlc.github.io/post/note/linux/vps/</link><pubDate>Sun, 01 Sep 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/vps/</guid><description>登录配置 本机生成密钥(输入管理密码) ssh-keygen -t rsa -C &amp;quot;yzlc233@outlook.com&amp;quot; 把公钥复制到服务器 ssh-copy-id -p port user@host ssh登录 ssh -p port user@host 安装工具包 1 2 3 4 yum -y update &amp;amp;&amp;amp; yum -y upgrade yum -y install wget yum -y install vim yum</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vps on YZLC</title><link>https://yzlc.github.io/tags/vps/</link><description>Recent content in vps on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Sep 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/vps/index.xml" rel="self" type="application/rss+xml"/><item><title>vps</title><link>https://yzlc.github.io/post/note/linux/vps/</link><pubDate>Sun, 01 Sep 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/vps/</guid><description>&lt;h3 id="登录配置">登录配置&lt;/h3>
+&lt;ol>
+&lt;li>本机生成密钥(输入管理密码)&lt;br>
+&lt;code>ssh-keygen -t rsa -C &amp;quot;yzlc233@outlook.com&amp;quot;&lt;/code>&lt;/li>
+&lt;li>把公钥复制到服务器&lt;br>
+&lt;code>ssh-copy-id -p port user@host&lt;/code>&lt;/li>
+&lt;li>ssh登录&lt;br>
+&lt;code>ssh -p port user@host&lt;/code>&lt;/li>
+&lt;/ol>
+&lt;h3 id="安装工具包">安装工具包&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">yum -y update &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> yum -y upgrade
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yum -y install wget
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yum -y install vim
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yum -y install zip unzip
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="vim配置">vim配置&lt;/h3>
+&lt;ul>
+&lt;li>&lt;code>vim /root/.vimrc&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#设置tab分隔符为4个空格&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">set&lt;/span> &lt;span class="nv">tabstop&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#解决中文乱码的设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">set&lt;/span> &lt;span class="nv">termencoding&lt;/span>&lt;span class="o">=&lt;/span>utf-8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">set&lt;/span> &lt;span class="nv">encoding&lt;/span>&lt;span class="o">=&lt;/span>prc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="修改时区">修改时区&lt;/h3>
+&lt;p>&lt;code>timedatectl set-timezone Asia/Shanghai&lt;/code>&lt;/p></description></item></channel></rss>

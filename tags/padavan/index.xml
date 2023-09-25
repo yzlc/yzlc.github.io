@@ -1,1 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>padavan on YZLC</title><link>https://yzlc.github.io/tags/padavan/</link><description>Recent content in padavan on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 Jul 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/padavan/index.xml" rel="self" type="application/rss+xml"/><item><title>padavan</title><link>https://yzlc.github.io/post/note/linux/padavan/</link><pubDate>Mon, 08 Jul 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/padavan/</guid><description>Padavan v2ray 导出节点 在电脑上将正常的节点导出为客户端json 修改json第10行&amp;quot;listen&amp;quot;为路由器的管理地址 v2ray设置</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>padavan on YZLC</title><link>https://yzlc.github.io/tags/padavan/</link><description>Recent content in padavan on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 08 Jul 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/padavan/index.xml" rel="self" type="application/rss+xml"/><item><title>padavan</title><link>https://yzlc.github.io/post/note/linux/padavan/</link><pubDate>Mon, 08 Jul 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/padavan/</guid><description>&lt;p>&lt;a class="link" href="https://right.com.cn/forum/thread-161324-1-1.html" target="_blank" rel="noopener"
+>Padavan&lt;/a>&lt;/p>
+&lt;h2 id="v2rayhttpssixulifepadavan-v2rayhtml">&lt;a class="link" href="https://sixu.life/padavan-v2ray.html" target="_blank" rel="noopener"
+>v2ray&lt;/a>&lt;/h2>
+&lt;h3 id="导出节点">导出节点&lt;/h3>
+&lt;ol>
+&lt;li>在电脑上将正常的节点导出为客户端json&lt;/li>
+&lt;li>修改json第10行&amp;quot;listen&amp;quot;为路由器的管理地址&lt;/li>
+&lt;/ol>
+&lt;h3 id="v2ray设置">v2ray设置&lt;/h3>
+&lt;ul>
+&lt;li>搭建Web环境==&amp;gt;v2ray==&amp;gt;v2ray proxy 开关 打开==&amp;gt;粘贴v2ray_config_script==&amp;gt;应用本页设置&lt;/li>
+&lt;/ul>
+&lt;h3 id="transocks设置">transocks设置&lt;/h3>
+&lt;ul>
+&lt;li>广告屏蔽功能==&amp;gt;transocks==&amp;gt;transocks 开关 打开&lt;/li>
+&lt;li>透明重定向的代理服务器IP、域名:路由器的管理IP&lt;/li>
+&lt;li>透明重定向的代理服务器端口:json文件第9行的端口&lt;/li>
+&lt;li>远端服务器IP、域名:v2ray节点的域名或者IP&lt;/li>
+&lt;/ul></description></item></channel></rss>

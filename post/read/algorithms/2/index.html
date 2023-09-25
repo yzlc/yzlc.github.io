@@ -1,0 +1,362 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="2.1 初级排序算法 2.1.2 选择排序 不断地选择剩余元素之中的最小者 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public class Selection { public static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Comparable[] a, int i, int j) { Comparable"><title>第2章　排序</title><link rel=canonical href=https://yzlc.github.io/post/read/algorithms/2/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="第2章　排序"><meta property="og:description" content="2.1 初级排序算法 2.1.2 选择排序 不断地选择剩余元素之中的最小者 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public class Selection { public static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Comparable[] a, int i, int j) { Comparable"><meta property="og:url" content="https://yzlc.github.io/post/read/algorithms/2/"><meta property="og:site_name" content="YZLC"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="算法"><meta property="article:published_time" content="2020-07-07T10:27:33+08:00"><meta property="article:modified_time" content="2023-09-25T11:15:53+08:00"><meta name=twitter:title content="第2章　排序"><meta name=twitter:description content="2.1 初级排序算法 2.1.2 选择排序 不断地选择剩余元素之中的最小者 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 public class Selection { public static boolean less(Comparable v, Comparable w) { return v.compareTo(w) &amp;lt; 0; } private static void exch(Comparable[] a, int i, int j) { Comparable"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>YZLC</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/tags/><span>标签</span></a></li><li><a href=/categories/><span>分类</span></a></li><li><a href=/post/web><span>网站大全</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/read/>read</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/read/algorithms/2/>第2章　排序</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jul 07, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><h2 id=21初级排序算法>2.1　初级排序算法</h2><h3 id=212选择排序>2.1.2　选择排序</h3><blockquote><p>不断地选择剩余元素之中的最小者</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Selection</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>boolean</span> <span class=nf>less</span><span class=o>(</span><span class=n>Comparable</span> <span class=n>v</span><span class=o>,</span> <span class=n>Comparable</span> <span class=n>w</span><span class=o>)</span> <span class=o>{</span> <span class=k>return</span> <span class=n>v</span><span class=o>.</span><span class=na>compareTo</span><span class=o>(</span><span class=n>w</span><span class=o>)</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>exch</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>i</span><span class=o>,</span> <span class=kt>int</span> <span class=n>j</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Comparable</span> <span class=n>t</span> <span class=o>=</span> <span class=n>a</span><span class=o>[</span><span class=n>i</span><span class=o>];</span> <span class=n>a</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>];</span> <span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>]</span> <span class=o>=</span> <span class=n>t</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>)</span> <span class=o>{</span> <span class=c1>// 将a[]按升序排列
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>N</span> <span class=o>=</span> <span class=n>a</span><span class=o>.</span><span class=na>length</span><span class=o>;</span> <span class=c1>// 数组长度
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span> <span class=c1>// 将a[i]和a[i+1..N]中最小的元素交换
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=kt>int</span> <span class=n>min</span> <span class=o>=</span> <span class=n>i</span><span class=o>;</span> <span class=c1>// 最小元素的索引
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>1</span><span class=o>;</span> <span class=n>j</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>;</span> <span class=n>j</span><span class=o>++)</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=o>(</span><span class=n>less</span><span class=o>(</span><span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>],</span> <span class=n>a</span><span class=o>[</span><span class=n>min</span><span class=o>]))</span> <span class=n>min</span> <span class=o>=</span> <span class=n>j</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>i</span><span class=o>,</span> <span class=n>min</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=213插入排序>2.1.3　插入排序</h3><blockquote><p>将其余所有元素在插入之前都向右移动一位</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Insertion</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 将a[]按升序排列
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>N</span> <span class=o>=</span> <span class=n>a</span><span class=o>.</span><span class=na>length</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>1</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span> <span class=c1>// 将 a[i] 插入到 a[i-1]、a[i-2]、a[i-3]...之中
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=n>i</span><span class=o>;</span> <span class=n>j</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=n>less</span><span class=o>(</span><span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>],</span> <span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>-</span><span class=mi>1</span><span class=o>]);</span> <span class=n>j</span><span class=o>--)</span>
+</span></span><span class=line><span class=cl>                <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>j</span><span class=o>,</span> <span class=n>j</span><span class=o>-</span><span class=mi>1</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=216希尔排序>2.1.6　希尔排序</h3><blockquote><p>基于插入排序的快速的排序算法，使数组中任意间隔为h的元素有序</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Shell</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 将a[]按升序排列
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>N</span> <span class=o>=</span> <span class=n>a</span><span class=o>.</span><span class=na>length</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>h</span> <span class=o>=</span> <span class=mi>1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=o>(</span><span class=n>h</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>/</span><span class=mi>3</span><span class=o>)</span> <span class=n>h</span> <span class=o>=</span> <span class=mi>3</span><span class=o>*</span><span class=n>h</span> <span class=o>+</span> <span class=mi>1</span><span class=o>;</span> <span class=c1>// 1, 4, 13, 40, 121, 364, 1093, ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>while</span> <span class=o>(</span><span class=n>h</span> <span class=o>&gt;=</span> <span class=mi>1</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span> <span class=c1>// 将数组变为h有序
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>h</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span>
+</span></span><span class=line><span class=cl>            <span class=o>{</span> <span class=c1>// 将a[i]插入到a[i-h], a[i-2*h], a[i-3*h]... 之中
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=n>i</span><span class=o>;</span> <span class=n>j</span> <span class=o>&gt;=</span> <span class=n>h</span> <span class=o>&amp;&amp;</span> <span class=n>less</span><span class=o>(</span><span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>],</span> <span class=n>a</span><span class=o>[</span><span class=n>j</span><span class=o>-</span><span class=n>h</span><span class=o>]);</span> <span class=n>j</span> <span class=o>-=</span> <span class=n>h</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>                    <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>j</span><span class=o>,</span> <span class=n>j</span><span class=o>-</span><span class=n>h</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=n>h</span> <span class=o>=</span> <span class=n>h</span><span class=o>/</span><span class=mi>3</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=22归并排序>2.2　归并排序</h2><blockquote><p>将两个有序的数组归并成一个更大的有序数组</p></blockquote><h3 id=221原地归并的抽象方法>2.2.1　原地归并的抽象方法</h3><blockquote><p>将两个不同的有序数组归并到第三个数组中</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>merge</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>lo</span><span class=o>,</span> <span class=kt>int</span> <span class=n>mid</span><span class=o>,</span> <span class=kt>int</span> <span class=n>hi</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span> <span class=c1>// 将a[lo..mid] 和 a[mid+1..hi] 归并
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>lo</span><span class=o>,</span> <span class=n>j</span> <span class=o>=</span> <span class=n>mid</span><span class=o>+</span><span class=mi>1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>k</span> <span class=o>=</span> <span class=n>lo</span><span class=o>;</span> <span class=n>k</span> <span class=o>&lt;=</span> <span class=n>hi</span><span class=o>;</span> <span class=n>k</span><span class=o>++)</span> <span class=c1>// 将a[lo..hi]复制到aux[lo..hi]
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>aux</span><span class=o>[</span><span class=n>k</span><span class=o>]</span> <span class=o>=</span> <span class=n>a</span><span class=o>[</span><span class=n>k</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>k</span> <span class=o>=</span> <span class=n>lo</span><span class=o>;</span> <span class=n>k</span> <span class=o>&lt;=</span> <span class=n>hi</span><span class=o>;</span> <span class=n>k</span><span class=o>++)</span> <span class=c1>// 归并回到a[lo..hi]
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>if</span> <span class=o>(</span><span class=n>i</span> <span class=o>&gt;</span> <span class=n>mid</span><span class=o>)</span> <span class=n>a</span><span class=o>[</span><span class=n>k</span><span class=o>]</span> <span class=o>=</span> <span class=n>aux</span><span class=o>[</span><span class=n>j</span><span class=o>++];</span><span class=c1>// 左半边用尽取右半边
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>else</span> <span class=k>if</span> <span class=o>(</span><span class=n>j</span> <span class=o>&gt;</span> <span class=n>hi</span> <span class=o>)</span> <span class=n>a</span><span class=o>[</span><span class=n>k</span><span class=o>]</span> <span class=o>=</span> <span class=n>aux</span><span class=o>[</span><span class=n>i</span><span class=o>++];</span><span class=c1>// 右半边用尽取左半边
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>else</span> <span class=k>if</span> <span class=o>(</span><span class=n>less</span><span class=o>(</span><span class=n>aux</span><span class=o>[</span><span class=n>j</span><span class=o>],</span> <span class=n>aux</span><span class=o>[</span><span class=n>i</span><span class=o>]))</span> <span class=n>a</span><span class=o>[</span><span class=n>k</span><span class=o>]</span> <span class=o>=</span> <span class=n>aux</span><span class=o>[</span><span class=n>j</span><span class=o>++];</span><span class=c1>// 右半边小于左半边取右半边
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>else</span> <span class=n>a</span><span class=o>[</span><span class=n>k</span><span class=o>]</span> <span class=o>=</span> <span class=n>aux</span><span class=o>[</span><span class=n>i</span><span class=o>++];</span><span class=c1>// 右半边大于等于左半边取左半边
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=222自顶向下的归并排序>2.2.2　自顶向下的归并排序</h3><blockquote><p>如果它能将两个子数组排序，它就能够通过归并两个子数组来将整个数组排序</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Merge</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Comparable</span><span class=o>[]</span> <span class=n>aux</span><span class=o>;</span> <span class=c1>// 归并所需的辅助数组
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>aux</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Comparable</span><span class=o>[</span><span class=n>a</span><span class=o>.</span><span class=na>length</span><span class=o>];</span> <span class=c1>// 一次性分配空间
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=mi>0</span><span class=o>,</span> <span class=n>a</span><span class=o>.</span><span class=na>length</span> <span class=o>-</span> <span class=mi>1</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>lo</span><span class=o>,</span> <span class=kt>int</span> <span class=n>hi</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 将数组a[lo..hi]排序
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>if</span> <span class=o>(</span><span class=n>hi</span> <span class=o>&lt;=</span> <span class=n>lo</span><span class=o>)</span> <span class=k>return</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>mid</span> <span class=o>=</span> <span class=n>lo</span> <span class=o>+</span> <span class=o>(</span><span class=n>hi</span> <span class=o>-</span> <span class=n>lo</span><span class=o>)/</span><span class=mi>2</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>mid</span><span class=o>);</span> <span class=c1>// 将左半边排序
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>mid</span><span class=o>+</span><span class=mi>1</span><span class=o>,</span> <span class=n>hi</span><span class=o>);</span> <span class=c1>// 将右半边排序
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>merge</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>mid</span><span class=o>,</span> <span class=n>hi</span><span class=o>);</span> <span class=c1>// 归并结果（代码见“原地归并的抽象方法”）
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=223自底向上的归并排序>2.2.3　自底向上的归并排序</h3><blockquote><p>先归并那些微型数组，然后再成对归并得到的子数组</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>MergeBU</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=n>Comparable</span><span class=o>[]</span> <span class=n>aux</span><span class=o>;</span> <span class=c1>// 归并所需的辅助数组
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// merge()方法的代码请见“原地归并的抽象方法”
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 进行lgN次两两归并
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>N</span> <span class=o>=</span> <span class=n>a</span><span class=o>.</span><span class=na>length</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>aux</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Comparable</span><span class=o>[</span><span class=n>N</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>sz</span> <span class=o>=</span> <span class=mi>1</span><span class=o>;</span> <span class=n>sz</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>;</span> <span class=n>sz</span> <span class=o>=</span> <span class=n>sz</span><span class=o>+</span><span class=n>sz</span><span class=o>)</span> <span class=c1>// sz子数组大小
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>lo</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span> <span class=n>lo</span> <span class=o>&lt;</span> <span class=n>N</span><span class=o>-</span><span class=n>sz</span><span class=o>;</span> <span class=n>lo</span> <span class=o>+=</span> <span class=n>sz</span><span class=o>+</span><span class=n>sz</span><span class=o>)</span> <span class=c1>// lo:子数组索引
+</span></span></span><span class=line><span class=cl><span class=c1></span>                <span class=n>merge</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>lo</span><span class=o>+</span><span class=n>sz</span><span class=o>-</span><span class=mi>1</span><span class=o>,</span> <span class=n>Math</span><span class=o>.</span><span class=na>min</span><span class=o>(</span><span class=n>lo</span><span class=o>+</span><span class=n>sz</span><span class=o>+</span><span class=n>sz</span><span class=o>-</span><span class=mi>1</span><span class=o>,</span> <span class=n>N</span><span class=o>-</span><span class=mi>1</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=23快速排序>2.3　快速排序</h2><blockquote><p>是一种分治的排序算法。它将一个数组分成两个子数组，将两部分独立地排序</p></blockquote><p>快速排序和归并排序是互补的</p><ul><li>归并排序：分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序。递归调用发生在处理整个数组之前。一个数组被等分为两半</li><li>快速排序：当两个子数组都有序时整个数组也就自然有序了。递归调用发生在处理整个数组之后 。切分（partition）的位置取决于数组的内容</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Quick</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>lo</span><span class=o>,</span> <span class=kt>int</span> <span class=n>hi</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>hi</span> <span class=o>&lt;=</span> <span class=n>lo</span><span class=o>)</span> <span class=k>return</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=n>partition</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>hi</span><span class=o>);</span> <span class=c1>// 切分
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>j</span><span class=o>-</span><span class=mi>1</span><span class=o>);</span> <span class=c1>// 将左半部分a[lo .. j-1]排序
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>j</span><span class=o>+</span><span class=mi>1</span><span class=o>,</span> <span class=n>hi</span><span class=o>);</span> <span class=c1>// 将右半部分a[j+1 .. hi]排序
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>int</span> <span class=nf>partition</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>lo</span><span class=o>,</span> <span class=kt>int</span> <span class=n>hi</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 将数组切分为a[lo..i-1], a[i], a[i+1..hi]
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>lo</span><span class=o>,</span> <span class=n>j</span> <span class=o>=</span> <span class=n>hi</span><span class=o>+</span><span class=mi>1</span><span class=o>;</span> <span class=c1>// 左右扫描指针
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Comparable</span> <span class=n>v</span> <span class=o>=</span> <span class=n>a</span><span class=o>[</span><span class=n>lo</span><span class=o>];</span> <span class=c1>// 切分元素
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>while</span> <span class=o>(</span><span class=kc>true</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span> <span class=c1>// 扫描左右，检查扫描是否结束并交换元素
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>while</span> <span class=o>(</span><span class=n>less</span><span class=o>(</span><span class=n>a</span><span class=o>[++</span><span class=n>i</span><span class=o>],</span> <span class=n>v</span><span class=o>))</span> <span class=k>if</span> <span class=o>(</span><span class=n>i</span> <span class=o>==</span> <span class=n>hi</span><span class=o>)</span> <span class=k>break</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>while</span> <span class=o>(</span><span class=n>less</span><span class=o>(</span><span class=n>v</span><span class=o>,</span> <span class=n>a</span><span class=o>[--</span><span class=n>j</span><span class=o>]))</span> <span class=k>if</span> <span class=o>(</span><span class=n>j</span> <span class=o>==</span> <span class=n>lo</span><span class=o>)</span> <span class=k>break</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>i</span> <span class=o>&gt;=</span> <span class=n>j</span><span class=o>)</span> <span class=k>break</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>i</span><span class=o>,</span> <span class=n>j</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>j</span><span class=o>);</span> <span class=c1>// 将v = a[j]放入正确的位置
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>return</span> <span class=n>j</span><span class=o>;</span> <span class=c1>// a[lo..j-1] &lt;= a[j] &lt;= a[j+1..hi] 达成
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=233算法改进>2.3.3　算法改进</h3><h4 id=2331切换到插入排序>2.3.3.1　切换到插入排序</h4><h4 id=2332三取样切分>2.3.3.2　三取样切分</h4><h4 id=2333熵最优的排序>2.3.3.3　熵最优的排序</h4><blockquote><p>适用于含有大量重复元素的数组。将数组切分为三部分，分别对应小于、等于和大于切分元素的数组元素</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Quick3way</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>,</span> <span class=kt>int</span> <span class=n>lo</span><span class=o>,</span> <span class=kt>int</span> <span class=n>hi</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>hi</span> <span class=o>&lt;=</span> <span class=n>lo</span><span class=o>)</span> <span class=k>return</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>lt</span> <span class=o>=</span> <span class=n>lo</span><span class=o>,</span> <span class=n>i</span> <span class=o>=</span> <span class=n>lo</span><span class=o>+</span><span class=mi>1</span><span class=o>,</span> <span class=n>gt</span> <span class=o>=</span> <span class=n>hi</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Comparable</span> <span class=n>v</span> <span class=o>=</span> <span class=n>a</span><span class=o>[</span><span class=n>lo</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=o>(</span><span class=n>i</span> <span class=o>&lt;=</span> <span class=n>gt</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>cmp</span> <span class=o>=</span> <span class=n>a</span><span class=o>[</span><span class=n>i</span><span class=o>].</span><span class=na>compareTo</span><span class=o>(</span><span class=n>v</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>cmp</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=o>)</span> <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lt</span><span class=o>++,</span> <span class=n>i</span><span class=o>++);</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=k>if</span> <span class=o>(</span><span class=n>cmp</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=o>)</span> <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>i</span><span class=o>,</span> <span class=n>gt</span><span class=o>--);</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=n>i</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=c1>// 现在 a[lo..lt-1] &lt; v = a[lt..gt] &lt; a[gt+1..hi]成立
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>lo</span><span class=o>,</span> <span class=n>lt</span> <span class=o>-</span> <span class=mi>1</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>sort</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>gt</span> <span class=o>+</span> <span class=mi>1</span><span class=o>,</span> <span class=n>hi</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=24优先队列>2.4　优先队列</h2><blockquote><p>删除最大元素和插入元素</p></blockquote><h3 id=241api>2.4.1　API</h3><div class=table-wrapper><table><thead><tr><th>public class MaxPQ &lt;Key extends Comparable></th><th></th></tr></thead><tbody><tr><td>MaxPQ()</td><td>创建一个优先队列</td></tr><tr><td>MaxPQ(int max)</td><td>创建一个初始容量为 max 的优先队列</td></tr><tr><td>MaxPQ(Key[] a)</td><td>用 a[] 中的元素创建一个优先队列</td></tr><tr><td>void Insert(Key v)</td><td>向优先队列中插入一个元素</td></tr><tr><td>Key max()</td><td>返回最大元素</td></tr><tr><td>Key delMax()</td><td>删除并返回最大元素</td></tr><tr><td>boolean isEmpty()</td><td>返回队列是否为空</td></tr><tr><td>int size()</td><td>返回优先队列中的元素个数</td></tr></tbody></table></div><h3 id=243堆的定义>2.4.3　堆的定义</h3><blockquote><p>当一棵二叉树的每个结点都大于等于它的两个子结点时，它被称为堆有序</p></blockquote><p>二叉堆：一组能够用堆有序的完全二叉树排序的元素，并在数组中按照层级储存（不使用数组的第一个位置）</p><p><img src=/images/read/algorithms/Image00420.gif loading=lazy></p><h3 id=244堆的算法>2.4.4　堆的算法</h3><p>上浮：当某个结点的优先级上升（或是在堆底加入一个新的元素）</p><p>下沉：当某个结点的优先级下降（例如，将根结点替换为一个较小的元素）</p><h4 id=2441由下至上的堆有序化上浮>2.4.4.1　由下至上的堆有序化（上浮）</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>private</span> <span class=kt>void</span> <span class=nf>swim</span><span class=o>(</span><span class=kt>int</span> <span class=n>k</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=o>(</span><span class=n>k</span> <span class=o>&gt;</span> <span class=mi>1</span> <span class=o>&amp;&amp;</span> <span class=n>less</span><span class=o>(</span><span class=n>k</span><span class=o>/</span><span class=mi>2</span><span class=o>,</span> <span class=n>k</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>exch</span><span class=o>(</span><span class=n>k</span><span class=o>/</span><span class=mi>2</span><span class=o>,</span> <span class=n>k</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>k</span> <span class=o>=</span> <span class=n>k</span><span class=o>/</span><span class=mi>2</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/images/read/algorithms/Image00426.gif loading=lazy></p><h4 id=2442由上至下的堆有序化下沉>2.4.4.2　由上至下的堆有序化（下沉）</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>private</span> <span class=kt>void</span> <span class=nf>sink</span><span class=o>(</span><span class=kt>int</span> <span class=n>k</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=o>(</span><span class=mi>2</span><span class=o>*</span><span class=n>k</span> <span class=o>&lt;=</span> <span class=n>N</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>2</span><span class=o>*</span><span class=n>k</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>j</span> <span class=o>&lt;</span> <span class=n>N</span> <span class=o>&amp;&amp;</span> <span class=n>less</span><span class=o>(</span><span class=n>j</span><span class=o>,</span> <span class=n>j</span><span class=o>+</span><span class=mi>1</span><span class=o>))</span> <span class=n>j</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(!</span><span class=n>less</span><span class=o>(</span><span class=n>k</span><span class=o>,</span> <span class=n>j</span><span class=o>))</span> <span class=k>break</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>exch</span><span class=o>(</span><span class=n>k</span><span class=o>,</span> <span class=n>j</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>k</span> <span class=o>=</span> <span class=n>j</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/images/read/algorithms/Image00427.gif loading=lazy></p><p>插入元素：将新元素加到数组末尾，增加堆的大小并让这个新元素上浮到合适的位置</p><p>删除最大元素：从数组顶端删去最大的元素并将数组的最后一个元素放到顶端，减小堆的大小并让这个元素下沉到合适的位置</p><p><img src=/images/read/algorithms/Image00428.gif loading=lazy></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>MaxPQ</span><span class=o>&lt;</span><span class=n>Key</span> <span class=kd>extends</span> <span class=n>Comparable</span><span class=o>&lt;</span><span class=n>Key</span><span class=o>&gt;&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Key</span><span class=o>[]</span> <span class=n>pq</span><span class=o>;</span> <span class=c1>// 基于堆的完全二叉树
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>N</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span> <span class=c1>// 存储于pq[1..N]中，pq[0]没有使用
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>public</span> <span class=nf>MaxPQ</span><span class=o>(</span><span class=kt>int</span> <span class=n>maxN</span><span class=o>){</span> <span class=n>pq</span> <span class=o>=</span> <span class=o>(</span><span class=n>Key</span><span class=o>[])</span> <span class=k>new</span> <span class=n>Comparable</span><span class=o>[</span><span class=n>maxN</span><span class=o>+</span><span class=mi>1</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>insert</span><span class=o>(</span><span class=n>Key</span> <span class=n>v</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>pq</span><span class=o>[++</span><span class=n>N</span><span class=o>]</span> <span class=o>=</span> <span class=n>v</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>swim</span><span class=o>(</span><span class=n>N</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Key</span> <span class=nf>delMax</span><span class=o>()</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Key</span> <span class=n>max</span> <span class=o>=</span> <span class=n>pq</span><span class=o>[</span><span class=mi>1</span><span class=o>];</span> <span class=c1>// 从根结点得到最大元素
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>exch</span><span class=o>(</span><span class=mi>1</span><span class=o>,</span> <span class=n>N</span><span class=o>--);</span> <span class=c1>// 将其和最后一个结点交换
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>pq</span><span class=o>[</span><span class=n>N</span><span class=o>+</span><span class=mi>1</span><span class=o>]</span> <span class=o>=</span> <span class=kc>null</span><span class=o>;</span> <span class=c1>// 防止对象游离
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>sink</span><span class=o>(</span><span class=mi>1</span><span class=o>);</span> <span class=c1>// 恢复堆的有序性
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>return</span> <span class=n>max</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=245堆排序>2.4.5　堆排序</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kt>void</span> <span class=nf>sort</span><span class=o>(</span><span class=n>Comparable</span><span class=o>[]</span> <span class=n>a</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>N</span> <span class=o>=</span> <span class=n>a</span><span class=o>.</span><span class=na>length</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>k</span> <span class=o>=</span> <span class=n>N</span><span class=o>/</span><span class=mi>2</span><span class=o>;</span> <span class=n>k</span> <span class=o>&gt;=</span> <span class=mi>1</span><span class=o>;</span> <span class=n>k</span><span class=o>--)</span>
+</span></span><span class=line><span class=cl>        <span class=n>sink</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=n>k</span><span class=o>,</span> <span class=n>N</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=o>(</span><span class=n>N</span> <span class=o>&gt;</span> <span class=mi>1</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>exch</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=mi>1</span><span class=o>,</span> <span class=n>N</span><span class=o>--);</span>
+</span></span><span class=line><span class=cl>        <span class=n>sink</span><span class=o>(</span><span class=n>a</span><span class=o>,</span> <span class=mi>1</span><span class=o>,</span> <span class=n>N</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/images/read/algorithms/Image00438.jpg loading=lazy></p></section><footer class=article-footer><section class=article-tags><a href=/tags/%E7%AE%97%E6%B3%95/>算法</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span>最后更新于 Sep 25, 2023 11:15 +0800</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/post/read/algorithms/1/><div class=article-details><h2 class=article-title>第1章　基础</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2023 YZLC</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.20.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

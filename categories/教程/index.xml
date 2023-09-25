@@ -1,1 +1,397 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on YZLC</title><link>https://yzlc.github.io/categories/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 05 Feb 2021 14:18:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>出行清单</title><link>https://yzlc.github.io/post/note/daily/travel/</link><pubDate>Fri, 05 Feb 2021 14:18:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/travel/</guid><description>牙刷 剃须刀 surface 衣服 充电器 充电宝 钥匙 纸 水杯 身份证 毛巾 洗发水 沐浴露</description></item><item><title>电话卡换绑清单</title><link>https://yzlc.github.io/post/note/daily/sim/</link><pubDate>Fri, 05 Feb 2021 14:18:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/sim/</guid><description>支付宝 淘宝 微信 qq 京东，金融 icloud 爱奇艺 bilibili 战网 社保 银行卡 美团 饿了么 钉钉 学信网 12306 酷狗 51 工作OA、邮箱、APP 云闪付 天虹 朴朴 拼多多</description></item><item><title>好物推荐清单</title><link>https://yzlc.github.io/post/note/daily/buy/</link><pubDate>Fri, 05 Feb 2021 14:18:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/buy/</guid><description>个护 牙刷：飞利浦hx6511 洗发水：selsun 沐浴露：梦芭菲 保温杯：虎牌、印象、膳魔师 拖鞋：网易严选（EVA） 花洒：九牧 电器 键盘：ikbc</description></item><item><title>Markdown简易教程</title><link>https://yzlc.github.io/post/note/daily/markdown/</link><pubDate>Fri, 29 May 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/markdown/</guid><description>基础语法 标题 Markdown支持6种级别的标题，与html标签h1~h6对应。 1 2 3 4 5 6 # h1 ## h2 ### h3 #### h4 ##### h5 ###### h6 h1 h2 h3 h4 h5 h6 除此之外，Ma</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>教程 on YZLC</title><link>https://yzlc.github.io/categories/%E6%95%99%E7%A8%8B/</link><description>Recent content in 教程 on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 05 Feb 2021 14:18:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/categories/%E6%95%99%E7%A8%8B/index.xml" rel="self" type="application/rss+xml"/><item><title>出行清单</title><link>https://yzlc.github.io/post/note/daily/travel/</link><pubDate>Fri, 05 Feb 2021 14:18:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/travel/</guid><description>&lt;ul>
+&lt;li>牙刷&lt;/li>
+&lt;li>剃须刀&lt;/li>
+&lt;li>surface&lt;/li>
+&lt;li>衣服&lt;/li>
+&lt;li>充电器&lt;/li>
+&lt;li>充电宝&lt;/li>
+&lt;li>钥匙&lt;/li>
+&lt;li>纸&lt;/li>
+&lt;li>水杯&lt;/li>
+&lt;li>身份证&lt;/li>
+&lt;li>毛巾&lt;/li>
+&lt;li>洗发水&lt;/li>
+&lt;li>沐浴露&lt;/li>
+&lt;/ul></description></item><item><title>电话卡换绑清单</title><link>https://yzlc.github.io/post/note/daily/sim/</link><pubDate>Fri, 05 Feb 2021 14:18:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/sim/</guid><description>&lt;ul>
+&lt;li>支付宝&lt;/li>
+&lt;li>淘宝&lt;/li>
+&lt;li>微信&lt;/li>
+&lt;li>qq&lt;/li>
+&lt;li>京东，金融&lt;/li>
+&lt;li>icloud&lt;/li>
+&lt;li>爱奇艺&lt;/li>
+&lt;li>bilibili&lt;/li>
+&lt;li>战网&lt;/li>
+&lt;li>社保&lt;/li>
+&lt;li>银行卡&lt;/li>
+&lt;li>美团&lt;/li>
+&lt;li>饿了么&lt;/li>
+&lt;li>钉钉&lt;/li>
+&lt;li>学信网&lt;/li>
+&lt;li>12306&lt;/li>
+&lt;li>酷狗&lt;/li>
+&lt;li>51&lt;/li>
+&lt;li>工作OA、邮箱、APP&lt;/li>
+&lt;li>云闪付&lt;/li>
+&lt;li>天虹&lt;/li>
+&lt;li>朴朴&lt;/li>
+&lt;li>拼多多&lt;/li>
+&lt;/ul></description></item><item><title>好物推荐清单</title><link>https://yzlc.github.io/post/note/daily/buy/</link><pubDate>Fri, 05 Feb 2021 14:18:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/buy/</guid><description>&lt;h2 id="个护">个护&lt;/h2>
+&lt;ul>
+&lt;li>牙刷：飞利浦hx6511&lt;/li>
+&lt;li>洗发水：selsun&lt;/li>
+&lt;li>沐浴露：梦芭菲&lt;/li>
+&lt;li>保温杯：虎牌、印象、膳魔师&lt;/li>
+&lt;li>拖鞋：网易严选（EVA）&lt;/li>
+&lt;li>花洒：九牧&lt;/li>
+&lt;/ul>
+&lt;h2 id="电器">电器&lt;/h2>
+&lt;ul>
+&lt;li>键盘：ikbc&lt;/li>
+&lt;/ul>
+&lt;h2 id="厨房">厨房&lt;/h2>
+&lt;ul>
+&lt;li>砧板：吉川、朝日&lt;/li>
+&lt;li>刀叉：wmf&lt;/li>
+&lt;li>牛排：山姆&lt;/li>
+&lt;li>烤箱：海氏c40&lt;/li>
+&lt;li>油壶：乐扣自动开合（不漏油）&lt;/li>
+&lt;li>手套：丁腈手套&lt;/li>
+&lt;li>饭盒：icook圆形饭盒&lt;/li>
+&lt;li>搅菜：志高304&lt;/li>
+&lt;li>酒杯：spiegelau&lt;/li>
+&lt;li>餐具：锦牌品味骨瓷&lt;/li>
+&lt;li>菜刀：JCD-915、TM1013&lt;/li>
+&lt;li>铁锅：炊大皇铁娘子&lt;/li>
+&lt;/ul>
+&lt;h2 id="衣物">衣物&lt;/h2>
+&lt;ul>
+&lt;li>内裤：舒美棉&lt;/li>
+&lt;li>枕头：乳胶、记忆棉&lt;/li>
+&lt;li>床垫：喜临门（乳胶、椰棕）&lt;/li>
+&lt;li>床笠：60支棉&lt;/li>
+&lt;/ul>
+&lt;h2 id="医药">医药&lt;/h2>
+&lt;ul>
+&lt;li>痘痘：(1:1)夫西地酸xx+卤米松xx、维a酸xx&lt;/li>
+&lt;li>晔康蟑螂药&lt;/li>
+&lt;li>皮肤感染：派瑞松、稳健敷贴&lt;/li>
+&lt;/ul>
+&lt;h2 id="吃">吃&lt;/h2>
+&lt;ul>
+&lt;li>圣农热狗&lt;/li>
+&lt;/ul>
+&lt;h2 id="礼物">礼物&lt;/h2>
+&lt;ul>
+&lt;li>抱枕&lt;/li>
+&lt;li>水晶球&lt;/li>
+&lt;li>积木遥控车&lt;/li>
+&lt;li>潮玩摆件&lt;/li>
+&lt;/ul></description></item><item><title>Markdown简易教程</title><link>https://yzlc.github.io/post/note/daily/markdown/</link><pubDate>Fri, 29 May 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/daily/markdown/</guid><description>&lt;h2 id="基础语法">基础语法&lt;/h2>
+&lt;h3 id="标题">标题&lt;/h3>
+&lt;p>Markdown支持6种级别的标题，与html标签h1~h6对应。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"># h1
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">## h2
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">### h3
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#### h4
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">##### h5
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">###### h6
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="h1">h1&lt;/h1>
+&lt;h2 id="h2">h2&lt;/h2>
+&lt;h3 id="h3">h3&lt;/h3>
+&lt;h4 id="h4">h4&lt;/h4>
+&lt;h5 id="h5">h5&lt;/h5>
+&lt;h6 id="h6">h6&lt;/h6>
+&lt;p>除此之外，Markdown支持另一种标题展现形式。&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">一级标题
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">===
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">二级标题
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="一级标题">一级标题&lt;/h1>
+&lt;h2 id="二级标题">二级标题&lt;/h2>
+&lt;h3 id="高亮显示">高亮显示&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;gt; 这段文字高亮显示
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>这段文字高亮显示&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="插入链接或图片">插入链接或图片&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[点击跳转至首页](https://yzlc.github.io &amp;#34;首页&amp;#34;)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">![图片](https://yzlc.github.io/favicon.ico &amp;#34;图片&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://yzlc.github.io" title="首页"
+target="_blank" rel="noopener"
+>点击跳转至首页&lt;/a>&lt;br>
+&lt;img src="https://yzlc.github.io/favicon.ico"
+loading="lazy"
+alt="图片"
+>&lt;br>
+如下给图片加上超链接的代码：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[![yzlc](&amp;#34;首页Logo&amp;#34;)](https://yzlc.github.io &amp;#34;首页&amp;#34;)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;a class="link" href="https://yzlc.github.io" target="_blank" rel="noopener"
+>&lt;img src="https://yzlc.github.io/favicon.ico"
+loading="lazy"
+alt="yzlc"
+>&lt;/a>&lt;/p>
+&lt;h3 id="列表">列表&lt;/h3>
+&lt;p>Markdown支持有序列表和无序列表两种形式：&lt;/p>
+&lt;ul>
+&lt;li>无序列表使用*或+或-标识，多级列表就是多加一个tab。&lt;/li>
+&lt;li>有序列表使用数字加.标识&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">+ 蔡徐坤
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 唱跳
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - Rap
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> - 篮球
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1. 蔡徐坤
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 1. 唱跳
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2. Rap
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 3. 篮球
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>蔡徐坤
+&lt;ul>
+&lt;li>唱跳&lt;/li>
+&lt;li>Rap&lt;/li>
+&lt;li>篮球&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>蔡徐坤
+&lt;ol>
+&lt;li>唱跳&lt;/li>
+&lt;li>Rap&lt;/li>
+&lt;li>篮球&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;p>Markdown只关注第一个列表代码的数字编号，例如第一个编号是3，第二个编号为4，指定了第一个编号，后面的编号错误也没有关系。&lt;/p>
+&lt;h3 id="缩进">缩进&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">&amp;gt;一级
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;gt;&amp;gt;二级
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&amp;gt;&amp;gt;&amp;gt;三级
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>一级&lt;/p>
+&lt;blockquote>
+&lt;p>二级&lt;/p>
+&lt;blockquote>
+&lt;p>三级&lt;/p>
+&lt;/blockquote>
+&lt;/blockquote>
+&lt;/blockquote>
+&lt;h3 id="分隔线">分隔线&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">***
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">---
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;hr>
+&lt;hr>
+&lt;p>产生分隔线的语法要求比较松，符号之间添加空格也可以。&lt;/p>
+&lt;h3 id="强调">强调&lt;/h3>
+&lt;p>文字强调使用反斜杠, 使用单一符号标记的效果是斜体，使用两个符号标记的效果是加粗&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">`文字强调`
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">*斜体*
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">_斜体_
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">**加粗**
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">__加粗__
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>文字强调&lt;/code>&lt;br>
+&lt;em>斜体&lt;/em>&lt;br>
+&lt;em>斜体&lt;/em>&lt;br>
+&lt;strong>加粗&lt;/strong>&lt;br>
+&lt;strong>加粗&lt;/strong>&lt;/p>
+&lt;h2 id="高级用法">高级用法&lt;/h2>
+&lt;h3 id="插入代码块">插入代码块&lt;/h3>
+&lt;p>插入代码块需要至少两个以上反引号进行包裹。&lt;br>
+```
+function(){
+console.log(&amp;ldquo;Chicken you are too beautiful!&amp;rdquo;);
+}
+```&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">function(){
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> console.log(&amp;#34;Chicken you are too beautiful!&amp;#34;);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="插入表格">插入表格&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">表头|条目一|条目二
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">:---:|:---:|:---:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">项目|项目一|项目二
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">表头&lt;/th>
+&lt;th style="text-align:center">条目一&lt;/th>
+&lt;th style="text-align:center">条目二&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">项目&lt;/td>
+&lt;td style="text-align:center">项目一&lt;/td>
+&lt;td style="text-align:center">项目二&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="其他">其他&lt;/h2>
+&lt;h3 id="特殊符号处理">特殊符号处理&lt;/h3>
+&lt;p>如下字符需要加反斜杠转译：&lt;br>
+\ 反斜线&lt;br>
+` 反引号&lt;br>
+* 星号&lt;br>
+_ 底线&lt;br>
+{} 花括号&lt;br>
+[] 方括号&lt;br>
+() 括弧&lt;br>
+# 井字号&lt;br>
++ 加号&lt;br>
+- 减号&lt;br>
+. 英文句点&lt;br>
+! 惊叹号&lt;/p>
+&lt;h3 id="换行">换行&lt;/h3>
+&lt;p>需要在结尾处添加两个以上空格。&lt;/p>
+&lt;h3 id="删除线">删除线&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">~~要删除的文字~~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;del>要删除的文字&lt;/del>&lt;/p>
+&lt;h3 id="单行文本和多行文本">单行文本和多行文本&lt;/h3>
+&lt;p>在文字前添加一个tab&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> 多行文本
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 多行文本
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;pre>&lt;code>多行文本
+多行文本
+&lt;/code>&lt;/pre>
+&lt;h3 id="表情">表情&lt;/h3>
+&lt;p>gif表情地址：https://webfx.com/tools/emoji-cheat-sheet/&lt;br>
+&lt;code>:smile&lt;/code>:&lt;br>
+😄&lt;/p>
+&lt;h3 id="勾选选项">勾选选项&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">- [ ] 不勾选
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">- [x] 勾选
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;input disabled="" type="checkbox"> 不勾选&lt;/li>
+&lt;li>&lt;input checked="" disabled="" type="checkbox"> 勾选&lt;/li>
+&lt;/ul>
+&lt;h3 id="网址">网址&lt;/h3>
+&lt;p>在Markdown输入的链接均显示为网页链接样式。&lt;br>
+&lt;a class="link" href="https://www.yzlc.github.io" target="_blank" rel="noopener"
+>www.yzlc.github.io&lt;/a>&lt;/p></description></item></channel></rss>

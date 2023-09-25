@@ -1,1 +1,557 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>spring on YZLC</title><link>https://yzlc.github.io/tags/spring/</link><description>Recent content in spring on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 10 Dec 2020 18:58:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml"/><item><title>spring</title><link>https://yzlc.github.io/post/read/spring/spring/</link><pubDate>Thu, 10 Dec 2020 18:58:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/spring/spring/</guid><description>AOP 动态代理 有接口：jdk，代理接口实现类 无接口：cglib，代理子类 事务 propagation REQUIRED（default）：有则追加，无则创建 REQUIR</description></item><item><title>springIOC</title><link>https://yzlc.github.io/post/read/spring/ioc/</link><pubDate>Mon, 07 Dec 2020 22:08:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/spring/ioc/</guid><description>参考 Spring分析 请别再问Spring Bean的生命周期了！ 思想：把对象创建和调用交给spring管理，降低耦合 实现：配置解析-&amp;gt;工</description></item><item><title>spring Security</title><link>https://yzlc.github.io/post/note/dev/java/spring/security/</link><pubDate>Thu, 06 Aug 2020 15:01:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/dev/java/spring/security/</guid><description>maven 1 2 3 4 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-security&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; config 1 2 3 4 5 6 7 8 9 10 @Configuration public class WebSecurityConfig extends WebSecurityConfigurerAdapter { @Override protected void configure(HttpSecurity http) throws Exception { http.authorizeRequests() .anyRequest().authenticated() .and().formLogin().loginProcessingUrl(&amp;#34;/login&amp;#34;).permitAll() .and().csrf().disable(); } } 1 2 spring.security.user.name=admin spring.security.user.password={bcrypt}$2a$10$io1baOv5SiP2G0DR.Dye.OQjtj1W8Aba31pGecyYdxgoXLkLjdfm.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>spring on YZLC</title><link>https://yzlc.github.io/tags/spring/</link><description>Recent content in spring on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 10 Dec 2020 18:58:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/spring/index.xml" rel="self" type="application/rss+xml"/><item><title>spring</title><link>https://yzlc.github.io/post/read/spring/spring/</link><pubDate>Thu, 10 Dec 2020 18:58:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/spring/spring/</guid><description>&lt;h2 id="aop">AOP&lt;/h2>
+&lt;p>动态代理&lt;/p>
+&lt;ul>
+&lt;li>有接口：jdk，代理接口实现类&lt;/li>
+&lt;li>无接口：cglib，代理子类&lt;/li>
+&lt;/ul>
+&lt;h2 id="事务">事务&lt;/h2>
+&lt;p>propagation&lt;/p>
+&lt;ul>
+&lt;li>REQUIRED（default）：有则追加，无则创建&lt;/li>
+&lt;li>REQUIRES_NEW：创建&lt;/li>
+&lt;/ul>
+&lt;h2 id="webflux">webflux&lt;/h2>
+&lt;blockquote>
+&lt;p>异步：调用者发送请求，不等待回应就做事情&lt;br>
+非阻塞：被调用者收到请求，先反馈再做事情&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="响应式编程">响应式编程&lt;/h3>
+&lt;blockquote>
+&lt;p>观察者模式，jdk8：Observale，jdk9：Flow&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="reactor">Reactor&lt;/h4>
+&lt;blockquote>
+&lt;p>Reactive规范&lt;/p>
+&lt;/blockquote>
+&lt;p>核心类：发布者Mono（返回0或1个元素）、Flux（返回N个元素）实现Publisher接口。发出三种数据信号：元素值，终止信号（错误、完成）&lt;/p></description></item><item><title>springIOC</title><link>https://yzlc.github.io/post/read/spring/ioc/</link><pubDate>Mon, 07 Dec 2020 22:08:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/spring/ioc/</guid><description>&lt;p>参考&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://developer.ibm.com/zh/articles/j-lo-spring-principle/" target="_blank" rel="noopener"
+>Spring分析&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.jianshu.com/p/1dec08d290c1" target="_blank" rel="noopener"
+>请别再问Spring Bean的生命周期了！&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>思想：把对象创建和调用交给spring管理，降低耦合&lt;/p>
+&lt;p>实现：配置解析-&amp;gt;工厂-&amp;gt;创建对象(反射)-&amp;gt;DI(注入属性)&lt;/p>
+&lt;h2 id="beans演员">beans（演员）&lt;/h2>
+&lt;p>创建&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image003.png"
+loading="lazy"
+>&lt;/p>
+&lt;ul>
+&lt;li>BeanFactory：IOC容器基本实现，懒加载&lt;/li>
+&lt;li>ListableBeanFactory：Bean是可列表的&lt;/li>
+&lt;li>HierarchicalBeanFactory：Bean有继承关系&lt;/li>
+&lt;li>AutowireCapableBeanFactory：Bean的自动装配规则&lt;/li>
+&lt;li>DefaultListableBeanFactory：默认实现&lt;/li>
+&lt;/ul>
+&lt;p>定义&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image004.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>解析&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image005.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="context舞台">context（舞台）&lt;/h2>
+&lt;blockquote>
+&lt;p>给Spring提供运行时的环境（Ioc容器），用以保存各个对象的状态。整合了大部分功能&lt;/p>
+&lt;/blockquote>
+&lt;p>Context类图&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image006.png"
+loading="lazy"
+>&lt;/p>
+&lt;ul>
+&lt;li>ResourceLoader：访问外部资源&lt;/li>
+&lt;li>ConfigurableApplicationContext：可动态添加或修改已有的配置信息
+&lt;ul>
+&lt;li>AbstractRefreshableApplicationContext（常用）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>作用&lt;/p>
+&lt;ul>
+&lt;li>标识应用环境&lt;/li>
+&lt;li>创建Bean对象&lt;/li>
+&lt;li>保存对象关系表&lt;/li>
+&lt;li>捕获各种事件&lt;/li>
+&lt;/ul>
+&lt;h2 id="core道具">core（道具）&lt;/h2>
+&lt;blockquote>
+&lt;p>定义了资源的访问方式&lt;/p>
+&lt;/blockquote>
+&lt;p>Resource类图&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image007.png"
+loading="lazy"
+>&lt;/p>
+&lt;p>Context和Resource类关系图&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image008.png"
+loading="lazy"
+>&lt;/p>
+&lt;h2 id="ioc">ioc&lt;/h2>
+&lt;p>&lt;code>AbstractApplicationContext&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">refresh&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="kd">throws&lt;/span> &lt;span class="n">BeansException&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">IllegalStateException&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">synchronized&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">startupShutdownMonitor&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Prepare this context for refreshing.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">prepareRefresh&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Tell the subclass to refresh the internal bean factory.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">ConfigurableListableBeanFactory&lt;/span> &lt;span class="n">beanFactory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">obtainFreshBeanFactory&lt;/span>&lt;span class="o">();&lt;/span>&lt;span class="c1">//创建BeanFactory
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Prepare the bean factory for use in this context.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">prepareBeanFactory&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//配置BeanFactory：添加一些Spring本身需要的一些工具类
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Allows post-processing of the bean factory in context subclasses.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">postProcessBeanFactory&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Invoke factory processors registered as beans in the context.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">invokeBeanFactoryPostProcessors&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//对已经构建的 BeanFactory 的配置做修改（实现BeanFactoryPostProcessor接口）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Register bean processors that intercept bean creation.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">registerBeanPostProcessors&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//对以后再创建 Bean 的实例对象时添加一些自定义的操作（实现BeanPostProcessor接口）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Initialize message source for this context.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">initMessageSource&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Initialize event multicaster for this context.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">initApplicationEventMulticaster&lt;/span>&lt;span class="o">();&lt;/span>&lt;span class="c1">//初始化监听事件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Initialize other special beans in specific context subclasses.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">onRefresh&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Check for listener beans and register them.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">registerListeners&lt;/span>&lt;span class="o">();&lt;/span>&lt;span class="c1">//对系统的其他监听者的注册（实现ApplicationListener接口）
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Instantiate all remaining (non-lazy-init) singletons.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">finishBeanFactoryInitialization&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//创建 Bean 实例并构建 Bean 的关系网
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Last step: publish corresponding event.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">finishRefresh&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span> &lt;span class="k">catch&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">BeansException&lt;/span> &lt;span class="n">ex&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Destroy already created singletons to avoid dangling resources.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">destroyBeans&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Reset &amp;#39;active&amp;#39; flag.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">cancelRefresh&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">ex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Propagate exception to caller.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">throw&lt;/span> &lt;span class="n">ex&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span> &lt;span class="k">finally&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Reset common introspection caches in Spring&amp;#39;s core, since we
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// might not ever need metadata for singleton beans anymore...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">resetCommonCaches&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="构建beanfactory">构建BeanFactory&lt;/h3>
+&lt;p>&lt;code>AbstractRefreshableApplicationContext&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">protected&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">refreshBeanFactory&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="kd">throws&lt;/span> &lt;span class="n">BeansException&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">hasBeanFactory&lt;/span>&lt;span class="o">())&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">destroyBeans&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">closeBeanFactory&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">DefaultListableBeanFactory&lt;/span> &lt;span class="n">beanFactory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createBeanFactory&lt;/span>&lt;span class="o">();&lt;/span>&lt;span class="c1">//BeanFactory的原始对象
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">beanFactory&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">setSerializationId&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">getId&lt;/span>&lt;span class="o">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">customizeBeanFactory&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">loadBeanDefinitions&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanFactory&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//加载、解析Bean的定义
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">beanFactory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">beanFactory&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span> &lt;span class="k">catch&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">IOException&lt;/span> &lt;span class="n">ex&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">throw&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">ApplicationContextException&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;I/O error parsing bean definition source for &amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">getDisplayName&lt;/span>&lt;span class="o">(),&lt;/span> &lt;span class="n">ex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>DefaultListableBeanFactory&lt;/code>类图&lt;/p>
+&lt;p>&lt;img src="https://yzlc.github.io/images/read/spring/image009.png"
+loading="lazy"
+>&lt;/p>
+&lt;h3 id="bean的实例化">Bean的实例化&lt;/h3>
+&lt;p>&lt;code>DefaultListableBeanFactory&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">preInstantiateSingletons&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="kd">throws&lt;/span> &lt;span class="n">BeansException&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Iterate over a copy to allow for init methods which in turn register new bean definitions.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// While this may not be part of the regular factory bootstrap, it does otherwise work fine.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">List&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">String&lt;/span>&lt;span class="o">&amp;gt;&lt;/span> &lt;span class="n">beanNames&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="k">new&lt;/span> &lt;span class="n">ArrayList&lt;/span>&lt;span class="o">&amp;lt;&amp;gt;(&lt;/span>&lt;span class="k">this&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">beanDefinitionNames&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Trigger initialization of all non-lazy singleton beans...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">String&lt;/span> &lt;span class="n">beanName&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="n">beanNames&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">RootBeanDefinition&lt;/span> &lt;span class="n">bd&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getMergedLocalBeanDefinition&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(!&lt;/span>&lt;span class="n">bd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">isAbstract&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">bd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">isSingleton&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="o">!&lt;/span>&lt;span class="n">bd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">isLazyInit&lt;/span>&lt;span class="o">())&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">isFactoryBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">))&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Object&lt;/span> &lt;span class="n">bean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">getBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">FACTORY_BEAN_PREFIX&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">bean&lt;/span> &lt;span class="k">instanceof&lt;/span> &lt;span class="n">FactoryBean&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">FactoryBean&lt;/span>&lt;span class="o">&amp;lt;?&amp;gt;&lt;/span> &lt;span class="n">factory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">FactoryBean&lt;/span>&lt;span class="o">&amp;lt;?&amp;gt;)&lt;/span> &lt;span class="n">bean&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">boolean&lt;/span> &lt;span class="n">isEagerInit&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">System&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getSecurityManager&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">null&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">factory&lt;/span> &lt;span class="k">instanceof&lt;/span> &lt;span class="n">SmartFactoryBean&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">isEagerInit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">AccessController&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">doPrivileged&lt;/span>&lt;span class="o">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>&lt;span class="n">PrivilegedAction&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="n">Boolean&lt;/span>&lt;span class="o">&amp;gt;)&lt;/span> &lt;span class="o">((&lt;/span>&lt;span class="n">SmartFactoryBean&lt;/span>&lt;span class="o">&amp;lt;?&amp;gt;)&lt;/span> &lt;span class="n">factory&lt;/span>&lt;span class="o">)::&lt;/span>&lt;span class="n">isEagerInit&lt;/span>&lt;span class="o">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getAccessControlContext&lt;/span>&lt;span class="o">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">isEagerInit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">factory&lt;/span> &lt;span class="k">instanceof&lt;/span> &lt;span class="n">SmartFactoryBean&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">((&lt;/span>&lt;span class="n">SmartFactoryBean&lt;/span>&lt;span class="o">&amp;lt;?&amp;gt;)&lt;/span> &lt;span class="n">factory&lt;/span>&lt;span class="o">).&lt;/span>&lt;span class="na">isEagerInit&lt;/span>&lt;span class="o">());&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">isEagerInit&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">getBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//创建实例
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>AbstractAutowireCapableBeanFactory&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">protected&lt;/span> &lt;span class="n">Object&lt;/span> &lt;span class="nf">doCreateBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">String&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">RootBeanDefinition&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nd">@Nullable&lt;/span> &lt;span class="n">Object&lt;/span>&lt;span class="o">[]&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="kd">throws&lt;/span> &lt;span class="n">BeanCreationException&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Instantiate the bean.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">BeanWrapper&lt;/span> &lt;span class="n">instanceWrapper&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">instanceWrapper&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">instanceWrapper&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">createBeanInstance&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//实例化阶段
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Initialize the bean instance.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">Object&lt;/span> &lt;span class="n">exposedObject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">bean&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">populateBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">instanceWrapper&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//属性赋值阶段
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">exposedObject&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">initializeBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">exposedObject&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//初始化阶段
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="扩展点">扩展点&lt;/h2>
+&lt;h3 id="第一大类影响多个bean的接口">第一大类：影响多个Bean的接口&lt;/h3>
+&lt;h4 id="instantiationawarebeanpostprocessor">&lt;code>InstantiationAwareBeanPostProcessor&lt;/code>&lt;/h4>
+&lt;blockquote>
+&lt;p>作用于实例化阶段的前后&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">protected&lt;/span> &lt;span class="n">Object&lt;/span> &lt;span class="nf">createBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">String&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">RootBeanDefinition&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nd">@Nullable&lt;/span> &lt;span class="n">Object&lt;/span>&lt;span class="o">[]&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="kd">throws&lt;/span> &lt;span class="n">BeanCreationException&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">Object&lt;/span> &lt;span class="n">bean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">resolveBeforeInstantiation&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">mbdToUse&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">// postProcessBeforeInstantiation方法调用点
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">bean&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">null&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">bean&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Object&lt;/span> &lt;span class="n">beanInstance&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">doCreateBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">mbdToUse&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">args&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">logger&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">isTraceEnabled&lt;/span>&lt;span class="o">())&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">logger&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">trace&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;Finished creating instance of bean &amp;#39;&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">beanName&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s">&amp;#34;&amp;#39;&amp;#34;&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">beanInstance&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">protected&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">populateBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">String&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">RootBeanDefinition&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nd">@Nullable&lt;/span> &lt;span class="n">BeanWrapper&lt;/span> &lt;span class="n">bw&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// Give any InstantiationAwareBeanPostProcessors the opportunity to modify the
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// state of the bean before properties are set. This can be used, for example,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// to support styles of field injection.
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="kt">boolean&lt;/span> &lt;span class="n">continueWithPropertyPopulation&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(!&lt;/span>&lt;span class="n">mbd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">isSynthetic&lt;/span>&lt;span class="o">()&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="n">hasInstantiationAwareBeanPostProcessors&lt;/span>&lt;span class="o">())&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">BeanPostProcessor&lt;/span> &lt;span class="n">bp&lt;/span> &lt;span class="o">:&lt;/span> &lt;span class="n">getBeanPostProcessors&lt;/span>&lt;span class="o">())&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">bp&lt;/span> &lt;span class="k">instanceof&lt;/span> &lt;span class="n">InstantiationAwareBeanPostProcessor&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">InstantiationAwareBeanPostProcessor&lt;/span> &lt;span class="n">ibp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">(&lt;/span>&lt;span class="n">InstantiationAwareBeanPostProcessor&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="n">bp&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">(!&lt;/span>&lt;span class="n">ibp&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">postProcessAfterInstantiation&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">bw&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">getWrappedInstance&lt;/span>&lt;span class="o">(),&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">))&lt;/span> &lt;span class="o">{&lt;/span>&lt;span class="c1">// postProcessAfterInstantiation方法调用点
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">continueWithPropertyPopulation&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="beanpostprocessor">&lt;code>BeanPostProcessor&lt;/code>&lt;/h4>
+&lt;blockquote>
+&lt;p>作用于初始化阶段的前后&lt;/p>
+&lt;/blockquote>
+&lt;p>执行顺序：PriorityOrdered &amp;gt; Ordered&lt;/p>
+&lt;h3 id="第二大类只调用一次的接口">第二大类：只调用一次的接口&lt;/h3>
+&lt;h4 id="aware">Aware&lt;/h4>
+&lt;blockquote>
+&lt;p>让我们能够拿到Spring容器中的一些资源&lt;/p>
+&lt;/blockquote>
+&lt;p>Aware Group1&lt;/p>
+&lt;ul>
+&lt;li>BeanNameAware&lt;/li>
+&lt;li>BeanClassLoaderAware&lt;/li>
+&lt;li>BeanFactoryAware&lt;/li>
+&lt;/ul>
+&lt;p>Aware Group2&lt;/p>
+&lt;ul>
+&lt;li>EnvironmentAware&lt;/li>
+&lt;li>EmbeddedValueResolverAware：实现该接口能够获取Spring EL解析器，用户的自定义注解需要支持spel表达式的时候使用&lt;/li>
+&lt;li>ApplicationContextAware(ResourceLoaderAware\ApplicationEventPublisherAware\MessageSourceAware)&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 初始化阶段
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">protected&lt;/span> &lt;span class="n">Object&lt;/span> &lt;span class="nf">initializeBean&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="kd">final&lt;/span> &lt;span class="n">String&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="kd">final&lt;/span> &lt;span class="n">Object&lt;/span> &lt;span class="n">bean&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nd">@Nullable&lt;/span> &lt;span class="n">RootBeanDefinition&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">invokeAwareMethods&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">bean&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">// Group1中的三个Bean开头的Aware
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">Object&lt;/span> &lt;span class="n">wrappedBean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">bean&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 这里调用的是Group2中的几个Aware，
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 而实质上这里就是前面所说的BeanPostProcessor的调用点！
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="c1">// 这里是通过BeanPostProcessor（ApplicationContextAwareProcessor）实现的。
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">wrappedBean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">applyBeanPostProcessorsBeforeInitialization&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">wrappedBean&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">invokeInitMethods&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">beanName&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">wrappedBean&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">mbd&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">// InitializingBean调用点
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">wrappedBean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">applyBeanPostProcessorsAfterInitialization&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">wrappedBean&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="n">beanName&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">// BeanPostProcessor的另一个调用点
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">wrappedBean&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h4 id="生命周期接口">生命周期接口&lt;/h4>
+&lt;p>&lt;code>InitializingBean&lt;/code>：对应生命周期的初始化阶段&lt;/p>
+&lt;p>&lt;code>DisposableBean&lt;/code>：对应生命周期的销毁阶段，以ConfigurableApplicationContext#close()方法作为入口&lt;/p></description></item><item><title>spring Security</title><link>https://yzlc.github.io/post/note/dev/java/spring/security/</link><pubDate>Thu, 06 Aug 2020 15:01:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/dev/java/spring/security/</guid><description>&lt;h2 id="maven">maven&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;groupId&amp;gt;&lt;/span>org.springframework.boot&lt;span class="nt">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;artifactId&amp;gt;&lt;/span>spring-boot-starter-security&lt;span class="nt">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="config">config&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@Configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">public&lt;/span> &lt;span class="kd">class&lt;/span> &lt;span class="nc">WebSecurityConfig&lt;/span> &lt;span class="kd">extends&lt;/span> &lt;span class="n">WebSecurityConfigurerAdapter&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nd">@Override&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">protected&lt;/span> &lt;span class="kt">void&lt;/span> &lt;span class="nf">configure&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">HttpSecurity&lt;/span> &lt;span class="n">http&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="kd">throws&lt;/span> &lt;span class="n">Exception&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">http&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="na">authorizeRequests&lt;/span>&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="na">anyRequest&lt;/span>&lt;span class="o">().&lt;/span>&lt;span class="na">authenticated&lt;/span>&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="na">and&lt;/span>&lt;span class="o">().&lt;/span>&lt;span class="na">formLogin&lt;/span>&lt;span class="o">().&lt;/span>&lt;span class="na">loginProcessingUrl&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s">&amp;#34;/login&amp;#34;&lt;/span>&lt;span class="o">).&lt;/span>&lt;span class="na">permitAll&lt;/span>&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">.&lt;/span>&lt;span class="na">and&lt;/span>&lt;span class="o">().&lt;/span>&lt;span class="na">csrf&lt;/span>&lt;span class="o">().&lt;/span>&lt;span class="na">disable&lt;/span>&lt;span class="o">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-properties" data-lang="properties">&lt;span class="line">&lt;span class="cl">&lt;span class="na">spring.security.user.name&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">admin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="na">spring.security.user.password&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">{bcrypt}$2a$10$io1baOv5SiP2G0DR.Dye.OQjtj1W8Aba31pGecyYdxgoXLkLjdfm.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

@@ -1,1 +1,1116 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>csapp on YZLC</title><link>https://yzlc.github.io/tags/csapp/</link><description>Recent content in csapp on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 29 Apr 2020 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/csapp/index.xml" rel="self" type="application/rss+xml"/><item><title>第5章 优化程序性能</title><link>https://yzlc.github.io/post/read/csapp/5/</link><pubDate>Wed, 29 Apr 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/5/</guid><description>5.1 优化编译器的能力和局限性 5.2 表示程序性能 CPE(Cycles Per Element):每元素的周期数 循环展开(loop unrolling) 举例:前置和,每次迭代计算两个元素 5.3 程序示例</description></item><item><title>3.7 过程</title><link>https://yzlc.github.io/post/read/csapp/3.7/</link><pubDate>Tue, 31 Dec 2019 12:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/3.7/</guid><description>3.7 过程 3.7.1 运行时栈 x86-64的栈向低地址方向增长，栈指针%rsp指向栈顶元素。减小栈指针分配空间，增加栈指针释放空间 当x86-64过程需要的</description></item><item><title>3.6 控制</title><link>https://yzlc.github.io/post/read/csapp/3.6/</link><pubDate>Tue, 31 Dec 2019 11:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/3.6/</guid><description>3.6 控制 3.6.1 条件码 CF：进位。无符号溢出 ZF：零 SF：符号。负数 OF：溢出。补码溢出 指令 基于 描述 CMP S1，S2 S2-S1 比较 TEST S1，S2 S1&amp;amp;S2 测试 3.6.2 访问条件码</description></item><item><title>第3章 程序的机器级表示</title><link>https://yzlc.github.io/post/read/csapp/3/</link><pubDate>Tue, 31 Dec 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/3/</guid><description>3.2 程序编码 3.2.1 机器级代码 程序计数器（PC，在x86-64中用%rip表示）：给出要执行的下一条指令在内存中的地址 整数寄存器：包含16个命名位置</description></item><item><title>第2章 信息的表示和处理</title><link>https://yzlc.github.io/post/read/csapp/2/</link><pubDate>Mon, 30 Dec 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/2/</guid><description>2.1 信息存储 2.1.1 十六进制表示法 二进制 (i+4j,{i∈[0,3],j个0})&amp;lt;——&amp;gt;(4位一拆) 十六进制 (除16)&amp;lt;——&amp;gt</description></item><item><title>第1章 计算机系统漫游</title><link>https://yzlc.github.io/post/read/csapp/1/</link><pubDate>Sun, 29 Dec 2019 10:32:28 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/1/</guid><description>1.9.1 Amdahl&amp;rsquo;s law（阿姆达尔定律） 要想显著加速整个系统，必须提升全系统中相当大的部分的速度 若系统执行某应用程序需要时间为$T_{old}$。 假设系统</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>csapp on YZLC</title><link>https://yzlc.github.io/tags/csapp/</link><description>Recent content in csapp on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 29 Apr 2020 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/csapp/index.xml" rel="self" type="application/rss+xml"/><item><title>第5章 优化程序性能</title><link>https://yzlc.github.io/post/read/csapp/5/</link><pubDate>Wed, 29 Apr 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/5/</guid><description>&lt;h2 id="51-优化编译器的能力和局限性">5.1 优化编译器的能力和局限性&lt;/h2>
+&lt;h2 id="52-表示程序性能">5.2 表示程序性能&lt;/h2>
+&lt;ul>
+&lt;li>CPE(Cycles Per Element):每元素的周期数&lt;/li>
+&lt;li>循环展开(loop unrolling) 举例:前置和,每次迭代计算两个元素&lt;/li>
+&lt;/ul>
+&lt;h2 id="53-程序示例">5.3 程序示例&lt;/h2>
+&lt;h2 id="54-消除循环的低效率">5.4 消除循环的低效率&lt;/h2>
+&lt;h2 id="55-减少过程调用">5.5 减少过程调用&lt;/h2>
+&lt;h2 id="56-消除不必要的内存引用">5.6 消除不必要的内存引用&lt;/h2>
+&lt;h2 id="57-理解现代处理器">5.7 理解现代处理器&lt;/h2>
+&lt;ul>
+&lt;li>延迟界限(latency bound):一系列操作必须按严格顺序执行.因为在下一条指令开始前,这条指令必须结束&lt;/li>
+&lt;li>吞吐量界限(throughput bound):原始计算能力&lt;/li>
+&lt;/ul>
+&lt;h3 id="571-整体操作">5.7.1 整体操作&lt;/h3>
+&lt;ul>
+&lt;li>指令控制单元(Instruction Control Unit,ICU):读指令并根据指令序列生成一组针对数据的基本操作&lt;/li>
+&lt;li>执行单元(Execution Unit,EU):执行操作
+&lt;img src="https://yzlc.github.io/images/read/csapp/5-11.png"
+loading="lazy"
+>&lt;/li>
+&lt;/ul>
+&lt;h3 id="572-功能单元的性能">5.7.2 功能单元的性能&lt;/h3>
+&lt;h3 id="573-处理器操作的抽象模型">5.7.3 处理器操作的抽象模型&lt;/h3>
+&lt;h2 id="58-循环展开">5.8 循环展开&lt;/h2>
+&lt;h2 id="59-提高并行性">5.9 提高并行性&lt;/h2>
+&lt;h2 id="510-优化合并代码的结果小结">5.10 优化合并代码的结果小结&lt;/h2>
+&lt;h2 id="511-一些限制因素">5.11 一些限制因素&lt;/h2>
+&lt;h2 id="512-理解内存性能">5.12 理解内存性能&lt;/h2>
+&lt;h2 id="513-应用性能提高技术">5.13 应用:性能提高技术&lt;/h2>
+&lt;h2 id="514-确认和消除性能瓶颈">5.14 确认和消除性能瓶颈&lt;/h2></description></item><item><title>3.7 过程</title><link>https://yzlc.github.io/post/read/csapp/3.7/</link><pubDate>Tue, 31 Dec 2019 12:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/3.7/</guid><description>&lt;h2 id="37-过程">3.7 过程&lt;/h2>
+&lt;h3 id="371-运行时栈">3.7.1 运行时栈&lt;/h3>
+&lt;ul>
+&lt;li>x86-64的栈向低地址方向增长，栈指针%rsp指向栈顶元素。减小栈指针分配空间，增加栈指针释放空间&lt;/li>
+&lt;li>当x86-64过程需要的存储空间超出寄存器存放大小，就会在栈上分配空间（栈帧）&lt;/li>
+&lt;li>许多函数不需要栈帧（所有局部变量都保存在寄存器，不调用其他函数）（树结构中的叶子过程）&lt;/li>
+&lt;/ul>
+&lt;h3 id="372-转移控制">3.7.2 转移控制&lt;/h3>
+&lt;p>P-&amp;gt;Q：call push A（P指令后的地址），PC设为Q；ret pop A，把PC设为A&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>call Label&lt;/td>
+&lt;td>过程调用&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>call *Operand&lt;/td>
+&lt;td>过程调用&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ret&lt;/td>
+&lt;td>从过程调用中返回&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="373-数据传送">3.7.3 数据传送&lt;/h3>
+&lt;p>x86-64中，寄存器最多传递6个整型参数，超过部分栈传递&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>操作数大小（位）&lt;/th>
+&lt;th>参数数量1&lt;/th>
+&lt;th>2&lt;/th>
+&lt;th>3&lt;/th>
+&lt;th>4&lt;/th>
+&lt;th>5&lt;/th>
+&lt;th>6&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>64&lt;/td>
+&lt;td>%rdi&lt;/td>
+&lt;td>%rsi&lt;/td>
+&lt;td>%rdx&lt;/td>
+&lt;td>%rcx&lt;/td>
+&lt;td>%r8&lt;/td>
+&lt;td>%r9&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>32&lt;/td>
+&lt;td>%edi&lt;/td>
+&lt;td>%esi&lt;/td>
+&lt;td>%edx&lt;/td>
+&lt;td>%ecx&lt;/td>
+&lt;td>%r8d&lt;/td>
+&lt;td>%r9d&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>16&lt;/td>
+&lt;td>%di&lt;/td>
+&lt;td>%si&lt;/td>
+&lt;td>%dx&lt;/td>
+&lt;td>%cx&lt;/td>
+&lt;td>%r8w&lt;/td>
+&lt;td>%r9w&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>8&lt;/td>
+&lt;td>%dil&lt;/td>
+&lt;td>%sil&lt;/td>
+&lt;td>%dl&lt;/td>
+&lt;td>%cl&lt;/td>
+&lt;td>%r8b&lt;/td>
+&lt;td>%r9b&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="374-栈上的局部存储">3.7.4 栈上的局部存储&lt;/h3>
+&lt;ul>
+&lt;li>局部数据必须存放在内存的情况
+&lt;ul>
+&lt;li>寄存器不够存放所有本地数据&lt;/li>
+&lt;li>对局部变量使用地址运算符‘&amp;amp;’，因此必须能够为它产生一个地址&lt;/li>
+&lt;li>某些局部变量是数组或结构，因此必须能够通过数组或结构引用被访问到&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="375-寄存器中的局部存储空间">3.7.5 寄存器中的局部存储空间&lt;/h3>
+&lt;ul>
+&lt;li>寄存器组是唯一被所有过程共享的资源&lt;/li>
+&lt;li>被调用者保存寄存器：%rbx、%rbp和%r12~%r15&lt;/li>
+&lt;li>调用者保存寄存器：除了栈指针%rsp&lt;/li>
+&lt;/ul>
+&lt;h3 id="376-递归过程">3.7.6 递归过程&lt;/h3>
+&lt;h2 id="38-数组分配和访问">3.8 数组分配和访问&lt;/h2>
+&lt;h3 id="381-基本原则">3.8.1 基本原则&lt;/h3>
+&lt;p>T A[N]&lt;/p>
+&lt;ul>
+&lt;li>L：T的大小（字节）&lt;/li>
+&lt;li>A：数组开头指针，值为$x_A$&lt;/li>
+&lt;li>元素i：存放在地址为$x_A+L·i$的地方&lt;/li>
+&lt;/ul>
+&lt;h3 id="382-指针运算">3.8.2 指针运算&lt;/h3>
+&lt;ul>
+&lt;li>&amp;amp;：指针&lt;/li>
+&lt;li>*：间接引用指针（值）&lt;/li>
+&lt;li>Expr与- &amp;amp;Expr等价&lt;/li>
+&lt;/ul>
+&lt;h3 id="383-嵌套的数组">3.8.3 嵌套的数组&lt;/h3>
+&lt;ul>
+&lt;li>数组元素在内存中按照“行优先”的顺序排列&lt;/li>
+&lt;li>T D[R][C]
+&lt;ul>
+&lt;li>D[i][j]的内存地址：&amp;amp;D[i][j] = $x_D$+L(C·i+j)&lt;/li>
+&lt;li>L：数据类型T大小（字节）&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="384-定长数组">3.8.4 定长数组&lt;/h3>
+&lt;h3 id="385-变长数组">3.8.5 变长数组&lt;/h3>
+&lt;h2 id="39-异质的数据结构">3.9 异质的数据结构&lt;/h2>
+&lt;h3 id="391-结构">3.9.1 结构&lt;/h3>
+&lt;h3 id="392-联合">3.9.2 联合&lt;/h3>
+&lt;h3 id="393-数据对齐">3.9.3 数据对齐&lt;/h3>
+&lt;h2 id="310-在机器级程序中将控制与数据结合起来">3.10 在机器级程序中将控制与数据结合起来&lt;/h2>
+&lt;h3 id="3101-理解指针">3.10.1 理解指针&lt;/h3>
+&lt;ul>
+&lt;li>每个指针都对应一个类型。例：
+&lt;ul>
+&lt;li>&lt;code>int *ip&lt;/code>：int类型指针&lt;/li>
+&lt;li>&lt;code>char **cpp&lt;/code>：char*类型指针&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>每个指针都有一个值(类型对象的地址)。NULL(0)值表示没指向任何地方&lt;/li>
+&lt;li>指针用&lt;code>&amp;amp;&lt;/code>运算符创建
+&lt;ul>
+&lt;li>lvalue：可以出现在赋值语句左边的表达式&lt;/li>
+&lt;li>这个运算符可以应用到lvalue类的C表达式上&lt;/li>
+&lt;li>机器代码常常用leaq指令(计算内存引用地址)实现&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;code>*&lt;/code>操作符用于间接引用指针
+&lt;ul>
+&lt;li>结果是一个值&lt;/li>
+&lt;li>用内存引用实现：要么是存储到指定地址，要么是从指定地址读取&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>数组与指针紧密联系
+&lt;ul>
+&lt;li>数组名字可以像指针变量一样引用但不能修改&lt;/li>
+&lt;li>数组引用(&lt;code>a[3]&lt;/code>)与指针运算和间接引用(&lt;code>*(a + 3)&lt;/code>)有一样的效果
+&lt;ul>
+&lt;li>数组引用和指针运算都需要用对象大小对偏移量进行伸缩&lt;/li>
+&lt;li>当我们写表达式p + i,这里指针p的值为$p$,得到的地址计算为$p+L·i$，$L$是与p相关联的数据类型的大小&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>指针也可以指向函数(值是该函数机器代码表示中第一条指令的地址)
+&lt;ol>
+&lt;li>定义函数：&lt;br>
+&lt;code>int fun(int x,int *p);&lt;/code>&lt;/li>
+&lt;li>声明指针并赋值：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">fp&lt;/span>&lt;span class="p">)(&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">);&lt;/span>&lt;span class="c1">//括号是必须的，防止被解读成(int *) fp(int,int *);
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">fp&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fun&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>调用：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">fp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">y&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="3102-应用使用gdb调试器">3.10.2 应用：使用GDB调试器&lt;/h3>
+&lt;h3 id="3103-内存越界引用和缓冲区溢出">3.10.3 内存越界引用和缓冲区溢出&lt;/h3>
+&lt;h3 id="3104-对抗缓冲区溢出攻击">3.10.4 对抗缓冲区溢出攻击&lt;/h3>
+&lt;ol>
+&lt;li>栈随机化&lt;/li>
+&lt;li>栈破坏检测&lt;/li>
+&lt;li>限制可执行代码区域&lt;/li>
+&lt;/ol>
+&lt;h3 id="3105-支持变长栈帧">3.10.5 支持变长栈帧&lt;/h3>
+&lt;h2 id="311-浮点代码">3.11 浮点代码&lt;/h2></description></item><item><title>3.6 控制</title><link>https://yzlc.github.io/post/read/csapp/3.6/</link><pubDate>Tue, 31 Dec 2019 11:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/3.6/</guid><description>&lt;h2 id="36-控制">3.6 控制&lt;/h2>
+&lt;h3 id="361-条件码">3.6.1 条件码&lt;/h3>
+&lt;ul>
+&lt;li>CF：进位。无符号溢出&lt;/li>
+&lt;li>ZF：零&lt;/li>
+&lt;li>SF：符号。负数&lt;/li>
+&lt;li>OF：溢出。补码溢出&lt;/li>
+&lt;/ul>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令&lt;/th>
+&lt;th>基于&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>CMP S1，S2&lt;/td>
+&lt;td>S2-S1&lt;/td>
+&lt;td>比较&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>TEST S1，S2&lt;/td>
+&lt;td>S1&amp;amp;S2&lt;/td>
+&lt;td>测试&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="362-访问条件码">3.6.2 访问条件码&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令&lt;/th>
+&lt;th>同义名&lt;/th>
+&lt;th>效果&lt;/th>
+&lt;th>设置条件&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>sete D&lt;/td>
+&lt;td>setz&lt;/td>
+&lt;td>D&amp;lt;——ZF&lt;/td>
+&lt;td>相等/零&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setne D&lt;/td>
+&lt;td>setnz&lt;/td>
+&lt;td>D&amp;lt;——~ZF&lt;/td>
+&lt;td>不等/非零&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>sets D&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>D&amp;lt;——SF&lt;/td>
+&lt;td>负数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setns D&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>D&amp;lt;——~SF&lt;/td>
+&lt;td>非负数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setg D&lt;/td>
+&lt;td>setnle&lt;/td>
+&lt;td>D&amp;lt;——~(SF^OF)&amp;amp;~ZF&lt;/td>
+&lt;td>大于(有符号&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setge D&lt;/td>
+&lt;td>setnl&lt;/td>
+&lt;td>D&amp;lt;——~(SF^OF)&lt;/td>
+&lt;td>大于等于(有符号&amp;gt;=)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setl D&lt;/td>
+&lt;td>setnge&lt;/td>
+&lt;td>D&amp;lt;——SF^OF&lt;/td>
+&lt;td>小于(有符号&amp;lt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setle D&lt;/td>
+&lt;td>setng&lt;/td>
+&lt;td>D&amp;lt;——(SF^OF)|ZF&lt;/td>
+&lt;td>小于等于(有符号&amp;lt;=)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>seta D&lt;/td>
+&lt;td>setnbe&lt;/td>
+&lt;td>D&amp;lt;——~CF&amp;amp;~ZF&lt;/td>
+&lt;td>超过(无符号&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setae D&lt;/td>
+&lt;td>setnb&lt;/td>
+&lt;td>D&amp;lt;——~CF&lt;/td>
+&lt;td>超过或相等(无符号&amp;gt;=)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setb D&lt;/td>
+&lt;td>setnae&lt;/td>
+&lt;td>D&amp;lt;——CF&lt;/td>
+&lt;td>低于(无符号&amp;lt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>setbe D&lt;/td>
+&lt;td>setna&lt;/td>
+&lt;td>D&amp;lt;——CF|ZF&lt;/td>
+&lt;td>低于或相等(无符号&amp;lt;=)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="363-跳转指令">3.6.3 跳转指令&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令&lt;/th>
+&lt;th>同义名&lt;/th>
+&lt;th>跳转条件&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>jmp Label&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>直接跳转&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jmp *Operand&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>1&lt;/td>
+&lt;td>间接跳转&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>je Label&lt;/td>
+&lt;td>jz&lt;/td>
+&lt;td>ZF&lt;/td>
+&lt;td>相等/零&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jne Label&lt;/td>
+&lt;td>jnz&lt;/td>
+&lt;td>~ZF&lt;/td>
+&lt;td>不相等/非零&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>js Label&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>SF&lt;/td>
+&lt;td>负数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jns Label&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>~SF&lt;/td>
+&lt;td>非负数&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jg Label&lt;/td>
+&lt;td>jnle&lt;/td>
+&lt;td>~(SF^OF)&amp;amp;~ZF&lt;/td>
+&lt;td>大于(有符号&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jge Label&lt;/td>
+&lt;td>jnl&lt;/td>
+&lt;td>~(SF^OF)&lt;/td>
+&lt;td>大于等于(有符号&amp;gt;=)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jl Label&lt;/td>
+&lt;td>jnge&lt;/td>
+&lt;td>~SF^OF&lt;/td>
+&lt;td>小于(有符号&amp;lt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jle Label&lt;/td>
+&lt;td>jng&lt;/td>
+&lt;td>(SF^OF)&lt;/td>
+&lt;td>小于等于(有符号&amp;lt;=)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ja Label&lt;/td>
+&lt;td>jnbe&lt;/td>
+&lt;td>~CF&amp;amp;~ZF&lt;/td>
+&lt;td>超过(无符号&amp;gt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jae Label&lt;/td>
+&lt;td>jnb&lt;/td>
+&lt;td>~CF&lt;/td>
+&lt;td>超过或相等(无符号&amp;gt;=)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jb Label&lt;/td>
+&lt;td>jnae&lt;/td>
+&lt;td>CF&lt;/td>
+&lt;td>低于(无符号&amp;lt;)&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>jbe Label&lt;/td>
+&lt;td>jna&lt;/td>
+&lt;td>CF|ZF&lt;/td>
+&lt;td>低于或相等(无符号&amp;lt;=)&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="364-跳转指令的编码">3.6.4 跳转指令的编码&lt;/h3>
+&lt;ul>
+&lt;li>PC-relative：将目标指令的地址与紧跟在跳转指令后面那条指令的地址之间的差作为编码&lt;/li>
+&lt;/ul>
+&lt;h3 id="365-用条件控制来实现条件分支">3.6.5 用条件控制来实现条件分支&lt;/h3>
+&lt;p>C：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">expr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">then&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">statement&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">statement&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>汇编：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(!t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto false;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> then-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto done;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">false:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> else-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">done:
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="366-用条件传送来实现条件分支">3.6.6 用条件传送来实现条件分支&lt;/h3>
+&lt;ul>
+&lt;li>使用控制(低效)：条件满足时，沿着一条路径执行，不满足时走另一条路径&lt;/li>
+&lt;li>使用数据(受限)：计算一个条件操作的两种结果，然后根据条件是否满足从中选取一个&lt;/li>
+&lt;/ul>
+&lt;h3 id="367-循环">3.6.7 循环&lt;/h3>
+&lt;ol>
+&lt;li>do-while
+C：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">statement&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">expr&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>汇编：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">loop:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto loop;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>while
+C：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">while&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">expr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">statement&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>汇编：
+方法1：跳转到中间
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl"> goto test;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">loop:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">test:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto loop;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>方法2(较高优化等级编译时)：guarded-do(先判断再做do-while)
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if(!t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto done;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">loop:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto loop;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">done;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>for
+C：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">init&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">expr&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">expr&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="n">update&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">expr&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">body&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">statement&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>汇编：
+方法1：跳转到中间
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">init-expr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">goto test;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">loop:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> update-expr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">test:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto loop;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>方法2(较高优化等级编译时)：guarded-do(先判断再做do-while)
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">init-expr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">if(!t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto done;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">loop:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> body-statement
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> update-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> t = test-expr;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> if(t)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> goto loop;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">done;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="368-switch语句">3.6.8 switch语句&lt;/h3>
+&lt;blockquote>
+&lt;p>根据一个整数索引值进行多重分支&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>跳转表(开关数量多，值范围小)：执行开关语句的时间与开关情况的数量无关&lt;/li>
+&lt;/ul></description></item><item><title>第3章 程序的机器级表示</title><link>https://yzlc.github.io/post/read/csapp/3/</link><pubDate>Tue, 31 Dec 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/3/</guid><description>&lt;h2 id="32-程序编码">3.2 程序编码&lt;/h2>
+&lt;h3 id="321-机器级代码">3.2.1 机器级代码&lt;/h3>
+&lt;ul>
+&lt;li>程序计数器（PC，在x86-64中用%rip表示）：给出要执行的下一条指令在内存中的地址&lt;/li>
+&lt;li>整数寄存器：包含16个命名位置，分别存储64位值。可以存储地址或整数。有的寄存器用来记录程序状态，其他的保存临时数据&lt;/li>
+&lt;li>条件码寄存器：保存最近执行的算术或逻辑指令状态。用来实现控制或数据流中的条件变化&lt;/li>
+&lt;li>一组向量寄存器可以存放一个或多个整数或浮点数&lt;/li>
+&lt;li>程序内存（虚拟地址寻址）：
+&lt;ul>
+&lt;li>程序的可执行机器代码&lt;/li>
+&lt;li>操作系统需要的信息&lt;/li>
+&lt;li>用来管理过程调用和返回的运行时栈&lt;/li>
+&lt;li>用户分配的内存块&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="322-代码示例">3.2.2 代码示例&lt;/h3>
+&lt;ul>
+&lt;li>机器代码和它的反汇编表示的特性
+&lt;ul>
+&lt;li>x86-64指令长度1-15字节不等。常用指令及操作数较少的指令所需字节数少&lt;/li>
+&lt;li>设计指令格式的方式：从某个给定位置开始，可以将字节唯一地解码成机器指令&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="33-数据格式">3.3 数据格式&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>C声明&lt;/th>
+&lt;th>Intel数据类型&lt;/th>
+&lt;th>汇编代码后缀&lt;/th>
+&lt;th>大小(字节)&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>char&lt;/td>
+&lt;td>字节&lt;/td>
+&lt;td>b&lt;/td>
+&lt;td>1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>short&lt;/td>
+&lt;td>字(word)&lt;/td>
+&lt;td>w&lt;/td>
+&lt;td>2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>int&lt;/td>
+&lt;td>双字(long word)&lt;/td>
+&lt;td>l&lt;/td>
+&lt;td>4&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>long&lt;/td>
+&lt;td>四字(quad words)&lt;/td>
+&lt;td>q&lt;/td>
+&lt;td>8&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>char-&lt;/td>
+&lt;td>四字&lt;/td>
+&lt;td>q&lt;/td>
+&lt;td>8&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>float&lt;/td>
+&lt;td>单精度&lt;/td>
+&lt;td>s&lt;/td>
+&lt;td>4&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>double&lt;/td>
+&lt;td>双精度&lt;/td>
+&lt;td>l&lt;/td>
+&lt;td>8&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;ul>
+&lt;li>任何指针都是8字节&lt;/li>
+&lt;/ul>
+&lt;h2 id="34-访问信息">3.4 访问信息&lt;/h2>
+&lt;h3 id="341-操作数指示符">3.4.1 操作数指示符&lt;/h3>
+&lt;ul>
+&lt;li>立即数(immediate)：
+&lt;ul>
+&lt;li>语法：$Imm&lt;/li>
+&lt;li>操作数值：Imm(常数)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>寄存器(register)：
+&lt;ul>
+&lt;li>语法：$r_a$&lt;/li>
+&lt;li>操作数值：$R[r_a]$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>内存引用
+&lt;ul>
+&lt;li>语法：$Imm(r_b,r_i,s)$&lt;/li>
+&lt;li>Imm：立即数偏移&lt;/li>
+&lt;li>$r_b$：基址寄存器&lt;/li>
+&lt;li>$r_i$：变址寄存器&lt;/li>
+&lt;li>s：比例因子，必须是1、2、4、8&lt;/li>
+&lt;li>操作数值：$M[Imm+R[r_b]+R[r_i]·s]$&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="342-数据传送指令">3.4.2 数据传送指令&lt;/h3>
+&lt;ul>
+&lt;li>两个操作数不能都指向内存$Imm(r_b,r_i,s)$位置&lt;/li>
+&lt;li>后缀大小与内存部分无关&lt;/li>
+&lt;li>MOV(S,D)：
+&lt;ul>
+&lt;li>S(源)：立即数，存储在寄存器/内存&lt;/li>
+&lt;li>D(目的位置)：寄存器/内存地址&lt;/li>
+&lt;li>movl(S——&amp;gt;寄存器)：把该寄存器的高位4字节设置为0&lt;/li>
+&lt;li>movabsq(绝对)：(S(64位)——&amp;gt;D(寄存器))&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>MOVZ(S(小),R(大))：R&amp;lt;——零扩展(S)&lt;/li>
+&lt;li>MOVS(S(小),R(大))：R&amp;lt;——符号扩展(S)
+&lt;ul>
+&lt;li>cltq：只用于寄存器%eax和%rax&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="344-压入和弹出栈数据">3.4.4 压入和弹出栈数据&lt;/h3>
+&lt;ul>
+&lt;li>pushq：入栈，指针-8&lt;/li>
+&lt;li>popq：出栈，指针+8&lt;/li>
+&lt;/ul>
+&lt;h2 id="35-算术和逻辑操作">3.5 算术和逻辑操作&lt;/h2>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令&lt;/th>
+&lt;th>效果&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>leaq S，D&lt;/td>
+&lt;td>D &amp;lt;—— &amp;amp;S&lt;/td>
+&lt;td>加载有效地址&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>INC D&lt;/td>
+&lt;td>D &amp;lt;—— D+1&lt;/td>
+&lt;td>加1&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DEC D&lt;/td>
+&lt;td>D &amp;lt;—— D-1&lt;/td>
+&lt;td>减l&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>NEG D&lt;/td>
+&lt;td>D &amp;lt;—— -D&lt;/td>
+&lt;td>取负&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>NOT D&lt;/td>
+&lt;td>D &amp;lt;—— ~D&lt;/td>
+&lt;td>取补&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>ADD S，D&lt;/td>
+&lt;td>D &amp;lt;—— D+S&lt;/td>
+&lt;td>加&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SUB S，D&lt;/td>
+&lt;td>D &amp;lt;—— D-S&lt;/td>
+&lt;td>减&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>IMUL S，D&lt;/td>
+&lt;td>D &amp;lt;—— D*S&lt;/td>
+&lt;td>乘&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>XOR S，D&lt;/td>
+&lt;td>D &amp;lt;—— D^S&lt;/td>
+&lt;td>异或&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>OR S，D&lt;/td>
+&lt;td>D &amp;lt;—— D|S&lt;/td>
+&lt;td>或&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AND S，D&lt;/td>
+&lt;td>D &amp;lt;—— D&amp;amp;S&lt;/td>
+&lt;td>与&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SAL K，D&lt;/td>
+&lt;td>D &amp;lt;—— D&amp;laquo;K&lt;/td>
+&lt;td>左移&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SHL K，D&lt;/td>
+&lt;td>D &amp;lt;—— D&amp;laquo;K&lt;/td>
+&lt;td>左移（等同于SAL）&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SAR K，D&lt;/td>
+&lt;td>D &amp;lt;—— D&amp;raquo;$_A$K&lt;/td>
+&lt;td>算术右移&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SHR K，D&lt;/td>
+&lt;td>D &amp;lt;—— D&amp;raquo;$_L$K&lt;/td>
+&lt;td>逻辑右移&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="351-加载有效地址">3.5.1 加载有效地址&lt;/h3>
+&lt;blockquote>
+&lt;p>leaq（load effective address），movq的变形&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>可以执行加法和有限乘法&lt;/li>
+&lt;/ul>
+&lt;h3 id="355-特殊的算术操作">3.5.5 特殊的算术操作&lt;/h3>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>指令&lt;/th>
+&lt;th>效果&lt;/th>
+&lt;th>描述&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>imulq S&lt;/td>
+&lt;td>R[%rdx]：R[%rax]&amp;lt;——S*R[%rax]&lt;/td>
+&lt;td>有符号全乘法&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>mulq S&lt;/td>
+&lt;td>R[%rdx]：R[%rax]&amp;lt;——S*R[%rax]&lt;/td>
+&lt;td>无符号全乘法&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>clto&lt;/td>
+&lt;td>R[%rdx]：R[%rax]&amp;lt;——符号扩展(R[%rax])&lt;/td>
+&lt;td>转换为八字&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>idivq S&lt;/td>
+&lt;td>R[%rdx]&amp;lt;——R[%rdx]：R[%rax] mod/÷ S&lt;/td>
+&lt;td>有符号除法&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>divq S&lt;/td>
+&lt;td>R[%rdx]&amp;lt;——R[%rdx]：R[%rax] mod/÷ S&lt;/td>
+&lt;td>无符号除法&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>第2章 信息的表示和处理</title><link>https://yzlc.github.io/post/read/csapp/2/</link><pubDate>Mon, 30 Dec 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/2/</guid><description>&lt;h2 id="21-信息存储">2.1 信息存储&lt;/h2>
+&lt;h3 id="211-十六进制表示法">2.1.1 十六进制表示法&lt;/h3>
+&lt;ul>
+&lt;li>二进制 (&lt;code>i+4j,{i∈[0,3],j个0}&lt;/code>)&amp;lt;——&amp;gt;(4位一拆) 十六进制 (除16)&amp;lt;——&amp;gt;(乘16) 十进制&lt;/li>
+&lt;/ul>
+&lt;h3 id="212-字数据大小">2.1.2 字数据大小&lt;/h3>
+&lt;ul>
+&lt;li>计算机字长w位（word size）：指明指针数据的标称大小（nominal size），
+决定虚拟地址空间大小0~$2^{w}-1$&lt;/li>
+&lt;/ul>
+&lt;h3 id="213-寻址和字节顺序">2.1.3 寻址和字节顺序&lt;/h3>
+&lt;ul>
+&lt;li>多字节对象都被存储为连续的字节序列&lt;/li>
+&lt;li>小端法：最低有效字节在前面&lt;/li>
+&lt;li>大端法：最高有效字节在前面&lt;/li>
+&lt;li>字节顺序产生问题
+&lt;ol>
+&lt;li>不同机器通过网络传送二进制数据&lt;/li>
+&lt;li>阅读表示整数数据的字节序列&lt;/li>
+&lt;li>编写规避正常的类型系统的程序&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="217-c语言中的位级运算">2.1.7 C语言中的位级运算&lt;/h3>
+&lt;ul>
+&lt;li>掩码运算：从一个字中选出的位的集合。&lt;code>x&amp;amp;0xFF&lt;/code>（可移植）&lt;/li>
+&lt;/ul>
+&lt;h3 id="218-c语言中的逻辑运算">2.1.8 C语言中的逻辑运算&lt;/h3>
+&lt;ul>
+&lt;li>逻辑运算(&lt;code>&amp;amp;&amp;amp;&lt;/code>、&lt;code>||&lt;/code>、&lt;code>!&lt;/code>) vs 位级运算(&lt;code>&amp;amp;&lt;/code>、&lt;code>|&lt;/code>、&lt;code>~&lt;/code>、&lt;code>^&lt;/code>)：非零 - &lt;code>true&lt;/code>，0 - &lt;code>false&lt;/code>；短路&lt;/li>
+&lt;/ul>
+&lt;h3 id="219-c语言中的移位运算">2.1.9 C语言中的移位运算&lt;/h3>
+&lt;blockquote>
+&lt;p>算术右移(补最高位)&lt;br>
+逻辑右移(补0)&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="22-整数表示">2.2 整数表示&lt;/h2>
+&lt;h3 id="224-有符号数和无符号数之间的转换">2.2.4 有符号数和无符号数之间的转换&lt;/h3>
+&lt;blockquote>
+&lt;p>$0≤x≤TMax_w$ $T2U_w(x)=x$ $U2T_w(x)=x$&lt;br>
+else $T2U_w(x)=x+2^w$ $U2T_w(x)=x-2^w$&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="226-扩展一个数字的位表示">2.2.6 扩展一个数字的位表示&lt;/h3>
+&lt;blockquote>
+&lt;p>无符号数的零扩展&lt;br>
+补码数的符号扩展&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="227-截断数字">2.2.7 截断数字&lt;/h3>
+&lt;blockquote>
+&lt;p>U2T(B2U % $2^k$)&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="23-整数运算">2.3 整数运算&lt;/h2>
+&lt;blockquote>
+&lt;p>w位截断，s=x+y&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="231-无符号加法">2.3.1 无符号加法&lt;/h3>
+&lt;blockquote>
+&lt;p>$x+{^u_w}y=
+\begin{cases}
+x+y, &amp;amp; x+y&amp;lt;2^w &amp;amp; 正常 \
+x+y-2^w, &amp;amp; 2^w≤x+y&amp;lt;2^{w+1} &amp;amp; 溢出
+\end{cases}$&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>溢出：&lt;code>s&amp;lt;x or s&amp;lt;y&lt;/code>&lt;/li>
+&lt;li>求反：$-{^u_w}x=
+\begin{cases}
+x, &amp;amp; x=0 \
+2^w-x, &amp;amp; x&amp;gt;0
+\end{cases}$&lt;/li>
+&lt;/ul>
+&lt;h3 id="232-补码加法">2.3.2 补码加法&lt;/h3>
+&lt;blockquote>
+&lt;p>$x+{^t_w}y=
+\begin{cases}
+x+y-2^w, &amp;amp; 2^{w-1}≤x+y &amp;amp; 正溢出 \
+x+y, &amp;amp; -2^{w-1}≤x+y&amp;lt;2^{w-1} &amp;amp; 正常 \
+x+y+2^w, &amp;amp; x+y&amp;lt;-2^{w-1} &amp;amp; 负溢出
+\end{cases}$&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>溢出：x&amp;gt;0,y&amp;gt;0 s≤0 or x&amp;lt;0,y&amp;lt;0 s≥0&lt;/li>
+&lt;/ul>
+&lt;h3 id="233-补码的非">2.3.3 补码的非&lt;/h3>
+&lt;blockquote>
+&lt;p>$-{^t_w}x=
+\begin{cases}
+TMin_w, &amp;amp; x=TMin_w \
+-x, &amp;amp; x&amp;gt;TMin_w
+\end{cases}$&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>位级表示
+&lt;ul>
+&lt;li>对每一位求补，再对结果加1&lt;/li>
+&lt;li>对位&lt;code>k&lt;/code>左边的所有位取反(&lt;code>k&lt;/code>为最右边1的位置)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="234-无符号乘法">2.3.4 无符号乘法&lt;/h3>
+&lt;blockquote>
+&lt;p>$x*{^u_w}y=(x·y)mod 2^w$&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="235-补码乘法">2.3.5 补码乘法&lt;/h3>
+&lt;blockquote>
+&lt;p>$x*{^t_w}y=U2T_w((x·y)mod 2^w)$&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="236-乘以常数">2.3.6 乘以常数&lt;/h3>
+&lt;blockquote>
+&lt;p>$x*{^u_w}2^k，x*{^t_w}2^k$：&lt;code>x&amp;lt;&amp;lt;k&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="237-除以2的幂">2.3.7 除以2的幂&lt;/h3>
+&lt;blockquote>
+&lt;p>无符号，补码(向下舍入)：&lt;code>x&amp;gt;&amp;gt;k&lt;/code>&lt;br>
+补码(向上舍入)：&lt;code>(x+(1&amp;lt;&amp;lt;k)-1)&amp;gt;&amp;gt;k&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="24-浮点数">2.4 浮点数&lt;/h2>
+&lt;h3 id="241-二进制小数">2.4.1 二进制小数&lt;/h3>
+&lt;ul>
+&lt;li>二进制转小数：$b=\sum_{i=-n}^{m}2^i\times b_i$&lt;/li>
+&lt;li>小数($\frac{x}{2^k}$)转二进制：使用&lt;code>x&lt;/code>的二进制表示，小数点插入右边&lt;code>k&lt;/code>位&lt;/li>
+&lt;/ul>
+&lt;h3 id="242-ieee浮点表示">2.4.2 IEEE浮点表示&lt;/h3>
+&lt;blockquote>
+&lt;p>$V=(-1)^s\times M\times 2^E$&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>s(符号sign)：1负0正&lt;/li>
+&lt;li>M(尾数，n位，frac)：二进制小数，&lt;code>1~2-ε or 0~1-ε&lt;/code>&lt;/li>
+&lt;li>E(阶码exponent，k位，exp)：权重$2^E$&lt;/li>
+&lt;li>32位：s=1、k=8、n=23&lt;/li>
+&lt;li>64位：s=1、k=11、n=52&lt;/li>
+&lt;/ul>
+&lt;h4 id="情况1规格化的值">情况1：规格化的值&lt;/h4>
+&lt;blockquote>
+&lt;p>exp≠0&amp;amp;≠255(双精度2047)&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>Bias(偏置biased)：$2^{k-1}-1$(单精度-126~127，双精度-1022~1023)&lt;/li>
+&lt;li>e(无符号数)：$e_{k-1}···e_1e_0$&lt;/li>
+&lt;li>f(frac小数值)：0≤f&amp;lt;1，$0.f_{n-1}···f_1f_0$&lt;/li>
+&lt;li>E=e-Bias&lt;/li>
+&lt;li>M=1+f&lt;/li>
+&lt;/ul>
+&lt;h4 id="情况2非规格化的值">情况2：非规格化的值&lt;/h4>
+&lt;blockquote>
+&lt;p>exp=0&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>E=1-Bias&lt;/li>
+&lt;li>M=f&lt;/li>
+&lt;li>表示0&lt;/li>
+&lt;/ul>
+&lt;h4 id="情况3特殊值">情况3：特殊值&lt;/h4>
+&lt;blockquote>
+&lt;p>exp=1：f=0(无穷)，f≠0(NaN)&lt;/p>
+&lt;/blockquote>
+&lt;h4 id="整数值转浮点形式">整数值转浮点形式&lt;/h4>
+&lt;ol>
+&lt;li>将二进制小数左移&lt;/li>
+&lt;li>丢弃开头的1，得到小数部分f&lt;/li>
+&lt;li>e=E+Bias&lt;/li>
+&lt;/ol>
+&lt;h3 id="244-舍入">2.4.4 舍入&lt;/h3>
+&lt;ul>
+&lt;li>向偶数舍入&lt;/li>
+&lt;li>向零舍入&lt;/li>
+&lt;li>向下舍入&lt;/li>
+&lt;li>向上舍入&lt;/li>
+&lt;/ul>
+&lt;h3 id="245-浮点运算">2.4.5 浮点运算&lt;/h3>
+&lt;ul>
+&lt;li>不具有结合性、分配性&lt;/li>
+&lt;/ul></description></item><item><title>第1章 计算机系统漫游</title><link>https://yzlc.github.io/post/read/csapp/1/</link><pubDate>Sun, 29 Dec 2019 10:32:28 +0800</pubDate><guid>https://yzlc.github.io/post/read/csapp/1/</guid><description>&lt;h2 id="191-amdahls-law阿姆达尔定律">1.9.1 Amdahl&amp;rsquo;s law（阿姆达尔定律）&lt;/h2>
+&lt;blockquote>
+&lt;p>要想显著加速整个系统，必须提升全系统中相当大的部分的速度&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>若系统执行某应用程序需要时间为$T_{old}$。
+假设系统某部分所需执行时间与该时间的比例为&lt;code>α&lt;/code>，而该部分性能提升比例为&lt;code>k&lt;/code>。
+即该部分初始所需时间为$αT_{old}$，现在所需时间为$(αT_{old})/k$&lt;/li>
+&lt;li>总的执行时间：$T_{new}=(1-α)T_{old}+(αT_{old})/k=T_{old}[(1-α)+a/k]$&lt;/li>
+&lt;li>加速比：$S=T_{old}/T_{new}$为$S=\frac{1}{(1-α)+a/k}$&lt;/li>
+&lt;/ul>
+&lt;h2 id="192-并发和并行">1.9.2 并发和并行&lt;/h2>
+&lt;ul>
+&lt;li>并发(concurrency)：一个同时具有多个活动的系统&lt;/li>
+&lt;li>并行(parallelism)：用并发来使一个系统运行得更快&lt;/li>
+&lt;/ul></description></item></channel></rss>

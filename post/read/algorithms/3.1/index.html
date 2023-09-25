@@ -1,0 +1,146 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="3.1 符号表 符号表是一种存储键值对的数据结构，支持两种操作：插入（put），即将一组新的键值对存入表中；查找 （get），即根据给定的键得到相应的"><title>第3章　查找</title><link rel=canonical href=https://yzlc.github.io/post/read/algorithms/3.1/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="第3章　查找"><meta property="og:description" content="3.1 符号表 符号表是一种存储键值对的数据结构，支持两种操作：插入（put），即将一组新的键值对存入表中；查找 （get），即根据给定的键得到相应的"><meta property="og:url" content="https://yzlc.github.io/post/read/algorithms/3.1/"><meta property="og:site_name" content="YZLC"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="算法"><meta property="article:published_time" content="2020-07-15T13:28:33+08:00"><meta property="article:modified_time" content="2023-09-25T11:15:53+08:00"><meta name=twitter:title content="第3章　查找"><meta name=twitter:description content="3.1 符号表 符号表是一种存储键值对的数据结构，支持两种操作：插入（put），即将一组新的键值对存入表中；查找 （get），即根据给定的键得到相应的"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>YZLC</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/tags/><span>标签</span></a></li><li><a href=/categories/><span>分类</span></a></li><li><a href=/post/web><span>网站大全</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/read/>read</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/read/algorithms/3.1/>第3章　查找</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jul 15, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 2 分钟</time></div></footer></div></header><section class=article-content><h2 id=31符号表>3.1　符号表</h2><blockquote><p>符号表是一种存储键值对的数据结构，支持两种操作：插入（put），即将一组新的键值对存入表中；查找 （get），即根据给定的键得到相应的值</p></blockquote><h3 id=311api>3.1.1　API</h3><div class=table-wrapper><table><thead><tr><th>public class ST &lt;Key, Value></th><th></th></tr></thead><tbody><tr><td>ST()</td><td>创建一张符号表</td></tr><tr><td>void put(Key key, Value val)</td><td>将键值对存入表中（若值为空则将键 key 从表中删除）</td></tr><tr><td>Value get(Key key)</td><td>获取键 key 对应的值（若键 key 不存在则返回 null）</td></tr><tr><td>void delete(Key key)</td><td>从表中删去键 key （及其对应的值）</td></tr><tr><td>boolean contains(Key key)</td><td>键 key 在表中是否有对应的值</td></tr><tr><td>boolean isEmpty()</td><td>表是否为空</td></tr><tr><td>int size()</td><td>表中的键值对数量</td></tr><tr><td>Iterable keys()</td><td>表中的所有键的集合</td></tr><tr><td>void delete(Key key)</td><td>put(key, null);</td></tr><tr><td>boolean contains(key key)</td><td>return get(key) != null;</td></tr><tr><td>boolean isEmpty()</td><td>return size() == 0;</td></tr></tbody></table></div><h3 id=314无序链表中的顺序查找>3.1.4　无序链表中的顺序查找</h3><blockquote><p>适用于小型问题；对于大型符号表很慢</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>SequentialSearchST</span><span class=o>&lt;</span><span class=n>Key</span><span class=o>,</span> <span class=n>Value</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Node</span> <span class=n>first</span><span class=o>;</span> <span class=c1>// 链表首结点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kd>class</span> <span class=nc>Node</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 链表结点的定义
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Key</span> <span class=n>key</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Value</span> <span class=n>val</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Node</span> <span class=n>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=nf>Node</span><span class=o>(</span><span class=n>Key</span> <span class=n>key</span><span class=o>,</span> <span class=n>Value</span> <span class=n>val</span><span class=o>,</span> <span class=n>Node</span> <span class=n>next</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>this</span><span class=o>.</span><span class=na>key</span> <span class=o>=</span> <span class=n>key</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>this</span><span class=o>.</span><span class=na>val</span> <span class=o>=</span> <span class=n>val</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>this</span><span class=o>.</span><span class=na>next</span> <span class=o>=</span> <span class=n>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Value</span> <span class=nf>get</span><span class=o>(</span><span class=n>Key</span> <span class=n>key</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 查找给定的键，返回相关联的值
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=n>Node</span> <span class=n>x</span> <span class=o>=</span> <span class=n>first</span><span class=o>;</span> <span class=n>x</span> <span class=o>!=</span> <span class=kc>null</span><span class=o>;</span> <span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=na>next</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>key</span><span class=o>.</span><span class=na>equals</span><span class=o>(</span><span class=n>x</span><span class=o>.</span><span class=na>key</span><span class=o>))</span>
+</span></span><span class=line><span class=cl>                <span class=k>return</span> <span class=n>x</span><span class=o>.</span><span class=na>val</span><span class=o>;</span> <span class=c1>// 命中
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>return</span> <span class=kc>null</span><span class=o>;</span> <span class=c1>// 未名中
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>put</span><span class=o>(</span><span class=n>Key</span> <span class=n>key</span><span class=o>,</span> <span class=n>Value</span> <span class=n>val</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 查找给定的键，找到则更新其值，否则在表中新建结点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>for</span> <span class=o>(</span><span class=n>Node</span> <span class=n>x</span> <span class=o>=</span> <span class=n>first</span><span class=o>;</span> <span class=n>x</span> <span class=o>!=</span> <span class=kc>null</span><span class=o>;</span> <span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=na>next</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>key</span><span class=o>.</span><span class=na>equals</span><span class=o>(</span><span class=n>x</span><span class=o>.</span><span class=na>key</span><span class=o>))</span> <span class=o>{</span> <span class=n>x</span><span class=o>.</span><span class=na>val</span> <span class=o>=</span> <span class=n>val</span><span class=o>;</span> <span class=k>return</span><span class=o>;</span> <span class=o>}</span> <span class=c1>// 命中，更新
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>first</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Node</span><span class=o>(</span><span class=n>key</span><span class=o>,</span> <span class=n>val</span><span class=o>,</span> <span class=n>first</span><span class=o>);</span> <span class=c1>// 未命中，新建结点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=315有序数组中的二分查找>3.1.5　有序数组中的二分查找</h3><blockquote><p>最优的查找效率和空间需求，能够进行有序性相关的操作；插入操作很慢</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>BinarySearchST</span><span class=o>&lt;</span><span class=n>Key</span> <span class=kd>extends</span> <span class=n>Comparable</span><span class=o>&lt;</span><span class=n>Key</span><span class=o>&gt;,</span> <span class=n>Value</span><span class=o>&gt;</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Key</span><span class=o>[]</span> <span class=n>keys</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Value</span><span class=o>[]</span> <span class=n>vals</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>N</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>BinarySearchST</span><span class=o>(</span><span class=kt>int</span> <span class=n>capacity</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>keys</span> <span class=o>=</span> <span class=o>(</span><span class=n>Key</span><span class=o>[])</span> <span class=k>new</span> <span class=n>Comparable</span><span class=o>[</span><span class=n>capacity</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>vals</span> <span class=o>=</span> <span class=o>(</span><span class=n>Value</span><span class=o>[])</span> <span class=k>new</span> <span class=n>Object</span><span class=o>[</span><span class=n>capacity</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>size</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>N</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Value</span> <span class=nf>get</span><span class=o>(</span><span class=n>Key</span> <span class=n>key</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>isEmpty</span><span class=o>())</span> <span class=k>return</span> <span class=kc>null</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>rank</span><span class=o>(</span><span class=n>key</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>i</span> <span class=o>&lt;</span> <span class=n>N</span> <span class=o>&amp;&amp;</span> <span class=n>keys</span><span class=o>[</span><span class=n>i</span><span class=o>].</span><span class=na>compareTo</span><span class=o>(</span><span class=n>key</span><span class=o>)</span> <span class=o>==</span> <span class=mi>0</span><span class=o>)</span> <span class=k>return</span> <span class=n>vals</span><span class=o>[</span><span class=n>i</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>        <span class=k>else</span> <span class=k>return</span> <span class=kc>null</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>rank</span><span class=o>(</span><span class=n>Key</span> <span class=n>key</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>lo</span> <span class=o>=</span> <span class=mi>0</span><span class=o>,</span> <span class=n>hi</span> <span class=o>=</span> <span class=n>N</span><span class=o>-</span><span class=mi>1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=o>(</span><span class=n>lo</span> <span class=o>&lt;=</span> <span class=n>hi</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>        <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>mid</span> <span class=o>=</span> <span class=n>lo</span> <span class=o>+</span> <span class=o>(</span><span class=n>hi</span> <span class=o>-</span> <span class=n>lo</span><span class=o>)</span> <span class=o>/</span> <span class=mi>2</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>cmp</span> <span class=o>=</span> <span class=n>key</span><span class=o>.</span><span class=na>compareTo</span><span class=o>(</span><span class=n>keys</span><span class=o>[</span><span class=n>mid</span><span class=o>]);</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>cmp</span> <span class=o>&lt;</span> <span class=mi>0</span><span class=o>)</span> <span class=n>hi</span> <span class=o>=</span> <span class=n>mid</span> <span class=o>-</span> <span class=mi>1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=k>if</span> <span class=o>(</span><span class=n>cmp</span> <span class=o>&gt;</span> <span class=mi>0</span><span class=o>)</span> <span class=n>lo</span> <span class=o>=</span> <span class=n>mid</span> <span class=o>+</span> <span class=mi>1</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>else</span> <span class=k>return</span> <span class=n>mid</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>lo</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>put</span><span class=o>(</span><span class=n>Key</span> <span class=n>key</span><span class=o>,</span> <span class=n>Value</span> <span class=n>val</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span> <span class=c1>// 查找键，找到则更新值，否则创建新的元素
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=n>rank</span><span class=o>(</span><span class=n>key</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>i</span> <span class=o>&lt;</span> <span class=n>N</span> <span class=o>&amp;&amp;</span> <span class=n>keys</span><span class=o>[</span><span class=n>i</span><span class=o>].</span><span class=na>compareTo</span><span class=o>(</span><span class=n>key</span><span class=o>)</span> <span class=o>==</span> <span class=mi>0</span><span class=o>)</span> <span class=o>{</span> <span class=n>vals</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>val</span><span class=o>;</span> <span class=k>return</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>j</span> <span class=o>=</span> <span class=n>N</span><span class=o>;</span> <span class=n>j</span> <span class=o>&gt;</span> <span class=n>i</span><span class=o>;</span> <span class=n>j</span><span class=o>--)</span> <span class=o>{</span> <span class=n>keys</span><span class=o>[</span><span class=n>j</span><span class=o>]</span> <span class=o>=</span> <span class=n>keys</span><span class=o>[</span><span class=n>j</span><span class=o>-</span><span class=mi>1</span><span class=o>];</span> <span class=n>vals</span><span class=o>[</span><span class=n>j</span><span class=o>]</span> <span class=o>=</span> <span class=n>vals</span><span class=o>[</span><span class=n>j</span><span class=o>-</span><span class=mi>1</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>keys</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>key</span><span class=o>;</span> <span class=n>vals</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>val</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>N</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/%E7%AE%97%E6%B3%95/>算法</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span>最后更新于 Sep 25, 2023 11:15 +0800</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/post/read/algorithms/2/><div class=article-details><h2 class=article-title>第2章　排序</h2></div></a></article><article><a href=/post/read/algorithms/1/><div class=article-details><h2 class=article-title>第1章　基础</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2023 YZLC</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.20.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

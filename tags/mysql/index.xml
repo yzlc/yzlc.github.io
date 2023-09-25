@@ -1,1 +1,89 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mysql on YZLC</title><link>https://yzlc.github.io/tags/mysql/</link><description>Recent content in mysql on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 15 Feb 2023 22:45:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>mysql</title><link>https://yzlc.github.io/post/note/win/mysql/</link><pubDate>Wed, 15 Feb 2023 22:45:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/mysql/</guid><description>安装 mysql.msi .net4.5.2 vc++2013 卸载 1 2 3 4 5 6 net stop mysql mysqld --remove mysql reg delete HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MYSQL /f reg delete HKEY_LOCAL_MACHINE\SYSTEM\ControlSet002\Services\Eventlog\Application\MYSQL /f reg delete HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\MYSQL /f rmdir /s/q C:\ProgramData\MYSQL</description></item><item><title>mysql</title><link>https://yzlc.github.io/post/note/linux/mysql/</link><pubDate>Sun, 01 Sep 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/mysql/</guid><description>安装 1 2 3 4 5 6 wget &amp;#39;https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm&amp;#39; sudo yum -y install mysql-community-server systemctl start mysqld systemctl status mysqld sudo grep &amp;#39;temporary password&amp;#39; /var/log/mysqld.log mysql -uroot -p #输入查看到的密码 配置 vim /etc/my.cnf 1 2 3 4 5 6 7 8 [client] default-character-set = utf8 [mysqld] default-storage-engine = INNODB character-set-server = utf8 collation-server = utf8_general_ci #不区分大小</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mysql on YZLC</title><link>https://yzlc.github.io/tags/mysql/</link><description>Recent content in mysql on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 15 Feb 2023 22:45:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>mysql</title><link>https://yzlc.github.io/post/note/win/mysql/</link><pubDate>Wed, 15 Feb 2023 22:45:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/mysql/</guid><description>&lt;h2 id="安装httpswwwcnblogscomkendoziyupmysqlhtml">&lt;a class="link" href="https://www.cnblogs.com/kendoziyu/p/MySQL.html" target="_blank" rel="noopener"
+>安装&lt;/a>&lt;/h2>
+&lt;ol>
+&lt;li>&lt;a class="link" href="https://dev.mysql.com/get/Downloads/MySQLInstaller/mysql-installer-community-5.7.41.0.msi" target="_blank" rel="noopener"
+>mysql.msi&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.microsoft.com/zh-CN/download/details.aspx?id=42642" target="_blank" rel="noopener"
+>.net4.5.2&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://www.microsoft.com/en-us/download/details.aspx?id=40784" target="_blank" rel="noopener"
+>vc++2013&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;h2 id="卸载">卸载&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">net stop mysql
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mysqld --remove mysql
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">reg delete HKEY_LOCAL_MACHINE&lt;span class="se">\S&lt;/span>YSTEM&lt;span class="se">\C&lt;/span>ontrolSet001&lt;span class="se">\S&lt;/span>ervices&lt;span class="se">\E&lt;/span>ventlog&lt;span class="se">\A&lt;/span>pplication&lt;span class="se">\M&lt;/span>YSQL /f
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">reg delete HKEY_LOCAL_MACHINE&lt;span class="se">\S&lt;/span>YSTEM&lt;span class="se">\C&lt;/span>ontrolSet002&lt;span class="se">\S&lt;/span>ervices&lt;span class="se">\E&lt;/span>ventlog&lt;span class="se">\A&lt;/span>pplication&lt;span class="se">\M&lt;/span>YSQL /f
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">reg delete HKEY_LOCAL_MACHINE&lt;span class="se">\S&lt;/span>YSTEM&lt;span class="se">\C&lt;/span>urrentControlSet&lt;span class="se">\S&lt;/span>ervices&lt;span class="se">\E&lt;/span>ventlog&lt;span class="se">\A&lt;/span>pplication&lt;span class="se">\M&lt;/span>YSQL /f
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">rmdir /s/q C:&lt;span class="se">\P&lt;/span>rogramData&lt;span class="se">\M&lt;/span>YSQL
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>mysql</title><link>https://yzlc.github.io/post/note/linux/mysql/</link><pubDate>Sun, 01 Sep 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/mysql/</guid><description>&lt;h2 id="安装">安装&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wget &lt;span class="s1">&amp;#39;https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo yum -y install mysql-community-server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl start mysqld
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">systemctl status mysqld
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sudo grep &lt;span class="s1">&amp;#39;temporary password&amp;#39;&lt;/span> /var/log/mysqld.log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">mysql -uroot -p &lt;span class="c1">#输入查看到的密码&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="配置">配置&lt;/h2>
+&lt;ul>
+&lt;li>&lt;code>vim /etc/my.cnf&lt;/code>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">[client]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">default-character-set = utf8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">[mysqld]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">default-storage-engine = INNODB
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">character-set-server = utf8
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">collation-server = utf8_general_ci #不区分大小写
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">collation-server = utf8_bin #区分大小写
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">collation-server = utf8_unicode_ci #比 utf8_general_ci 更准确
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="授权任何主机连接">授权任何主机连接&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mysql -u 用户名 -p
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">GRANT ALL PRIVILEGES ON *.- TO &lt;span class="s1">&amp;#39;用户名&amp;#39;&lt;/span>@&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span> IDENTIFIED BY &lt;span class="s1">&amp;#39;密码&amp;#39;&lt;/span> WITH GRANT OPTION&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">FLUSH PRIVILEGES&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

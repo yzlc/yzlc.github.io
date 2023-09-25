@@ -1,0 +1,263 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="1.3 背包、队列和栈 1.3.1 API 1.3.1.4 背包 不支持从中删除元素的集合数据类型——它的目的就是帮助用例收集元素并迭代遍历所有收集到的元素 1.3.1.5 先进先出队列 先进先出队"><title>第1章　基础</title><link rel=canonical href=https://yzlc.github.io/post/read/algorithms/1/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="第1章　基础"><meta property="og:description" content="1.3 背包、队列和栈 1.3.1 API 1.3.1.4 背包 不支持从中删除元素的集合数据类型——它的目的就是帮助用例收集元素并迭代遍历所有收集到的元素 1.3.1.5 先进先出队列 先进先出队"><meta property="og:url" content="https://yzlc.github.io/post/read/algorithms/1/"><meta property="og:site_name" content="YZLC"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="算法"><meta property="article:published_time" content="2020-07-02T14:01:33+08:00"><meta property="article:modified_time" content="2023-09-25T11:15:53+08:00"><meta name=twitter:title content="第1章　基础"><meta name=twitter:description content="1.3 背包、队列和栈 1.3.1 API 1.3.1.4 背包 不支持从中删除元素的集合数据类型——它的目的就是帮助用例收集元素并迭代遍历所有收集到的元素 1.3.1.5 先进先出队列 先进先出队"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>YZLC</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/tags/><span>标签</span></a></li><li><a href=/categories/><span>分类</span></a></li><li><a href=/post/web><span>网站大全</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/read/>read</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/read/algorithms/1/>第1章　基础</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Jul 02, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 4 分钟</time></div></footer></div></header><section class=article-content><h2 id=13背包队列和栈>1.3　背包、队列和栈</h2><h3 id=131api>1.3.1　API</h3><h4 id=1314背包>1.3.1.4　背包</h4><blockquote><p>不支持从中删除元素的集合数据类型——它的目的就是帮助用例收集元素并迭代遍历所有收集到的元素</p></blockquote><h4 id=1315先进先出队列>1.3.1.5　先进先出队列</h4><blockquote><p>先进先出队列 （或简称队列 ）是一种基于先进先出 （FIFO）策略的集合类型</p></blockquote><p>在应用程序中使用队列的主要原因是在用集合保存元素的同时保存它们的相对顺序</p><h4 id=1316下压栈>1.3.1.6　下压栈</h4><blockquote><p>下压栈 （或简称栈 ）是一种基于后进先出 （LIFO）策略的集合类型</p></blockquote><p>在应用程序中使用栈迭代器的一个典型原因是在用集合保存元素的同时颠倒它们的相对顺序</p><h3 id=133链表>1.3.3　链表</h3><blockquote><p>链表是一种递归的数据结构，它或者为空（null ），或者是指向一个结点 （node）的引用，该结点含有一个泛型的元素和一个指向另一条
+链表的引用。</p></blockquote><h4 id=1331结点记录>1.3.3.1　结点记录</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>private</span> <span class=kd>class</span> <span class=nc>Node</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>Item</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>Node</span> <span class=n>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=1333在表头插入结点>1.3.3.3　在表头插入结点</h4><p><img src=/images/read/algorithms/Image00078.gif loading=lazy></p><h4 id=1334从表头删除结点>1.3.3.4　从表头删除结点</h4><p><img src=/images/read/algorithms/Image00079.gif loading=lazy></p><h4 id=1335在表尾插入结点>1.3.3.5　在表尾插入结点</h4><p><img src=/images/read/algorithms/Image00080.gif loading=lazy></p><h4 id=1336其他位置的插入和删除操作>1.3.3.6　其他位置的插入和删除操作</h4><p>实现任意插入和删除操作的标准解决方案是使用双向链表 ，其中每个结点都含有两个链接，分别指向不同的方向</p><h4 id=1337遍历>1.3.3.7　遍历</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=k>for</span> <span class=o>(</span><span class=n>Node</span> <span class=n>x</span> <span class=o>=</span> <span class=n>first</span><span class=o>;</span> <span class=n>x</span> <span class=o>!=</span> <span class=kc>null</span><span class=o>;</span> <span class=n>x</span> <span class=o>=</span> <span class=n>x</span><span class=o>.</span><span class=na>next</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 处理x.item
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=1338栈的实现>1.3.3.8　栈的实现</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Stack</span><span class=o>&lt;</span><span class=n>Item</span><span class=o>&gt;</span> <span class=kd>implements</span> <span class=n>Iterable</span><span class=o>&lt;</span><span class=n>Item</span><span class=o>&gt;</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Node</span> <span class=n>first</span><span class=o>;</span><span class=c1>//栈顶（最近添加的元素）
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>n</span><span class=o>;</span><span class=c1>//元素数量
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kd>class</span> <span class=nc>Node</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Item</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Node</span> <span class=n>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>isEmpty</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>n</span> <span class=o>==</span> <span class=mi>0</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>size</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>n</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>push</span><span class=o>(</span><span class=n>Item</span> <span class=n>item</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Node</span> <span class=n>oldFirst</span> <span class=o>=</span> <span class=n>first</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>first</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Node</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>first</span><span class=o>.</span><span class=na>item</span> <span class=o>=</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>first</span><span class=o>.</span><span class=na>next</span> <span class=o>=</span> <span class=n>oldFirst</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>n</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Item</span> <span class=nf>pop</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Item</span> <span class=n>item</span> <span class=o>=</span> <span class=n>first</span><span class=o>.</span><span class=na>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>first</span> <span class=o>=</span> <span class=n>first</span><span class=o>.</span><span class=na>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>n</span><span class=o>--;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>class</span> <span class=nc>ListIterator</span> <span class=kd>implements</span> <span class=n>Iterator</span><span class=o>&lt;</span><span class=n>Item</span><span class=o>&gt;</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>private</span> <span class=n>Node</span> <span class=n>current</span> <span class=o>=</span> <span class=n>first</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>hasNext</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>current</span> <span class=o>!=</span> <span class=kc>null</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=n>Item</span> <span class=nf>next</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>Item</span> <span class=n>item</span> <span class=o>=</span> <span class=n>current</span><span class=o>.</span><span class=na>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>current</span> <span class=o>=</span> <span class=n>current</span><span class=o>.</span><span class=na>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=nd>@Override</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Iterator</span><span class=o>&lt;</span><span class=n>Item</span><span class=o>&gt;</span> <span class=nf>iterator</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=k>new</span> <span class=n>ListIterator</span><span class=o>();</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=1339队列的实现>1.3.3.9　队列的实现</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Queue</span><span class=o>&lt;</span><span class=n>Item</span><span class=o>&gt;</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=n>Node</span> <span class=n>first</span><span class=o>;</span><span class=c1>//指向最早添加的节点的链接
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=n>Node</span> <span class=n>last</span><span class=o>;</span><span class=c1>//指向最近添加的节点的链接
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>n</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>class</span> <span class=nc>Node</span><span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>Item</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>Node</span> <span class=n>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>boolean</span> <span class=nf>isEmpty</span><span class=o>(){</span><span class=k>return</span> <span class=n>n</span><span class=o>==</span><span class=mi>0</span><span class=o>;}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>size</span><span class=o>(){</span><span class=k>return</span> <span class=n>n</span><span class=o>;}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>enQueue</span><span class=o>(</span><span class=n>Item</span> <span class=n>item</span><span class=o>){</span>
+</span></span><span class=line><span class=cl>        <span class=n>Node</span> <span class=n>oldLast</span> <span class=o>=</span> <span class=n>last</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>last</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Node</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>last</span><span class=o>.</span><span class=na>item</span> <span class=o>=</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>isEmpty</span><span class=o>())</span><span class=n>first</span> <span class=o>=</span> <span class=n>last</span><span class=o>;</span><span class=c1>//链表为空时将first和last都指向新结点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>else</span> <span class=n>oldLast</span><span class=o>.</span><span class=na>next</span> <span class=o>=</span> <span class=n>last</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>n</span><span class=o>++;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=n>Item</span> <span class=nf>deQueue</span><span class=o>(){</span>
+</span></span><span class=line><span class=cl>        <span class=n>Item</span> <span class=n>item</span> <span class=o>=</span> <span class=n>first</span><span class=o>.</span><span class=na>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>first</span> <span class=o>=</span> <span class=n>first</span><span class=o>.</span><span class=na>next</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>isEmpty</span><span class=o>())</span><span class=n>last</span><span class=o>=</span><span class=kc>null</span><span class=o>;</span><span class=c1>//链表为空时更新last的值
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>n</span><span class=o>--;</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>item</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=15案例研究union-find-算法>1.5　案例研究：union-find 算法</h2><h3 id=151动态连通性>1.5.1　动态连通性</h3><p><img src=/images/read/algorithms/Image00263.jpg loading=lazy></p><h4 id=1513数学集合>1.5.1.3　数学集合</h4><p>将对象称为触点，将整数对称为连接，将等价类称为连通分量或是简称分量</p><div class=table-wrapper><table><thead><tr><th>public class UF</th><th></th></tr></thead><tbody><tr><td>UF(int N)</td><td>以整数标识（0到N-1）初始化N个触点</td></tr><tr><td>void union(int p, int q)</td><td>在p和q之间添加一条连接</td></tr><tr><td>int find(int p)</td><td>p（0到N-1）所在的分量的标识符</td></tr><tr><td>boolean connected(int p, int q)</td><td>如果p和q存在于同一个分量中则返回true</td></tr><tr><td>int count()</td><td>连通分量的数量</td></tr></tbody></table></div><h3 id=152实现>1.5.2　实现</h3><h4 id=1521quick-find-算法>1.5.2.1　quick-find 算法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>int</span> <span class=nf>find</span><span class=o>(</span><span class=kt>int</span> <span class=n>p</span><span class=o>){</span> <span class=k>return</span> <span class=n>id</span><span class=o>[</span><span class=n>p</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>union</span><span class=o>(</span><span class=kt>int</span> <span class=n>p</span><span class=o>,</span> <span class=kt>int</span> <span class=n>q</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span> <span class=c1>// 将p和q归并到相同的分量中
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>int</span> <span class=n>pID</span> <span class=o>=</span> <span class=n>find</span><span class=o>(</span><span class=n>p</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>qID</span> <span class=o>=</span> <span class=n>find</span><span class=o>(</span><span class=n>q</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 如果p和q已经在相同的分量之中则不需要采取任何行动
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=o>(</span><span class=n>pID</span> <span class=o>==</span> <span class=n>qID</span><span class=o>)</span> <span class=k>return</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 将p的分量重命名为q的名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>id</span><span class=o>.</span><span class=na>length</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>id</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>==</span> <span class=n>pID</span><span class=o>)</span> <span class=n>id</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>qID</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span><span class=o>--;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=1523quick-union-算法>1.5.2.3　quick-union 算法</h4><p>每个触点所对应的id[]元素都是同一个分量中的另一个触点的名称（也可能是它自己）——我们将这种联系称为链接。在实现find()方法时，我们从给定的触点开始，由它的链接得到另一个触点，再由这个触点的链接到达第三个触点，如此继续跟随着链接直到到达一个根触点，即链接指向自己的触点</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>private</span> <span class=kt>int</span> <span class=nf>find</span><span class=o>(</span><span class=kt>int</span> <span class=n>p</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span> <span class=c1>// 找出分量的名称
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>while</span> <span class=o>(</span><span class=n>p</span> <span class=o>!=</span> <span class=n>id</span><span class=o>[</span><span class=n>p</span><span class=o>])</span> <span class=n>p</span> <span class=o>=</span> <span class=n>id</span><span class=o>[</span><span class=n>p</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>p</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>union</span><span class=o>(</span><span class=kt>int</span> <span class=n>p</span><span class=o>,</span> <span class=kt>int</span> <span class=n>q</span><span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=o>{</span> <span class=c1>// 将p和q的根节点统一
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kt>int</span> <span class=n>pRoot</span> <span class=o>=</span> <span class=n>find</span><span class=o>(</span><span class=n>p</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>qRoot</span> <span class=o>=</span> <span class=n>find</span><span class=o>(</span><span class=n>q</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>(</span><span class=n>pRoot</span> <span class=o>==</span> <span class=n>qRoot</span><span class=o>)</span> <span class=k>return</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>id</span><span class=o>[</span><span class=n>pRoot</span><span class=o>]</span> <span class=o>=</span> <span class=n>qRoot</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>count</span><span class=o>--;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=1528最优算法>1.5.2.8　最优算法</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>class</span> <span class=nc>WeightedQuickUnionPathCompressionUF</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>parent</span><span class=o>;</span><span class=c1>//父链接数组（由触点索引）
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span><span class=o>[]</span> <span class=n>size</span><span class=o>;</span><span class=c1>//各个根节点所对应的分量的大小
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=kd>private</span> <span class=kt>int</span> <span class=n>count</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=nf>WeightedQuickUnionPathCompressionUF</span><span class=o>(</span><span class=kt>int</span> <span class=n>n</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span> <span class=o>=</span> <span class=n>n</span><span class=o>;</span><span class=n>parent</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>n</span><span class=o>];</span><span class=n>size</span> <span class=o>=</span> <span class=k>new</span> <span class=kt>int</span><span class=o>[</span><span class=n>n</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=o>(</span><span class=kt>int</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=n>count</span><span class=o>;</span> <span class=n>i</span><span class=o>++)</span> <span class=o>{</span> <span class=n>parent</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=n>i</span><span class=o>;</span><span class=n>size</span><span class=o>[</span><span class=n>i</span><span class=o>]</span> <span class=o>=</span> <span class=mi>1</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>int</span> <span class=nf>find</span><span class=o>(</span><span class=kt>int</span> <span class=n>p</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>root</span> <span class=o>=</span> <span class=n>p</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//跟随链接找到根节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>while</span> <span class=o>(</span><span class=n>root</span> <span class=o>!=</span> <span class=n>parent</span><span class=o>[</span><span class=n>root</span><span class=o>])</span> <span class=n>root</span> <span class=o>=</span> <span class=n>parent</span><span class=o>[</span><span class=n>root</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//将在路径上遇到的所有节点都直接链接到根节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>while</span> <span class=o>(</span><span class=n>p</span> <span class=o>!=</span> <span class=n>root</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=kt>int</span> <span class=n>newp</span> <span class=o>=</span> <span class=n>parent</span><span class=o>[</span><span class=n>p</span><span class=o>];</span>
+</span></span><span class=line><span class=cl>            <span class=n>parent</span><span class=o>[</span><span class=n>p</span><span class=o>]</span> <span class=o>=</span> <span class=n>root</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=n>p</span> <span class=o>=</span> <span class=n>newp</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>p</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kt>void</span> <span class=nf>union</span><span class=o>(</span><span class=kt>int</span> <span class=n>p</span><span class=o>,</span> <span class=kt>int</span> <span class=n>q</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>rootP</span> <span class=o>=</span> <span class=n>find</span><span class=o>(</span><span class=n>p</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=kt>int</span> <span class=n>rootQ</span> <span class=o>=</span> <span class=n>find</span><span class=o>(</span><span class=n>q</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>rootP</span> <span class=o>==</span> <span class=n>rootQ</span><span class=o>)</span> <span class=k>return</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=c1>//将小树的根节点连接到大树的根节点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>if</span> <span class=o>(</span><span class=n>size</span><span class=o>[</span><span class=n>rootP</span><span class=o>]</span> <span class=o>&lt;</span> <span class=n>size</span><span class=o>[</span><span class=n>rootQ</span><span class=o>])</span> <span class=o>{</span> <span class=n>parent</span><span class=o>[</span><span class=n>rootP</span><span class=o>]</span> <span class=o>=</span> <span class=n>rootQ</span><span class=o>;</span><span class=n>size</span><span class=o>[</span><span class=n>rootQ</span><span class=o>]</span> <span class=o>+=</span> <span class=n>size</span><span class=o>[</span><span class=n>rootP</span><span class=o>];</span> <span class=o>}</span> 
+</span></span><span class=line><span class=cl>        <span class=k>else</span> <span class=o>{</span> <span class=n>parent</span><span class=o>[</span><span class=n>rootQ</span><span class=o>]</span> <span class=o>=</span> <span class=n>rootP</span><span class=o>;</span><span class=n>size</span><span class=o>[</span><span class=n>rootP</span><span class=o>]</span> <span class=o>+=</span> <span class=n>size</span><span class=o>[</span><span class=n>rootQ</span><span class=o>];</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=n>count</span><span class=o>--;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/%E7%AE%97%E6%B3%95/>算法</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span>最后更新于 Sep 25, 2023 11:15 +0800</span></section></footer></article><footer class=site-footer><section class=copyright>&copy;
+2023 YZLC</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.20.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

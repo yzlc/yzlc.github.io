@@ -1,1 +1,425 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>os on YZLC</title><link>https://yzlc.github.io/tags/os/</link><description>Recent content in os on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 29 May 2022 15:03:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/os/index.xml" rel="self" type="application/rss+xml"/><item><title>第五章 I/O设备</title><link>https://yzlc.github.io/post/read/base/os/5/</link><pubDate>Sun, 29 May 2022 15:03:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/5/</guid><description>I/O控制方式 程序直接控制方式：CPU轮询。传输单位-字。设备-&amp;gt;CPU-&amp;gt;内存 中断驱动：CPU发出命令后做其他事。传输单位-字</description></item><item><title>第四章 文件管理</title><link>https://yzlc.github.io/post/read/base/os/4/</link><pubDate>Sat, 28 May 2022 15:08:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/4/</guid><description>文件的逻辑结构 顺序文件：可变长记录文件无法实现随机存储、定长记录、顺序结构文件可以快速检索 索引文件：索引表就是定长记录的顺序文件，若按关键字</description></item><item><title>第三章 内存</title><link>https://yzlc.github.io/post/read/base/os/3/</link><pubDate>Sat, 28 May 2022 14:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/3/</guid><description>进程运行基本原理 编译：高级语言 -&amp;gt; 机器语言 链接：把编译后的一组模块+库函数 链接在一起 装入：把链接后的装入模块 装入内存 覆盖与交换 覆盖：覆盖区、固</description></item><item><title>第二章 进程</title><link>https://yzlc.github.io/post/read/base/os/2/</link><pubDate>Tue, 10 May 2022 21:22:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/2/</guid><description>定义 PCB(系统分配用来描述进程信息)：PID(唯一标识)、UID(用户)、状态、优先级、资源分配清单(程序(数据)段指针、键盘、鼠标)、处</description></item><item><title>第一章 操作系统</title><link>https://yzlc.github.io/post/read/base/os/1/</link><pubDate>Tue, 10 May 2022 20:44:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/1/</guid><description>功能 资源管理：处理机、存储器、文件、设备 提供服务：命令、程序接口、图形界面 特征 并发：间隔发生，宏观上是同时，微观上是交替。VS 多核并行：同时</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>os on YZLC</title><link>https://yzlc.github.io/tags/os/</link><description>Recent content in os on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 29 May 2022 15:03:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/os/index.xml" rel="self" type="application/rss+xml"/><item><title>第五章 I/O设备</title><link>https://yzlc.github.io/post/read/base/os/5/</link><pubDate>Sun, 29 May 2022 15:03:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/5/</guid><description>&lt;h2 id="io控制方式">I/O控制方式&lt;/h2>
+&lt;ul>
+&lt;li>程序直接控制方式：CPU轮询。传输单位-字。设备-&amp;gt;CPU-&amp;gt;内存&lt;/li>
+&lt;li>中断驱动：CPU发出命令后做其他事。传输单位-字。设备-&amp;gt;CPU-&amp;gt;内存&lt;/li>
+&lt;li>DMA：传输单位-块。设备-&amp;gt;内存&lt;/li>
+&lt;li>通道：执行通道程序。一组块。设备-&amp;gt;内存&lt;/li>
+&lt;/ul>
+&lt;h2 id="io软件层次结构">I/O软件层次结构&lt;/h2>
+&lt;p>用户层(库函数)-&amp;gt;设备独立性软件(设备管理)-&amp;gt;设备驱动程序-&amp;gt;中断处理程序-&amp;gt;硬件&lt;/p>
+&lt;h2 id="假软件方式脱机spooling技术">假(软件方式)脱机(SPOOLING)技术&lt;/h2>
+&lt;ul>
+&lt;li>输入/出井：模拟脱机输入/出时的磁带&lt;/li>
+&lt;li>输入/出进程：模拟脱机输入/出时的外围控制机&lt;/li>
+&lt;li>输入/出缓冲区：内存中的缓冲区&lt;/li>
+&lt;/ul>
+&lt;h2 id="设备的分配与回收">设备的分配与回收&lt;/h2>
+&lt;ul>
+&lt;li>分配算法：先来先服务、优先级、短任务优先等&lt;/li>
+&lt;li>动(静)态分配：进程运行时(前)分配(全部)资源&lt;/li>
+&lt;li>数据结构：DCT(设备控制表)、COCT(控制器控制表)、CHCT(通道控制表)、SDT(系统设备表)。状态、等待队列指针&lt;/li>
+&lt;li>分配步骤：设备名-&amp;gt;SDT-&amp;gt;DCT-&amp;gt;COCT-&amp;gt;CHCT-&amp;gt;分配通道&lt;/li>
+&lt;li>改进：LUT(逻辑设备表：逻辑设备名-&amp;gt;物理设备名)&lt;/li>
+&lt;/ul>
+&lt;h2 id="缓冲区管理">缓冲区管理&lt;/h2>
+&lt;blockquote>
+&lt;p>一般利用内存作为缓冲区，缓解CPU与设备的矛盾&lt;/p>
+&lt;/blockquote>
+&lt;p>单/双/循环缓冲区、缓冲池(空缓冲队列、输入/出队列)&lt;/p></description></item><item><title>第四章 文件管理</title><link>https://yzlc.github.io/post/read/base/os/4/</link><pubDate>Sat, 28 May 2022 15:08:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/4/</guid><description>&lt;h2 id="文件的逻辑结构">文件的逻辑结构&lt;/h2>
+&lt;ul>
+&lt;li>顺序文件：可变长记录文件无法实现随机存储、定长记录、顺序结构文件可以快速检索&lt;/li>
+&lt;li>索引文件：索引表就是定长记录的顺序文件，若按关键字排列，可支持快速检索&lt;/li>
+&lt;li>索引顺序文件：将记录分组，每组对应一个索引表项，多级索引&lt;/li>
+&lt;/ul>
+&lt;h2 id="文件目录">文件目录&lt;/h2>
+&lt;ul>
+&lt;li>一个文件对应一个FCB(目录项)，多个组成目录&lt;/li>
+&lt;li>无环图目录结构：在树形基础上，增加指向同一节点的有向边，为共享节点设置一个计数器，为0时删除&lt;/li>
+&lt;li>索引节点：目录项只放文件名+索引节点指针，检索时磁盘I/O就少了&lt;/li>
+&lt;/ul>
+&lt;h2 id="文件物理结构">文件物理结构&lt;/h2>
+&lt;ul>
+&lt;li>磁盘块一般与内存块、页面大小相同&lt;/li>
+&lt;li>分配方式
+&lt;ul>
+&lt;li>连续分配：支持随机访问，碎片&lt;/li>
+&lt;li>链接分配：隐式链接(每块指向下一块指针)不支持随机访问；显示链接(FAT)分配表常驻内存，支持随机访问&lt;/li>
+&lt;li>索引分配：多级索引表，支持随机访问&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="文件存储空间管理">文件存储空间管理&lt;/h2>
+&lt;ul>
+&lt;li>空闲表法：记录每个连续空闲区的起始盘块号、盘块数。分配采用首次适应、最佳适应等；回收时表项合并&lt;/li>
+&lt;li>空闲链表法：以盘块/盘区为单位组成一条空闲链&lt;/li>
+&lt;li>位示图法：一个二进制位对应一个盘块。行号+列号与盘块号对应&lt;/li>
+&lt;li>成组链接法(UNIX)：超级快：链表指向下一组 空闲盘快数+空闲块号。在磁盘目录区设置超级快，放入内存&lt;/li>
+&lt;/ul>
+&lt;h2 id="文件的基本操作">文件的基本操作&lt;/h2>
+&lt;ul>
+&lt;li>创建：分配外存空间，创建目录项&lt;/li>
+&lt;li>删除：回收外存空间，删除目录项&lt;/li>
+&lt;li>打开：把目录项复制到内存的打开文件表(打开计数器)，进程有自己的打开文件表(读写指针、访问权限)&lt;/li>
+&lt;li>关闭：删除进程和内存(计数器为0)的打开文件表&lt;/li>
+&lt;li>读：根据读指针、读入数据量、内存位置将文件数据从外存读入内存&lt;/li>
+&lt;li>写：根据写指针、写出数据量、内存位置将文件数据从内存写出外存&lt;/li>
+&lt;/ul>
+&lt;h2 id="文件共享">文件共享&lt;/h2>
+&lt;ul>
+&lt;li>硬链接：每个用户目录项指向同一个索引节点，count为0时删除&lt;/li>
+&lt;li>软链接：link型文件(Windows快捷方式)，多次磁盘I/O&lt;/li>
+&lt;/ul>
+&lt;h2 id="磁盘调度算法寻道">磁盘调度算法(寻道)&lt;/h2>
+&lt;p>FCFS(先来先服务)、SSTF(最短寻找时间优先 贪心算法) -&amp;gt; SCAN(扫描算法 电梯算法) -&amp;gt; LOOK(边移动边观察)&lt;/p>
+&lt;h2 id="减少磁盘延迟时间转圈的方法">减少磁盘延迟时间(转圈)的方法&lt;/h2>
+&lt;p>扇区交替编号、错位命名、地址结构(柱面号，盘面号，扇区号)&lt;/p></description></item><item><title>第三章 内存</title><link>https://yzlc.github.io/post/read/base/os/3/</link><pubDate>Sat, 28 May 2022 14:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/3/</guid><description>&lt;h2 id="进程运行基本原理">进程运行基本原理&lt;/h2>
+&lt;ol>
+&lt;li>编译：高级语言 -&amp;gt; 机器语言&lt;/li>
+&lt;li>链接：把编译后的一组模块+库函数 链接在一起&lt;/li>
+&lt;li>装入：把链接后的装入模块 装入内存&lt;/li>
+&lt;/ol>
+&lt;h2 id="覆盖与交换">覆盖与交换&lt;/h2>
+&lt;ul>
+&lt;li>覆盖：覆盖区、固定区(不会调入调出)&lt;/li>
+&lt;li>交换：对换区(更快，离散分配)、文件区(连续分配)&lt;/li>
+&lt;/ul>
+&lt;h2 id="分页存储">分页存储&lt;/h2>
+&lt;blockquote>
+&lt;p>把进程分页，离散放到内存块&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>页表：页号+块号。记录进程页面和实际内存块对应关系&lt;/li>
+&lt;li>快表(TLB)：局部性原理，高速缓存，存放当前访问的页表&lt;/li>
+&lt;li>多级页表：页表过大时需要连续空间和常驻内存&lt;/li>
+&lt;/ul>
+&lt;h2 id="虚拟内存">虚拟内存&lt;/h2>
+&lt;ul>
+&lt;li>局部性原理：时间、空间、高速缓存&lt;/li>
+&lt;li>特征：多次(调入)性、对换性、虚拟性&lt;/li>
+&lt;li>页表机制：状态位(是否在内存)、访问字段(供置换算法参考)、修改位(写回外存)、外存地址&lt;/li>
+&lt;/ul>
+&lt;h3 id="置换算法">置换算法&lt;/h3>
+&lt;ul>
+&lt;li>OPT：最长时间不会被访问。发生在未来，无法实现&lt;/li>
+&lt;li>FIFO：先进先出&lt;/li>
+&lt;li>LRU：最近最久未访问&lt;/li>
+&lt;li>CLOCK(NRU)：循环扫描，淘汰访问位=0的，其他的改为1&lt;/li>
+&lt;li>改CLOCK，循环扫描
+&lt;ul>
+&lt;li>
+&lt;ol>
+&lt;li>淘汰访问0、修改0&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;ol start="2">
+&lt;li>淘汰访问0、修改1，其他页面访问改为0&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul></description></item><item><title>第二章 进程</title><link>https://yzlc.github.io/post/read/base/os/2/</link><pubDate>Tue, 10 May 2022 21:22:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/2/</guid><description>&lt;h2 id="定义">定义&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>PCB(系统分配用来描述进程信息)：PID(唯一标识)、UID(用户)、状态、优先级、资源分配清单(程序(数据)段指针、键盘、鼠标)、处理机相关信息(各种寄存器值。进程切换时记录运行情况。如程序计数器值等)&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>程序段、数据段&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>多个进程组织方式：链表、数组&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="状态">状态&lt;/h2>
+&lt;ul>
+&lt;li>创建 -&amp;gt; 就绪(处理机×其他√) &amp;lt;-&amp;gt; 运行((处理机√其他√)) -&amp;gt; 终止&lt;/li>
+&lt;li>运行 -&amp;gt;(主动) 阻塞(处理机×其他×) -&amp;gt;(被动) 就绪&lt;/li>
+&lt;/ul>
+&lt;h2 id="进程控制">进程控制&lt;/h2>
+&lt;blockquote>
+&lt;p>用原语实现进程状态转换&lt;/p>
+&lt;/blockquote>
+&lt;ol>
+&lt;li>更新PCB信息(修改进程状态标志、运行环境保存到PCB、从PCB恢复)&lt;/li>
+&lt;li>将PCB插入合适队列&lt;/li>
+&lt;li>分配/回收资源&lt;/li>
+&lt;/ol>
+&lt;h2 id="进程通信">进程通信&lt;/h2>
+&lt;ul>
+&lt;li>共享存储：设置一个共享空间，互斥访问&lt;/li>
+&lt;li>管道通信：设置一个特殊的共享文件(管道)，其实就是一个缓冲区。半双工、互斥、没写满不能读，没读空不能写&lt;/li>
+&lt;li>消息传递：传递结构化消息(消息头/消息体)，系统提供&amp;quot;发送/接受原语&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;h2 id="线程">线程&lt;/h2>
+&lt;blockquote>
+&lt;p>CPU执行单元，调度的基本单位，进程作为除CPU外的资源分配基本单位&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>同进程线程切换，不需要切换进程环境&lt;/li>
+&lt;li>多线程模型：用户级线程-内核级线程(处理机分配单位) 多(开销小)对多(并发高)&lt;/li>
+&lt;/ul>
+&lt;h2 id="处理机调度">处理机调度&lt;/h2>
+&lt;ul>
+&lt;li>高级(作业)调度：后备队列(外存)-&amp;gt;内存，发生频率最低，无-&amp;gt;创建态-&amp;gt;就绪态&lt;/li>
+&lt;li>中级(内存)调度：挂起队列(外存)-&amp;gt;内存，发生频率中等，挂起态-&amp;gt;就绪态 (阻塞挂起-&amp;gt;阻塞态)&lt;/li>
+&lt;li>低级(进程)调度：就绪队列(内存)-&amp;gt;CPU，发生频率最高，就绪态-&amp;gt;运行态&lt;/li>
+&lt;/ul>
+&lt;h2 id="调度时机">调度时机&lt;/h2>
+&lt;ul>
+&lt;li>主动(非抢占式)：进程正常终止、异常终止、阻塞（I/O）&lt;/li>
+&lt;li>被动(抢占式)：时间片用完、更紧急(I/O中断)、更高优先级进程进入就绪队列&lt;/li>
+&lt;li>不能调度：中断、进程在系统内核临界区(锁住的内核数据结构需要尽快操作完释放)、原语&lt;/li>
+&lt;/ul>
+&lt;h2 id="调度算法">调度算法&lt;/h2>
+&lt;ul>
+&lt;li>先来先服务(FCFS) + 短作业优先(SJF) = 高响应比优先(HRRN)&lt;/li>
+&lt;li>时间片轮转(RR) + 优先级调度 = 多级反馈队列&lt;/li>
+&lt;/ul>
+&lt;h2 id="进程同步先后互斥临界资源">进程同步(先后)、互斥(临界资源)&lt;/h2>
+&lt;ul>
+&lt;li>进程互斥四部分：进入区(检查是否可进入和上锁) -&amp;gt; 临界区(访问临界资源) -&amp;gt; 退出区(解锁) -&amp;gt; 剩余区(其余代码)&lt;/li>
+&lt;li>原则：空闲让进、忙则(有限(饥饿)、让权(CPU))等待&lt;/li>
+&lt;/ul>
+&lt;h2 id="互斥软件实现方法">互斥软件实现方法&lt;/h2>
+&lt;ul>
+&lt;li>单标志法：进入区只检查，不上锁，退出区转交。不遵循空闲让进原则&lt;/li>
+&lt;li>双标志先检查法：进入区先检查后上锁，退出区解锁。不遵循忙则等待原则&lt;/li>
+&lt;li>双标志后检查法：进入区先上锁后检查，退出区解锁。不遵循空闲让进、有限等待原则&lt;/li>
+&lt;li>peterson算法：进入区主动争取-主动谦让-检查对方是否想进、己方是否谦让。不遵循让权等待原则&lt;/li>
+&lt;/ul>
+&lt;h2 id="互斥硬件实现方法">互斥硬件实现方法&lt;/h2>
+&lt;ul>
+&lt;li>中断屏蔽方法：使用“开/关中断”指令实现。只适用于单处理机、操作系统内核进程&lt;/li>
+&lt;li>TestAndSet(TS指令/TSL指令)、Swap指令(XCHG指令)：old记录是否已被上锁，再将lock设为true，检查临界区是否已被上锁，若已上锁循环重复前几步&lt;/li>
+&lt;/ul>
+&lt;h2 id="信号量机制">信号量机制&lt;/h2>
+&lt;ul>
+&lt;li>整型信号量：用数值表示资源数(S)。
+&lt;ul>
+&lt;li>P：while(S&amp;lt;=0); S=S-1;&lt;/li>
+&lt;li>V：S=S+1;&lt;/li>
+&lt;li>不满足让权等待&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>记录型信号量(semaphore)S：剩余资源数(value) + 等待队列(L)
+&lt;ul>
+&lt;li>P(S)：S.value&amp;ndash;; if(S.value&amp;lt;0) block(S.L);&lt;/li>
+&lt;li>V(S)：S.value++; if(S.value&amp;lt;=0) wakeup(S.L);&lt;/li>
+&lt;li>进程互斥：信号量初值为1，P-&amp;gt;临界区-&amp;gt;V&lt;/li>
+&lt;li>进程同步(保证一前一后)、前驱关系：信号量初值为0，在每个前操作之后执行V，在每个后操作之前执行P。从前后事件角度考虑&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="互斥同步问题">互斥同步问题&lt;/h2>
+&lt;h3 id="生产者-消费者问题">生产者-消费者问题&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="n">semaphore&lt;/span> &lt;span class="n">mutex&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//缓冲区互斥
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">semaphore&lt;/span> &lt;span class="n">empty&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">n&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//空闲缓冲区同步，等生产者放
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">semaphore&lt;/span> &lt;span class="n">full&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//非空缓冲区同步，等消费者取
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">producer&lt;/span>&lt;span class="o">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">生产一个产品&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">empty&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//消耗一个空闲缓冲区
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">把产品放入缓冲区&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">full&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//增加一个非空缓冲区
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">consumer&lt;/span>&lt;span class="o">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">full&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//消耗一个非空缓冲区
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">从缓冲区取出一个产品&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">empty&lt;/span>&lt;span class="o">);&lt;/span>&lt;span class="c1">//增加一个空闲缓冲区
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">使用产品&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="读者-写者问题">读者-写者问题&lt;/h3>
+&lt;blockquote>
+&lt;p>允许读-读&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="n">semaphore&lt;/span> &lt;span class="n">rw&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//文件互斥访问
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">count&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//记录几个读进程在访问文件
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">semaphore&lt;/span> &lt;span class="n">mutex&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//对count互斥
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">semaphore&lt;/span> &lt;span class="n">w&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//实现写优先
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">writer&lt;/span>&lt;span class="o">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">w&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">rw&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">写&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">rw&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">w&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">reader&lt;/span>&lt;span class="o">(){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">w&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="o">)&lt;/span> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">rw&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span>&lt;span class="o">++;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">w&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">读&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">count&lt;/span>&lt;span class="o">--;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">count&lt;/span>&lt;span class="o">==&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="o">)&lt;/span>&lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">rw&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="哲学家进餐问题">哲学家进餐问题&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-java" data-lang="java">&lt;span class="line">&lt;span class="cl">&lt;span class="n">semaphore&lt;/span> &lt;span class="n">chopstick&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="o">]={&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">semaphore&lt;/span> &lt;span class="n">mutex&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">;&lt;/span>&lt;span class="c1">//互斥取筷子
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="n">Pi&lt;/span>&lt;span class="o">(){&lt;/span>&lt;span class="c1">//i号哲学家进程
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="k">while&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">chopstick&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">]);&lt;/span>&lt;span class="c1">//拿左
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">P&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">chopstick&lt;/span>&lt;span class="o">[(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">)%&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="o">]);&lt;/span>&lt;span class="c1">//拿右
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">mutex&lt;/span>&lt;span class="o">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">吃&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">chopstick&lt;/span>&lt;span class="o">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">]);&lt;/span>&lt;span class="c1">//放左
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">V&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="n">chopstick&lt;/span>&lt;span class="o">[(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="o">)%&lt;/span>&lt;span class="mi">5&lt;/span>&lt;span class="o">]);&lt;/span>&lt;span class="c1">//放右
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">思考&lt;/span>&lt;span class="o">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="管程">管程&lt;/h2>
+&lt;blockquote>
+&lt;p>synchronized&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="死锁">死锁&lt;/h2>
+&lt;ul>
+&lt;li>预防死锁(破坏四个条件)：互斥、不剥夺、请求和保持、循环等待&lt;/li>
+&lt;li>避免死锁(银行家算法)：检查需求，试探分配，检查安全序列(剩余资源能满足某个进程需求)&lt;/li>
+&lt;li>检测和解除：用资源分配图(进程/资源节点)检测。解除：资源剥夺、终止进程、进程回退&lt;/li>
+&lt;/ul></description></item><item><title>第一章 操作系统</title><link>https://yzlc.github.io/post/read/base/os/1/</link><pubDate>Tue, 10 May 2022 20:44:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/base/os/1/</guid><description>&lt;h2 id="功能">功能&lt;/h2>
+&lt;ul>
+&lt;li>资源管理：处理机、存储器、文件、设备&lt;/li>
+&lt;li>提供服务：命令、程序接口、图形界面&lt;/li>
+&lt;/ul>
+&lt;h2 id="特征">特征&lt;/h2>
+&lt;ul>
+&lt;li>并发：间隔发生，宏观上是同时，微观上是交替。VS 多核并行：同时&lt;/li>
+&lt;li>共享：互斥、同时&lt;/li>
+&lt;li>虚拟：空分复用(虚拟存储器)、时分复用(虚拟处理器)&lt;/li>
+&lt;li>异步&lt;/li>
+&lt;/ul>
+&lt;h2 id="运行机制与体系结构">运行机制与体系结构&lt;/h2>
+&lt;ul>
+&lt;li>(非)特权指令&lt;/li>
+&lt;li>处理器：核心(用户)态，寄存器PSW标识&lt;/li>
+&lt;li>内核(应用)程序&lt;/li>
+&lt;/ul>
+&lt;p>内核：时钟管理、中断处理、原语(设备驱动、CPU切换等，最接近硬件的具有原子性的特殊程序)、资源管理(大内核)&lt;/p>
+&lt;p>大(微)内核：高(低)性能、不好(好)维护&lt;/p>
+&lt;h2 id="中断">中断&lt;/h2>
+&lt;blockquote>
+&lt;p>为了实现并发，用户态-&amp;gt;核心态唯一途径&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>内中断(与当前指令有关)：自愿中断(系统调用)、强迫中断(硬件故障-缺页、软件中断-除0)&lt;/li>
+&lt;li>外中断(与当前指令无关)：外设请求(IO)、人工干预(结束进程)&lt;/li>
+&lt;/ul>
+&lt;h2 id="系统调用">系统调用&lt;/h2>
+&lt;blockquote>
+&lt;p>保证系统的安全性&lt;/p>
+&lt;/blockquote>
+&lt;p>传递系统调用参数-&amp;gt;执行陷入指令(只能是用户态)-&amp;gt;执行系统调用(核心态)-&amp;gt;返回用户程序&lt;/p></description></item></channel></rss>

@@ -1,1 +1,47 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>powershell on YZLC</title><link>https://yzlc.github.io/tags/powershell/</link><description>Recent content in powershell on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Dec 2020 15:41:10 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml"/><item><title>powershell</title><link>https://yzlc.github.io/post/note/win/powershell/</link><pubDate>Mon, 28 Dec 2020 15:41:10 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/powershell/</guid><description>代理 1 2 3 4 5 6 #设置代理 $Env:https_proxy=&amp;#34;socks5://localhost:10808&amp;#34; #取消代理 #查看代理 $env:https_proxy 环境变量 1 2 3 4 5 6 7 8 9 10 [environment]::SetEnvironmentvariable(&amp;#34;GOPATH&amp;#34;, &amp;#34;$env:USERPROFILE\gopath&amp;#34;, &amp;#34;User&amp;#34;) #调用命令结果：$(命令) #获取原有用户 PATH 变量：$([e</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>powershell on YZLC</title><link>https://yzlc.github.io/tags/powershell/</link><description>Recent content in powershell on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Mon, 28 Dec 2020 15:41:10 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/powershell/index.xml" rel="self" type="application/rss+xml"/><item><title>powershell</title><link>https://yzlc.github.io/post/note/win/powershell/</link><pubDate>Mon, 28 Dec 2020 15:41:10 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/powershell/</guid><description>&lt;h2 id="代理">代理&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c">#设置代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$Env:https_proxy&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="s2">&amp;#34;socks5://localhost:10808&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#取消代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#查看代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$env:https_proxy&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="环境变量">环境变量&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="no">environment&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">SetEnvironmentvariable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;GOPATH&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env:USERPROFILE&lt;/span>&lt;span class="s2">\gopath&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;User&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#调用命令结果：$(命令)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#获取原有用户 PATH 变量：$([environment]::GetEnvironmentvariable(&amp;#34;Path&amp;#34;, &amp;#34;User&amp;#34;))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#注意 PATH 中条目以分号结尾&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="no">environment&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">SetEnvironmentvariable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;PATH&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">$([&lt;/span>&lt;span class="no">environment&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">GetEnvironmentvariable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Path&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;User&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="s2">;%GOPATH%\bin&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;User&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="no">environment&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">SetEnvironmentvariable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;GOROOT&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;C:\go&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Machine&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#调用命令结果：$(命令)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c">#获取原有系统 PATH 变量：$([environment]::GetEnvironmentvariable(&amp;#34;Path&amp;#34;, &amp;#34;Machine&amp;#34;))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="no">environment&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">SetEnvironmentvariable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;PATH&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">$([&lt;/span>&lt;span class="no">environment&lt;/span>&lt;span class="p">]::&lt;/span>&lt;span class="n">GetEnvironmentvariable&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Path&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Machine&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="s2">;%GOROOT%\bin&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;Machine&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

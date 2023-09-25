@@ -1,0 +1,346 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="参考 Spring分析 请别再问Spring Bean的生命周期了！ 思想：把对象创建和调用交给spring管理，降低耦合 实现：配置解析-&amp;gt;工"><title>springIOC</title><link rel=canonical href=https://yzlc.github.io/post/read/spring/ioc/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="springIOC"><meta property="og:description" content="参考 Spring分析 请别再问Spring Bean的生命周期了！ 思想：把对象创建和调用交给spring管理，降低耦合 实现：配置解析-&amp;gt;工"><meta property="og:url" content="https://yzlc.github.io/post/read/spring/ioc/"><meta property="og:site_name" content="YZLC"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="spring"><meta property="article:published_time" content="2020-12-07T22:08:33+08:00"><meta property="article:modified_time" content="2023-09-25T11:15:53+08:00"><meta name=twitter:title content="springIOC"><meta name=twitter:description content="参考 Spring分析 请别再问Spring Bean的生命周期了！ 思想：把对象创建和调用交给spring管理，降低耦合 实现：配置解析-&amp;gt;工"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>YZLC</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/tags/><span>标签</span></a></li><li><a href=/categories/><span>分类</span></a></li><li><a href=/post/web><span>网站大全</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/read/>read</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/read/spring/ioc/>springIOC</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Dec 07, 2020</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><p>参考</p><ul><li><a class=link href=https://developer.ibm.com/zh/articles/j-lo-spring-principle/ target=_blank rel=noopener>Spring分析</a></li><li><a class=link href=https://www.jianshu.com/p/1dec08d290c1 target=_blank rel=noopener>请别再问Spring Bean的生命周期了！</a></li></ul><p>思想：把对象创建和调用交给spring管理，降低耦合</p><p>实现：配置解析->工厂->创建对象(反射)->DI(注入属性)</p><h2 id=beans演员>beans（演员）</h2><p>创建</p><p><img src=/images/read/spring/image003.png loading=lazy></p><ul><li>BeanFactory：IOC容器基本实现，懒加载</li><li>ListableBeanFactory：Bean是可列表的</li><li>HierarchicalBeanFactory：Bean有继承关系</li><li>AutowireCapableBeanFactory：Bean的自动装配规则</li><li>DefaultListableBeanFactory：默认实现</li></ul><p>定义</p><p><img src=/images/read/spring/image004.png loading=lazy></p><p>解析</p><p><img src=/images/read/spring/image005.png loading=lazy></p><h2 id=context舞台>context（舞台）</h2><blockquote><p>给Spring提供运行时的环境（Ioc容器），用以保存各个对象的状态。整合了大部分功能</p></blockquote><p>Context类图</p><p><img src=/images/read/spring/image006.png loading=lazy></p><ul><li>ResourceLoader：访问外部资源</li><li>ConfigurableApplicationContext：可动态添加或修改已有的配置信息<ul><li>AbstractRefreshableApplicationContext（常用）</li></ul></li></ul><p>作用</p><ul><li>标识应用环境</li><li>创建Bean对象</li><li>保存对象关系表</li><li>捕获各种事件</li></ul><h2 id=core道具>core（道具）</h2><blockquote><p>定义了资源的访问方式</p></blockquote><p>Resource类图</p><p><img src=/images/read/spring/image007.png loading=lazy></p><p>Context和Resource类关系图</p><p><img src=/images/read/spring/image008.png loading=lazy></p><h2 id=ioc>ioc</h2><p><code>AbstractApplicationContext</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>refresh</span><span class=o>()</span> <span class=kd>throws</span> <span class=n>BeansException</span><span class=o>,</span> <span class=n>IllegalStateException</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>synchronized</span> <span class=o>(</span><span class=k>this</span><span class=o>.</span><span class=na>startupShutdownMonitor</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// Prepare this context for refreshing.
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>prepareRefresh</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// Tell the subclass to refresh the internal bean factory.
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>ConfigurableListableBeanFactory</span> <span class=n>beanFactory</span> <span class=o>=</span> <span class=n>obtainFreshBeanFactory</span><span class=o>();</span><span class=c1>//创建BeanFactory
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>        <span class=c1>// Prepare the bean factory for use in this context.
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>prepareBeanFactory</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span><span class=c1>//配置BeanFactory：添加一些Spring本身需要的一些工具类
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>        <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Allows post-processing of the bean factory in context subclasses.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>postProcessBeanFactory</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// Invoke factory processors registered as beans in the context.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>invokeBeanFactoryPostProcessors</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span><span class=c1>//对已经构建的 BeanFactory 的配置做修改（实现BeanFactoryPostProcessor接口）
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Register bean processors that intercept bean creation.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>registerBeanPostProcessors</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span><span class=c1>//对以后再创建 Bean 的实例对象时添加一些自定义的操作（实现BeanPostProcessor接口）
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Initialize message source for this context.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>initMessageSource</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// Initialize event multicaster for this context.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>initApplicationEventMulticaster</span><span class=o>();</span><span class=c1>//初始化监听事件
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Initialize other special beans in specific context subclasses.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>onRefresh</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// Check for listener beans and register them.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>registerListeners</span><span class=o>();</span><span class=c1>//对系统的其他监听者的注册（实现ApplicationListener接口）
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Instantiate all remaining (non-lazy-init) singletons.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>finishBeanFactoryInitialization</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span><span class=c1>//创建 Bean 实例并构建 Bean 的关系网
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Last step: publish corresponding event.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>finishRefresh</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>BeansException</span> <span class=n>ex</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// Destroy already created singletons to avoid dangling resources.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>destroyBeans</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// Reset &#39;active&#39; flag.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>cancelRefresh</span><span class=o>(</span><span class=n>ex</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1>// Propagate exception to caller.
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>throw</span> <span class=n>ex</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span> <span class=k>finally</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=c1>// Reset common introspection caches in Spring&#39;s core, since we
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=c1>// might not ever need metadata for singleton beans anymore...
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=n>resetCommonCaches</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=构建beanfactory>构建BeanFactory</h3><p><code>AbstractRefreshableApplicationContext</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>protected</span> <span class=kd>final</span> <span class=kt>void</span> <span class=nf>refreshBeanFactory</span><span class=o>()</span> <span class=kd>throws</span> <span class=n>BeansException</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>(</span><span class=n>hasBeanFactory</span><span class=o>())</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>destroyBeans</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>        <span class=n>closeBeanFactory</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>DefaultListableBeanFactory</span> <span class=n>beanFactory</span> <span class=o>=</span> <span class=n>createBeanFactory</span><span class=o>();</span><span class=c1>//BeanFactory的原始对象
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>beanFactory</span><span class=o>.</span><span class=na>setSerializationId</span><span class=o>(</span><span class=n>getId</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>        <span class=n>customizeBeanFactory</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=n>loadBeanDefinitions</span><span class=o>(</span><span class=n>beanFactory</span><span class=o>);</span><span class=c1>//加载、解析Bean的定义
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>this</span><span class=o>.</span><span class=na>beanFactory</span> <span class=o>=</span> <span class=n>beanFactory</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span> <span class=k>catch</span> <span class=o>(</span><span class=n>IOException</span> <span class=n>ex</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>throw</span> <span class=k>new</span> <span class=n>ApplicationContextException</span><span class=o>(</span><span class=s>&#34;I/O error parsing bean definition source for &#34;</span> <span class=o>+</span> <span class=n>getDisplayName</span><span class=o>(),</span> <span class=n>ex</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>DefaultListableBeanFactory</code>类图</p><p><img src=/images/read/spring/image009.png loading=lazy></p><h3 id=bean的实例化>Bean的实例化</h3><p><code>DefaultListableBeanFactory</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kt>void</span> <span class=nf>preInstantiateSingletons</span><span class=o>()</span> <span class=kd>throws</span> <span class=n>BeansException</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Iterate over a copy to allow for init methods which in turn register new bean definitions.
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// While this may not be part of the regular factory bootstrap, it does otherwise work fine.
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>List</span><span class=o>&lt;</span><span class=n>String</span><span class=o>&gt;</span> <span class=n>beanNames</span> <span class=o>=</span> <span class=k>new</span> <span class=n>ArrayList</span><span class=o>&lt;&gt;(</span><span class=k>this</span><span class=o>.</span><span class=na>beanDefinitionNames</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Trigger initialization of all non-lazy singleton beans...
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>for</span> <span class=o>(</span><span class=n>String</span> <span class=n>beanName</span> <span class=o>:</span> <span class=n>beanNames</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>RootBeanDefinition</span> <span class=n>bd</span> <span class=o>=</span> <span class=n>getMergedLocalBeanDefinition</span><span class=o>(</span><span class=n>beanName</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(!</span><span class=n>bd</span><span class=o>.</span><span class=na>isAbstract</span><span class=o>()</span> <span class=o>&amp;&amp;</span> <span class=n>bd</span><span class=o>.</span><span class=na>isSingleton</span><span class=o>()</span> <span class=o>&amp;&amp;</span> <span class=o>!</span><span class=n>bd</span><span class=o>.</span><span class=na>isLazyInit</span><span class=o>())</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(</span><span class=n>isFactoryBean</span><span class=o>(</span><span class=n>beanName</span><span class=o>))</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>Object</span> <span class=n>bean</span> <span class=o>=</span> <span class=n>getBean</span><span class=o>(</span><span class=n>FACTORY_BEAN_PREFIX</span> <span class=o>+</span> <span class=n>beanName</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=o>(</span><span class=n>bean</span> <span class=k>instanceof</span> <span class=n>FactoryBean</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                    <span class=n>FactoryBean</span><span class=o>&lt;?&gt;</span> <span class=n>factory</span> <span class=o>=</span> <span class=o>(</span><span class=n>FactoryBean</span><span class=o>&lt;?&gt;)</span> <span class=n>bean</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>                    <span class=kt>boolean</span> <span class=n>isEagerInit</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=o>(</span><span class=n>System</span><span class=o>.</span><span class=na>getSecurityManager</span><span class=o>()</span> <span class=o>!=</span> <span class=kc>null</span> <span class=o>&amp;&amp;</span> <span class=n>factory</span> <span class=k>instanceof</span> <span class=n>SmartFactoryBean</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>isEagerInit</span> <span class=o>=</span> <span class=n>AccessController</span><span class=o>.</span><span class=na>doPrivileged</span><span class=o>(</span>
+</span></span><span class=line><span class=cl>                                <span class=o>(</span><span class=n>PrivilegedAction</span><span class=o>&lt;</span><span class=n>Boolean</span><span class=o>&gt;)</span> <span class=o>((</span><span class=n>SmartFactoryBean</span><span class=o>&lt;?&gt;)</span> <span class=n>factory</span><span class=o>)::</span><span class=n>isEagerInit</span><span class=o>,</span>
+</span></span><span class=line><span class=cl>                                <span class=n>getAccessControlContext</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span> <span class=k>else</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>isEagerInit</span> <span class=o>=</span> <span class=o>(</span><span class=n>factory</span> <span class=k>instanceof</span> <span class=n>SmartFactoryBean</span> <span class=o>&amp;&amp;</span>
+</span></span><span class=line><span class=cl>                                <span class=o>((</span><span class=n>SmartFactoryBean</span><span class=o>&lt;?&gt;)</span> <span class=n>factory</span><span class=o>).</span><span class=na>isEagerInit</span><span class=o>());</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span>
+</span></span><span class=line><span class=cl>                    <span class=k>if</span> <span class=o>(</span><span class=n>isEagerInit</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                        <span class=n>getBean</span><span class=o>(</span><span class=n>beanName</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>                    <span class=o>}</span>
+</span></span><span class=line><span class=cl>                <span class=o>}</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span> <span class=k>else</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>                <span class=n>getBean</span><span class=o>(</span><span class=n>beanName</span><span class=o>);</span><span class=c1>//创建实例
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>AbstractAutowireCapableBeanFactory</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>protected</span> <span class=n>Object</span> <span class=nf>doCreateBean</span><span class=o>(</span><span class=n>String</span> <span class=n>beanName</span><span class=o>,</span> <span class=n>RootBeanDefinition</span> <span class=n>mbd</span><span class=o>,</span> <span class=nd>@Nullable</span> <span class=n>Object</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>BeanCreationException</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// Instantiate the bean.
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>BeanWrapper</span> <span class=n>instanceWrapper</span> <span class=o>=</span> <span class=kc>null</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=o>(</span><span class=n>instanceWrapper</span> <span class=o>==</span> <span class=kc>null</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>instanceWrapper</span> <span class=o>=</span> <span class=n>createBeanInstance</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>mbd</span><span class=o>,</span> <span class=n>args</span><span class=o>);</span><span class=c1>//实例化阶段
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// Initialize the bean instance.
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>Object</span> <span class=n>exposedObject</span> <span class=o>=</span> <span class=n>bean</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>populateBean</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>mbd</span><span class=o>,</span> <span class=n>instanceWrapper</span><span class=o>);</span><span class=c1>//属性赋值阶段
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>exposedObject</span> <span class=o>=</span> <span class=n>initializeBean</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>exposedObject</span><span class=o>,</span> <span class=n>mbd</span><span class=o>);</span><span class=c1>//初始化阶段
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=扩展点>扩展点</h2><h3 id=第一大类影响多个bean的接口>第一大类：影响多个Bean的接口</h3><h4 id=instantiationawarebeanpostprocessor><code>InstantiationAwareBeanPostProcessor</code></h4><blockquote><p>作用于实例化阶段的前后</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=nd>@Override</span>
+</span></span><span class=line><span class=cl><span class=kd>protected</span> <span class=n>Object</span> <span class=nf>createBean</span><span class=o>(</span><span class=n>String</span> <span class=n>beanName</span><span class=o>,</span> <span class=n>RootBeanDefinition</span> <span class=n>mbd</span><span class=o>,</span> <span class=nd>@Nullable</span> <span class=n>Object</span><span class=o>[]</span> <span class=n>args</span><span class=o>)</span> <span class=kd>throws</span> <span class=n>BeanCreationException</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=n>Object</span> <span class=n>bean</span> <span class=o>=</span> <span class=n>resolveBeforeInstantiation</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>mbdToUse</span><span class=o>);</span><span class=c1>// postProcessBeforeInstantiation方法调用点
+</span></span></span><span class=line><span class=cl><span class=c1></span>        <span class=k>if</span> <span class=o>(</span><span class=n>bean</span> <span class=o>!=</span> <span class=kc>null</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=n>bean</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=k>try</span> <span class=o>{</span>   
+</span></span><span class=line><span class=cl>        <span class=n>Object</span> <span class=n>beanInstance</span> <span class=o>=</span> <span class=n>doCreateBean</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>mbdToUse</span><span class=o>,</span> <span class=n>args</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=o>(</span><span class=n>logger</span><span class=o>.</span><span class=na>isTraceEnabled</span><span class=o>())</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>logger</span><span class=o>.</span><span class=na>trace</span><span class=o>(</span><span class=s>&#34;Finished creating instance of bean &#39;&#34;</span> <span class=o>+</span> <span class=n>beanName</span> <span class=o>+</span> <span class=s>&#34;&#39;&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>beanInstance</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>protected</span> <span class=kt>void</span> <span class=nf>populateBean</span><span class=o>(</span><span class=n>String</span> <span class=n>beanName</span><span class=o>,</span> <span class=n>RootBeanDefinition</span> <span class=n>mbd</span><span class=o>,</span> <span class=nd>@Nullable</span> <span class=n>BeanWrapper</span> <span class=n>bw</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>   <span class=c1>// Give any InstantiationAwareBeanPostProcessors the opportunity to modify the
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// state of the bean before properties are set. This can be used, for example,
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// to support styles of field injection.
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=kt>boolean</span> <span class=n>continueWithPropertyPopulation</span> <span class=o>=</span> <span class=kc>true</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=o>(!</span><span class=n>mbd</span><span class=o>.</span><span class=na>isSynthetic</span><span class=o>()</span> <span class=o>&amp;&amp;</span> <span class=n>hasInstantiationAwareBeanPostProcessors</span><span class=o>())</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=o>(</span><span class=n>BeanPostProcessor</span> <span class=n>bp</span> <span class=o>:</span> <span class=n>getBeanPostProcessors</span><span class=o>())</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>         <span class=k>if</span> <span class=o>(</span><span class=n>bp</span> <span class=k>instanceof</span> <span class=n>InstantiationAwareBeanPostProcessor</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>InstantiationAwareBeanPostProcessor</span> <span class=n>ibp</span> <span class=o>=</span> <span class=o>(</span><span class=n>InstantiationAwareBeanPostProcessor</span><span class=o>)</span> <span class=n>bp</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=o>(!</span><span class=n>ibp</span><span class=o>.</span><span class=na>postProcessAfterInstantiation</span><span class=o>(</span><span class=n>bw</span><span class=o>.</span><span class=na>getWrappedInstance</span><span class=o>(),</span> <span class=n>beanName</span><span class=o>))</span> <span class=o>{</span><span class=c1>// postProcessAfterInstantiation方法调用点
+</span></span></span><span class=line><span class=cl><span class=c1></span>               <span class=n>continueWithPropertyPopulation</span> <span class=o>=</span> <span class=kc>false</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>               <span class=k>break</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=o>}</span>
+</span></span><span class=line><span class=cl>         <span class=o>}</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>
+</span></span><span class=line><span class=cl>   <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=beanpostprocessor><code>BeanPostProcessor</code></h4><blockquote><p>作用于初始化阶段的前后</p></blockquote><p>执行顺序：PriorityOrdered > Ordered</p><h3 id=第二大类只调用一次的接口>第二大类：只调用一次的接口</h3><h4 id=aware>Aware</h4><blockquote><p>让我们能够拿到Spring容器中的一些资源</p></blockquote><p>Aware Group1</p><ul><li>BeanNameAware</li><li>BeanClassLoaderAware</li><li>BeanFactoryAware</li></ul><p>Aware Group2</p><ul><li>EnvironmentAware</li><li>EmbeddedValueResolverAware：实现该接口能够获取Spring EL解析器，用户的自定义注解需要支持spel表达式的时候使用</li><li>ApplicationContextAware(ResourceLoaderAware\ApplicationEventPublisherAware\MessageSourceAware)</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// 初始化阶段
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>protected</span> <span class=n>Object</span> <span class=nf>initializeBean</span><span class=o>(</span><span class=kd>final</span> <span class=n>String</span> <span class=n>beanName</span><span class=o>,</span> <span class=kd>final</span> <span class=n>Object</span> <span class=n>bean</span><span class=o>,</span> <span class=nd>@Nullable</span> <span class=n>RootBeanDefinition</span> <span class=n>mbd</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>invokeAwareMethods</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>bean</span><span class=o>);</span><span class=c1>// Group1中的三个Bean开头的Aware
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=n>Object</span> <span class=n>wrappedBean</span> <span class=o>=</span> <span class=n>bean</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=c1>// 这里调用的是Group2中的几个Aware，
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 而实质上这里就是前面所说的BeanPostProcessor的调用点！
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// 这里是通过BeanPostProcessor（ApplicationContextAwareProcessor）实现的。
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>wrappedBean</span> <span class=o>=</span> <span class=n>applyBeanPostProcessorsBeforeInitialization</span><span class=o>(</span><span class=n>wrappedBean</span><span class=o>,</span> <span class=n>beanName</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl>    <span class=n>invokeInitMethods</span><span class=o>(</span><span class=n>beanName</span><span class=o>,</span> <span class=n>wrappedBean</span><span class=o>,</span> <span class=n>mbd</span><span class=o>);</span><span class=c1>// InitializingBean调用点
+</span></span></span><span class=line><span class=cl><span class=c1></span>    
+</span></span><span class=line><span class=cl>    <span class=n>wrappedBean</span> <span class=o>=</span> <span class=n>applyBeanPostProcessorsAfterInitialization</span><span class=o>(</span><span class=n>wrappedBean</span><span class=o>,</span> <span class=n>beanName</span><span class=o>);</span><span class=c1>// BeanPostProcessor的另一个调用点
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>wrappedBean</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=生命周期接口>生命周期接口</h4><p><code>InitializingBean</code>：对应生命周期的初始化阶段</p><p><code>DisposableBean</code>：对应生命周期的销毁阶段，以ConfigurableApplicationContext#close()方法作为入口</p></section><footer class=article-footer><section class=article-tags><a href=/tags/spring/>spring</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span>最后更新于 Sep 25, 2023 11:15 +0800</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/post/note/dev/java/spring/security/><div class=article-details><h2 class=article-title>spring Security</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2023 YZLC</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.20.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

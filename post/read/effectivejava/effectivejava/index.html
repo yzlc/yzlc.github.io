@@ -1,0 +1,222 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="1. 考虑使用静态工厂方法替代构造方法 1 2 3 public static Boolean valueOf(boolean b) { return b ? Boolean.TRUE : Boolean.FALSE; } 优点 有名字(BigInteger.probablePrime) 不用每次调用"><title>effective java</title><link rel=canonical href=https://yzlc.github.io/post/read/effectivejava/effectivejava/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="effective java"><meta property="og:description" content="1. 考虑使用静态工厂方法替代构造方法 1 2 3 public static Boolean valueOf(boolean b) { return b ? Boolean.TRUE : Boolean.FALSE; } 优点 有名字(BigInteger.probablePrime) 不用每次调用"><meta property="og:url" content="https://yzlc.github.io/post/read/effectivejava/effectivejava/"><meta property="og:site_name" content="YZLC"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="java"><meta property="article:published_time" content="2019-08-26T10:32:28+08:00"><meta property="article:modified_time" content="2023-09-25T11:15:53+08:00"><meta name=twitter:title content="effective java"><meta name=twitter:description content="1. 考虑使用静态工厂方法替代构造方法 1 2 3 public static Boolean valueOf(boolean b) { return b ? Boolean.TRUE : Boolean.FALSE; } 优点 有名字(BigInteger.probablePrime) 不用每次调用"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>YZLC</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/tags/><span>标签</span></a></li><li><a href=/categories/><span>分类</span></a></li><li><a href=/post/web><span>网站大全</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/read/>read</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/read/effectivejava/effectivejava/>effective java</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Aug 26, 2019</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 8 分钟</time></div></footer></div></header><section class=article-content><h2 id=1-考虑使用静态工厂方法替代构造方法>1. 考虑使用静态工厂方法替代构造方法</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=n>Boolean</span> <span class=nf>valueOf</span><span class=o>(</span><span class=kt>boolean</span> <span class=n>b</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>b</span> <span class=o>?</span> <span class=n>Boolean</span><span class=o>.</span><span class=na>TRUE</span> <span class=o>:</span> <span class=n>Boolean</span><span class=o>.</span><span class=na>FALSE</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=优点>优点</h3><ul><li>有名字(BigInteger.probablePrime)</li><li>不用每次调用都创建新对象(Boolean.valueOf(boolean))</li><li>可以返回子类型的对象(Collections)</li><li>返回对象的类可以根据输入参数的不同而不同(EnumSet.noneOf())</li><li>编写包含该方法的类时，返回的对象的类不需要存在(ServiceLoader)</li></ul><h3 id=缺点>缺点</h3><ul><li>没有公共或受保护构造方法的类不能被子类化(Collections)</li><li>程序员很难找到它们</li></ul><h2 id=2-当构造方法参数过多时使用-builder-模式>2. 当构造方法参数过多时使用 builder 模式</h2><blockquote><p><a class=link href=/files/read/effectiveJava/2/NutritionFacts.java>示例下载</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Builder Pattern
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>NutritionFacts</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=kd>final</span> <span class=kt>int</span> <span class=n>calories</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=kd>public</span> <span class=kd>static</span> <span class=kd>class</span> <span class=nc>Builder</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=kd>private</span> <span class=kt>int</span> <span class=n>calories</span> <span class=o>=</span> <span class=mi>0</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=nf>Builder</span><span class=o>()</span> <span class=o>{}</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=n>Builder</span> <span class=nf>calories</span><span class=o>(</span><span class=kt>int</span> <span class=n>val</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=n>calories</span> <span class=o>=</span> <span class=n>val</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=k>this</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=kd>public</span> <span class=n>NutritionFacts</span> <span class=nf>build</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>return</span> <span class=k>new</span> <span class=n>NutritionFacts</span><span class=o>(</span><span class=k>this</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=kd>private</span> <span class=nf>NutritionFacts</span><span class=o>(</span><span class=n>Builder</span> <span class=n>builder</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=n>calories</span> <span class=o>=</span> <span class=n>builder</span><span class=o>.</span><span class=na>calories</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=3-使用私有构造方法或枚举类实现-singleton-属性>3. 使用私有构造方法或枚举类实现 Singleton 属性</h2><blockquote><p><a class=link href=/files/read/effectiveJava/3/Elvis.java>示例下载</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Singleton with static factory
+</span></span></span><span class=line><span class=cl><span class=c1>// 1.防范AccessibleObject.setAccessible：修改构造函数
+</span></span></span><span class=line><span class=cl><span class=c1>// 2.implements Serializable：声明实例属性transient，并提供readResolve方法
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Elvis</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Elvis</span> <span class=n>INSTANCE</span> <span class=o>=</span> <span class=k>new</span> <span class=n>Elvis</span><span class=o>();</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=nf>Elvis</span><span class=o>()</span> <span class=o>{</span> <span class=o>...</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kd>static</span> <span class=n>Elvis</span> <span class=nf>getInstance</span><span class=o>()</span> <span class=o>{</span> <span class=k>return</span> <span class=n>INSTANCE</span><span class=o>;</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kt>void</span> <span class=nf>leaveTheBuilding</span><span class=o>()</span> <span class=o>{</span> <span class=o>...</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Enum singleton - the preferred approach
+</span></span></span><span class=line><span class=cl><span class=c1>// 不适用：单例必须继承 Enum 以外的父类
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>enum</span> <span class=n>Elvis</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>INSTANCE</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kt>void</span> <span class=nf>leaveTheBuilding</span><span class=o>()</span> <span class=o>{</span> <span class=o>...</span> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=4-使用私有构造方法执行非实例化>4. 使用私有构造方法执行非实例化</h2><ul><li>Java8，可以放接口中</li></ul><h2 id=5-依赖注入优于硬连接资源hardwiring-resources>5. 依赖注入优于硬连接资源（hardwiring resources）</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Dependency injection provides flexibility and testability
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>SpellChecker</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=kd>final</span> <span class=n>Lexicon</span> <span class=n>dictionary</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=nf>SpellChecker</span><span class=o>(</span><span class=n>Lexicon</span> <span class=n>dictionary</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=o>.</span><span class=na>dictionary</span> <span class=o>=</span> <span class=n>Objects</span><span class=o>.</span><span class=na>requireNonNull</span><span class=o>(</span><span class=n>dictionary</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>  <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=6-避免创建不必要的对象>6. 避免创建不必要的对象</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Performance can be greatly improved!
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>static</span> <span class=kt>boolean</span> <span class=nf>isRomanNumeral</span><span class=o>(</span><span class=n>String</span> <span class=n>s</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>s</span><span class=o>.</span><span class=na>matches</span><span class=o>(</span><span class=s>&#34;^(?=.)M*(C[MD]|D?C{0,3})&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=o>+</span> <span class=s>&#34;(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Reusing expensive object for improved performance
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>RomanNumerals</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Pattern</span> <span class=n>ROMAN</span> <span class=o>=</span> <span class=n>Pattern</span><span class=o>.</span><span class=na>compile</span><span class=o>(</span>
+</span></span><span class=line><span class=cl>      <span class=s>&#34;^(?=.)M*(C[MD]|D?C{0,3})&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=o>+</span> <span class=s>&#34;(X[CL]|L?X{0,3})(I[XV]|V?I{0,3})$&#34;</span><span class=o>);</span>
+</span></span><span class=line><span class=cl>  <span class=kd>static</span> <span class=kt>boolean</span> <span class=nf>isRomanNumeral</span><span class=o>(</span><span class=n>String</span> <span class=n>s</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>ROMAN</span><span class=o>.</span><span class=na>matcher</span><span class=o>(</span><span class=n>s</span><span class=o>).</span><span class=na>matches</span><span class=o>();</span>
+</span></span><span class=line><span class=cl> <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>优先使用基本类型而不是装箱的基本类型，也要注意无意识的自动装箱</li></ul><h2 id=7-消除过期的对象引用>7. 消除过期的对象引用</h2><ul><li>类自己管理内存时，应该警惕内存泄漏问题</li><li>缓存</li><li>监听器和其他回调</li></ul><h2 id=8-避免使用-finalizer-和-cleaner-机制>8. 避免使用 Finalizer 和 Cleaner 机制</h2><h2 id=9-使用-try-with-resources-语句替代-try-finally-语句>9. 使用 try-with-resources 语句替代 try-finally 语句</h2><h2 id=10-重写-equals-方法时遵守通用约定>10. 重写 equals 方法时遵守通用约定</h2><h3 id=约定>约定</h3><ul><li>自反性：x.equals(x) == true</li><li>对称性：x.equals(y) == true，则y.equals(x) == true</li><li>传递性：x.equals(y) == true && y.equals(z) == true，则x.equals(z) == true</li><li>一致性：多次调用结果相同（不要依赖不可靠资源） 反例：java.net.URL</li><li>非空性：必须做<code>if(!(o instanceof MyType))</code>所以不需要<code>if(o == null)</code></li></ul><h3 id=写法>写法</h3><ol><li>if(o == MyType)</li><li>if(!(o instanceof MyType))</li><li>非float或double的基本类型用==比较，引用类型递归调用equals<ul><li>因为存在Float(Double).NaN、-0.0f，使用Float(Double).compare(float,float)</li><li>不使用Float(Double).equals，自动装箱性能差</li></ul></li></ol><h3 id=开源框架>开源框架</h3><ul><li>谷歌AutoValue</li></ul><h2 id=11-重写-equals-方法时同时也要重写-hashcode-方法>11. 重写 equals 方法时同时也要重写 hashcode 方法</h2><h3 id=约定-1>约定</h3><ol><li>重复调用hashCode返回相同的值</li><li>equals(Object)相等，hashCode相等</li><li>为不相等的对象生成不同的结果可能会提高hash tables的性能。</li></ol><h3 id=写法-1>写法</h3><ol><li>int result = 重要属性c.hashCode(areaCode);</li><li>result = 31 - result + 剩余的重要属性f.hashCode;<ol><li>基本类型：Type.hashCode(f)</li><li>引用类型：<ul><li>equals递归比较：递归调用hashCode</li><li>否则计算范式：例如字段为空，使用0</li></ul></li><li>数组：<ul><li>部分重要元素：递归计算哈希码并合并</li><li>没有重要的元素：使用不为0常量</li><li>所有元素都重要：使用Arrays.hashCode</li></ul></li></ol></li><li>return result;</li></ol><h2 id=12-始终重写-tostring-方法>12. 始终重写 toString 方法</h2><h2 id=13-谨慎地重写-clone-方法>13. 谨慎地重写 clone 方法</h2><ul><li>复制功能最好由构造方法或工厂提供</li></ul><h2 id=14-考虑实现-comparable-接口>14. 考虑实现 Comparable 接口</h2><h3 id=约定-2>约定</h3><ul><li>自反性：x.compareTo(y) == 0，则sgn(x.compareTo(z)) == sgn(y.compareTo(z))</li><li>对称性：sgn(x.compareTo(y)) == -sgn(y. compareTo(x))</li><li>传递性：(x.compareTo(y) > 0 && y.compareTo(z) > 0)，则x.compareTo(z) > 0</li><li>推荐：(x.compareTo(y) == 0) == (x.equals(y))<ul><li>反例：添加new BigDecimal(&ldquo;1.0&rdquo;)和new BigDecimal(&ldquo;1.00&rdquo;)<ul><li>HashSet：调用equals方法 集合中两个元素</li><li>TreeSet：调用compareTo方法 集合中一个元素</li></ul></li></ul></li></ul><h3 id=写法-2>写法</h3><p>在compareTo方法中使用关系运算符「&lt;」和「>」是冗长且容易出错的，不推荐</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Multiple-field `Comparable` with primitive fields
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kt>int</span> <span class=nf>compareTo</span><span class=o>(</span><span class=n>PhoneNumber</span> <span class=n>pn</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>result</span> <span class=o>=</span> <span class=o>[</span><span class=n>Short</span><span class=o>.</span><span class=na>compare</span><span class=o>(</span><span class=n>areaCode</span><span class=o>](</span><span class=n>http</span><span class=o>:</span><span class=c1>//Short.compare(areaCode), pn.areaCode);
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=k>if</span> <span class=o>(</span><span class=n>result</span> <span class=o>==</span> <span class=mi>0</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>result</span> <span class=o>=</span> <span class=o>[</span><span class=n>Short</span><span class=o>.</span><span class=na>compare</span><span class=o>(</span><span class=n>prefix</span><span class=o>](</span><span class=n>http</span><span class=o>:</span><span class=c1>//Short.compare(prefix), pn.prefix);
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=k>if</span> <span class=o>(</span><span class=n>result</span> <span class=o>==</span> <span class=mi>0</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>result</span> <span class=o>=</span> <span class=o>[</span><span class=n>Short</span><span class=o>.</span><span class=na>compare</span><span class=o>(</span><span class=n>lineNum</span><span class=o>](</span><span class=n>http</span><span class=o>:</span><span class=c1>//Short.compare(lineNum), pn.lineNum);
+</span></span></span><span class=line><span class=cl><span class=c1></span> <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>result</span><span class=o>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// Comparable with comparator construction methods
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Comparator</span><span class=o>&lt;</span><span class=n>PhoneNumber</span><span class=o>&gt;</span> <span class=n>COMPARATOR</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl>    <span class=n>comparingInt</span><span class=o>((</span><span class=n>PhoneNumber</span> <span class=n>pn</span><span class=o>)</span> <span class=o>-&gt;</span> <span class=n>pn</span><span class=o>.</span><span class=na>areaCode</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>.</span><span class=na>thenComparingInt</span><span class=o>(</span><span class=n>pn</span> <span class=o>-&gt;</span> <span class=n>pn</span><span class=o>.</span><span class=na>prefix</span><span class=o>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>.</span><span class=na>thenComparingInt</span><span class=o>(</span><span class=n>pn</span> <span class=o>-&gt;</span> <span class=n>pn</span><span class=o>.</span><span class=na>lineNum</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kt>int</span> <span class=nf>compareTo</span><span class=o>(</span><span class=n>PhoneNumber</span> <span class=n>pn</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>COMPARATOR</span><span class=o>.</span><span class=na>compare</span><span class=o>(</span><span class=k>this</span><span class=o>,</span> <span class=n>pn</span><span class=o>);</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=15-使类和成员的可访问性最小化>15. 使类和成员的可访问性最小化</h2><ul><li>类具有公共静态final数组属性，或返回这样一个属性的访问器是错误的</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Potential security hole!
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Thing</span><span class=o>[]</span> <span class=n>VALUES</span> <span class=o>=</span> <span class=o>{</span> <span class=o>...</span> <span class=o>};</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//解决方案
+</span></span></span><span class=line><span class=cl><span class=c1>//方案1：添加一个公共的不可变列表
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Thing</span><span class=o>[]</span> <span class=n>PRIVATE_VALUES</span> <span class=o>=</span> <span class=o>{</span> <span class=o>...</span> <span class=o>};</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>List</span><span class=o>&lt;</span><span class=n>Thing</span><span class=o>&gt;</span> <span class=n>VALUES</span> <span class=o>=</span>
+</span></span><span class=line><span class=cl><span class=n>Collections</span><span class=o>.</span><span class=na>unmodifiableList</span><span class=o>(</span><span class=n>Arrays</span><span class=o>.</span><span class=na>asList</span><span class=o>(</span><span class=n>PRIVATE_VALUES</span><span class=o>));</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>//方案2：添加一个返回私有数组拷贝
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>private</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Thing</span><span class=o>[]</span> <span class=n>PRIVATE_VALUES</span> <span class=o>=</span> <span class=o>{</span> <span class=o>...</span> <span class=o>};</span>
+</span></span><span class=line><span class=cl><span class=kd>public</span> <span class=kd>static</span> <span class=kd>final</span> <span class=n>Thing</span><span class=o>[]</span> <span class=nf>values</span><span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>PRIVATE_VALUES</span><span class=o>.</span><span class=na>clone</span><span class=o>();</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=16-在公共类中使用访问方法而不是公共属性>16. 在公共类中使用访问方法而不是公共属性</h2><h2 id=17-最小化可变性>17. 最小化可变性</h2><h3 id=不可变类>不可变类</h3><p>String、基本类型包装类、BigInteger、BigDecimal</p><h3 id=规则>规则</h3><ol><li>不要提供修改对象状态的方法（也称为 mutators）</li><li>确保这个类不能被继承</li><li>把所有属性设置为 final</li><li>把所有的属性设置为 private</li><li>确保对任何可变组件的互斥访问</li></ol><h3 id=优点-1>优点</h3><ul><li>不可变对象很简单</li><li>不可变对象本质上是线程安全的</li><li>不可变对象为其他对象提供了很好的构件</li><li>不可变对象提供了免费的原子失败机制</li></ul><h3 id=缺点-1>缺点</h3><ul><li>对于每个不同的值都需要一个单独的对象</li></ul><h3 id=实现>实现</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=c1>// Immutable class with static factories instead of constructors
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>public</span> <span class=kd>class</span> <span class=nc>Complex</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=kd>final</span> <span class=kt>double</span> <span class=n>re</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=kd>final</span> <span class=kt>double</span> <span class=n>im</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>  <span class=kd>private</span> <span class=nf>Complex</span><span class=o>(</span><span class=kt>double</span> <span class=n>re</span><span class=o>,</span> <span class=kt>double</span> <span class=n>im</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=o>.</span><span class=na>re</span> <span class=o>=</span> <span class=n>re</span><span class=o>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>this</span><span class=o>.</span><span class=na>im</span> <span class=o>=</span> <span class=n>im</span><span class=o>;</span>
+</span></span><span class=line><span class=cl> <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=kd>public</span> <span class=kd>static</span> <span class=n>Complex</span> <span class=nf>valueOf</span><span class=o>(</span><span class=kt>double</span> <span class=n>re</span><span class=o>,</span> <span class=kt>double</span> <span class=n>im</span><span class=o>)</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=k>new</span> <span class=n>Complex</span><span class=o>(</span><span class=n>re</span><span class=o>,</span> <span class=n>im</span><span class=o>);</span>
+</span></span><span class=line><span class=cl> <span class=o>}</span>
+</span></span><span class=line><span class=cl> <span class=o>...</span> <span class=c1>// Remainder unchanged
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=18-组合优于继承>18. 组合优于继承</h2><ul><li>InstrumentedHashSet</li><li>使用包装类（Decorator）ForwardingSet 改进</li><li>只有「is-a」关系，才能使用继承 反例：Stack extends Vector；Properties extends Hashtable</li></ul><h2 id=19-要么设计继承并提供文档说明要么禁用继承>19. 要么设计继承并提供文档说明，要么禁用继承</h2><h2 id=20-接口优于抽象类>20. 接口优于抽象类</h2><ul><li>通过抽象类实现接口默认方法 例如：AbstractList implements List</li></ul><h2 id=21-为后代设计接口>21. 为后代设计接口</h2><h2 id=22-接口仅用来定义类型>22. 接口仅用来定义类型</h2><ul><li>常量接口模式是对接口的糟糕使用</li></ul><h2 id=23-类层次结构优于标签类>23. 类层次结构优于标签类</h2><h2 id=24-支持使用静态成员类而不是非静态类>24. 支持使用静态成员类而不是非静态类</h2><ul><li>如果你声明了一个不需要访问宿主实例的成员类，总是把 static 修饰符放在它的声明中，使它成为一个静态成员
+类，而不是非静态的成员类</li></ul><h2 id=25-将源文件限制为单个顶级类>25. 将源文件限制为单个顶级类</h2><h2 id=26-不要使用原始类型>26. 不要使用原始类型</h2><h2 id=27-消除非检查警告>27. 消除非检查警告</h2><h2 id=28-列表优于数组>28. 列表优于数组</h2><h2 id=29-优先考虑泛型>29. 优先考虑泛型</h2><h2 id=30-优先使用泛型方法>30. 优先使用泛型方法</h2><h2 id=31-使用限定通配符来增加-api-的灵活性>31. 使用限定通配符来增加 API 的灵活性</h2><h2 id=32-合理地结合泛型和可变参数>32. 合理地结合泛型和可变参数</h2><h2 id=33-优先考虑类型安全的异构容器>33. 优先考虑类型安全的异构容器</h2><h2 id=34-使用枚举类型替代整型常量>34. 使用枚举类型替代整型常量</h2><h2 id=35-使用实例属性替代序数>35. 使用实例属性替代序数</h2><h2 id=36-使用-enumset-替代位属性>36. 使用 EnumSet 替代位属性</h2><h2 id=37-使用-enummap-替代序数索引>37. 使用 EnumMap 替代序数索引</h2><h2 id=38-使用接口模拟可扩展的枚举>38. 使用接口模拟可扩展的枚举</h2><h2 id=39-注解优于命名模式>39. 注解优于命名模式</h2><h2 id=40-始终使用-override-注解>40. 始终使用 Override 注解</h2><h2 id=41-使用标记接口定义类型>41. 使用标记接口定义类型</h2><h2 id=42-lambda-表达式优于匿名类>42. lambda 表达式优于匿名类</h2><h2 id=43-方法引用优于-lambda-表达式>43. 方法引用优于 lambda 表达式</h2><h2 id=44-优先使用标准的函数式接口>44. 优先使用标准的函数式接口</h2><h2 id=45-明智审慎地使用-stream>45. 明智审慎地使用 Stream</h2><h2 id=46-优先考虑流中无副作用的函数>46. 优先考虑流中无副作用的函数</h2><h2 id=47-优先使用-collection-而不是-stream-来作为方法的返回类型>47. 优先使用 Collection 而不是 Stream 来作为方法的返回类型</h2><h2 id=48-谨慎使用流并行>48. 谨慎使用流并行</h2><h2 id=49-检查参数有效性>49. 检查参数有效性</h2><ul><li>Objects.requireNonNull</li></ul><h2 id=50-必要时进行防御性拷贝>50. 必要时进行防御性拷贝</h2><h2 id=51-仔细设计方法签名>51. 仔细设计方法签名</h2><h2 id=52-明智审慎地使用重载>52. 明智审慎地使用重载</h2><h2 id=53-明智审慎地使用可变参数>53. 明智审慎地使用可变参数</h2><h2 id=54-返回空的数组或集合不要返回-null>54. 返回空的数组或集合，不要返回 null</h2><ul><li>Collections.emptyList</li></ul><h2 id=55-明智审慎地返回-optional>55. 明智审慎地返回 Optional</h2><h2 id=56-为所有已公开的-api-元素编写文档注释>56. 为所有已公开的 API 元素编写文档注释</h2><h2 id=57-最小化局部变量的作用域>57. 最小化局部变量的作用域</h2><h2 id=58-for-each-循环优于传统-for-循环>58. for-each 循环优于传统 for 循环</h2><h2 id=59-了解并使用库>59. 了解并使用库</h2><ul><li>不使用Random,用ThreadLocalRandom</li><li>每个程序员都应该熟悉 java.lang、java.util 和 java.io 的基础知识及其子包</li></ul><h2 id=60-若需要精确答案就应避免使用-float-和-double-类型>60. 若需要精确答案就应避免使用 float 和 double 类型</h2><h2 id=61-基本数据类型优于包装类>61. 基本数据类型优于包装类</h2><ul><li>将 == 操作符应用于包装类型几乎都是错误的</li></ul><h2 id=62-当使用其他类型更合适时应避免使用字符串>62. 当使用其他类型更合适时应避免使用字符串</h2><h2 id=63-当心字符串连接引起的性能问题>63. 当心字符串连接引起的性能问题</h2><h2 id=64-通过接口引用对象>64. 通过接口引用对象</h2><h2 id=65-接口优于反射>65. 接口优于反射</h2><h2 id=66-明智审慎地本地方法>66. 明智审慎地本地方法</h2><h2 id=67-明智审慎地进行优化>67. 明智审慎地进行优化</h2><h2 id=68-遵守被广泛认可的命名约定>68. 遵守被广泛认可的命名约定</h2><ul><li>转换对象类型（返回不同类型的独立对象）的实例方法通常称为 toType，例如
+toString 或 toArray。返回与接收对象类型不同的视图的方法通常称为 asType，例如 asList。返回与调
+用它们的对象具有相同值的基本类型的方法通常称为类型值，例如 intValue。静态工厂的常见名称包括 from、of、
+valueOf、instance、getInstance、newInstance、getType 和 newType</li></ul><h2 id=69-只针对异常的情况下才使用异常>69. 只针对异常的情况下才使用异常</h2><h2 id=70-对可恢复的情况使用受检异常对编程错误使用运行时异常>70. 对可恢复的情况使用受检异常，对编程错误使用运行时异常</h2><h2 id=71-避免不必要的使用受检异常>71. 避免不必要的使用受检异常</h2><h2 id=72-优先使用标准的异常>72. 优先使用标准的异常</h2><h2 id=73-抛出与抽象对应的异常>73. 抛出与抽象对应的异常</h2><h2 id=74-每个方法抛出的异常都需要创建文档>74. 每个方法抛出的异常都需要创建文档</h2><h2 id=75-在细节消息中包含失败一捕获信息>75. 在细节消息中包含失败一捕获信息</h2><h2 id=76-保持失败原子性>76. 保持失败原子性</h2><h2 id=77-不要忽略异常>77. 不要忽略异常</h2><h2 id=78-同步访问共享的可变数据>78. 同步访问共享的可变数据</h2><h2 id=79-避免过度同步>79. 避免过度同步</h2><h2 id=80-executor-task-和-stream-优先于线程>80. executor 、task 和 stream 优先于线程</h2><h2 id=81-并发工具优于-wait-和-notify>81. 并发工具优于 wait 和 notify</h2><h2 id=82-文档应包含线程安全属性>82. 文档应包含线程安全属性</h2><h2 id=83-明智审慎的使用延迟初始化>83. 明智审慎的使用延迟初始化</h2><h2 id=84-不要依赖线程调度器>84. 不要依赖线程调度器</h2><h2 id=85-优先选择-java-序列化的替代方案>85. 优先选择 Java 序列化的替代方案</h2><h2 id=86-非常谨慎地实现-serializable>86. 非常谨慎地实现 Serializable</h2><h2 id=87-考虑使用自定义的序列化形式>87. 考虑使用自定义的序列化形式</h2><h2 id=88-保护性的编写-readobject-方法>88. 保护性的编写 readObject 方法</h2><h2 id=89-对于实例控制枚举类型优于-readresolve>89. 对于实例控制，枚举类型优于 readResolve</h2><h2 id=90-考虑用序列化代理代替序列化实例>90. 考虑用序列化代理代替序列化实例</h2></section><footer class=article-footer><section class=article-tags><a href=/tags/java/>java</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span>最后更新于 Sep 25, 2023 11:15 +0800</span></section></footer></article><footer class=site-footer><section class=copyright>&copy;
+2023 YZLC</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.20.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

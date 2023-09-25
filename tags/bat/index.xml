@@ -1,1 +1,130 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bat on YZLC</title><link>https://yzlc.github.io/tags/bat/</link><description>Recent content in bat on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 30 Jun 2019 15:42:10 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/bat/index.xml" rel="self" type="application/rss+xml"/><item><title>bat</title><link>https://yzlc.github.io/post/note/win/bat/</link><pubDate>Sun, 30 Jun 2019 15:42:10 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/bat/</guid><description>变量 ps&amp;gt;ls env: 用户目录：%UserProfile% 开机启动（用户）：%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup 删目录、文</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>bat on YZLC</title><link>https://yzlc.github.io/tags/bat/</link><description>Recent content in bat on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 30 Jun 2019 15:42:10 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/bat/index.xml" rel="self" type="application/rss+xml"/><item><title>bat</title><link>https://yzlc.github.io/post/note/win/bat/</link><pubDate>Sun, 30 Jun 2019 15:42:10 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/bat/</guid><description>&lt;h2 id="变量">变量&lt;/h2>
+&lt;blockquote>
+&lt;p>ps&amp;gt;ls env:&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>用户目录：&lt;code>%UserProfile%&lt;/code>&lt;/li>
+&lt;li>开机启动（用户）：&lt;code>%APPDATA%\Microsoft\Windows\Start Menu\Programs\Startup&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="删目录文件">删目录、文件&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="k">rd&lt;/span> /s/q dir
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">del&lt;/span> /s/q file
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="复制目录">复制目录&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">xcopy src dest\src /S /E /y /q
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="日期">日期&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="k">set&lt;/span> &lt;span class="nv">year&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="nv">%date:~0,4%&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">set&lt;/span> &lt;span class="nv">month&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="nv">%date:~5,2%&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">set&lt;/span> &lt;span class="nv">day&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="nv">%date:~8,2%&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">set&lt;/span> &lt;span class="nv">date&lt;/span>&lt;span class="p">=&lt;/span>&lt;span class="nv">%year%%month%%day%&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="utf8">utf8&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">chcp 65001
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="管理员">管理员&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="p">@&lt;/span>&lt;span class="k">echo&lt;/span> off&lt;span class="p">&amp;amp;(&lt;/span>&lt;span class="k">cd&lt;/span>/d &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">%~dp0&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&amp;amp;(&lt;/span>cacls &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">%SystemDrive%&lt;/span>&lt;span class="s2">\System Volume Information&amp;#34;&lt;/span> &lt;span class="p">&amp;gt;&lt;/span>nul &lt;span class="mi">2&lt;/span>&lt;span class="p">&amp;gt;&amp;amp;&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)||(&lt;/span>&lt;span class="k">start&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> mshta vbscript:CreateObject&lt;span class="se">^(&lt;/span>&lt;span class="s2">&amp;#34;Shell.Application&amp;#34;&lt;/span>&lt;span class="se">^)&lt;/span>.ShellExecute&lt;span class="se">^(&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">%~snx0&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>,&lt;span class="s2">&amp;#34; &lt;/span>&lt;span class="nv">%*&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>,&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>,&lt;span class="s2">&amp;#34;runas&amp;#34;&lt;/span>,1&lt;span class="se">^)^(&lt;/span>window.close&lt;span class="se">^)&lt;/span>&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="k">exit&lt;/span> /b&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="开机启动">开机启动&lt;/h2>
+&lt;p>新建vbs&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="k">Set&lt;/span> &lt;span class="nv">ws &lt;/span>&lt;span class="p">=&lt;/span> CreateObject(&lt;span class="s2">&amp;#34;Wscript.Shell&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ws.run &lt;span class="s2">&amp;#34;cmd /c .\startup.bat&amp;#34;&lt;/span>,vbhide
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="启动">启动&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="k">start&lt;/span> &lt;span class="s2">&amp;#34;test&amp;#34;&lt;/span> java -jar -Dfile.encoding=utf8 test.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="停止">停止&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">TASKKILL /FI &lt;span class="s2">&amp;#34;WINDOWTITLE eq test&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="代理">代理&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="k">set&lt;/span> &lt;span class="nv">https_proxy&lt;/span>&lt;span class="p">=&lt;/span>socks5://localhost:10808
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">echo&lt;/span> &lt;span class="nv">%https_proxy%&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">set&lt;/span> &lt;span class="nv">https_proxy&lt;/span>&lt;span class="p">=&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="uwp">uwp&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">&lt;span class="p">:&lt;/span>&lt;span class="nl">C&lt;/span>&lt;span class="c1">:\Users\%username%\AppData\Local\Packages&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">CheckNetIsolation.exe LoopbackExempt -a -n=&lt;span class="s2">&amp;#34;4DF9E0F8.Netflix_mcm4njqhnhss8&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="休眠">休眠&lt;/h2>
+&lt;ul>
+&lt;li>打开：&lt;code>powercfg -h on&lt;/code>&lt;/li>
+&lt;li>关闭：&lt;code>powercfg -h off&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="定时关机">定时关机&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bat" data-lang="bat">&lt;span class="line">&lt;span class="cl">schtasks /create /tn shutWin10 /sc daily /st 17:00:00 /tr &lt;span class="s2">&amp;#34;shutdown -s -t 100&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

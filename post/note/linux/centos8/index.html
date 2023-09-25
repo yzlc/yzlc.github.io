@@ -1,0 +1,436 @@
+<!doctype html><html lang=en dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &amp;ldquo;114.114.114.114 8.8.8.8&amp;rdquo; 修改对应网卡的 dns"><title>centos8</title><link rel=canonical href=https://yzlc.github.io/post/note/linux/centos8/><link rel=stylesheet href=/scss/style.min.abbd69b2908fdfcd5179898beaafd374514a86538d81639ddd2c58c06ae54e40.css><meta property="og:title" content="centos8"><meta property="og:description" content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &amp;ldquo;114.114.114.114 8.8.8.8&amp;rdquo; 修改对应网卡的 dns"><meta property="og:url" content="https://yzlc.github.io/post/note/linux/centos8/"><meta property="og:site_name" content="YZLC"><meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="linux"><meta property="article:published_time" content="2023-04-03T15:32:33+08:00"><meta property="article:modified_time" content="2023-09-25T11:15:53+08:00"><meta name=twitter:title content="centos8"><meta name=twitter:description content="DNS配置 通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置） 通过命令 nmcli con mod eno1 ipv4.dns &amp;ldquo;114.114.114.114 8.8.8.8&amp;rdquo; 修改对应网卡的 dns"><script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column compact"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png width=300 height=300 class=site-logo loading=lazy alt=Avatar></a></figure><div class=site-meta><h1 class=site-name><a href=/>YZLC</a></h1><h2 class=site-description></h2></div></header><ol class=menu id=main-menu><li><a href=/tags/><span>标签</span></a></li><li><a href=/categories/><span>分类</span></a></li><li><a href=/post/web><span>网站大全</span></a></li><div class=menu-bottom-section><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><span>暗色模式</span></li></div></ol></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/note/>note</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/note/linux/centos8/>centos8</a></h2></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg><time class=article-time--published>Apr 03, 2023</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></div></header><section class=article-content><h2 id=dns配置>DNS配置</h2><ol><li>通过 ifconfig 或 nmcli connection show 命令确定当前使用的网卡名称（如：eth0、eno1 等，以下均以 eno1 为例进行设置）</li><li>通过命令 nmcli con mod eno1 ipv4.dns &ldquo;114.114.114.114 8.8.8.8&rdquo; 修改对应网卡的 dns 设置</li><li>systemctl restart NetworkManager.service</li><li>cat /etc/resolv.conf 查看dns</li></ol><h2 id=修改hosts>修改hosts</h2><ol><li>vim /etc/hosts</li><li>8.132.50.96 mirrors.aliyun.com</li><li>nmcli c reload</li></ol><h2 id=更换yum源>更换yum源</h2><ul><li>cd /etc/yum.repos.d/</li><li>创建新文件夹并将源文件备份为repo.bak</li><li>mkdir backup && mv *repo backup/</li><li>下载国内yum源文件</li><li>curl -o /etc/yum.repos.d/CentOS-Base.repo <a class=link href=http://mirrors.aliyun.com/repo/Centos-8.repo target=_blank rel=noopener>http://mirrors.aliyun.com/repo/Centos-8.repo</a></li><li>更新下载yum源地址</li><li>sed -i -e"s|mirrors.cloud.aliyuncs.com|mirrors.aliyun.com|g " /etc/yum.repos.d/CentOS-*</li><li>sed -i -e &ldquo;s|releasever|releasever-stream|g&rdquo; /etc/yum.repos.d/CentOS-*</li><li>生成缓存</li><li>yum clean all && yum makecache</li></ul><h2 id=防火墙>防火墙</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>systemctl status firewalld
+</span></span><span class=line><span class=cl>systemctl start firewalld
+</span></span></code></pre></td></tr></table></div></div><h2 id=安装nginx>安装nginx</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install nginx
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> nginx
+</span></span><span class=line><span class=cl>sudo systemctl restart nginx
+</span></span><span class=line><span class=cl>sudo systemctl status nginx
+</span></span><span class=line><span class=cl>cat /etc/nginx/nginx.conf
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#端口权限问题:修改端口类型</span>
+</span></span><span class=line><span class=cl>sudo semanage port -a -t http_port_t -p tcp 端口号
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#日志权限问题</span>
+</span></span><span class=line><span class=cl>sudo semanage fcontext -a -t httpd_log_t <span class=s2>&#34;/usr/share/nginx/logs(/.*)?&#34;</span>
+</span></span><span class=line><span class=cl>sudo restorecon -Rv /usr/share/nginx/logs
+</span></span></code></pre></td></tr></table></div></div><h2 id=mysql>mysql</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#关防火墙</span>
+</span></span><span class=line><span class=cl>firewall-cmd --zone<span class=o>=</span>public --add-port<span class=o>=</span>3306/tcp --permanent
+</span></span><span class=line><span class=cl>firewall-cmd --reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.38-1.el7.x86_64.rpm-bundle.tar
+</span></span><span class=line><span class=cl>tar xvf mysql-5.7.38-1.el7.x86_64.rpm-bundle.tar
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>yum install libncurses* -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 移除已有的 MariaDB libs</span>
+</span></span><span class=line><span class=cl>yum -y remove mariadb-libs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装 MySQL rpm</span>
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-common-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-libs-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-devel-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-client-5.7*.rpm
+</span></span><span class=line><span class=cl>rpm -ivh mysql-community-server-5.7*.rpm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl start mysqld
+</span></span><span class=line><span class=cl>grep <span class=s1>&#39;temporary password&#39;</span> /var/log/mysqld.log
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql -uroot -p
+</span></span><span class=line><span class=cl>mysql&gt; ALTER USER USER<span class=o>()</span> IDENTIFIED BY <span class=s1>&#39;Password123@mysql&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=集群节点设置主主>集群节点设置(主/主)</h3><blockquote><p>添加复制用户及权限，在 MySQL-1 节点上创建用于复制数据的用户 clusteruser，授权 MySQL-2 节点访问，在 MySQL-2 节点上创建用于复制数据的用户 clusteruser，授权 MySQL-1 节点访问</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 开启 root 用户远程访问</span>
+</span></span><span class=line><span class=cl>mysql&gt; grant all privileges on *.* to <span class=s1>&#39;root&#39;</span>@<span class=s1>&#39;%&#39;</span> identified by <span class=s1>&#39;Password123@mysql&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1># 添加 MySQL 主从复制⽤户 clusteruser，并授权 MySQL-2 节点可访问 MySQL-1 节点</span>
+</span></span><span class=line><span class=cl>mysql&gt; grant replication slave,file on *.* to <span class=s1>&#39;clusteruser&#39;</span>@<span class=s1>&#39;2/1节点IP&#39;</span> identified by <span class=s1>&#39;Replication@123&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=c1># 刷新授权</span>
+</span></span><span class=line><span class=cl>mysql&gt; flush privileges<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>我们在 1/2节点上添加一个复制账户 <span class=s1>&#39;clusteruser&#39;</span>，允许 <span class=s1>&#39;2/1节点IP&#39;</span> 客户端来访问，密码为 <span class=s1>&#39;Replication@123&#39;</span>。
+</span></span><span class=line><span class=cl>如果有多个从服务器需要共享这一个复制账号，可以使用 <span class=s1>&#39;10.1.11.%&#39;</span> 来替代整个网段。
+</span></span></code></pre></td></tr></table></div></div><h3 id=修改集群配置文件>修改集群配置文件</h3><blockquote><p>将 /etc/my.cnf 文件内容修改如下，MySQL-2 节点修改<code>server-id=102</code>和<code>auto_increment_offset=2</code></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[mysqld]
+</span></span><span class=line><span class=cl>datadir=/var/lib/mysql
+</span></span><span class=line><span class=cl>default-storage-engine=INNODB
+</span></span><span class=line><span class=cl>character_set_server=utf8
+</span></span><span class=line><span class=cl>lower_case_table_names=1
+</span></span><span class=line><span class=cl>table_open_cache=128
+</span></span><span class=line><span class=cl>max_connections=2000
+</span></span><span class=line><span class=cl>max_connect_errors=6000
+</span></span><span class=line><span class=cl>innodb_file_per_table=1
+</span></span><span class=line><span class=cl>innodb_buffer_pool_size=1G
+</span></span><span class=line><span class=cl>max_allowed_packet=64M
+</span></span><span class=line><span class=cl>transaction_isolation=READ-COMMITTED
+</span></span><span class=line><span class=cl>innodb_flush_method=O_DIRECT
+</span></span><span class=line><span class=cl>innodb_flush_log_at_trx_commit=0
+</span></span><span class=line><span class=cl>sync_binlog=0
+</span></span><span class=line><span class=cl>innodb_lock_wait_timeout=1800
+</span></span><span class=line><span class=cl>bind-address=0.0.0.0
+</span></span><span class=line><span class=cl>group_concat_max_len=1024000
+</span></span><span class=line><span class=cl>sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION
+</span></span><span class=line><span class=cl>skip-name-resolve
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>server-id=101
+</span></span><span class=line><span class=cl>log-bin=mysql-bin
+</span></span><span class=line><span class=cl>auto_increment_increment=2
+</span></span><span class=line><span class=cl>auto_increment_offset=1
+</span></span><span class=line><span class=cl>expire_logs_days=30
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[mysql]
+</span></span><span class=line><span class=cl>default-character-set=utf8
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[mysql.server]
+</span></span><span class=line><span class=cl>default-character-set=utf8
+</span></span></code></pre></td></tr></table></div></div><p>配置完成后重启 MySQL 服务：
+systemctl restart mysqld</p><h3 id=配置-mysql-主从关系>配置 MySQL 主从关系</h3><blockquote><p>分别登录到 MySQL 的两个节点上，配置相互的主从关系。</p></blockquote><p>获取各节点状态信息
+到各节点上获取节点状态信息：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql -uroot -p<span class=s1>&#39;Password123@mysql&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql&gt; flush tables with <span class=nb>read</span> lock<span class=se>\G</span>
+</span></span><span class=line><span class=cl>Query OK, <span class=m>0</span> rows affected <span class=o>(</span>0.00 sec<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql&gt; show master status<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以获取到 &lsquo;File&rsquo; 和 &lsquo;Position&rsquo; 两个值，用于设置主从关系。</p><h3 id=配置主从关系>配置主从关系</h3><p>在各个节点上执行以下命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; change master to <span class=nv>master_host</span><span class=o>=</span><span class=s1>&#39;2/1节点IP&#39;</span>, <span class=nv>master_user</span><span class=o>=</span><span class=s1>&#39;clusteruser&#39;</span>, <span class=nv>master_password</span><span class=o>=</span><span class=s1>&#39;Replication@123&#39;</span>, <span class=nv>master_log_file</span><span class=o>=</span><span class=s1>&#39;2/1节点File&#39;</span>, <span class=nv>master_log_pos</span><span class=o>=</span>2/1节点Position<span class=p>;</span>
+</span></span><span class=line><span class=cl>mysql&gt; start slave<span class=p>;</span>
+</span></span><span class=line><span class=cl>mysql&gt; show slave status<span class=se>\G</span>
+</span></span><span class=line><span class=cl>提示：master_host 为 2/1节点的 IP，master_log_file 为 2/1节点上查询到的 <span class=s2>&#34;File&#34;</span> 值，master_log_pos 为 2/1节点上查询到的 <span class=s2>&#34;Position&#34;</span> 值。
+</span></span><span class=line><span class=cl>当 <span class=s2>&#34;show slave status\G&#34;</span> 命令执行结果中，查询到 Slave_IO_Running 和 Slave_SQL_Running 都为 Yes 则表明配置成功。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>最后执行 MySQL 命令解锁：
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>mysql&gt; UNLOCK TABLES<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=创建数据库>创建数据库</h3><blockquote><p>配置好主主节点后，登录到任意节点</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mysql&gt; CREATE DATABASE <span class=sb>`</span>testdb<span class=sb>`</span> DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>在另一个节点上，用 MySQL 命令可以同样查看到新建的数据库：
+</span></span><span class=line><span class=cl>mysql&gt; show databases<span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=oracle-jdk-8>Oracle JDK 8</h2><ol><li><p><a class=link href=https://github.com/frekele/oracle-java/releases/download/8u212-b10/jdk-8u212-linux-x64.tar.gz target=_blank rel=noopener>下载</a></p></li><li><p>解压缩</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> /usr/local/src
+</span></span><span class=line><span class=cl>tar zxvf jdk-8u212-linux-x64.tar.gz
+</span></span></code></pre></td></tr></table></div></div><ol start=3><li>在 /etc/profile.d 中创建一个新文件以设置 JAVA_HOME 和 PATH 环境变量</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vi /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table></div></div><ol start=4><li>在 jdk.sh 文件中添加以下内容：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>export</span> <span class=nv>JAVA_HOME</span><span class=o>=</span>/usr/local/src/jdk1.8.8u212
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:<span class=nv>$JAVA_HOME</span>/bin
+</span></span></code></pre></td></tr></table></div></div><ol start=5><li>使 jdk.sh 文件可执行：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo chmod +x /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table></div></div><ol start=6><li>使更改生效：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>source</span> /etc/profile.d/jdk.sh
+</span></span></code></pre></td></tr></table></div></div><ol start=7><li>确认 Java 已成功安装：</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>java -version
+</span></span></code></pre></td></tr></table></div></div><h2 id=tomcat7>tomcat7</h2><p>1.下载</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget https://archive.apache.org/dist/tomcat/tomcat-7/v7.0.109/bin/apache-tomcat-7.0.109.tar.gz
+</span></span></code></pre></td></tr></table></div></div><p>2.解压</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>tar -zxvf apache-tomcat-7.0.109.tar.gz
+</span></span></code></pre></td></tr></table></div></div><p>3.将 Tomcat 7 的 bin 目录添加到 PATH 环境变量中</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;export PATH=</span><span class=nv>$PATH</span><span class=s2>:/opt/apache-tomcat-7.0.109/bin&#34;</span> &gt;&gt; ~/.bashrc
+</span></span><span class=line><span class=cl><span class=nb>source</span> ~/.bashrc
+</span></span></code></pre></td></tr></table></div></div><h2 id=开机启动>开机启动</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#1、首先切换到/etc/init.d目录下</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /etc/init.d
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#拷贝要运行的脚本文件到此目录，这个脚本是startMyServer.sh，现在是放在/root/目录下</span>
+</span></span><span class=line><span class=cl>cp /root/startMyServer.sh /etc/init.d
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>## 脚本文件startMyServer.sh内容如下：</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#!/bin/bash</span>
+</span></span><span class=line><span class=cl><span class=c1># chkconfig: - 85 15</span>
+</span></span><span class=line><span class=cl><span class=c1># description:开机自启脚本</span>
+</span></span><span class=line><span class=cl><span class=nb>source</span> /etc/profile
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /opt/scripts
+</span></span><span class=line><span class=cl>./serve.sh start
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#为这个脚本加上可执行权限</span>
+</span></span><span class=line><span class=cl>chmod +x startMyServer.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#将此脚本加入chkconfig命令进行管理</span>
+</span></span><span class=line><span class=cl>chkconfig --add startMyServer.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#设置该脚本为开机自运行</span>
+</span></span><span class=line><span class=cl>chkconfig startMyServer.sh on
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#移除该自启动脚本，依次执行如下两句即可</span>
+</span></span><span class=line><span class=cl>chkconfig startMyServer.sh off
+</span></span><span class=line><span class=cl>chkconfig --del startMyServer.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#用CentOS8系统自带的systemctl 命令查看和停止该脚本</span>
+</span></span><span class=line><span class=cl>systemctl start startMyServer.service <span class=c1>#开启该脚本</span>
+</span></span><span class=line><span class=cl>systemctl restart startMyServer.service <span class=c1>#重启动脚本</span>
+</span></span><span class=line><span class=cl>systemctl stop startMyServer.service  <span class=c1>#停止该脚本</span>
+</span></span><span class=line><span class=cl>systemctl status startMyServer.service <span class=c1>#查看服务状态</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=shell脚本格式>shell脚本格式</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span>xxx
+</span></span></code></pre></td></tr></table></div></div><h2 id=docker>docker</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#containerd</span>
+</span></span><span class=line><span class=cl>yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#安装一些其他依赖</span>
+</span></span><span class=line><span class=cl>yum install -y yum-utils device-mapper-persistent-data lvm2
+</span></span><span class=line><span class=cl>yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</span></span><span class=line><span class=cl>yum makecache
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#安装docker-ce</span>
+</span></span><span class=line><span class=cl>dnf -y  install docker-ce --nobest
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#开启Docker服务并设置开机自启</span>
+</span></span><span class=line><span class=cl>systemctl start docker <span class=o>&amp;&amp;</span> sudo systemctl <span class=nb>enable</span> docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#测试，如输出下图结果则安装成功</span>
+</span></span><span class=line><span class=cl>docker version
+</span></span></code></pre></td></tr></table></div></div><h2 id=docker-compose>Docker-compose</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo curl -L <span class=s2>&#34;https://github.com/docker/compose/releases/download/1.27.4/docker-compose-</span><span class=k>$(</span>uname -s<span class=k>)</span><span class=s2>-</span><span class=k>$(</span>uname -m<span class=k>)</span><span class=s2>&#34;</span> -o /usr/local/bin/docker-compose
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo chmod +x /usr/local/bin/docker-compose
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker-compose --version
+</span></span></code></pre></td></tr></table></div></div><h2 id=apisix>apisix</h2><h3 id=etcd>etcd</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nv>ETCD_VERSION</span><span class=o>=</span><span class=s1>&#39;3.5.4&#39;</span>
+</span></span><span class=line><span class=cl>wget https://github.com/etcd-io/etcd/releases/download/v<span class=si>${</span><span class=nv>ETCD_VERSION</span><span class=si>}</span>/etcd-v<span class=si>${</span><span class=nv>ETCD_VERSION</span><span class=si>}</span>-linux-amd64.tar.gz
+</span></span><span class=line><span class=cl>tar -xvf etcd-v<span class=si>${</span><span class=nv>ETCD_VERSION</span><span class=si>}</span>-linux-amd64.tar.gz <span class=o>&amp;&amp;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  <span class=nb>cd</span> etcd-v<span class=si>${</span><span class=nv>ETCD_VERSION</span><span class=si>}</span>-linux-amd64 <span class=o>&amp;&amp;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  sudo cp -a etcd etcdctl /usr/bin/
+</span></span><span class=line><span class=cl>nohup etcd &gt;/tmp/etcd.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=apisix-1>apisix</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y https://repos.apiseven.com/packages/centos/apache-apisix-repo-1.0-1.noarch.rpm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo yum-config-manager --add-repo https://repos.apiseven.com/packages/centos/apache-apisix.repo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo yum install apisix
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>apisix init
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>apisix start
+</span></span></code></pre></td></tr></table></div></div><h2 id=apisix-dashboard>apisix-Dashboard</h2><h3 id=golang>golang</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget https://golang.google.cn/dl/go1.17.linux-amd64.tar.gz
+</span></span><span class=line><span class=cl>tar zxvf go1.17.linux-amd64.tar.gz
+</span></span><span class=line><span class=cl>mv go /usr/local/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>vim /etc/profile
+</span></span><span class=line><span class=cl><span class=c1>#底部加上</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>GOROOT</span><span class=o>=</span>/usr/local/go
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:<span class=nv>$GOROOT</span>/bin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>source</span> /etc/profile
+</span></span><span class=line><span class=cl>go version
+</span></span></code></pre></td></tr></table></div></div><h3 id=nodejs>nodejs</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -fsSL https://rpm.nodesource.com/setup_16.x <span class=p>|</span> sudo bash -
+</span></span><span class=line><span class=cl>sudo yum install -y nodejs
+</span></span><span class=line><span class=cl>sudo corepack <span class=nb>enable</span> yarn
+</span></span><span class=line><span class=cl>node --version
+</span></span><span class=line><span class=cl>npm --version
+</span></span><span class=line><span class=cl>yarn -v
+</span></span></code></pre></td></tr></table></div></div><h3 id=dashboard>dashboard</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y https://github.com/apache/apisix-dashboard/releases/download/v3.0.1/apisix-dashboard-3.0.1-0.el7.x86_64.rpm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>vi /usr/local/apisix/dashboard/conf/conf.yaml
+</span></span><span class=line><span class=cl><span class=c1>#allow_list值注释</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl start apisix-dashboard
+</span></span></code></pre></td></tr></table></div></div><h3 id=file-logger>file-logger</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;_meta&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nt>&#34;disable&#34;</span><span class=p>:</span> <span class=kc>false</span>
+</span></span><span class=line><span class=cl>  <span class=p>},</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;include_req_body&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;include_resp_body&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;path&#34;</span><span class=p>:</span> <span class=s2>&#34;/usr/local/apisix/logs/file.log&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/linux/>linux</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg><span>最后更新于 Sep 25, 2023 11:15 +0800</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/post/note/linux/linux/><div class=article-details><h2 class=article-title>linux</h2></div></a></article><article><a href=/post/read/linux/shell/><div class=article-details><h2 class=article-title>linux - shell</h2></div></a></article><article><a href=/post/read/linux/cmd/><div class=article-details><h2 class=article-title>linux - 使用命令</h2></div></a></article><article><a href=/post/read/linux/filedir/><div class=article-details><h2 class=article-title>linux - 探究操作系统</h2></div></a></article><article><a href=/post/read/linux/auth/><div class=article-details><h2 class=article-title>linux - 权限</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2023 YZLC</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.20.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

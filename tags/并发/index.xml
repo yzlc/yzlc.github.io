@@ -1,1 +1,330 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>并发 on YZLC</title><link>https://yzlc.github.io/tags/%E5%B9%B6%E5%8F%91/</link><description>Recent content in 并发 on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 23 Jun 2020 13:33:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/%E5%B9%B6%E5%8F%91/index.xml" rel="self" type="application/rss+xml"/><item><title>第11章　性能与可伸缩性</title><link>https://yzlc.github.io/post/read/concurrency/11/</link><pubDate>Tue, 23 Jun 2020 13:33:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/11/</guid><description>11.3 线程引入的开销 11.3.1 上下文切换 11.3.2 内存同步 11.3.3 阻塞 11.4 减少锁的竞争 减少锁的持有时间 降低锁的请求频率 使用带有协调机制的独占锁，这些机制允许更高的并发性</description></item><item><title>第10章　避免活跃性危险</title><link>https://yzlc.github.io/post/read/concurrency/10/</link><pubDate>Tue, 23 Jun 2020 13:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/10/</guid><description>10.1 死锁 10.1.1 锁顺序死锁 如果所有线程以固定的顺序来获得锁，那么在程序中就不会出现锁顺序死锁问题 10.1.2 动态的锁顺序死锁 10.1.3 在协作对象之间发生的死锁 如果在持</description></item><item><title>第8章　线程池的使用</title><link>https://yzlc.github.io/post/read/concurrency/8/</link><pubDate>Tue, 23 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/8/</guid><description>8.1 在任务与执行策略之间的隐性耦合 有些类型的任务需要明确地指定执行策略 依赖性任务 使用线程封封闭机制的任务 对响应时间敏感的任务 8.1.1 线程饥饿死锁 线程</description></item><item><title>第7章　取消与关闭</title><link>https://yzlc.github.io/post/read/concurrency/7/</link><pubDate>Mon, 22 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/7/</guid><description>7.1 任务取消 用户请求取消 有时间限制的操作 应用程序事件 错误 关闭 7.1.1 中断 调用interrupt并不意味着立即停止目标线程正在进行的工作，而只是传递了</description></item><item><title>第6章　任务执行</title><link>https://yzlc.github.io/post/read/concurrency/6/</link><pubDate>Thu, 18 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/6/</guid><description>6.1 在线程中执行任务 6.1.1 串行地执行任务 6.1.2 显式地为任务创建线程 6.1.3 无限制创建线程的不足 线程生命周期的开销非常高 资源消耗 稳定性 6.2 Executor框架 基</description></item><item><title>第4章　对象的组合</title><link>https://yzlc.github.io/post/read/concurrency/4/</link><pubDate>Tue, 16 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/4/</guid><description>4.1 设计线程安全的类 在设计线程安全类的过程中，需要包含以下三个基本要素： 找出构成对象状态的所有变量。 找出约束状态变量的不变性条件。 建立对象状态</description></item><item><title>第5章　基础构建模块</title><link>https://yzlc.github.io/post/read/concurrency/5/</link><pubDate>Tue, 16 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/5/</guid><description>5.1 同步容器类 5.1.1 同步容器类的问题 5.1.2 迭代器与ConcurrentModificationException 5.1.3 隐藏迭代器 5.2 并发容器 5.2.1 ConcurrentHashMap 只有当应用程</description></item><item><title>第2章　线程安全性</title><link>https://yzlc.github.io/post/read/concurrency/2/</link><pubDate>Mon, 15 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/2/</guid><description>2.1 什么是线程安全性 当多个线程访问某个类时，这个类始终都能表现出正确的行为 2.2 原子性 2.2.1 竞态条件（Race Condition） 由于不恰当的执行时序</description></item><item><title>第3章　对象的共享</title><link>https://yzlc.github.io/post/read/concurrency/3/</link><pubDate>Mon, 15 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/3/</guid><description>3.1 可见性 3.1.1 失效数据 3.1.2 非原子的64位操作 3.1.3 加锁与可见性 3.1.4 Volatile变量 当且仅当满足以下所有条件时使用： 对变量的写入操作不依赖变量的当前值</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>并发 on YZLC</title><link>https://yzlc.github.io/tags/%E5%B9%B6%E5%8F%91/</link><description>Recent content in 并发 on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 23 Jun 2020 13:33:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/%E5%B9%B6%E5%8F%91/index.xml" rel="self" type="application/rss+xml"/><item><title>第11章　性能与可伸缩性</title><link>https://yzlc.github.io/post/read/concurrency/11/</link><pubDate>Tue, 23 Jun 2020 13:33:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/11/</guid><description>&lt;h2 id="113-线程引入的开销">11.3 线程引入的开销&lt;/h2>
+&lt;h3 id="1131-上下文切换">11.3.1 上下文切换&lt;/h3>
+&lt;h3 id="1132-内存同步">11.3.2 内存同步&lt;/h3>
+&lt;h3 id="1133-阻塞">11.3.3 阻塞&lt;/h3>
+&lt;h2 id="114-减少锁的竞争">11.4 减少锁的竞争&lt;/h2>
+&lt;ul>
+&lt;li>减少锁的持有时间&lt;/li>
+&lt;li>降低锁的请求频率&lt;/li>
+&lt;li>使用带有协调机制的独占锁，这些机制允许更高的并发性&lt;/li>
+&lt;/ul>
+&lt;h3 id="1141-缩小锁的范围">11.4.1 缩小锁的范围&lt;/h3>
+&lt;h3 id="1142-减小锁的粒度">11.4.2 减小锁的粒度&lt;/h3>
+&lt;h3 id="1143-锁分段">11.4.3 锁分段&lt;/h3>
+&lt;h3 id="1144-避免热点域">11.4.4 避免热点域&lt;/h3>
+&lt;blockquote>
+&lt;p>例如将一些反复计算的结果缓存起来&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="1145-一些替代独占锁的方法">11.4.5 一些替代独占锁的方法&lt;/h3>
+&lt;h3 id="1146-监测cpu的利用率">11.4.6 监测CPU的利用率&lt;/h3>
+&lt;h3 id="1147-向对象池说不">11.4.7 向对象池说不&lt;/h3>
+&lt;p>通常，对象分配操作的开销比同步的开销更低&lt;/p></description></item><item><title>第10章　避免活跃性危险</title><link>https://yzlc.github.io/post/read/concurrency/10/</link><pubDate>Tue, 23 Jun 2020 13:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/10/</guid><description>&lt;h2 id="101-死锁">10.1 死锁&lt;/h2>
+&lt;h3 id="1011-锁顺序死锁">10.1.1 锁顺序死锁&lt;/h3>
+&lt;p>如果所有线程以固定的顺序来获得锁，那么在程序中就不会出现锁顺序死锁问题&lt;/p>
+&lt;h3 id="1012-动态的锁顺序死锁">10.1.2 动态的锁顺序死锁&lt;/h3>
+&lt;h3 id="1013-在协作对象之间发生的死锁">10.1.3 在协作对象之间发生的死锁&lt;/h3>
+&lt;p>如果在持有锁时调用某个外部方法，那么将出现活跃性问题。在这个外部方法中可能会获取其他锁，或者阻塞时间过长，导致其他线程无法及时获得当前被持有的锁&lt;/p>
+&lt;h3 id="1014-开放调用">10.1.4 开放调用&lt;/h3>
+&lt;blockquote>
+&lt;p>在调用某个方法时不需要持有锁&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="1015-资源死锁">10.1.5 资源死锁&lt;/h3>
+&lt;h2 id="102-死锁的避免与诊断">10.2 死锁的避免与诊断&lt;/h2>
+&lt;h3 id="1021-支持定时的锁">10.2.1 支持定时的锁&lt;/h3>
+&lt;h3 id="1022-通过线程转储信息来分析死锁">10.2.2 通过线程转储信息来分析死锁&lt;/h3>
+&lt;h2 id="103-其他活跃性危险">10.3 其他活跃性危险&lt;/h2>
+&lt;h3 id="1031-饥饿">10.3.1 饥饿&lt;/h3>
+&lt;h3 id="1032-糟糕的响应性">10.3.2 糟糕的响应性&lt;/h3>
+&lt;h3 id="1033-活锁">10.3.3 活锁&lt;/h3></description></item><item><title>第8章　线程池的使用</title><link>https://yzlc.github.io/post/read/concurrency/8/</link><pubDate>Tue, 23 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/8/</guid><description>&lt;h2 id="81-在任务与执行策略之间的隐性耦合">8.1 在任务与执行策略之间的隐性耦合&lt;/h2>
+&lt;p>有些类型的任务需要明确地指定执行策略&lt;/p>
+&lt;ul>
+&lt;li>依赖性任务&lt;/li>
+&lt;li>使用线程封封闭机制的任务&lt;/li>
+&lt;li>对响应时间敏感的任务&lt;/li>
+&lt;/ul>
+&lt;h3 id="811-线程饥饿死锁">8.1.1 线程饥饿死锁&lt;/h3>
+&lt;blockquote>
+&lt;p>线程池中的任务需要无限期地等待一些必须由池中其他任务才能提供的资源或条件&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="812-运行时间较长的任务">8.1.2 运行时间较长的任务&lt;/h3>
+&lt;h2 id="82-设置线程池的大小">8.2 设置线程池的大小&lt;/h2>
+&lt;h2 id="83-配置threadpoolexecutor">8.3 配置ThreadPoolExecutor&lt;/h2>
+&lt;h3 id="831-线程的创建与销毁">8.3.1 线程的创建与销毁&lt;/h3>
+&lt;h3 id="832-管理队列任务">8.3.2 管理队列任务&lt;/h3>
+&lt;p>对于Executor，newCachedThreadPool工厂方法是一种很好的默认选择，它能提供比固定大小的线程池更好的排队性能。当需要限制当前任务的数量以满足资源管理需求时，那么可以选择固定大小的线程池，就像在接受网络客户请求的服务器应用程序中。如果不进行限制，那么很容易发生过载问题&lt;/p>
+&lt;h3 id="833-饱和策略">8.3.3 饱和策略&lt;/h3>
+&lt;h3 id="834-线程工厂">8.3.4 线程工厂&lt;/h3>
+&lt;h3 id="835-在调用构造函数后再定制threadpoolexecutor">8.3.5 在调用构造函数后再定制ThreadPoolExecutor&lt;/h3></description></item><item><title>第7章　取消与关闭</title><link>https://yzlc.github.io/post/read/concurrency/7/</link><pubDate>Mon, 22 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/7/</guid><description>&lt;h2 id="71-任务取消">7.1 任务取消&lt;/h2>
+&lt;ul>
+&lt;li>用户请求取消&lt;/li>
+&lt;li>有时间限制的操作&lt;/li>
+&lt;li>应用程序事件&lt;/li>
+&lt;li>错误&lt;/li>
+&lt;li>关闭&lt;/li>
+&lt;/ul>
+&lt;h3 id="711-中断">7.1.1 中断&lt;/h3>
+&lt;p>调用interrupt并不意味着立即停止目标线程正在进行的工作，而只是传递了请求中断的消息&lt;/p>
+&lt;p>通常，中断是实现取消的最合理方式&lt;/p>
+&lt;h3 id="712-中断策略">7.1.2 中断策略&lt;/h3>
+&lt;p>由于每个线程拥有各自的中断策略，因此除非你知道中断对该线程的含义，否则就不应该中断这个线程&lt;/p>
+&lt;h3 id="713-响应中断">7.1.3 响应中断&lt;/h3>
+&lt;p>只有实现了线程中断策略的代码才可以屏蔽中断请求，在常规的任务和库代码中都不应该屏蔽中断请求&lt;/p>
+&lt;h3 id="715-通过future来实现取消">7.1.5 通过Future来实现取消&lt;/h3>
+&lt;p>当Future.get抛出InterruptedException或TimeoutException时，如果你知道不再需要结果，那么就可以调用Future.cancel来取消任务&lt;/p>
+&lt;h3 id="716-处理不可中断的阻塞">7.1.6 处理不可中断的阻塞&lt;/h3>
+&lt;p>线程阻塞的原因&lt;/p>
+&lt;ul>
+&lt;li>Java.io包中的同步Socket I/O。&lt;/li>
+&lt;li>Java.io包中的同步I/O&lt;/li>
+&lt;li>Selector的异步I/O&lt;/li>
+&lt;li>获取某个锁&lt;/li>
+&lt;/ul>
+&lt;h3 id="717-采用newtaskfor来封装非标准的取消">7.1.7 采用newTaskFor来封装非标准的取消&lt;/h3>
+&lt;h2 id="72-停止基于线程的服务">7.2 停止基于线程的服务&lt;/h2>
+&lt;p>对于持有线程的服务，只要服务的存在时间大于创建线程的方法的存在时间，那么就应该提供生命周期方法&lt;/p>
+&lt;h3 id="722-关闭executorservice">7.2.2 关闭ExecutorService&lt;/h3>
+&lt;h3 id="723-毒丸对象">7.2.3 毒丸对象&lt;/h3>
+&lt;p>毒丸是指一个放在队列上的对象，其含义是：当得到这个对象时，立即停止&lt;/p>
+&lt;h3 id="725-shutdownnow的局限性">7.2.5 shutdownNow的局限性&lt;/h3>
+&lt;p>使用TrackingExecutorService来保存未完成的任务以备后续执行&lt;/p>
+&lt;h2 id="73-处理非正常的线程终止">7.3 处理非正常的线程终止&lt;/h2>
+&lt;h2 id="74-jvm关闭">7.4 JVM关闭&lt;/h2>
+&lt;h3 id="741-关闭钩子">7.4.1 关闭钩子&lt;/h3>
+&lt;blockquote>
+&lt;p>通过Runtime.addShutdownHook注册的但尚未开始的线程&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="742-守护线程">7.4.2 守护线程&lt;/h3>
+&lt;p>创建一个线程来执行一些辅助工作，但又不希望这个线程阻碍JVM的关闭&lt;/p>
+&lt;h3 id="743-终结器">7.4.3 终结器&lt;/h3></description></item><item><title>第6章　任务执行</title><link>https://yzlc.github.io/post/read/concurrency/6/</link><pubDate>Thu, 18 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/6/</guid><description>&lt;h2 id="61-在线程中执行任务">6.1 在线程中执行任务&lt;/h2>
+&lt;h2 id="611-串行地执行任务">6.1.1 串行地执行任务&lt;/h2>
+&lt;h2 id="612-显式地为任务创建线程">6.1.2 显式地为任务创建线程&lt;/h2>
+&lt;h2 id="613-无限制创建线程的不足">6.1.3 无限制创建线程的不足&lt;/h2>
+&lt;ul>
+&lt;li>线程生命周期的开销非常高&lt;/li>
+&lt;li>资源消耗&lt;/li>
+&lt;li>稳定性&lt;/li>
+&lt;/ul>
+&lt;h2 id="62-executor框架">6.2 Executor框架&lt;/h2>
+&lt;blockquote>
+&lt;p>基于生产者 - 消费者模式&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="622-执行策略">6.2.2 执行策略&lt;/h3>
+&lt;h3 id="623-线程池">6.2.3 线程池&lt;/h3>
+&lt;p>通过调用Executors静态工厂方法创建线程池：&lt;/p>
+&lt;ul>
+&lt;li>newFixedThreadPool。固定长度的线程池，每提交任务时创建，直到最大数量&lt;/li>
+&lt;li>newCachedThreadPool。可缓存线程池，线程池规模超过需求时回收，需求增加时添加线程，线程池规模无限制&lt;/li>
+&lt;li>newSingleThreadExecutor。单线程。确保任务在队列中顺序串行执行&lt;/li>
+&lt;li>newScheduledThreadPool。固定长度线程池，延迟或定时方式执行&lt;/li>
+&lt;/ul>
+&lt;h3 id="624-executor的生命周期">6.2.4 Executor的生命周期&lt;/h3>
+&lt;h3 id="625-延迟任务与周期任务">6.2.5 延迟任务与周期任务&lt;/h3>
+&lt;h2 id="63-找出可利用的并行性">6.3 找出可利用的并行性&lt;/h2>
+&lt;h3 id="632-携带结果的任务callable与future">6.3.2 携带结果的任务Callable与Future&lt;/h3>
+&lt;ul>
+&lt;li>Callable：抽象的计算任务&lt;/li>
+&lt;li>Future：任务的生命周期，提供方法判断是否完成或取消，获取任务的结果和取消任务等&lt;/li>
+&lt;/ul>
+&lt;h3 id="634-在异构任务并行化中存在的局限">6.3.4 在异构任务并行化中存在的局限&lt;/h3>
+&lt;h3 id="635-completionserviceexecutor与blockingqueue">6.3.5 CompletionService：Executor与BlockingQueue&lt;/h3>
+&lt;blockquote>
+&lt;p>将Callable任务提交给它执行，使用类似队列操作的take和poll等方法获得已完成的结果&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="637-为任务设置时限">6.3.7 为任务设置时限&lt;/h3></description></item><item><title>第4章　对象的组合</title><link>https://yzlc.github.io/post/read/concurrency/4/</link><pubDate>Tue, 16 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/4/</guid><description>&lt;h2 id="41设计线程安全的类">4.1　设计线程安全的类&lt;/h2>
+&lt;p>在设计线程安全类的过程中，需要包含以下三个基本要素：&lt;/p>
+&lt;ul>
+&lt;li>找出构成对象状态的所有变量。&lt;/li>
+&lt;li>找出约束状态变量的不变性条件。&lt;/li>
+&lt;li>建立对象状态的并发访问管理策略。&lt;/li>
+&lt;/ul>
+&lt;h3 id="411收集同步需求">4.1.1　收集同步需求&lt;/h3>
+&lt;h3 id="412依赖状态的操作">4.1.2　依赖状态的操作&lt;/h3>
+&lt;blockquote>
+&lt;p>在某个操作中包含有基于状态的先验条件&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="413状态的所有权">4.1.3　状态的所有权&lt;/h3>
+&lt;h2 id="42实例封闭">4.2　实例封闭&lt;/h2>
+&lt;h3 id="421java监视器模式">4.2.1　Java监视器模式&lt;/h3>
+&lt;blockquote>
+&lt;p>把对象的所有可变状态都封装起来，并由对象自己的内置锁来保护&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="43线程安全性的委托">4.3　线程安全性的委托&lt;/h2>
+&lt;h3 id="432独立的状态变量">4.3.2　独立的状态变量&lt;/h3>
+&lt;h3 id="433当委托失效时">4.3.3　当委托失效时&lt;/h3>
+&lt;h3 id="434发布底层的状态变量">4.3.4　发布底层的状态变量&lt;/h3>
+&lt;h2 id="44在现有的线程安全类中添加功能">4.4　在现有的线程安全类中添加功能&lt;/h2>
+&lt;h3 id="441客户端加锁机制">4.4.1　客户端加锁机制&lt;/h3>
+&lt;h3 id="442组合">4.4.2　组合&lt;/h3></description></item><item><title>第5章　基础构建模块</title><link>https://yzlc.github.io/post/read/concurrency/5/</link><pubDate>Tue, 16 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/5/</guid><description>&lt;h2 id="51同步容器类">5.1　同步容器类&lt;/h2>
+&lt;h3 id="511同步容器类的问题">5.1.1　同步容器类的问题&lt;/h3>
+&lt;h3 id="512迭代器与concurrentmodificationexception">5.1.2　迭代器与ConcurrentModificationException&lt;/h3>
+&lt;h3 id="513隐藏迭代器">5.1.3　隐藏迭代器&lt;/h3>
+&lt;h2 id="52并发容器">5.2　并发容器&lt;/h2>
+&lt;h3 id="521concurrenthashmap">5.2.1　ConcurrentHashMap&lt;/h3>
+&lt;blockquote>
+&lt;p>只有当应用程序需要加锁Map以进行独占访问时，才应该放弃使用ConcurrentHashMap&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="522额外的原子map操作">5.2.2　额外的原子Map操作&lt;/h3>
+&lt;h3 id="523copyonwritearraylist">5.2.3　CopyOnWriteArrayList&lt;/h3>
+&lt;blockquote>
+&lt;p>仅当迭代操作远远多于修改操作时，才应该使用“写入时复制”容器&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="53阻塞队列和生产者-消费者模式">5.3　阻塞队列和生产者-消费者模式&lt;/h2>
+&lt;p>BlockingQueue&lt;/p>
+&lt;ul>
+&lt;li>LinkedBlockingQueue和ArrayBlocking-Queue是FIFO队列，二者分别与LinkedList和ArrayList类似，但比同步List拥有更好的并发性能&lt;/li>
+&lt;li>PriorityBlockingQueue是一个按优先级排序的队列，当你希望按照某种顺序而不是FIFO来处理元素时，这个队列将非常有用&lt;/li>
+&lt;li>SynchronousQueue实际上不是一个真正的队列，因为它不会为队列中元素维护存储空间。与其他队列不同的是，它维护一组线程，这些线程在等待着把元素加入或移出队列。仅当有足够多的消费者，并且总是有一个消费者准备好获取交付的工作时，才适合使用同步队列&lt;/li>
+&lt;/ul>
+&lt;h3 id="532串行线程封闭">5.3.2　串行线程封闭&lt;/h3>
+&lt;blockquote>
+&lt;p>线程封闭对象只能由单个线程拥有，但可以通过安全地发布该对象来转移所有权。阻塞队列、ConcurrentMap#remove、AtomicReference#compareAndSet&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="533-双端队列与工作密取work-stealing">5.3.3 双端队列与工作密取（Work Stealing）&lt;/h3>
+&lt;p>Deque：队头队尾插入移除&lt;/p>
+&lt;ul>
+&lt;li>ArrayDeque&lt;/li>
+&lt;li>BlockingDeque
+&lt;ul>
+&lt;li>LinkedBlockingDeque&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;p>工作密取：每个消费者都有各自的双端队列，如果它完成了自己双端队列中的全部工作，那么它可以从其他消费者双端队列末尾秘密地获取工作。适用于既是消费者也是生产者问题&lt;/p>
+&lt;h2 id="54-阻塞方法与中断方法">5.4 阻塞方法与中断方法&lt;/h2>
+&lt;h2 id="55-同步工具类">5.5 同步工具类&lt;/h2>
+&lt;h3 id="551-闭锁">5.5.1 闭锁&lt;/h3>
+&lt;blockquote>
+&lt;p>延迟进程的进度直到其到达终止状态。用来确保某些活动直到其他活动都完成后才继续执行&lt;/p>
+&lt;/blockquote>
+&lt;p>CountDownLatch(int count)&lt;/p>
+&lt;ul>
+&lt;li>count：计数器，需要等待的事件数&lt;/li>
+&lt;li>countDown：递减计数器，表示有一个事件已经发生&lt;/li>
+&lt;li>await：等待计数器达到零，表示所有事件都已经发生&lt;/li>
+&lt;/ul>
+&lt;h3 id="552-funturetask">5.5.2 FuntureTask&lt;/h3>
+&lt;blockquote>
+&lt;p>也可以用做闭锁。通过Callable实现，相当于可生成结果的Runnable，可处于等待运行、正在运行、运行完成状态&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="553-信号量">5.5.3 信号量&lt;/h3>
+&lt;blockquote>
+&lt;p>计数信号量（Counting Semaphore）用来控制同时访问某个特定资源的操作数量，或者同时执行某个指定操作的数量。可用来实现资源池或对容器施加边界
+Semaphore(int permits)&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>permits：许可，执行操作时先获得许可，使用后释放许可&lt;/li>
+&lt;li>acquire：阻塞直到有许可&lt;/li>
+&lt;li>release：返回一个许可给信号量&lt;/li>
+&lt;/ul>
+&lt;h3 id="554-栅栏">5.5.4 栅栏&lt;/h3>
+&lt;blockquote>
+&lt;p>阻塞一组线程直到某个事件发生&lt;/p>
+&lt;/blockquote>
+&lt;p>区别：闭锁等待事件，栅栏等待其他线程&lt;/p>
+&lt;p>CyclicBarrier：并行迭代算法、模拟程序&lt;/p>
+&lt;p>Exchanger：两方栅栏，各方在栅栏位置交换数据。两方执行不对称操作（缓冲区写、读数据）&lt;/p>
+&lt;h2 id="56-构建高效且可伸缩的结果缓存">5.6 构建高效且可伸缩的结果缓存&lt;/h2></description></item><item><title>第2章　线程安全性</title><link>https://yzlc.github.io/post/read/concurrency/2/</link><pubDate>Mon, 15 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/2/</guid><description>&lt;h2 id="21什么是线程安全性">2.1　什么是线程安全性&lt;/h2>
+&lt;blockquote>
+&lt;p>当多个线程访问某个类时，这个类始终都能表现出正确的行为&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="22原子性">2.2　原子性&lt;/h2>
+&lt;h3 id="221竞态条件race-condition">2.2.1　竞态条件（Race Condition）&lt;/h3>
+&lt;blockquote>
+&lt;p>由于不恰当的执行时序而出现不正确的结果&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>最常见的竞态条件类型就是“先检查后执行（Check-Then-Act）”操作，即通过一个可能失效的观测结果来决定下一步的动作&lt;/li>
+&lt;/ul>
+&lt;h3 id="复合操作">复合操作&lt;/h3>
+&lt;blockquote>
+&lt;p>包含了一组必须以原子方式执行的操作以确保线程安全性&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="23加锁机制">2.3　加锁机制&lt;/h2>
+&lt;h3 id="231内置锁">2.3.1　内置锁&lt;/h3>
+&lt;blockquote>
+&lt;p>同步代码块（Synchronized Block）。包括两部分：一个作为锁的对象引用，一个作为由这个锁保护的代码块。以关键字synchronized来修饰的方法就是一种横跨整个方法体的同步代码块，其中该同步代码块的锁就是方法调用所在的对象。静态的synchronized方法以Class对象作为锁。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="232重入">2.3.2　重入&lt;/h3>
+&lt;blockquote>
+&lt;p>如果某个线程试图获得一个已经由它自己持有的锁，那么这个请求就会成功&lt;/p>
+&lt;/blockquote></description></item><item><title>第3章　对象的共享</title><link>https://yzlc.github.io/post/read/concurrency/3/</link><pubDate>Mon, 15 Jun 2020 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/read/concurrency/3/</guid><description>&lt;h2 id="31可见性">3.1　可见性&lt;/h2>
+&lt;h3 id="311失效数据">3.1.1　失效数据&lt;/h3>
+&lt;h3 id="312非原子的64位操作">3.1.2　非原子的64位操作&lt;/h3>
+&lt;h3 id="313加锁与可见性">3.1.3　加锁与可见性&lt;/h3>
+&lt;h3 id="314volatile变量">3.1.4　Volatile变量&lt;/h3>
+&lt;p>当且仅当满足以下所有条件时使用：&lt;/p>
+&lt;ul>
+&lt;li>对变量的写入操作不依赖变量的当前值，或者你能确保只有单个线程更新变量的值&lt;/li>
+&lt;li>该变量不会与其他状态变量一起纳入不变性条件中&lt;/li>
+&lt;li>在访问变量时不需要加锁&lt;/li>
+&lt;/ul>
+&lt;h2 id="32发布与逸出">3.2　发布与逸出&lt;/h2>
+&lt;blockquote>
+&lt;p>发布（Publish）：使对象能够在当前作用域之外的代码中使用。当某个不应该发布的对象被发布时，这种情况就被称为逸出（Escape）&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="33线程封闭thread-confinement">3.3　线程封闭（Thread Confinement）&lt;/h2>
+&lt;blockquote>
+&lt;p>仅在单线程内访问数据&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="331ad-hoc线程封闭">3.3.1　Ad-hoc线程封闭&lt;/h3>
+&lt;blockquote>
+&lt;p>维护线程封闭性的职责完全由程序实现来承担&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="332栈封闭">3.3.2　栈封闭&lt;/h3>
+&lt;blockquote>
+&lt;p>只能通过局部变量才能访问对象&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="333threadlocal类">3.3.3　ThreadLocal类&lt;/h3>
+&lt;blockquote>
+&lt;p>使线程中的某个值与保存值的对象关联起来&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="34不变性">3.4　不变性&lt;/h2>
+&lt;p>当满足以下条件时，对象才是不可变的：&lt;/p>
+&lt;ul>
+&lt;li>对象创建以后其状态就不能修改&lt;/li>
+&lt;li>对象的所有域都是final类型&lt;/li>
+&lt;li>对象是正确创建的（在对象的创建期间，this引用没有逸出）&lt;/li>
+&lt;/ul>
+&lt;h3 id="341final域">3.4.1　Final域&lt;/h3>
+&lt;h2 id="35安全发布">3.5　安全发布&lt;/h2>
+&lt;h3 id="351不正确的发布正确的对象被破坏">3.5.1　不正确的发布：正确的对象被破坏&lt;/h3>
+&lt;blockquote>
+&lt;p>不能指望一个尚未被完全创建的对象拥有完整性&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="352不可变对象与初始化安全性">3.5.2　不可变对象与初始化安全性&lt;/h3>
+&lt;blockquote>
+&lt;p>状态不可修改，所有域都是final类型，以及正确的构造过程&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="353安全发布的常用模式">3.5.3　安全发布的常用模式&lt;/h3>
+&lt;p>一个正确构造的对象可以通过以下方式来安全地发布：&lt;/p>
+&lt;ul>
+&lt;li>在静态初始化函数中初始化一个对象引用&lt;/li>
+&lt;li>将对象的引用保存到volatile类型的域或者AtomicReferance对象中&lt;/li>
+&lt;li>将对象的引用保存到某个正确构造对象的final类型域中&lt;/li>
+&lt;li>将对象的引用保存到一个由锁保护的域中&lt;/li>
+&lt;/ul>
+&lt;p>线程安全库中的容器类提供了以下的安全发布保证：&lt;/p>
+&lt;ul>
+&lt;li>通过将一个键或者值放入Hashtable、synchronizedMap或者ConcurrentMap中，可以安全地将它发布给任何从这些容器中访问它的线程（无论是直接访问还是通过迭代器访问）&lt;/li>
+&lt;li>通过将某个元素放入Vector、CopyOnWriteArrayList、CopyOnWriteArraySet、synchronizedList或synchronizedSet中，可以将该元素安全地发布到任何从这些容器中访问该元素的线程&lt;/li>
+&lt;li>通过将某个元素放入BlockingQueue或者ConcurrentLinkedQueue中，可以将该元素安全地发布到任何从这些队列中访问该元素的线程&lt;/li>
+&lt;/ul>
+&lt;h3 id="354事实不可变对象effectively-immutable-object">3.5.4　事实不可变对象（Effectively Immutable Object）&lt;/h3>
+&lt;blockquote>
+&lt;p>对象从技术上来看是可变的，但其状态在发布后不会再改变&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="355可变对象">3.5.5　可变对象&lt;/h3>
+&lt;p>对象的发布需求取决于它的可变性：&lt;/p>
+&lt;ul>
+&lt;li>不可变对象可以通过任意机制来发布&lt;/li>
+&lt;li>事实不可变对象必须通过安全方式来发布&lt;/li>
+&lt;li>可变对象必须通过安全方式来发布，并且必须是线程安全的或者由某个锁保护起来&lt;/li>
+&lt;/ul>
+&lt;h3 id="356安全地共享对象">3.5.6　安全地共享对象&lt;/h3>
+&lt;p>在并发程序中使用和共享对象时，可以使用一些实用的策略，包括：&lt;/p>
+&lt;ul>
+&lt;li>线程封闭。线程封闭的对象只能由一个线程拥有，对象被封闭在该线程中，并且只能由这个线程修改&lt;/li>
+&lt;li>只读共享。在没有额外同步的情况下，共享的只读对象可以由多个线程并发访问，但任何线程都不能修改它。共享的只读对象包括不可变对象和事实不可变对象&lt;/li>
+&lt;li>线程安全共享。线程安全的对象在其内部实现同步，因此多个线程可以通过对象的公有接口来进行访问而不需要进一步的同步&lt;/li>
+&lt;li>保护对象。被保护的对象只能通过持有特定的锁来访问。保护对象包括封装在其他线程安全对象中的对象，以及已发布的并且由某个特定锁保护的对象&lt;/li>
+&lt;/ul></description></item></channel></rss>

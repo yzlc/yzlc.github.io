@@ -1,1 +1,116 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vue on YZLC</title><link>https://yzlc.github.io/tags/vue/</link><description>Recent content in vue on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Jan 2022 10:45:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>vue</title><link>https://yzlc.github.io/post/note/dev/vue/</link><pubDate>Sat, 08 Jan 2022 10:45:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/dev/vue/</guid><description>数据绑定 v-bind单向，v-model(表单元素)双向 el、data的其他写法 vm.$mount('#root') data(){ return {msg:'1'} } 事件处理 @click=&amp;quot;demo($event,1)&amp;quot; 事件修饰符 prevent：阻止默认事件（</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vue on YZLC</title><link>https://yzlc.github.io/tags/vue/</link><description>Recent content in vue on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sat, 08 Jan 2022 10:45:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/vue/index.xml" rel="self" type="application/rss+xml"/><item><title>vue</title><link>https://yzlc.github.io/post/note/dev/vue/</link><pubDate>Sat, 08 Jan 2022 10:45:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/dev/vue/</guid><description>&lt;h2 id="数据绑定">数据绑定&lt;/h2>
+&lt;p>v-bind单向，v-model(表单元素)双向&lt;/p>
+&lt;h2 id="eldata的其他写法">el、data的其他写法&lt;/h2>
+&lt;p>&lt;code>vm.$mount('#root')&lt;/code>&lt;/p>
+&lt;p>&lt;code>data(){ return {msg:'1'} }&lt;/code>&lt;/p>
+&lt;h2 id="事件处理">事件处理&lt;/h2>
+&lt;p>&lt;code>@click=&amp;quot;demo($event,1)&amp;quot;&lt;/code>&lt;/p>
+&lt;h2 id="事件修饰符">事件修饰符&lt;/h2>
+&lt;ol>
+&lt;li>prevent：阻止默认事件（a标签跳转）&lt;/li>
+&lt;li>stop：阻止事件冒泡（外层div事件）&lt;/li>
+&lt;li>once：事件只触发一次&lt;/li>
+&lt;/ol>
+&lt;h2 id="键盘事件">键盘事件&lt;/h2>
+&lt;p>按键别名：enter、delete、esc、space、tab；keydown：ctrl、alt、shift、meta&lt;/p>
+&lt;h2 id="计算属性">计算属性&lt;/h2>
+&lt;blockquote>
+&lt;p>不能异步&lt;/p>
+&lt;/blockquote>
+&lt;p>computed：&lt;code>fullName:{get(){}}&lt;/code>，简写&lt;code>fullName(){}&lt;/code>&lt;/p>
+&lt;h2 id="监视属性">监视属性&lt;/h2>
+&lt;p>watch：&lt;code>isHot(newVal,oldVal){}&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="nx">isHot&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">immediate&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">//初始化时调用
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">deep&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="c1">//深度监视
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="nx">handler&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">newVal&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="nx">oldVal&lt;/span>&lt;span class="p">){}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>vm.$watch('isHot',function(newVal,oldVal){})&lt;/code>&lt;/p>
+&lt;h2 id="绑定class">绑定class&lt;/h2>
+&lt;p>单个：&amp;lsquo;class1&amp;rsquo;、多个不确定：arr[&amp;lsquo;class1&amp;rsquo;,&amp;lsquo;class2&amp;rsquo;]、动态开启：obj:{class1:false,class2:true}&lt;/p>
+&lt;h2 id="条件渲染">条件渲染&lt;/h2>
+&lt;p>v-if：切换频率低的场景，移除；v-show：切换频率高的场景，隐藏，不能搭配template&lt;/p>
+&lt;h2 id="列表渲染">列表渲染&lt;/h2>
+&lt;p>&lt;code>v-for=&amp;quot;(item,index) in xxx&amp;quot; :key=&amp;quot;唯一标识id&amp;quot;&lt;/code>&lt;/p>
+&lt;h2 id="列表过滤">列表过滤&lt;/h2>
+&lt;p>computed、watch&lt;/p>
+&lt;h2 id="数据监视">数据监视&lt;/h2>
+&lt;p>对象、数组：Vue.set(target,propertyName/index,value)、vm.$set(target,propertyName/index,value)&lt;/p>
+&lt;p>数组：push、pop、shift、unshift、splice、sort、reverse&lt;/p>
+&lt;h2 id="v-model">v-model&lt;/h2>
+&lt;ul>
+&lt;li>radio：需要配置value&lt;/li>
+&lt;li>checkbox：不配置value，则为checked（布尔）；初始值是[]，则为value数组&lt;/li>
+&lt;/ul>
+&lt;p>三个修饰符：lazy（失焦再收集数据）、number（转数字）、trim（去空格）&lt;/p>
+&lt;h2 id="v-cloak">v-cloak&lt;/h2>
+&lt;p>使用css&lt;code>[v-cloak]{display:none;}&lt;/code>配合v-cloak解决{{xxx}}问题&lt;/p>
+&lt;h2 id="v-once">v-once&lt;/h2>
+&lt;p>初次渲染后视为静态内容&lt;/p>
+&lt;h2 id="v-pre">v-pre&lt;/h2>
+&lt;p>跳过编译过程&lt;/p>
+&lt;h2 id="自定义指令">自定义指令&lt;/h2>
+&lt;ul>
+&lt;li>局部：new Vue({ directives:{指令名:配置对象/回调函数} })&lt;/li>
+&lt;li>全局：Vue.directives(指令名,配置对象/回调函数)&lt;/li>
+&lt;/ul>
+&lt;p>配置对象常用的回调&lt;/p>
+&lt;ol>
+&lt;li>bind：指令与元素绑定时&lt;/li>
+&lt;li>inserted：元素被插入时&lt;/li>
+&lt;li>update：模板结构被重新解析时&lt;/li>
+&lt;/ol>
+&lt;h2 id="生命周期">生命周期&lt;/h2>
+&lt;ul>
+&lt;li>mounted：发送ajax、启动定时器、绑定自定义事件、订阅消息&lt;/li>
+&lt;li>beforeDestroy：清除定时器、解绑自定义事件、取消订阅&lt;/li>
+&lt;/ul>
+&lt;h2 id="组件">组件&lt;/h2>
+&lt;p>Vue.extend(options)，el不写，data必须写成函数。局部注册components，全局Vue.component(&amp;lsquo;组件名&amp;rsquo;,组件)&lt;/p>
+&lt;ul>
+&lt;li>每次调用，返回一个全新的VueComponent&lt;/li>
+&lt;li>this在组件中是vc（VueComponent）对象，在new Vue中是vm（Vue）对象&lt;/li>
+&lt;li>VueComponent.prototype.&lt;strong>proto&lt;/strong> === Vue.prototype&lt;/li>
+&lt;/ul>
+&lt;h2 id="ref">ref&lt;/h2>
+&lt;p>给元素（dom）或子组件（vc）注册引用信息，this.$refs.xxx&lt;/p>
+&lt;h2 id="nexttick">nextTick&lt;/h2>
+&lt;p>在下一次dom更新后执行回调&lt;/p>
+&lt;h2 id="路由">路由&lt;/h2>
+&lt;p>query参数&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-js" data-lang="js">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="nx">router&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">link&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">:&lt;/span>&lt;span class="nx">to&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> path:&amp;#39;/home/msg/detail&amp;#39;,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> query:{
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> id:1,
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> title:&amp;#39;标题1&amp;#39;
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> }
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s2"> }&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="nx">跳转&lt;/span>&lt;span class="o">&amp;lt;&lt;/span>&lt;span class="err">/router-link&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>接收：&lt;code>$route.query.id&lt;/code>&lt;/p></description></item></channel></rss>

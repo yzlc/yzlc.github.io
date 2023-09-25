@@ -1,1 +1,86 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nginx on YZLC</title><link>https://yzlc.github.io/tags/nginx/</link><description>Recent content in nginx on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 30 Jun 2019 15:42:10 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>nginx</title><link>https://yzlc.github.io/post/note/win/nginx/</link><pubDate>Sun, 30 Jun 2019 15:42:10 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/nginx/</guid><description>nginx 启动 start nginx 正常停止 nginx -s quit 快速停止 nginx -s stop 代理 地址 1 2 3 4 5 6 7 8 9 server { listen 9001; server_name 192.168.1.10; location /11/ { #192.168.1.10:9001/11/test -&amp;gt; http://192.168.1.11:8080/test proxy_pass http://192.168.1.11:8080/; } } 服务器 1 2 3 4 5 6 7 8 9 10 11 12 stream { #stre</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>nginx on YZLC</title><link>https://yzlc.github.io/tags/nginx/</link><description>Recent content in nginx on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 30 Jun 2019 15:42:10 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/nginx/index.xml" rel="self" type="application/rss+xml"/><item><title>nginx</title><link>https://yzlc.github.io/post/note/win/nginx/</link><pubDate>Sun, 30 Jun 2019 15:42:10 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/nginx/</guid><description>&lt;h2 id="nginx">nginx&lt;/h2>
+&lt;ul>
+&lt;li>启动&lt;br>
+&lt;code>start nginx&lt;/code>&lt;/li>
+&lt;li>正常停止&lt;br>
+&lt;code>nginx -s quit&lt;/code>&lt;/li>
+&lt;li>快速停止&lt;br>
+&lt;code>nginx -s stop&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;h2 id="代理">代理&lt;/h2>
+&lt;h3 id="地址">地址&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">server {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> listen 9001;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> server_name 192.168.1.10;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> location /11/ {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> #192.168.1.10:9001/11/test -&amp;gt; http://192.168.1.11:8080/test
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> proxy_pass http://192.168.1.11:8080/;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="服务器">服务器&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">stream { #stream模块与http模块处于同一级；stream模块编译后需要手动添加；这两个模块可以共存。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> upstream remote01{
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> server 192.168.1.11:22;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> server {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> listen 2201;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> proxy_connect_timeout 1h;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> proxy_timeout 1h;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> proxy_pass remote01;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="文件下载">文件下载&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">location /file {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> alias /test/; # 文件存放目录，注意要以 &amp;#39;/&amp;#39; 结尾；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> index index.html; # 如果文件存放目录有 index.html，会跳转到 index.html；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> autoindex on; # 自动列出目录下的文件；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> autoindex_exact_size off; # 文件大小按 G、M 的格式显示，而不是 Bytes；
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

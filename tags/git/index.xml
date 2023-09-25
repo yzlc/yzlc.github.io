@@ -1,1 +1,85 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on YZLC</title><link>https://yzlc.github.io/tags/git/</link><description>Recent content in git on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Sep 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>git - linux</title><link>https://yzlc.github.io/post/note/linux/git/</link><pubDate>Sun, 01 Sep 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/git/</guid><description>服务端 1 2 3 4 5 #安装 yum -y install git # 添加仓库 git init --bare sample.git git bash客户端 1 2 3 4 5 6 7 8 #生成公钥 ssh-keygen #导入 ssh -p port root@host &amp;#39;mkdir -p .ssh &amp;amp;&amp;amp; cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;#39; &amp;lt; ~/.ssh/id_rsa.pub # 下载 git clone --depth 1 --recursive</description></item><item><title>git - win</title><link>https://yzlc.github.io/post/note/win/git/</link><pubDate>Thu, 30 May 2019 15:19:25 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/git/</guid><description>免密登录 ssh方式 ssh-keygen -t rsa -C &amp;quot;yzlc233@outlook.com&amp;quot; http方式 1 2 3 4 5 6 7 8 9 10 #1. 新增配置文件 cd ~ vim .git-credentials #2. 添加内容 https://username:password@github.com http://username:password@github.com #3. 配置账号 git config --global credential.helper store 配置代理 1 2 git config --global http.proxy socks5://127.0.0.1:10808 git</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on YZLC</title><link>https://yzlc.github.io/tags/git/</link><description>Recent content in git on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Sun, 01 Sep 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>git - linux</title><link>https://yzlc.github.io/post/note/linux/git/</link><pubDate>Sun, 01 Sep 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/linux/git/</guid><description>&lt;h2 id="服务端">服务端&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">yum -y install git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 添加仓库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git init --bare sample.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="git-bash客户端">git bash客户端&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#生成公钥 &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ssh-keygen
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#导入 &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ssh -p port root@host &lt;span class="s1">&amp;#39;mkdir -p .ssh &amp;amp;&amp;amp; cat &amp;gt;&amp;gt; ~/.ssh/authorized_keys&amp;#39;&lt;/span> &amp;lt; ~/.ssh/id_rsa.pub
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 下载&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git clone --depth &lt;span class="m">1&lt;/span> --recursive ssh://root@server:port/root/sample.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>git - win</title><link>https://yzlc.github.io/post/note/win/git/</link><pubDate>Thu, 30 May 2019 15:19:25 +0800</pubDate><guid>https://yzlc.github.io/post/note/win/git/</guid><description>&lt;h2 id="免密登录">免密登录&lt;/h2>
+&lt;ul>
+&lt;li>ssh方式&lt;br>
+&lt;code>ssh-keygen -t rsa -C &amp;quot;yzlc233@outlook.com&amp;quot;&lt;/code>&lt;/li>
+&lt;li>http方式
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#1. 新增配置文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> ~
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vim .git-credentials
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#2. 添加内容&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">https://username:password@github.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">http://username:password@github.com
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#3. 配置账号&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git config --global credential.helper store
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="配置代理">配置代理&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git config --global http.proxy socks5://127.0.0.1:10808
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git config --global https.proxy socks5://127.0.0.1:10808
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>

@@ -1,1 +1,103 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ibatis on YZLC</title><link>https://yzlc.github.io/tags/ibatis/</link><description>Recent content in ibatis on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 May 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/ibatis/index.xml" rel="self" type="application/rss+xml"/><item><title>ibatis</title><link>https://yzlc.github.io/post/note/dev/java/ibatis/</link><pubDate>Thu, 02 May 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/dev/java/ibatis/</guid><description>批量merge Oracle 参数做判断，需要传入map 1 2 3 4 5 6 &amp;lt;statement id=&amp;#34;merge&amp;#34; parameterClass=&amp;#34;map&amp;#34;&amp;gt; &amp;lt;iterate property=&amp;#34;list&amp;#34; open=&amp;#34;begin&amp;#34; close=&amp;#34;;end;&amp;#34; conjunction=&amp;#34;;&amp;#34;&amp;gt; merge into... &amp;lt;isNotEmpty property=&amp;#34;list[].id&amp;#34;&amp;gt; id=id, &amp;lt;/isNotEmpty&amp;gt; 不用判断参数，传入list 1 2 3 &amp;lt;statement id=&amp;#34;merge&amp;#34; parameterClass=&amp;#34;list&amp;#34;&amp;gt; &amp;lt;iterate open=&amp;#34;begin&amp;#34; close=&amp;#34;;end;&amp;#34; conjunction=&amp;#34;;&amp;#34;&amp;gt; merge into... #list[].id# mysql 1 2</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ibatis on YZLC</title><link>https://yzlc.github.io/tags/ibatis/</link><description>Recent content in ibatis on YZLC</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Thu, 02 May 2019 10:32:33 +0800</lastBuildDate><atom:link href="https://yzlc.github.io/tags/ibatis/index.xml" rel="self" type="application/rss+xml"/><item><title>ibatis</title><link>https://yzlc.github.io/post/note/dev/java/ibatis/</link><pubDate>Thu, 02 May 2019 10:32:33 +0800</pubDate><guid>https://yzlc.github.io/post/note/dev/java/ibatis/</guid><description>&lt;h2 id="批量merge">批量merge&lt;/h2>
+&lt;h3 id="oracle">Oracle&lt;/h3>
+&lt;ol>
+&lt;li>参数做判断，需要传入map
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;statement&lt;/span> &lt;span class="na">id=&lt;/span>&lt;span class="s">&amp;#34;merge&amp;#34;&lt;/span> &lt;span class="na">parameterClass=&lt;/span>&lt;span class="s">&amp;#34;map&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;iterate&lt;/span> &lt;span class="na">property=&lt;/span>&lt;span class="s">&amp;#34;list&amp;#34;&lt;/span> &lt;span class="na">open=&lt;/span>&lt;span class="s">&amp;#34;begin&amp;#34;&lt;/span> &lt;span class="na">close=&lt;/span>&lt;span class="s">&amp;#34;;end;&amp;#34;&lt;/span> &lt;span class="na">conjunction=&lt;/span>&lt;span class="s">&amp;#34;;&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> merge into...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;isNotEmpty&lt;/span> &lt;span class="na">property=&lt;/span>&lt;span class="s">&amp;#34;list[].id&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> id=id,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/isNotEmpty&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>不用判断参数，传入list
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;statement&lt;/span> &lt;span class="na">id=&lt;/span>&lt;span class="s">&amp;#34;merge&amp;#34;&lt;/span> &lt;span class="na">parameterClass=&lt;/span>&lt;span class="s">&amp;#34;list&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;iterate&lt;/span> &lt;span class="na">open=&lt;/span>&lt;span class="s">&amp;#34;begin&amp;#34;&lt;/span> &lt;span class="na">close=&lt;/span>&lt;span class="s">&amp;#34;;end;&amp;#34;&lt;/span> &lt;span class="na">conjunction=&lt;/span>&lt;span class="s">&amp;#34;;&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> merge into... #list[].id#
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="mysql">mysql&lt;/h3>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">insert into table (column)
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">values
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;foreach&lt;/span> &lt;span class="na">collection=&lt;/span>&lt;span class="s">&amp;#34;list&amp;#34;&lt;/span> &lt;span class="na">item=&lt;/span>&lt;span class="s">&amp;#34;item&amp;#34;&lt;/span> &lt;span class="na">index=&lt;/span>&lt;span class="s">&amp;#34;index&amp;#34;&lt;/span> &lt;span class="na">separator=&lt;/span>&lt;span class="s">&amp;#34;,&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> (#{item.column,jdbcType=VARCHAR})
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/foreach&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ON DUPLICATE KEY UPDATE
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> column = values(column)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="集合字段映射">集合字段映射&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;resultMap&lt;/span> &lt;span class="na">class=&lt;/span>&lt;span class="s">&amp;#34;&amp;#34;&lt;/span> &lt;span class="na">id=&lt;/span>&lt;span class="s">&amp;#34;queryResult&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;result&lt;/span> &lt;span class="na">property=&lt;/span>&lt;span class="s">&amp;#34;ids&amp;#34;&lt;/span> &lt;span class="na">column=&lt;/span>&lt;span class="s">&amp;#34;id&amp;#34;&lt;/span> &lt;span class="na">select=&lt;/span>&lt;span class="s">&amp;#34;queryIds&amp;#34;&lt;/span>&lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/resultMap&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="常见错误">常见错误&lt;/h2>
+&lt;ul>
+&lt;li>Invalid bound statement (not found)&lt;br>
+只有Mapper结尾的xml文件才会被Mybatis扫描到&lt;/li>
+&lt;/ul>
+&lt;h2 id="去除多余的and或者or">去除多余的and或者or&lt;/h2>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;trim&lt;/span> &lt;span class="na">prefix=&lt;/span>&lt;span class="s">&amp;#34;WHERE (&amp;#34;&lt;/span> &lt;span class="na">suffix=&lt;/span>&lt;span class="s">&amp;#34;)&amp;#34;&lt;/span> &lt;span class="na">prefixOverrides=&lt;/span>&lt;span class="s">&amp;#34;AND |OR &amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;if&lt;/span> &lt;span class="na">test=&lt;/span>&lt;span class="s">&amp;#34;null != name and &amp;#39;&amp;#39; != name &amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or name = #{name,jdbcType=VARCHAR}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/if&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;if&lt;/span> &lt;span class="na">test=&lt;/span>&lt;span class="s">&amp;#34;null != mobile and &amp;#39;&amp;#39; != mobile &amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> or mobile = #{mobile,jdbcType=VARCHAR}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/if&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/trim&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">and status = 1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item></channel></rss>
