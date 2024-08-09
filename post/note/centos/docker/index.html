@@ -1,10 +1,10 @@
-<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>docker - lim</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="lim"><meta name=description content="docker 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服务并"><meta name=keywords content="lim"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://yzlc.github.io/post/note/centos/docker/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="docker"><meta property="og:description" content="docker 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服务并"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/centos/docker/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-04-03T15:32:33+08:00"><meta property="article:modified_time" content="2024-07-27T23:24:06+08:00"><meta itemprop=name content="docker"><meta itemprop=description content="docker 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服务并"><meta itemprop=datePublished content="2023-04-03T15:32:33+08:00"><meta itemprop=dateModified content="2024-07-27T23:24:06+08:00"><meta itemprop=wordCount content="122"><meta itemprop=keywords content="linux,"><meta name=twitter:card content="summary"><meta name=twitter:title content="docker"><meta name=twitter:description content="docker 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服务并"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>docker - lim</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="lim"><meta name=description content="docker 在线 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服"><meta name=keywords content="lim"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://yzlc.github.io/post/note/centos/docker/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="docker"><meta property="og:description" content="docker 在线 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/centos/docker/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-04-03T15:32:33+08:00"><meta property="article:modified_time" content="2024-08-09T11:20:58+08:00"><meta itemprop=name content="docker"><meta itemprop=description content="docker 在线 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服"><meta itemprop=datePublished content="2023-04-03T15:32:33+08:00"><meta itemprop=dateModified content="2024-08-09T11:20:58+08:00"><meta itemprop=wordCount content="364"><meta itemprop=keywords content="linux,"><meta name=twitter:card content="summary"><meta name=twitter:title content="docker"><meta name=twitter:description content="docker 在线 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 #containerd yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm #安装一些其他依赖 yum install -y yum-utils device-mapper-persistent-data lvm2 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo yum makecache #安装docker-ce dnf -y install docker-ce --nobest #开启Docker服"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
 <script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>lim</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/post/web><li class=mobile-menu-item>网站大全</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>lim</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/post/web>网站大全</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>docker</h1><div class=post-meta><span class=post-time>2023-04-03</span><div class=post-category><a href=/categories/note/>note</a></div><span class=more-meta>约 122 字</span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/post/web><li class=mobile-menu-item>网站大全</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>lim</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/post/web>网站大全</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>docker</h1><div class=post-meta><span class=post-time>2023-04-03</span><div class=post-category><a href=/categories/note/>note</a></div><span class=more-meta>约 364 字</span>
 <span class=more-meta>预计阅读 1 分钟</span>
-<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#docker>docker</a></li><li><a href=#docker-compose>Docker-compose</a></li></ul></nav></div></div><div class=post-content><h2 id=docker>docker</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#docker>docker</a><ul><li><a href=#在线>在线</a></li><li><a href=#离线>离线</a></li></ul></li><li><a href=#docker-compose>Docker-compose</a><ul><li><a href=#在线-1>在线</a></li><li><a href=#离线-1>离线</a></li></ul></li><li><a href=#俄罗斯镜像https51ruyonet18687html><a href=https://51.ruyo.net/18687.html>俄罗斯镜像</a></a></li></ul></nav></div></div><div class=post-content><h2 id=docker>docker</h2><h3 id=在线>在线</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -36,7 +36,91 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1>#测试，如输出下图结果则安装成功</span>
 </span></span><span class=line><span class=cl>docker version
-</span></span></code></pre></td></tr></table></div></div><h2 id=docker-compose>Docker-compose</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></span></code></pre></td></tr></table></div></div><h3 id=离线>离线</h3><p><a href=https://download.docker.com/linux/static/stable/x86_64/docker-20.10.13.tgz>下载20.10.13版本</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 解压</span>
+</span></span><span class=line><span class=cl>tar -zxvf docker-20.10.13.tgz
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 复制</span>
+</span></span><span class=line><span class=cl>cp -rf docker/* /usr/bin/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建docker.service</span>
+</span></span><span class=line><span class=cl>vi /usr/lib/systemd/system/docker.service
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>Unit<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Description</span><span class=o>=</span>Docker Application Container Engine
+</span></span><span class=line><span class=cl><span class=nv>Documentation</span><span class=o>=</span>http://docs.docker.com
+</span></span><span class=line><span class=cl><span class=nv>After</span><span class=o>=</span>network.target docker.socket
+</span></span><span class=line><span class=cl><span class=o>[</span>Service<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>Type</span><span class=o>=</span>notify
+</span></span><span class=line><span class=cl><span class=nv>EnvironmentFile</span><span class=o>=</span>-/run/flannel/docker
+</span></span><span class=line><span class=cl><span class=nv>WorkingDirectory</span><span class=o>=</span>/usr/local/bin
+</span></span><span class=line><span class=cl><span class=nv>ExecStart</span><span class=o>=</span>/usr/bin/dockerd <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>                -H tcp://0.0.0.0:4243 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>                -H unix:///var/run/docker.sock <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>                --selinux-enabled<span class=o>=</span><span class=nb>false</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>                --log-opt max-size<span class=o>=</span>100m
+</span></span><span class=line><span class=cl><span class=nv>ExecReload</span><span class=o>=</span>/bin/kill -s HUP <span class=nv>$MAINPID</span>
+</span></span><span class=line><span class=cl><span class=nv>LimitNOFILE</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=nv>LimitNPROC</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=nv>LimitCORE</span><span class=o>=</span>infinity
+</span></span><span class=line><span class=cl><span class=nv>TimeoutStartSec</span><span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=nv>Delegate</span><span class=o>=</span>yes
+</span></span><span class=line><span class=cl><span class=nv>KillMode</span><span class=o>=</span>process
+</span></span><span class=line><span class=cl><span class=nv>Restart</span><span class=o>=</span>on-failure
+</span></span><span class=line><span class=cl><span class=o>[</span>Install<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>WantedBy</span><span class=o>=</span>multi-user.target
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重新加载</span>
+</span></span><span class=line><span class=cl>systemctl daemon-reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 开机启动</span>
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> docker.service
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看版本</span>
+</span></span><span class=line><span class=cl>systemctl start docker
+</span></span><span class=line><span class=cl>docker version
+</span></span></code></pre></td></tr></table></div></div><h2 id=docker-compose>Docker-compose</h2><h3 id=在线-1>在线</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
 </span><span class=lnt>4
@@ -46,10 +130,56 @@
 </span></span><span class=line><span class=cl>sudo chmod +x /usr/local/bin/docker-compose
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>docker-compose --version
+</span></span></code></pre></td></tr></table></div></div><h3 id=离线-1>离线</h3><p><a href=https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-x86_64>下载</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 复制到 /usr/local/bin</span>
+</span></span><span class=line><span class=cl>mv docker-compose-linux-x86_64 /usr/local/bin/docker-compose
+</span></span><span class=line><span class=cl><span class=c1># 设置可执行</span>
+</span></span><span class=line><span class=cl>chmod +x /usr/local/bin/docker-compose 
+</span></span><span class=line><span class=cl><span class=c1># 创建软链</span>
+</span></span><span class=line><span class=cl>ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
+</span></span><span class=line><span class=cl><span class=c1># 查看</span>
+</span></span><span class=line><span class=cl>docker-compose version
+</span></span></code></pre></td></tr></table></div></div><h2 id=俄罗斯镜像https51ruyonet18687html><a href=https://51.ruyo.net/18687.html>俄罗斯镜像</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /etc/docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo tee /etc/docker/daemon.json <span class=s>&lt;&lt;-&#39;EOF&#39;
+</span></span></span><span class=line><span class=cl><span class=s>{
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;registry-mirrors&#34;: [
+</span></span></span><span class=line><span class=cl><span class=s>        &#34;https://docker.m.daocloud.io&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>        &#34;https://huecker.io&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>        &#34;https://dockerhub.timeweb.cloud&#34;,
+</span></span></span><span class=line><span class=cl><span class=s>        &#34;https://noohub.ru&#34;
+</span></span></span><span class=line><span class=cl><span class=s>    ]
+</span></span></span><span class=line><span class=cl><span class=s>}
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl restart docker
 </span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
 <span class=item-content>lim</span></p><p class=copyright-item><span class=item-title>上次更新</span>
-<span class=item-content>2024-07-27
-<a href=https://github.com/yzlc/www/commit/f9f8df3e3322ad7510133a9519a1cc7cbfdd90c1 title=1>(f9f8df3)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content>2024-08-09
+<a href=https://github.com/yzlc/www/commit/31b6a885ade4d98f161662afb544680d26547d49 title=1>(31b6a88)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
 <span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
 <label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/images/reward/wechat.jpg>
 <span>微信打赏</span></label>
