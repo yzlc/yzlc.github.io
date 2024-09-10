@@ -1,0 +1,278 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>hadoop - lim</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="lim"><meta name=description content="安装SSH，配置SSH无密码登录 1 2 3 4 cd ~/.ssh/ # 若没有该目录，请先执行一次ssh localhost ssh-keygen -t rsa # 会有提示，都按回车就可以 cat id_rsa.pub &amp;gt;&amp;gt; authorized_keys # 加入授权 chmod 600 ./authorized_keys # 修"><meta name=keywords content="lim"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://yzlc.github.io/post/note/centos/hadoop/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
+<link href=/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="hadoop"><meta property="og:description" content="安装SSH，配置SSH无密码登录 1 2 3 4 cd ~/.ssh/ # 若没有该目录，请先执行一次ssh localhost ssh-keygen -t rsa # 会有提示，都按回车就可以 cat id_rsa.pub >> authorized_keys # 加入授权 chmod 600 ./authorized_keys # 修"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/centos/hadoop/"><meta property="article:section" content="post"><meta property="article:published_time" content="2024-09-06T15:06:33+08:00"><meta property="article:modified_time" content="2024-09-10T10:29:56+08:00"><meta itemprop=name content="hadoop"><meta itemprop=description content="安装SSH，配置SSH无密码登录 1 2 3 4 cd ~/.ssh/ # 若没有该目录，请先执行一次ssh localhost ssh-keygen -t rsa # 会有提示，都按回车就可以 cat id_rsa.pub >> authorized_keys # 加入授权 chmod 600 ./authorized_keys # 修"><meta itemprop=datePublished content="2024-09-06T15:06:33+08:00"><meta itemprop=dateModified content="2024-09-10T10:29:56+08:00"><meta itemprop=wordCount content="702"><meta itemprop=keywords content="大数据,"><meta name=twitter:card content="summary"><meta name=twitter:title content="hadoop"><meta name=twitter:description content="安装SSH，配置SSH无密码登录 1 2 3 4 cd ~/.ssh/ # 若没有该目录，请先执行一次ssh localhost ssh-keygen -t rsa # 会有提示，都按回车就可以 cat id_rsa.pub >> authorized_keys # 加入授权 chmod 600 ./authorized_keys # 修"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>lim</a></div><div class=mobile-navbar-icon><span></span>
+<span></span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/post/web><li class=mobile-menu-item>网站大全</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>lim</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/post/web>网站大全</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>hadoop</h1><div class=post-meta><span class=post-time>2024-09-06</span><div class=post-category><a href=/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/>大数据</a></div><span class=more-meta>约 702 字</span>
+<span class=more-meta>预计阅读 2 分钟</span>
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#安装ssh配置ssh无密码登录>安装SSH，配置SSH无密码登录</a></li><li><a href=#修改主机名>修改主机名</a></li><li><a href=#安装jdk>安装jdk</a></li><li><a href=#安装hadoophttpsmirrorstunatsinghuaeducnapachehadoopcommonhadoop-336hadoop-336targz>安装<a href=https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz>Hadoop</a></a></li></ul></nav></div></div><div class=post-content><h2 id=安装ssh配置ssh无密码登录>安装SSH，配置SSH无密码登录</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> ~/.ssh/                     <span class=c1># 若没有该目录，请先执行一次ssh localhost</span>
+</span></span><span class=line><span class=cl>ssh-keygen -t rsa              <span class=c1># 会有提示，都按回车就可以</span>
+</span></span><span class=line><span class=cl>cat id_rsa.pub &gt;&gt; authorized_keys  <span class=c1># 加入授权</span>
+</span></span><span class=line><span class=cl>chmod <span class=m>600</span> ./authorized_keys    <span class=c1># 修改文件权限</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=修改主机名>修改主机名</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>hostnamectl set-hostname hadoop1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看</span>
+</span></span><span class=line><span class=cl>hostname
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#修改主机列表</span>
+</span></span><span class=line><span class=cl>vi /etc/hosts
+</span></span><span class=line><span class=cl>ip 主机名
+</span></span></code></pre></td></tr></table></div></div><h2 id=安装jdk>安装jdk</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install java-1.8.0-openjdk* -y
+</span></span></code></pre></td></tr></table></div></div><h2 id=安装hadoophttpsmirrorstunatsinghuaeducnapachehadoopcommonhadoop-336hadoop-336targz>安装<a href=https://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-3.3.6/hadoop-3.3.6.tar.gz>Hadoop</a></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>mkdir -p /home/hadoop/hdfs/tmp /home/hadoop/hdfs/data /home/hadoop/hdfs/name
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /home/hadoop
+</span></span><span class=line><span class=cl>tar -zxvf hadoop-3.3.6.tar.gz
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 环境变量新增</span>
+</span></span><span class=line><span class=cl>vi /etc/profile
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HADOOP_HOME</span><span class=o>=</span>/home/hadoop/hadoop-3.3.6
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>PATH</span><span class=o>=</span><span class=nv>$PATH</span>:<span class=si>${</span><span class=nv>HADOOP_HOME</span><span class=si>}</span>/bin:<span class=si>${</span><span class=nv>HADOOP_HOME</span><span class=si>}</span>/sbin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 生效</span>
+</span></span><span class=line><span class=cl><span class=nb>source</span> /etc/profile
+</span></span><span class=line><span class=cl><span class=c1># 查看</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$HADOOP_HOME</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 添加hadoop-env.sh环境变量</span>
+</span></span><span class=line><span class=cl><span class=c1># echo $JAVA_HOME</span>
+</span></span><span class=line><span class=cl>vi /home/hadoop/hadoop-3.3.6/etc/hadoop/hadoop-env.sh
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>JAVA_HOME</span><span class=o>=</span>/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.412.b08-1.el7_9.x86_64/jre
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HADOOP_HOME</span><span class=o>=</span>/home/hadoop/hadoop-3.3.6
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HDFS_NAMENODE_USER</span><span class=o>=</span>root
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HDFS_DATANODE_USER</span><span class=o>=</span>root
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>HDFS_SECONDARYNAMENODE_USER</span><span class=o>=</span>root
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>YARN_RESOURCEMANAGER_USER</span><span class=o>=</span>root
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>YARN_NODEMANAGER_USER</span><span class=o>=</span>root
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#修改core-site.xml：在configuration标签添加</span>
+</span></span><span class=line><span class=cl>vi /home/hadoop/hadoop-3.3.6/etc/hadoop/core-site.xml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;!-- 指定 NameNode 的地址 --&gt;
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;fs.defaultFS&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;hdfs://hadoop1:9090&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;!-- 指定 hadoop 数据的存储目录 --&gt;
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;/home/hadoop/hdfs/tmp&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;hadoop.proxyuser.root.hosts&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;*&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;hadoop.proxyuser.root.groups&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;*&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 修改 hdfs-site.xml：在configuration标签添加</span>
+</span></span><span class=line><span class=cl>vi /home/hadoop/hadoop-3.3.6/etc/hadoop/hdfs-site.xml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;dfs.replication&lt;/name&gt;      
+</span></span><span class=line><span class=cl>    &lt;value&gt;1&lt;/value&gt;
+</span></span><span class=line><span class=cl>    &lt;description&gt;副本个数，配置默认是3,应小于datanode机器数量&lt;/description&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;  
+</span></span><span class=line><span class=cl>    &lt;value&gt;/home/hadoop/hdfs/name&lt;/value&gt;  
+</span></span><span class=line><span class=cl>    &lt;final&gt;true&lt;/final&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;  
+</span></span><span class=line><span class=cl>    &lt;value&gt;/home/hadoop/hdfs/data&lt;/value&gt;  
+</span></span><span class=line><span class=cl>    &lt;final&gt;true&lt;/final&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;dfs.http.address&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;0.0.0.0:50070&lt;/value&gt;
+</span></span><span class=line><span class=cl>    &lt;description&gt;将绑定IP改为0.0.0.0，而不是本地回环IP，这样，就能够实现外网访问本机的50070端口了&lt;/description&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;dfs.permissions&lt;/name&gt;  
+</span></span><span class=line><span class=cl>    &lt;value&gt;false&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 修改mapred-site.xml，在configuration标签添加</span>
+</span></span><span class=line><span class=cl>vi /home/hadoop/hadoop-3.3.6/etc/hadoop/mapred-site.xml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;yarn&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 修改 yarn-site.xml，在configuration标签添加</span>
+</span></span><span class=line><span class=cl>vi /home/hadoop/hadoop-3.3.6/etc/hadoop/yarn-site.xml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>&lt;property&gt;
+</span></span><span class=line><span class=cl>    &lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+</span></span><span class=line><span class=cl>    &lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+</span></span><span class=line><span class=cl>&lt;/property&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 格式化HDFS</span>
+</span></span><span class=line><span class=cl>hdfs namenode -format
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 关闭防火墙</span>
+</span></span><span class=line><span class=cl>systemctl stop firewalld
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /home/hadoop/hadoop-3.3.6/sbin
+</span></span><span class=line><span class=cl>./start-all.sh
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
+<span class=item-content>lim</span></p><p class=copyright-item><span class=item-title>上次更新</span>
+<span class=item-content>2024-09-10
+<a href=https://github.com/yzlc/www/commit/d0520e1e0ebc3cff9c9612b4fd8154ca87d4baf0 title=1>(d0520e1)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
+<label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/images/reward/wechat.jpg>
+<span>微信打赏</span></label>
+<label class=qr-code-image for=reward><img class=image src=/images/reward/alipay.jpg>
+<span>支付宝打赏</span></label></div></div><footer class=post-footer><div class=post-tags><a href=/tags/%E5%A4%A7%E6%95%B0%E6%8D%AE/>大数据</a></div><nav class=post-nav><a class=next href=/post/note/win/wsl/><span class="next-text nav-default">wsl</span>
+<span class="next-text nav-mobile">下一篇</span>
+<i class="iconfont icon-right"></i></a></nav></footer></article></div><div id=vcomments></div><script src=//cdn1.lncld.net/static/js/3.0.4/av-min.js></script>
+<script src=//unpkg.com/valine/dist/Valine.min.js></script>
+<script type=text/javascript>new Valine({el:"#vcomments",appId:"eqLcOvlY4d8bxdMA47BQqwRV-gzGzoHsz",appKey:"fhXztPgcCKoM3Tlof1DEGnB8",notify:!1,verify:!1,avatar:"mm",placeholder:"说点什么吧...",visitor:!1})</script></div></main><footer id=footer class=footer><div class=social-links><a href=mailto:yzlc233@outlook.com class="iconfont icon-email" title=email></a>
+<a href=https://github.com/yzlc class="iconfont icon-github" title=github></a>
+<a href=https://space.bilibili.com/10341737 class="iconfont icon-bilibili" title=bilibili></a>
+<a href=https://yzlc.github.io/index.xml type=application/rss+xml class="iconfont icon-rss" title=rss></a></div><div class=copyright><span class=power-by>由 <a class=hexo-link href=https://gohugo.io>Hugo</a> 强力驱动</span>
+<span class=division>|</span>
+<span class=theme-info>主题 -
+<a class=theme-link href=https://github.com/olOwOlo/hugo-theme-even>Even</a></span><div class=busuanzi-footer><span id=busuanzi_container_site_pv>本站总访问量 <span id=busuanzi_value_site_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次</span>
+<span class=division>|</span>
+<span id=busuanzi_container_site_uv>本站总访客数 <span id=busuanzi_value_site_uv><img src=/img/spinner.svg alt=spinner.svg></span> 人</span></div><span class=copyright-year>&copy;
+2019 -
+2024<span class=heart><i class="iconfont icon-heart"></i></span><span>lim</span></span></div></footer><div class=back-to-top id=back-to-top><i class="iconfont icon-up"></i></div></div><script src=https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin=anonymous></script>
+<script src=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin=anonymous></script>
+<script type=text/javascript src=/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js></script>
+<script type=text/javascript>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}}</script><script async src=https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin=anonymous></script>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(function(e,t,n,s,o,i,a){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,i=t.createElement(n),a=t.getElementsByTagName(n)[0],i.async=1,i.src=s,a.parentNode.insertBefore(i,a)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-154585647-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"))</script></body></html>
