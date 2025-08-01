@@ -1,20 +1,29 @@
 <!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>xray - lim</title><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1"><meta http-equiv=cache-control content="no-transform"><meta http-equiv=cache-control content="no-siteapp"><meta name=theme-color content="#f8f5ec"><meta name=msapplication-navbutton-color content="#f8f5ec"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="#f8f5ec"><meta name=author content="lim"><meta name=description content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><meta name=keywords content="lim"><meta name=generator content="Hugo 0.110.0 with theme even"><link rel=canonical href=https://yzlc.github.io/post/note/centos/xray/><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/manifest.json><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script>
-<link href=/sass/main.min.154ed883776547b0e136be39b3037f61350da06f888d0868d1756a9463cd9520.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="xray"><meta property="og:description" content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/centos/xray/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-01-07T16:59:33+08:00"><meta property="article:modified_time" content="2025-07-30T08:48:39+08:00"><meta itemprop=name content="xray"><meta itemprop=description content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><meta itemprop=datePublished content="2023-01-07T16:59:33+08:00"><meta itemprop=dateModified content="2025-07-30T08:48:39+08:00"><meta itemprop=wordCount content="238"><meta itemprop=keywords content="xray,"><meta name=twitter:card content="summary"><meta name=twitter:title content="xray"><meta name=twitter:description content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<link href=/sass/main.min.154ed883776547b0e136be39b3037f61350da06f888d0868d1756a9463cd9520.css rel=stylesheet><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin=anonymous><link rel=stylesheet href=/css/dark.css><link rel=stylesheet href=/css/custom.css><meta property="og:title" content="xray"><meta property="og:description" content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><meta property="og:type" content="article"><meta property="og:url" content="https://yzlc.github.io/post/note/centos/xray/"><meta property="article:section" content="post"><meta property="article:published_time" content="2023-01-07T16:59:33+08:00"><meta property="article:modified_time" content="2025-08-01T11:02:15+08:00"><meta itemprop=name content="xray"><meta itemprop=description content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><meta itemprop=datePublished content="2023-01-07T16:59:33+08:00"><meta itemprop=dateModified content="2025-08-01T11:02:15+08:00"><meta itemprop=wordCount content="435"><meta itemprop=keywords content="xray,"><meta name=twitter:card content="summary"><meta name=twitter:title content="xray"><meta name=twitter:description content="namesilo unlock Domains change nameservers cloudflare Add a Site DNS Add record Type：A Name：www / @ Content：ip Proxy Status：DNS only（vps操作完成后改为Proxie"><!--[if lte IE 9]><script src=https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js></script><![endif]--><!--[if lt IE 9]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
 <script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script><![endif]--></head><body><div id=mobile-navbar class=mobile-navbar><div class=mobile-header-logo><a href=/ class=logo>lim</a></div><div class=mobile-navbar-icon><span></span>
 <span></span>
-<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/post/web><li class=mobile-menu-item>导航</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>lim</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/post/web>导航</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>xray</h1><div class=post-meta><span class=post-time>2023-01-07</span><div class=post-category><a href=/categories/%E9%85%8D%E7%BD%AE/>配置</a></div><span class=more-meta>约 238 字</span>
+<span></span></div></div><nav id=mobile-menu class="mobile-menu slideout-menu"><ul class=mobile-menu-list><a href=/tags/><li class=mobile-menu-item>标签</li></a><a href=/post/web><li class=mobile-menu-item>导航</li></a></ul></nav><div class=container id=mobile-panel><header id=header class=header><div class=logo-wrapper><a href=/ class=logo>lim</a></div><nav class=site-navbar><ul id=menu class=menu><li class=menu-item><a class=menu-item-link href=/tags/>标签</a></li><li class=menu-item><a class=menu-item-link href=/post/web>导航</a></li></ul></nav></header><main id=main class=main><div class=content-wrapper><div id=content class=content><article class=post><header class=post-header><h1 class=post-title>xray</h1><div class=post-meta><span class=post-time>2023-01-07</span><div class=post-category><a href=/categories/%E9%85%8D%E7%BD%AE/>配置</a></div><span class=more-meta>约 435 字</span>
 <span class=more-meta>预计阅读 1 分钟</span>
-<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#namesilohttpsnamesilocom><a href=https://namesilo.com>namesilo</a></a></li><li><a href=#cloudflarehttpscloudflarecom><a href=https://cloudflare.com>cloudflare</a></a></li><li><a href=#一键>一键</a></li><li><a href=#命令>命令</a></li><li><a href=#warp>warp</a></li><li><a href=#降低mtu>降低mtu</a></li></ul></nav></div></div><div class=post-content><h2 id=namesilohttpsnamesilocom><a href=https://namesilo.com>namesilo</a></h2><ol><li>unlock Domains</li><li>change nameservers</li></ol><h2 id=cloudflarehttpscloudflarecom><a href=https://cloudflare.com>cloudflare</a></h2><ol><li>Add a Site</li><li>DNS<ul><li>Add record<ul><li>Type：<code>A</code></li><li>Name：<code>www</code> / <code>@</code></li><li>Content：ip</li><li>Proxy Status：<code>DNS only</code>（vps操作完成后改为<code>Proxied</code>）</li></ul></li></ul></li><li>SSL<ul><li>encryption mode：<code>Full</code></li></ul></li></ol><h2 id=一键>一键</h2><blockquote><p><code>/usr/local/etc/xray/config.json</code></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+<span id=busuanzi_container_page_pv class=more-meta><span id=busuanzi_value_page_pv><img src=/img/spinner.svg alt=spinner.svg></span> 次阅读</span></div></header><div class=post-toc id=post-toc><h2 class=post-toc-title>文章目录</h2><div class="post-toc-content always-active"><nav id=TableOfContents><ul><li><a href=#namesilohttpsnamesilocom><a href=https://namesilo.com>namesilo</a></a></li><li><a href=#cloudflarehttpscloudflarecom><a href=https://cloudflare.com>cloudflare</a></a></li><li><a href=#reality目标网站>REALITY目标网站</a></li><li><a href=#安装-xray>安装 Xray</a></li><li><a href=#配置-xray>配置 Xray</a></li><li><a href=#命令>命令</a></li></ul></nav></div></div><div class=post-content><h2 id=namesilohttpsnamesilocom><a href=https://namesilo.com>namesilo</a></h2><ol><li>unlock Domains</li><li>change nameservers</li></ol><h2 id=cloudflarehttpscloudflarecom><a href=https://cloudflare.com>cloudflare</a></h2><ol><li>Add a Site</li><li>DNS<ul><li>Add record<ul><li>Type：<code>A</code></li><li>Name：<code>www</code> / <code>@</code></li><li>Content：ip</li><li>Proxy Status：<code>DNS only</code>（vps操作完成后改为<code>Proxied</code>）</li></ul></li></ul></li><li>SSL<ul><li>encryption mode：<code>Full</code></li></ul></li></ol><h2 id=reality目标网站>REALITY目标网站</h2><p>访问 <a href=https://myip.ms/xxx.xxx.xxx.xxx>https://myip.ms/xxx.xxx.xxx.xxx</a> ，
+点击 “Owner IP Range” 这一栏的【Other Sites on IP »】按钮，
+然后查看 “Known Websites between IP: xx.xx.xx.xx - xx.xx.xx.xx” 域名列表。</p><p>尝试使用浏览器“直连”访问列表中的站点域名，
+并在【开发者工具】的“安全（h2）”和“网络（TLS1.3、X25519）”选项卡中查看相关信息是否符合要求。</p><h2 id=安装-xray>安装 Xray</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>dnf -y install wget ca-certificates <span class=o>||</span> yum -y install wget ca-certificates
-</span></span><span class=line><span class=cl>wget -O Xray-TLS+Web-setup.sh https://github.com/kirin10000/Xray-script/raw/main/Xray-TLS+Web-setup.sh
-</span></span><span class=line><span class=cl>bash Xray-TLS+Web-setup.sh
-</span></span></code></pre></td></tr></table></div></div><h2 id=命令>命令</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>systemctl restart xray
-</span></span><span class=line><span class=cl>systemctl status xray -l
-</span></span></code></pre></td></tr></table></div></div><h2 id=warp>warp</h2><p><code>wget -N https://raw.githubusercontent.com/fscarmen/warp/main/menu.sh && bash menu.sh [option] [lisence]</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>bash &lt;<span class=o>(</span>curl -L https://github.com/XTLS/Xray-install/raw/main/install-release.sh<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 生成私钥/公钥（客户端）：realitySettings-privateKey</span>
+</span></span><span class=line><span class=cl><span class=nb>cd</span> /usr/local/bin
+</span></span><span class=line><span class=cl>xray x25519
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 生成UUID：clients-id</span>
+</span></span><span class=line><span class=cl>xray uuid
+</span></span></code></pre></td></tr></table></div></div><h2 id=配置-xray>配置 Xray</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
 </span><span class=lnt> 2
 </span><span class=lnt> 3
 </span><span class=lnt> 4
@@ -50,60 +59,56 @@
 </span><span class=lnt>34
 </span><span class=lnt>35
 </span><span class=lnt>36
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;outbounds&#34;</span><span class=p>:[</span>
-</span></span><span class=line><span class=cl>        <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;tag&#34;</span><span class=p>:</span><span class=s2>&#34;INTERNET_OUT&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;protocol&#34;</span><span class=p>:</span><span class=s2>&#34;freedom&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;settings&#34;</span><span class=p>:{</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;domainStrategy&#34;</span><span class=p>:</span><span class=s2>&#34;UseIP&#34;</span>
-</span></span><span class=line><span class=cl>            <span class=p>}</span>
-</span></span><span class=line><span class=cl>        <span class=p>},</span>
-</span></span><span class=line><span class=cl>        <span class=p>{</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;tag&#34;</span><span class=p>:</span><span class=s2>&#34;WARP-GO&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;protocol&#34;</span><span class=p>:</span><span class=s2>&#34;freedom&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;settings&#34;</span><span class=p>:{</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;domainStrategy&#34;</span><span class=p>:</span><span class=s2>&#34;UseIPv4&#34;</span>
-</span></span><span class=line><span class=cl>            <span class=p>},</span>
-</span></span><span class=line><span class=cl>            <span class=nt>&#34;sendThrough&#34;</span><span class=p>:</span><span class=s2>&#34;172.16.0.2&#34;</span>
-</span></span><span class=line><span class=cl>        <span class=p>}</span>
-</span></span><span class=line><span class=cl>    <span class=p>],</span>
-</span></span><span class=line><span class=cl>    <span class=nt>&#34;routing&#34;</span><span class=p>:{</span>
-</span></span><span class=line><span class=cl>        <span class=nt>&#34;rules&#34;</span><span class=p>:[</span>
-</span></span><span class=line><span class=cl>            <span class=p>{</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;type&#34;</span><span class=p>:</span><span class=s2>&#34;field&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;outboundTag&#34;</span><span class=p>:</span><span class=s2>&#34;WARP-GO&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;domain&#34;</span><span class=p>:[</span>
-</span></span><span class=line><span class=cl>                    <span class=s2>&#34;domain:ip.sb&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>                    <span class=s2>&#34;domain:openai.com&#34;</span>
-</span></span><span class=line><span class=cl>                <span class=p>]</span>
-</span></span><span class=line><span class=cl>            <span class=p>},</span>
-</span></span><span class=line><span class=cl>            <span class=p>{</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;type&#34;</span><span class=p>:</span><span class=s2>&#34;field&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;outboundTag&#34;</span><span class=p>:</span><span class=s2>&#34;INTERNET_OUT&#34;</span><span class=p>,</span>
-</span></span><span class=line><span class=cl>                <span class=nt>&#34;network&#34;</span><span class=p>:</span><span class=s2>&#34;udp,tcp&#34;</span>
-</span></span><span class=line><span class=cl>            <span class=p>}</span>
-</span></span><span class=line><span class=cl>        <span class=p>]</span>
-</span></span><span class=line><span class=cl>    <span class=p>}</span>
-</span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></td></tr></table></div></div><h2 id=降低mtu>降低mtu</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>vi /usr/local/etc/xray/config.json
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;inbounds&#34;</span>: <span class=o>[</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;port&#34;</span>: 443,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;protocol&#34;</span>: <span class=s2>&#34;vless&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;settings&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;clients&#34;</span>: <span class=o>[</span>
+</span></span><span class=line><span class=cl>          <span class=o>{</span>
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;id&#34;</span>: <span class=s2>&#34;TODO&#34;</span>, 
+</span></span><span class=line><span class=cl>            <span class=s2>&#34;flow&#34;</span>: <span class=s2>&#34;xtls-rprx-vision&#34;</span>
+</span></span><span class=line><span class=cl>          <span class=o>}</span>
+</span></span><span class=line><span class=cl>        <span class=o>]</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;decryption&#34;</span>: <span class=s2>&#34;none&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;fallbacks&#34;</span>: <span class=o>[]</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;streamSettings&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;network&#34;</span>: <span class=s2>&#34;tcp&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;security&#34;</span>: <span class=s2>&#34;reality&#34;</span>,
+</span></span><span class=line><span class=cl>        <span class=s2>&#34;realitySettings&#34;</span>: <span class=o>{</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;show&#34;</span>: false,
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;dest&#34;</span>: <span class=s2>&#34;www.beadsglass.com:443&#34;</span>,
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;xver&#34;</span>: 0,
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;serverNames&#34;</span>: <span class=o>[</span><span class=s2>&#34;www.beadsglass.com&#34;</span><span class=o>]</span>,
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;privateKey&#34;</span>: <span class=s2>&#34;TODO&#34;</span>,
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;shortIds&#34;</span>: <span class=o>[</span><span class=s2>&#34;&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl>        <span class=o>}</span>
+</span></span><span class=line><span class=cl>      <span class=o>}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>]</span>,
+</span></span><span class=line><span class=cl>  <span class=s2>&#34;outbounds&#34;</span>: <span class=o>[</span>
+</span></span><span class=line><span class=cl>    <span class=o>{</span>
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;protocol&#34;</span>: <span class=s2>&#34;freedom&#34;</span>,
+</span></span><span class=line><span class=cl>      <span class=s2>&#34;settings&#34;</span>: <span class=o>{}</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=命令>命令</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
 </span><span class=lnt>2
 </span><span class=lnt>3
-</span><span class=lnt>4
-</span><span class=lnt>5
-</span><span class=lnt>6
-</span><span class=lnt>7
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ip link <span class=nb>set</span> dev eth0 mtu <span class=m>1400</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>#永久生效</span>
-</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;ip link set dev eth0 mtu 1400&#34;</span> &gt;&gt; /etc/rc.local
-</span></span><span class=line><span class=cl>chmod +x /etc/rc.local
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>ip link show
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>systemctl <span class=nb>enable</span> xray
+</span></span><span class=line><span class=cl>systemctl restart xray
+</span></span><span class=line><span class=cl>systemctl status xray -l
 </span></span></code></pre></td></tr></table></div></div></div><div class=post-copyright><p class=copyright-item><span class=item-title>文章作者</span>
 <span class=item-content>lim</span></p><p class=copyright-item><span class=item-title>上次更新</span>
-<span class=item-content>2025-07-30
-<a href=https://github.com/yzlc/www/commit/3b85b24852e64b79416405be04b5cc7f9a3ed4e5 title=1>(3b85b24)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
+<span class=item-content>2025-08-01
+<a href=https://github.com/yzlc/www/commit/dfc29879459c5e25d6e6648b4e77f3b3fc14e952 title=1>(dfc2987)</a></span></p><p class=copyright-item><span class=item-title>许可协议</span>
 <span class=item-content><a rel="license noopener" href=https://creativecommons.org/licenses/by-nc-nd/4.0/ target=_blank>CC BY-NC-ND 4.0</a></span></p></div><div class=post-reward><input type=checkbox name=reward id=reward hidden>
 <label class=reward-button for=reward>赞赏支持</label><div class=qr-code><label class=qr-code-image for=reward><img class=image src=/images/reward/wechat.jpg>
 <span>微信打赏</span></label>
